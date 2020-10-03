@@ -1,6 +1,6 @@
 from radiant.server import RadiantAPI, RadiantServer
 from browser import document, html
-
+import logging
 
 ########################################################################
 class BareMinimum(RadiantAPI):
@@ -10,6 +10,8 @@ class BareMinimum(RadiantAPI):
         """"""
         super().__init__(*args, **kwargs)
         document.select_one('body') <= html.H1('Hello World')
+
+        logging.warning('HOLA')
 
 
 if __name__ == '__main__':

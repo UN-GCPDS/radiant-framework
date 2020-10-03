@@ -16,7 +16,7 @@ import jinja2
 import pathlib
 import importlib.util
 from xml.etree import ElementTree
-from typing import Union, List, Tuple
+from typing import Union, List, Tuple, Optional
 
 from tornado.web import Application, url, RequestHandler, StaticFileHandler
 from tornado.ioloop import IOLoop
@@ -54,7 +54,8 @@ class ThemeHandler(RequestHandler):
     # ----------------------------------------------------------------------
     def get(self):
         theme = self.get_theme()
-        loader = jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
+        loader = jinja2.FileSystemLoader(os.path.join(
+            os.path.dirname(__file__), 'templates'))
         env = jinja2.Environment(autoescape=True, loader=loader)
         env.filters['vector'] = self.hex2vector
         stylesheet = env.get_template('theme.css.template')
@@ -70,10 +71,11 @@ class ThemeHandler(RequestHandler):
         theme = self.settings['theme']
 
         if (not theme) or (not os.path.exists(theme)):
-            theme = os.path.join(os.path.dirname(__file__), 'templates', 'default_theme.xml')
+            theme = os.path.join(os.path.dirname(__file__),
+                                 'templates', 'default_theme.xml')
 
         tree = ElementTree.parse(theme)
-        theme_css = {child.attrib['name']: child.text for child in tree.getroot()}
+        theme_css = {child.attrib['name']                     : child.text for child in tree.getroot()}
         return theme_css
 
 
@@ -93,10 +95,12 @@ class RadiantHandler(RequestHandler):
 
 # ----------------------------------------------------------------------
 def make_app(class_: str, /,
-             template: PATH = os.path.join(os.path.dirname(__file__), 'templates', 'index.html'),
+             template: PATH = os.path.join(os.path.dirname(
+                 __file__), 'templates', 'index.html'),
              environ: dict = {},
              mock_imports: Tuple[str] = [],
-             handlers: Tuple[URL, Union[List[Union[PATH, str]], RequestHandler], dict] = (),
+             handlers: Tuple[URL, Union[List[Union[PATH, str]],
+                                        RequestHandler], dict] = (),
              python: Tuple[PATH, str] = (),
              theme: PATH = None,
              path: PATH = None,
@@ -127,7 +131,7 @@ def make_app(class_: str, /,
 
     settings = {
         "debug": DEBUG,
-        'static_path': os.path.join(os.path.dirname(__file__), 'brython'),
+        'static_path': os.path.join(os.path.dirname(__file__), 'brython-3.9.1'),
         'static_url_prefix': '/static/',
         "xsrf_cookies": False,
         'autoreload': autoreload,
@@ -152,14 +156,16 @@ def make_app(class_: str, /,
     ]
 
     if python:
-        spec = importlib.util.spec_from_file_location('.'.join(python).replace('.py', ''), os.path.abspath(python[0]))
+        spec = importlib.util.spec_from_file_location(
+            '.'.join(python).replace('.py', ''), os.path.abspath(python[0]))
         foo = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(foo)
         app.append(url(r'^/python_handler', getattr(foo, python[1])))
 
     for handler in handlers:
         if isinstance(handler[1], tuple):
-            spec = importlib.util.spec_from_file_location('.'.join(handler[1]).replace('.py', ''), os.path.abspath(handler[1][0]))
+            spec = importlib.util.spec_from_file_location(
+                '.'.join(handler[1]).replace('.py', ''), os.path.abspath(handler[1][0]))
             foo = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(foo)
             app.append(url(handler[0], getattr(foo, handler[1][1]), handler[2]))
@@ -178,14 +184,18 @@ def make_app(class_: str, /,
 def RadiantServer(class_: str, /,
                   host: str = 'localhost',
                   port: str = '5000',
-                  template: PATH = os.path.join(os.path.dirname(__file__), 'templates', 'index.html'),
+                  template: PATH = os.path.join(os.path.dirname(
+                      __file__), 'templates', 'index.html'),
                   environ: dict = {},
                   mock_imports: Tuple[str] = [],
-                  handlers: Tuple[URL, Union[List[Union[PATH, str]], RequestHandler], dict] = (),
+                  handlers: Tuple[URL, Union[List[Union[PATH, str]],
+                                             RequestHandler], dict] = (),
                   python: Tuple[PATH, str] = (),
-                  theme: PATH = None,
-                  path: PATH = None,
-                  autoreload: bool = False):
+                  theme: Optional[PATH] = None,
+                  path: Optional[PATH] = None,
+                  autoreload: Optional[bool] = False,
+                  callbacks: Optional[tuple] = (),
+                  ):
     """Python implementation for move `class_` into a Bython environment.
 
     Configure the Tornado server and the Brython environment for run the
@@ -225,6 +235,18 @@ def RadiantServer(class_: str, /,
                            mock_imports=mock_imports, path=path)
     http_server = HTTPServer(application)
     http_server.listen(port, host)
+
+    for handler in callbacks:
+        if isinstance(handler, tuple):
+            spec = importlib.util.spec_from_file_location(
+                '.'.join(handler).replace('.py', ''), os.path.abspath(handler[0]))
+            foo = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(foo)
+            getattr(foo, handler[1])()
+            # app.append(url(handler[0], getattr(foo, handler[1][1]), handler[2]))
+        else:
+            handler()
+
     IOLoop.instance().start()
 
 

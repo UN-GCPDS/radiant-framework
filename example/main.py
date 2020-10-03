@@ -28,13 +28,15 @@ class MainApp(RadiantAPI):
 
         a, b = 3, 5
         c = self.MyClass.pitagoras(a, b)
-        document.select('body')[0] <= html.H3(f"Pitagoras: {a=}, {b=}, {c=:.3f}")
+        document.select('body')[0] <= html.H3(
+            f"Pitagoras: {a=}, {b=}, {c=:.3f}")
 
         self.add_css_file('custom_styles.css')
 
         document <= MDCButton("Button", raised=False)
         document <= MDCButton("Button raised", raised=True)
-        document <= MDCButton("Button outlined", raised=False, outlined=True)
+        document <= MDCButton(
+            "Button outlined", raised=False, outlined=True)
 
         label = 'SLIDER'
         unit = 'PX'
@@ -46,9 +48,10 @@ class MainApp(RadiantAPI):
         form <= label_
         slider_ = form.mdc.Slider('Slider', min=1, max=100, step=5, value=50)
 
-        document <= form
+        document.select('body')[0] <= form
 
-        # document <= MDCCard("Card title", subtitle="Secondary text", text_content="off")
+        # document <= MDCCard(
+            # "Card title", subtitle="Secondary text", text_content="off")
 
 
 if __name__ == '__main__':
