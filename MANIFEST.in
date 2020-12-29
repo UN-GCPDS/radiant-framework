@@ -1,0 +1,6 @@
+recursive-include radiant/ *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+
+recursive-exclude example/ *
+recursive-exclude docs/ *

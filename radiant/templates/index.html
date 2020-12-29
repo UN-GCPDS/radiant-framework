@@ -1,0 +1,39 @@
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="/static/brython.js"></script>
+    <script type="text/javascript" src="/static/brython_stdlib.js"></script>
+    <script type="text/javascript" src="/static/material-components-web/material-components-web.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/material-components-web/material-components-web.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/material-components-web/theme.css">
+
+    <!--Fonts-->
+    <!--<link type="text/css" rel="stylesheet" href="/static/fonts/fontawesome-free-5.5.0-web/css/all.min.css">-->
+    <link type="text/css" rel="stylesheet" href="/static/fonts/roboto-android/roboto.css">
+    <link type="text/css" rel="stylesheet" href="/static/fonts/roboto-android/roboto-mono.css">
+
+    <!--Material Icons-->
+    <!--<link type="text/css" rel="stylesheet" href="/static/fonts/material-design-icons-3.0.1/iconfont/material-icons.css">-->
+    <!--<link type="text/css" rel="stylesheet" href="/static/fonts/mdi/css/materialdesignicons.min.css">-->
+
+  </head>
+
+  <body onload="brython(1)">
+    <script type="text/python">
+import sys
+sys.path.append('/root/')
+sys.path.append('/static/Lib/site-packages/')
+
+from radiant.utils import autoinit
+from {{file}} import {{class_}}
+
+{{class_}}(None, ('{{python_[0]}}', '{{python_[1]}}'))
+autoinit()
+
+    </script>
+
+
+  </body>
+
+</html>
