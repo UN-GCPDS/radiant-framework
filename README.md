@@ -1,19 +1,46 @@
 # Radiant
 Brython framework
 
-![GitHub top language](https://img.shields.io/github/languages/top/un-gcpds/openbci-stream?)
-![PyPI - License](https://img.shields.io/pypi/l/openbci-stream?)
-![PyPI](https://img.shields.io/pypi/v/openbci-stream?)
-![PyPI - Status](https://img.shields.io/pypi/status/openbci-stream?)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/openbci-stream?)
-![GitHub last commit](https://img.shields.io/github/last-commit/un-gcpds/openbci-stream?)
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/UN-GCPDS/openbci-stream?)
-[![Documentation Status](https://readthedocs.org/projects/openbci-stream/badge/?version=latest)](https://openbci-stream.readthedocs.io/en/latest/?badge=latest)
+![GitHub top language](https://img.shields.io/github/languages/top/un-gcpds/radiant?)
+![PyPI - License](https://img.shields.io/pypi/l/radiant?)
+![PyPI](https://img.shields.io/pypi/v/radiant?)
+![PyPI - Status](https://img.shields.io/pypi/status/radiant?)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/radiant?)
+![GitHub last commit](https://img.shields.io/github/last-commit/un-gcpds/radiant?)
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/UN-GCPDS/radiant?)
+[![Documentation Status](https://readthedocs.org/projects/radiant/badge/?version=latest)](https://radiant.readthedocs.io/en/latest/?badge=latest)
 
 
-.. brython ::
 
-    from mdc import MDCButton
-    #!ignore
-    button = MDCButton('ButtonXX', raised=True)
-    container <= button
+## Instalation
+
+
+```python
+pip install radiant
+```
+
+## Usage
+
+
+```python
+# Brython modules
+from browser import document, html
+
+# Radiant modules
+from radiant import RadiantAPI, RadiantServer
+
+
+# Main class inheriting RadiantAPI
+class BareMinimum(RadiantAPI):
+
+    # Constructor 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+    
+        # Brython code (finally)
+        document.select_one('body') <= html.H1('Hello World')
+
+# Execute server
+if __name__ == '__main__':
+    RadiantServer('BareMinimum')
+```
