@@ -9,7 +9,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='radiant',
-    version='3.0',
+    version='3.0a1',
     packages=['radiant'],
 
     author='Yeison Cardona',
@@ -29,6 +29,7 @@ setup(
     long_description_content_type='text/markdown',
 
     python_requires='>=3.8',
+
 
     classifiers=[
         'Development Status :: 4 - Beta',

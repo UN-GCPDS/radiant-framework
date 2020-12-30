@@ -1,6 +1,17 @@
+"""
+Radiant
+
+"""
 import os
 import sys
 import random
+
+try:
+    import browser
+    sys.exit()
+except:
+    pass
+
 
 import json
 
@@ -16,11 +27,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'fake_modules'))
 
 RadiantAPI = object
 DEBUG = True
-
-if len(sys.argv) > 1:
-    port = sys.argv[1]
-else:
-    port = '5000'
 
 
 ########################################################################
@@ -50,9 +56,10 @@ class RadiantHandler(RequestHandler):
         python_ = self.settings['python']
         module = self.settings['module']
         file = self.settings['file']
-        port = self.settings['port']
-        seed = self.settings['seed']
-        mode = 'dashboard'
+        argv = json.dumps(self.settings['argv'])
+        # port = self.settings['port']
+        # seed = self.settings['seed']
+        # mode = 'dashboard'
 
         variables = locals().copy()
         variables.pop('self')
@@ -60,7 +67,7 @@ class RadiantHandler(RequestHandler):
 
 
 # ----------------------------------------------------------------------
-def make_app(class_, python):
+def make_app(class_, python, websockethandler):
 
     settings = {
         "debug": DEBUG,
@@ -71,16 +78,16 @@ def make_app(class_, python):
         'python': python if python else (None, None),
         'module': os.path.split(sys.path[0])[-1],
         'file': os.path.split(sys.argv[0])[-1].removesuffix('.py'),
-        'port': port,
+        # 'port': port,
         'autoreload': False,
-        'seed': random.randint(0, 1000),
+        # 'seed': random.randint(0, 1000),
+
+        'argv': sys.argv,
     }
 
     app = [
         url(r'^/$', RadiantHandler),
         url(r'^/root/(.*)', StaticFileHandler, {'path': sys.path[0]}),
-        # url(r'^/python_handler', PythonHandler),
-        # url(r'^/ws', WSHandler),
     ]
 
     if python:
@@ -89,16 +96,22 @@ def make_app(class_, python):
         spec.loader.exec_module(foo)
         app.append(url(r'^/python_handler', getattr(foo, python[1])))
 
+    if websockethandler:
+        spec = importlib.util.spec_from_file_location('.'.join(websockethandler).replace('.py', ''), os.path.abspath(websockethandler[0]))
+        foo = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(foo)
+        app.append(url(r'^/ws', getattr(foo, websockethandler[1])))
+
     return Application(app, **settings)
 
 
 # ----------------------------------------------------------------------
-def RadiantServer(class_, python=None):
+def RadiantServer(class_, host='localhost', port='5000', python=None, websockethandler=None):
     """"""
     print("Radiant server running on port {}".format(port))
-    application = make_app(class_, python)
+    application = make_app(class_, python, websockethandler)
     http_server = HTTPServer(application)
-    http_server.listen(port, '0.0.0.0')
+    http_server.listen(port, host)
     IOLoop.instance().start()
 
 

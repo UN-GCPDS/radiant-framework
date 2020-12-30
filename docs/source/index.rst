@@ -9,7 +9,9 @@ Navigation
    :maxdepth: 2
    :name: mastertoc
 
-   notebooks/Untitled
+   notebooks/05-builtin
+   notebooks/10-advance_usage
+   notebooks/99-mdc
 
 Indices and tables
 ------------------

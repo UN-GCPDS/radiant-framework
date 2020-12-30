@@ -16,8 +16,12 @@ class MainApp(RadiantAPI):
 
         document.select('body')[0] <= html.H3(self.MyClass.local_python())
 
+        a, b = 3, 5
+        c = self.MyClass.pitagoras(a, b)
+        document.select('body')[0] <= html.H3(f"Pitagoras: {a=}, {b=}, {c=:.3f}")
+
 
 if __name__ == '__main__':
-    RadiantServer('MainApp', python=('python_foo.py', 'MyClass'))
+    RadiantServer('MainApp', python=('python_foo.py', 'MyClass'), websockethandler=('ws_handler.py', 'WSHandler'))
 
 

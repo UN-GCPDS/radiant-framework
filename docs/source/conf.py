@@ -12,7 +12,9 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))
+
+# sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('../../radiant/brython/Lib/site-packages'))
 sys.path.insert(0, os.path.abspath('exts'))
 
 # -- Project information -----------------------------------------------------
@@ -205,6 +207,8 @@ epub_exclude_files = ['search.html']
 
 autodoc_mock_imports = [
 
+    'browser',
+
     'IPython',
     'numpy',
     'scipy',
@@ -222,12 +226,14 @@ autodoc_mock_imports = [
     'kafka',
     'rpyc',
     'serial',
+
+
 ]
 
 todo_include_todos = True
 
 
-html_logo = '_static/logo.png'
+html_logo = '_static/logo.svg'
 html_favicon = '_static/favico.ico'
 
 # autodoc_default_options = [

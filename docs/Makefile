@@ -23,7 +23,9 @@ help:
 buildapi:
 
 	rm -f source/_modules/*
-	sphinx-apidoc -fMeET -o source/_modules ../radiant
+	#sphinx-apidoc -fMeET -o source/_modules ../radiant
+	sphinx-apidoc -fMeET -o source/_modules ../radiant/brython/Lib/site-packages/mdc
+	sphinx-apidoc -fMeET -o source/_modules ../radiant/brython/Lib/site-packages/radiant
 
 	jupyter nbconvert --to rst source/notebooks/readme.ipynb
 	jupyter nbconvert --to markdown source/notebooks/readme.ipynb --output ../../../README.md

@@ -1,3 +1,5 @@
+{% autoescape None %}
+
 <html>
 
   <head>
@@ -28,7 +30,9 @@ sys.path.append('/static/Lib/site-packages/')
 from radiant.utils import autoinit
 from {{file}} import {{class_}}
 
-{{class_}}(None, ('{{python_[0]}}', '{{python_[1]}}'))
+argvs = {{argv}}
+
+{{class_}}(None, {{python_}})
 autoinit()
 
     </script>
