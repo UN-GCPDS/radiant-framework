@@ -27,71 +27,20 @@ class Brython(Directive):
 
         temp_id = ''.join([random.choice(ascii_lowercase) for i in range(16)])
 
-        text = self.highlight_code()
-        text += f'<iframe src="about:blank" class="brython-out" id="iframe_{temp_id}"></iframe>'
+        script = self.highlight_code()
+        # text += f'<iframe src="about:blank" class="brython-out" id="iframe_{temp_id}"></iframe>'
 
-        script = self.gen_script(temp_id)
+        script += self.gen_script(temp_id)
 
         if 'hide-output' in self.options:
             style = 'style="display: none"'
         else:
             style = ''
 
-        text += f"""
-        <script type="text/python">
-
-from browser import document
-from radiant.utils import autoiframe
-
-frame = document.select_one('#iframe_{temp_id}').contentDocument
-
-frame.open()
-
-frame.write("<scr"+"ipt type='text/javascript' src='/_static/brython/brython.js'></scr"+"ipt>")
-frame.write("<scr"+"ipt type='text/javascript' src='/_static/brython/brython_stdlib.js'></scr"+"ipt>")
-frame.write("<scr"+"ipt type='text/javascript' src='/_static/brython/material-components-web/material-components-web.min.js'></scr"+"ipt>")
-frame.write("<link rel='stylesheet' type='text/css' href='/_static/brython/material-components-web/material-components-web.min.css'>")
-frame.write("<link rel='stylesheet' type='text/css' href='/_static/theme.css'>")
-
-frame.write("<link rel='stylesheet' type='text/css' href='/_static/brython/fonts/fontawesome-free-5.5.0-web/css/all.min.css'>")
-frame.write("<link rel='stylesheet' type='text/css' href='/_static/brython/fonts/roboto-android/roboto.css'>")
-frame.write("<link rel='stylesheet' type='text/css' href='/_static/brython/fonts/roboto-android/roboto-mono.css'>")
-frame.write("<link rel='stylesheet' type='text/css' href='/_static/brython/fonts/material-design-icons-3.0.1/iconfont/material-icons.css'>")
-frame.write("<link rel='stylesheet' type='text/css' href='/_static/custom_iframe.css'>")
-
-
-frame.write("<scr"+"ipt type='text/javascript' src='/en/latest/_static/brython/brython.js'></scr"+"ipt>")
-frame.write("<scr"+"ipt type='text/javascript' src='/en/latest/_static/brython/brython_stdlib.js'></scr"+"ipt>")
-frame.write("<scr"+"ipt type='text/javascript' src='/en/latest/_static/brython/material-components-web/material-components-web.min.js'></scr"+"ipt>")
-frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/brython/material-components-web/material-components-web.min.css'>")
-frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/theme.css'>")
-
-frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/brython/fonts/fontawesome-free-5.5.0-web/css/all.min.css'>")
-frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/brython/fonts/roboto-android/roboto.css'>")
-frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/brython/fonts/roboto-android/roboto-mono.css'>")
-frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/brython/fonts/material-design-icons-3.0.1/iconfont/material-icons.css'>")
-frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/custom_iframe.css'>")
-
-
-frame.write("<scr"+"ipt type='text/python'>import sys;sys.path.append('/root/');sys.path.append('/static/Lib/site-packages/')</scr"+"ipt>")
-
-frame.write('''{script}'''+"</scr"+"ipt>")
-frame.write("<div class='brython-out' {style} id='{temp_id}'></div>")
-
-frame.write("<scr"+"ipt type='text/python'>from radiant.utils import autoinit;autoinit()</scr"+"ipt>")
-
-frame.write("<scr"+"ipt type='text/javascript'>brython()</scr"+"ipt>")
-
-frame.close()
-
-autoiframe("iframe_{temp_id}", ".brython-out")
-
-
-        </script>
-        """
+        script += '<div class="brython-out" {} id="{}"></div>\n'.format(style, temp_id)
 
         attributes = {'format': 'html', }
-        node = brython_node(text=text, **attributes)
+        node = brython_node(text=script, **attributes)
 
         return [node]
 
@@ -108,7 +57,7 @@ autoiframe("iframe_{temp_id}", ".brython-out")
         script = script.replace('‘', "'")
         script = script.replace('’', "'")
 
-        # script += "</script>\n"
+        script += "</script>\n"
 
         return script
 

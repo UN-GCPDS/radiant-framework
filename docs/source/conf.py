@@ -42,6 +42,7 @@ extensions = [
     'sphinx.ext.mathjax',
 
     'brython_code',
+    'brython_code_iframe',
 ]
 
 naoleon_google_docstring = False

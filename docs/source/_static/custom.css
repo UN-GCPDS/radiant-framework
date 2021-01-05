@@ -132,14 +132,38 @@ h1 {
 }
 
 
-.brython-out{
+iframe.brython-out{
 border: 0px solid #eee;
 border-radius: 0px 0px 2px 2px;
 width: -moz-available;
+width: -webkit-fill-available;
 display: inline-flex;
 margin: -9px -8px;
 border-top: 0px;
 }
+
+
+
+
+
+div.brython-out{
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #eee;
+    /*margin-top: -16px;*/
+    border-radius: 0px 0px 2px 2px;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    display: inline-flex;
+}
+
+
+div.brython-out *{
+    margin: 0 auto;
+    display: inline-flex;
+}
+
+
 
 
 /*.brython-out *{*/
