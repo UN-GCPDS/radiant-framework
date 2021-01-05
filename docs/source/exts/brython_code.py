@@ -59,6 +59,20 @@ frame.write("<link rel='stylesheet' type='text/css' href='/_static/brython/fonts
 frame.write("<link rel='stylesheet' type='text/css' href='/_static/brython/fonts/material-design-icons-3.0.1/iconfont/material-icons.css'>")
 frame.write("<link rel='stylesheet' type='text/css' href='/_static/custom_iframe.css'>")
 
+
+frame.write("<scr"+"ipt type='text/javascript' src='/en/latest/_static/brython/brython.js'></scr"+"ipt>")
+frame.write("<scr"+"ipt type='text/javascript' src='/en/latest/_static/brython/brython_stdlib.js'></scr"+"ipt>")
+frame.write("<scr"+"ipt type='text/javascript' src='/en/latest/_static/brython/material-components-web/material-components-web.min.js'></scr"+"ipt>")
+frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/brython/material-components-web/material-components-web.min.css'>")
+frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/theme.css'>")
+
+frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/brython/fonts/fontawesome-free-5.5.0-web/css/all.min.css'>")
+frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/brython/fonts/roboto-android/roboto.css'>")
+frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/brython/fonts/roboto-android/roboto-mono.css'>")
+frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/brython/fonts/material-design-icons-3.0.1/iconfont/material-icons.css'>")
+frame.write("<link rel='stylesheet' type='text/css' href='/en/latest/_static/custom_iframe.css'>")
+
+
 frame.write("<scr"+"ipt type='text/python'>import sys;sys.path.append('/root/');sys.path.append('/static/Lib/site-packages/')</scr"+"ipt>")
 
 frame.write('''{script}'''+"</scr"+"ipt>")
