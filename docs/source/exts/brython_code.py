@@ -26,9 +26,7 @@ class Brython(Directive):
     def run(self):
 
         temp_id = ''.join([random.choice(ascii_lowercase) for i in range(16)])
-
         script = self.highlight_code()
-        # text += f'<iframe src="about:blank" class="brython-out" id="iframe_{temp_id}"></iframe>'
 
         script += self.gen_script(temp_id)
 
@@ -56,6 +54,7 @@ class Brython(Directive):
             script += "\n".join(self.content)
         script = script.replace('‘', "'")
         script = script.replace('’', "'")
+        script = script.replace('\_', "_")
 
         script += "</script>\n"
 
