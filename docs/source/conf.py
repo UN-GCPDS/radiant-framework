@@ -73,6 +73,8 @@ master_doc = 'index'
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+highlight_language = 'none'
+
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -259,7 +261,8 @@ def setup(app):
     app.add_js_file("brython/load_brython.js")
 
     # app.add_js_file("material-components-web/material-components-web.min.js")
-    # app.add_css_file("fonts/material-design-icons-3.0.1/iconfont/material-icons.css")
+    app.add_css_file("fonts/material-design-icons-3.0.1/iconfont/material-icons.css")
+    app.add_css_file("fonts/fontawesome-free-5.5.0-web/css/all.min.css")
     app.add_css_file("fonts/roboto-android/roboto.css")
     app.add_css_file("fonts/roboto-android/roboto-mono.css")
 
@@ -267,6 +270,7 @@ def setup(app):
     app.add_css_file("material-components-web/material-components-web.min.css")
 
     app.add_css_file("custom.css")
+    app.add_css_file("theme.css")
     app.add_css_file("material-components-web/theme.css")
 
 
@@ -296,23 +300,29 @@ nbsphinx_prolog = """
     </style>
 """
 
-notebooks_dir = 'notebooks'
 
-notebooks_list = os.listdir(os.path.join(
-    os.path.abspath(os.path.dirname(__file__)), notebooks_dir))
-notebooks_list = filter(lambda s: not s.startswith('__'), notebooks_list)
+def get_notebooks(notebooks_dir, exclude=[]):
+    notebooks_list = os.listdir(os.path.join(
+        os.path.abspath(os.path.dirname(__file__)), notebooks_dir))
+    notebooks_list = filter(lambda s: not s.startswith('__'), notebooks_list)
 
-notebooks = []
-for notebook in notebooks_list:
-    if notebook not in ['readme.ipynb', 'license.ipynb'] and notebook.endswith('.ipynb'):
-        notebooks.append(f"{notebooks_dir}/{notebook.replace('.ipynb', '')}")
+    notebooks = []
+    for notebook in notebooks_list:
+        if notebook not in exclude and notebook.endswith('.ipynb'):
+            notebooks.append(f"{notebooks_dir}/{notebook.replace('.ipynb', '')}")
 
-notebooks = '\n   '.join(sorted(notebooks))
+    notebooks = '\n   '.join(sorted(notebooks))
+    return notebooks
+
+
+notebooks = get_notebooks('notebooks', exclude=['readme.ipynb', 'license.ipynb'])
+components = get_notebooks('notebooks/components', exclude=['readme.ipynb', 'license.ipynb'])
+
 
 with open('index.rst', 'w') as file:
     file.write(f"""
 
-.. include:: {notebooks_dir}/readme.rst
+.. include:: notebooks/readme.rst
 
 Navigation
 ----------
@@ -322,6 +332,18 @@ Navigation
    :name: mastertoc
 
    {notebooks}
+
+
+MDC Components
+--------------
+
+.. toctree::
+   :glob:
+   :maxdepth: 2
+   :name: mastertoc2
+
+   notebooks/components/*
+
 
 Indices and tables
 ------------------

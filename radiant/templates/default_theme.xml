@@ -1,0 +1,22 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<!--<resources>-->
+  <!--<color name="primaryColor">#4db6ac</color>-->
+  <!--<color name="primaryLightColor">#82e9de</color>-->
+  <!--<color name="primaryDarkColor">#00867d</color>-->
+  <!--<color name="secondaryColor">#009688</color>-->
+  <!--<color name="secondaryLightColor">#52c7b8</color>-->
+  <!--<color name="secondaryDarkColor">#00675b</color>-->
+  <!--<color name="primaryTextColor">#ffffff</color>-->
+  <!--<color name="secondaryTextColor">#ffffff</color>-->
+<!--</resources>-->
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<resources>
+  <color name="primaryColor">#4db6ac</color>
+  <color name="primaryLightColor">#82e9de</color>
+  <color name="primaryDarkColor">#00867d</color>
+  <color name="secondaryColor">#ffab00</color>
+  <color name="secondaryLightColor">#ffdd4b</color>
+  <color name="secondaryDarkColor">#c67c00</color>
+  <color name="primaryTextColor">#ffffff</color>
+  <color name="secondaryTextColor">#ffffff</color>
+</resources>

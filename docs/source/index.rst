@@ -11,7 +11,18 @@ Navigation
 
    notebooks/05-builtin
    notebooks/10-advance_usage
-   notebooks/99-mdc
+
+
+MDC Components
+--------------
+
+.. toctree::
+   :glob:
+   :maxdepth: 2
+   :name: mastertoc2
+
+   notebooks/components/*
+
 
 Indices and tables
 ------------------

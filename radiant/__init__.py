@@ -5,6 +5,8 @@ Radiant
 import os
 import sys
 import random
+import jinja2
+from xml.etree import ElementTree
 
 try:
     import browser
@@ -50,6 +52,36 @@ class PythonHandler(RequestHandler):
 
 
 ########################################################################
+class ThemeHandler(RequestHandler):
+
+    # ----------------------------------------------------------------------
+    def get(self):
+        theme = self.get_theme()
+        loader = jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
+        env = jinja2.Environment(autoescape=True, loader=loader)
+        env.filters['vector'] = self.hex2vector
+        stylesheet = env.get_template('theme.css.template')
+        self.write(stylesheet.render(**theme))
+
+    # ----------------------------------------------------------------------
+    @staticmethod
+    def hex2vector(hex_):
+        """"""
+        return ', '.join([str(int(hex_[i:i + 2], 16)) for i in range(1, 6, 2)])
+
+    # ----------------------------------------------------------------------
+    def get_theme(self):
+        theme = self.settings['theme']
+
+        if (not theme) or (not os.path.exists(theme)):
+            theme = os.path.join(os.path.dirname(__file__), 'templates', 'default_theme.xml')
+
+        tree = ElementTree.parse(theme)
+        theme_css = {child.attrib['name']: child.text for child in tree.getroot()}
+        return theme_css
+
+
+########################################################################
 class RadiantHandler(RequestHandler):
     def get(self):
         class_ = self.settings['class']
@@ -67,7 +99,7 @@ class RadiantHandler(RequestHandler):
 
 
 # ----------------------------------------------------------------------
-def make_app(class_, python, websockethandler):
+def make_app(class_, python, websockethandler, theme):
 
     settings = {
         "debug": DEBUG,
@@ -78,15 +110,14 @@ def make_app(class_, python, websockethandler):
         'python': python if python else (None, None),
         'module': os.path.split(sys.path[0])[-1],
         'file': os.path.split(sys.argv[0])[-1].removesuffix('.py'),
-        # 'port': port,
-        'autoreload': False,
-        # 'seed': random.randint(0, 1000),
-
+        # 'autoreload': False,
+        'theme': theme,
         'argv': sys.argv,
     }
 
     app = [
         url(r'^/$', RadiantHandler),
+        url(r'^/theme.css$', ThemeHandler),
         url(r'^/root/(.*)', StaticFileHandler, {'path': sys.path[0]}),
     ]
 
@@ -106,10 +137,10 @@ def make_app(class_, python, websockethandler):
 
 
 # ----------------------------------------------------------------------
-def RadiantServer(class_, host='localhost', port='5000', python=None, websockethandler=None):
+def RadiantServer(class_, host='localhost', port='5000', python=None, websockethandler=None, theme=None):
     """"""
     print("Radiant server running on port {}".format(port))
-    application = make_app(class_, python, websockethandler)
+    application = make_app(class_, python, websockethandler, theme)
     http_server = HTTPServer(application)
     http_server.listen(port, host)
     IOLoop.instance().start()
