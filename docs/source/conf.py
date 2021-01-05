@@ -261,17 +261,16 @@ def setup(app):
     app.add_js_file("brython/load_brython.js")
 
     # app.add_js_file("material-components-web/material-components-web.min.js")
-    app.add_css_file("fonts/material-design-icons-3.0.1/iconfont/material-icons.css")
-    app.add_css_file("fonts/fontawesome-free-5.5.0-web/css/all.min.css")
-    app.add_css_file("fonts/roboto-android/roboto.css")
-    app.add_css_file("fonts/roboto-android/roboto-mono.css")
+    app.add_css_file("brython/fonts/material-design-icons-3.0.1/iconfont/material-icons.css")
+    app.add_css_file("brython/fonts/fontawesome-free-5.5.0-web/css/all.min.css")
+    app.add_css_file("brython/fonts/roboto-android/roboto.css")
+    app.add_css_file("brython/fonts/roboto-android/roboto-mono.css")
 
-    app.add_js_file("material-components-web/material-components-web.min.js")
-    app.add_css_file("material-components-web/material-components-web.min.css")
+    app.add_js_file("brython/material-components-web/material-components-web.min.js")
+    app.add_css_file("brython/material-components-web/material-components-web.min.css")
 
     app.add_css_file("custom.css")
     app.add_css_file("theme.css")
-    app.add_css_file("material-components-web/theme.css")
 
 
 highlight_language = 'none'
