@@ -138,6 +138,7 @@ border-radius: 0px 0px 2px 2px;
 width: -moz-available;
 display: inline-flex;
 margin: -9px -8px;
+border-top: 0px;
 }
 
 
