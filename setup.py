@@ -9,7 +9,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='radiant',
-    version='3.0a2',
+    version='3.0b1',
     packages=['radiant'],
 
     author='Yeison Cardona',
@@ -17,7 +17,7 @@ setup(
     maintainer='Yeison Cardona',
     maintainer_email='yencardonaal@unal.edu.co',
 
-    download_url='https://github.com/UN-GCPDS/python-radiant',
+    download_url='https://github.com/UN-GCPDS/brython-radiant',
 
     install_requires=requirements,
 
@@ -38,6 +38,7 @@ setup(
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Scientific/Engineering :: Human Machine Interfaces',
