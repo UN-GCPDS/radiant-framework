@@ -1,8 +1,9 @@
-from radiant import RadiantAPI, RadiantServer
+from radiant.server import RadiantAPI, RadiantServer
 from browser import document, html
 from submodule import submodule_fn
 
-from mdc import MDCButton, MDCCard
+from mdc.MDCButton import MDCButton
+# from mdc.MDCCard import MDCCard
 
 ########################################################################
 class MainApp(RadiantAPI):
@@ -27,7 +28,7 @@ class MainApp(RadiantAPI):
         document <= MDCButton("Button raised", raised=True)
         document <= MDCButton("Button outlined", raised=False, outlined=True)
 
-        document <= MDCCard("Card title", subtitle="Secondary text", text_content="off")
+        # document <= MDCCard("Card title", subtitle="Secondary text", text_content="off")
 
 
 if __name__ == '__main__':

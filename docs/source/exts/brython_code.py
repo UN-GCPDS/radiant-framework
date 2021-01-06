@@ -82,6 +82,7 @@ class Brython(Directive):
 
         code = code.replace('‘', '"')
         code = code.replace('’', '"')
+        code = code.replace('\_', "_")
 
         return highlight(code, Python3Lexer(), HtmlFormatter())
 

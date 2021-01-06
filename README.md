@@ -28,7 +28,7 @@ pip install radiant
 from browser import document, html
 
 # Radiant modules
-from radiant import RadiantAPI, RadiantServer
+from radiant.server import RadiantAPI, RadiantServer
 
 # Main class inheriting RadiantAPI
 class BareMinimum(RadiantAPI):

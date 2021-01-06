@@ -1,4 +1,4 @@
-from radiant import RadiantAPI, RadiantServer
+from radiant.server import RadiantAPI, RadiantServer
 from browser import document, html
 
 
