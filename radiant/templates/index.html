@@ -20,6 +20,18 @@
     <link type="text/css" rel="stylesheet" href="/static/fonts/material-design-icons-3.0.1/iconfont/material-icons.css">
     <!--<link type="text/css" rel="stylesheet" href="/static/fonts/mdi/css/materialdesignicons.min.css">-->
 
+    {% block html_head %}{% end %}
+
+
+    <script type="text/python">
+import sys
+from radiant.utils import fake
+{% for module in mock_imports %}
+sys.modules["{{module}}"] = fake()
+{% end %}
+    </script>
+
+
   </head>
 
   <body onload="brython(1)">
@@ -28,12 +40,19 @@ import sys
 sys.path.append('/root/')
 sys.path.append('/static/Lib/site-packages/')
 
+{% if path %}
+sys.path.append('/path/')
+{% end %}
+
 from radiant.utils import autoinit
 from {{file}} import {{class_}}
 
 argvs = {{argv}}
 
+{% block module_init %}
 {{class_}}(None, {{python_}})
+{% end %}
+
 autoinit()
 
     </script>

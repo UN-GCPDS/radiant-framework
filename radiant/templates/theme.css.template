@@ -108,3 +108,10 @@
     all: unset;
   }
 }
+
+
+.mdc-slider {
+
+    width: 100%;
+
+}
