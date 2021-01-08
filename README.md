@@ -1,14 +1,14 @@
-# Radiant
+# Brython-Radiant
 
 A Brython Framework for Web Apps development.
 
-![GitHub top language](https://img.shields.io/github/languages/top/un-gcpds/radiant?)
+![GitHub top language](https://img.shields.io/github/languages/top/un-gcpds/brython-radiant?)
 ![PyPI - License](https://img.shields.io/pypi/l/radiant?)
 ![PyPI](https://img.shields.io/pypi/v/radiant?)
 ![PyPI - Status](https://img.shields.io/pypi/status/radiant?)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/radiant?)
-![GitHub last commit](https://img.shields.io/github/last-commit/un-gcpds/radiant?)
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/UN-GCPDS/radiant?)
+![GitHub last commit](https://img.shields.io/github/last-commit/un-gcpds/brython-radiant?)
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/UN-GCPDS/brython-radiant?)
 [![Documentation Status](https://readthedocs.org/projects/radiant/badge/?version=latest)](https://radiant-framework.readthedocs.io/en/latest/?badge=latest)
 
 Radiant is a [Brython](https://brython.info/) framework for the quick development of web apps from pure Python syntax which means that there is no need to care about (if you don't want) HTML, CSS, or Javascript.  It's based on [Tornado](https://www.tornadoweb.org/) servers and includes support to [Websockets](notebooks/10-advance_usage.html#WebSockets), [Python Scripts](notebooks/10-advance_usage.html#Python-scripting) and [MDC](notebooks/99-mdc.html).

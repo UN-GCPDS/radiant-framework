@@ -12,7 +12,6 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   radiant.radiant
    radiant.server
    radiant.sound
    radiant.utils

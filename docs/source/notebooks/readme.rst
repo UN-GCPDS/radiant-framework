@@ -1,5 +1,5 @@
-Radiant
-=======
+Brython-Radiant
+===============
 
 A Brython Framework for Web Apps development.
 
@@ -16,13 +16,13 @@ includes support to
 Scripts <notebooks/10-advance_usage.html#Python-scripting>`__ and
 `MDC <notebooks/99-mdc.html>`__.
 
-.. |GitHub top language| image:: https://img.shields.io/github/languages/top/un-gcpds/radiant?
+.. |GitHub top language| image:: https://img.shields.io/github/languages/top/un-gcpds/brython-radiant?
 .. |PyPI - License| image:: https://img.shields.io/pypi/l/radiant?
 .. |PyPI| image:: https://img.shields.io/pypi/v/radiant?
 .. |PyPI - Status| image:: https://img.shields.io/pypi/status/radiant?
 .. |PyPI - Python Version| image:: https://img.shields.io/pypi/pyversions/radiant?
-.. |GitHub last commit| image:: https://img.shields.io/github/last-commit/un-gcpds/radiant?
-.. |CodeFactor Grade| image:: https://img.shields.io/codefactor/grade/github/UN-GCPDS/radiant?
+.. |GitHub last commit| image:: https://img.shields.io/github/last-commit/un-gcpds/brython-radiant?
+.. |CodeFactor Grade| image:: https://img.shields.io/codefactor/grade/github/UN-GCPDS/brython-radiant?
 .. |Documentation Status| image:: https://readthedocs.org/projects/radiant/badge/?version=latest
    :target: https://radiant-framework.readthedocs.io/en/latest/?badge=latest
 
