@@ -10,16 +10,21 @@ Navigation
    :name: mastertoc
 
    notebooks/05-builtin
-   notebooks/10-advance_usage
-
-
-MDC Components
---------------
+   notebooks/10-additional_features
 
 .. toctree::
    :glob:
    :maxdepth: 2
    :name: mastertoc2
+   :caption: Modules
+
+   notebooks/modules/*
+
+.. toctree::
+   :glob:
+   :maxdepth: 2
+   :name: mastertoc3
+   :caption: MDC Components
 
    notebooks/components/*
 

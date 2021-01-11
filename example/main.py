@@ -44,7 +44,6 @@ class MainApp(RadiantAPI):
         label_ = MDCComponent(html.SPAN(f'{label}'))
         label_ .mdc.typography('subtitle1')
         form <= label_
-        form <= MDCComponent(html.SPAN(f' {float(50):.1f} {unit}', id=f'value_{id}')).mdc.typography('caption')
         slider_ = form.mdc.Slider('Slider', min=1, max=100, step=5, value=50)
 
         document <= form

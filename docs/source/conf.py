@@ -316,7 +316,8 @@ def get_notebooks(notebooks_dir, exclude=[]):
 
 
 notebooks = get_notebooks('notebooks', exclude=['readme.ipynb', 'license.ipynb'])
-components = get_notebooks('notebooks/components', exclude=['readme.ipynb', 'license.ipynb'])
+components = get_notebooks('notebooks/components')
+modules = get_notebooks('notebooks/modules')
 
 
 with open('index.rst', 'w') as file:
@@ -333,14 +334,19 @@ Navigation
 
    {notebooks}
 
-
-MDC Components
---------------
-
 .. toctree::
    :glob:
    :maxdepth: 2
    :name: mastertoc2
+   :caption: Modules
+
+   notebooks/modules/*
+
+.. toctree::
+   :glob:
+   :maxdepth: 2
+   :name: mastertoc3
+   :caption: MDC Components
 
    notebooks/components/*
 
