@@ -9,7 +9,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='radiant',
-    version='3.0',
+    version='3.1',
     packages=['radiant'],
 
     author='Yeison Cardona',
