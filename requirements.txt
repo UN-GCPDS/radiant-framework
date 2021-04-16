@@ -1,2 +1,2 @@
-jinja2
-tornado
+Jinja2>=2.11.3
+tornado>=6.1

@@ -4,9 +4,6 @@ from setuptools import setup
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
 
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
-
 setup(
     name='radiant',
     version='3.1',
@@ -19,7 +16,9 @@ setup(
 
     download_url='https://github.com/UN-GCPDS/brython-radiant',
 
-    install_requires=requirements,
+    install_requires=['Jinja2>=2.11.3'
+                      'tornado>=6.1',
+                      ],
 
     include_package_data=True,
     license='BSD-2-Clause',
