@@ -33,10 +33,13 @@ class MainApp(RadiantAPI):
 
         self.add_css_file('custom_styles.css')
 
-        document <= MDCButton("Button", raised=False)
-        document <= MDCButton("Button raised", raised=True)
-        document <= MDCButton(
-            "Button outlined", raised=False, outlined=True)
+        document <= MDCButton("Button", raised=False, unelevated=True)
+        document <= MDCButton("Button raised", raised=True, unelevated=True)
+        button = MDCButton(
+            "Button outlined", raised=False, outlined=True, unelevated=True)
+        button.bind('click', self.on_button)
+
+        document <= button
 
         label = 'SLIDER'
         unit = 'PX'
@@ -48,10 +51,16 @@ class MainApp(RadiantAPI):
         form <= label_
         slider_ = form.mdc.Slider('Slider', min=1, max=100, step=5, value=50)
 
+        options = [[f'Option-{o}', f'value-{o}'] for o in range(10)]
+        value = 'value-5'
+        self.select_ = form.mdc.Select('', options=options, selected=value)
+
         document.select('body')[0] <= form
 
-        # document <= MDCCard(
-            # "Card title", subtitle="Secondary text", text_content="off")
+    # ----------------------------------------------------------------------
+    def on_button(self, evt):
+        """"""
+        print(self.select_.mdc.value)
 
 
 if __name__ == '__main__':
