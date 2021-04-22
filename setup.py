@@ -6,7 +6,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 
 setup(
     name='radiant',
-    version='3.2',
+    version='3.2.1',
     packages=['radiant'],
 
     author='Yeison Cardona',
@@ -16,8 +16,8 @@ setup(
 
     download_url='https://github.com/UN-GCPDS/brython-radiant',
 
-    install_requires=['Jinja2>=2.11.3'
-                      'tornado>=6.1',
+    install_requires=['Jinja2',
+                      'tornado',
                       ],
 
     include_package_data=True,
