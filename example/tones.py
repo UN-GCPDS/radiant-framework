@@ -1,4 +1,4 @@
-from radiant.server import RadiantAPI, RadiantServer
+from radiant.server import RadiantAPI
 from radiant.sound import Tone, note_values
 
 from browser import document, html
@@ -36,6 +36,6 @@ class MainApp(RadiantAPI):
 
 
 if __name__ == '__main__':
-    RadiantServer('MainApp')
+    MainApp()
 
 

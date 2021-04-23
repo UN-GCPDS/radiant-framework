@@ -1,4 +1,4 @@
-from radiant.server import RadiantAPI, RadiantServer
+from radiant.server import RadiantAPI
 from browser import document, html
 import logging
 
@@ -15,6 +15,6 @@ class BareMinimum(RadiantAPI):
 
 
 if __name__ == '__main__':
-    RadiantServer('BareMinimum')
+    BareMinimum()
 
 
