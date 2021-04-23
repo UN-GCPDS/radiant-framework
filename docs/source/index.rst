@@ -9,8 +9,8 @@ Navigation
    :maxdepth: 2
    :name: mastertoc
 
-   notebooks/05-builtin
-   notebooks/10-additional_features
+   notebooks/01-builtin
+   notebooks/02-additional_features
 
 .. toctree::
    :glob:
