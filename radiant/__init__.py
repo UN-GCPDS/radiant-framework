@@ -22,10 +22,23 @@ from tornado.web import Application, url, RequestHandler, StaticFileHandler
 from tornado.ioloop import IOLoop
 from tornado.httpserver import HTTPServer
 
-RadiantAPI = object
 DEBUG = True
 PATH = Union[str, pathlib.Path]
 URL = str
+
+
+########################################################################
+class RadiantAPI:
+    """Rename Randiant with a arand new class."""
+
+    # ---------------------------------------------------------------------
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    # ----------------------------------------------------------------------
+    def __new__(self):
+        """"""
+        RadiantServer(self.__name__)
 
 
 ########################################################################
