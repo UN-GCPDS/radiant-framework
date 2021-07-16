@@ -25,7 +25,8 @@ class Brython(Directive):
 
     def run(self):
 
-        temp_id = ''.join([random.choice(ascii_lowercase) for i in range(16)])
+        temp_id = ''.join([random.choice(ascii_lowercase)
+                           for i in range(16)])
 
         text = self.highlight_code()
         text += f'<iframe src="about:blank" class="brython-out" id="iframe_{temp_id}"></iframe>'
@@ -105,6 +106,7 @@ autoiframe("iframe_{temp_id}", ".brython-out")
             script += "\n".join(self.content.data[0].split('; '))
         else:
             script += "\n".join(self.content)
+
         script = script.replace('‘', "'")
         script = script.replace('’', "'")
 
@@ -140,7 +142,8 @@ autoiframe("iframe_{temp_id}", ".brython-out")
 
 def setup(app):
     app.add_directive('brython_iframe', Brython)
-    app.add_node(brython_node, html=(visit_brython, depart_brython), override=True)
+    app.add_node(brython_node, html=(
+        visit_brython, depart_brython), override=True)
 
 
 def visit_brython(self, node):

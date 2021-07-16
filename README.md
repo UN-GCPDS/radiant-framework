@@ -49,6 +49,37 @@ if __name__ == '__main__':
     BareMinimum()
 ```
 
+
+```python
+# Radiant modules
+from radiant.server import RadiantAPI, RadiantServer  # import RadiantServer for advance options
+
+from browser import document, html
+
+# Main class inheriting RadiantAPI
+class BareMinimum(RadiantAPI):
+
+    def __init__(self, *args, **kwargs):
+        """"""
+        super().__init__(*args, **kwargs)
+
+        #-----------------------------------------------------------
+        # Brython code
+        document.select_one('body') <= html.H1('Hello World')
+        #
+        # ...all your brython code
+        #-----------------------------------------------------------
+        
+if __name__ == '__main__':
+    # Advance options
+    RadiantServer('BareMinimum',
+                  host='localhost',
+                  port=5000,
+                  brython_version='3.9.1',
+                  debug_level=0,
+                  )
+```
+
 ## How to works
 
 This is basically a set of scripts that allows the same file run from _Python_ and _Brython_, when is running under _Python_ a [Tornado](https://www.tornadoweb.org/) server is created and configure the local path for serving static files, and a custom HTML template is configured in runtime to import the same script, this time under _Brython_, is very simple.

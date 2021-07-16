@@ -6,7 +6,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 
 setup(
     name='radiant',
-    version='3.2.2',
+    version='3.3',
     packages=['radiant'],
 
     author='Yeison Cardona',

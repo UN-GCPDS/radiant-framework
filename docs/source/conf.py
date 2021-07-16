@@ -14,13 +14,14 @@ import os
 import sys
 
 # sys.path.insert(0, os.path.abspath('../..'))
-sys.path.insert(0, os.path.abspath('../../radiant/brython/Lib/site-packages'))
+sys.path.insert(0, os.path.abspath(
+    '../../radiant/static/modules'))
 sys.path.insert(0, os.path.abspath('exts'))
 
 # -- Project information -----------------------------------------------------
 
 project = 'Radiant'
-copyright = '2020, Yeison Cardona'
+copyright = '2021, Yeison Cardona'
 author = 'Yeison Cardona'
 
 
@@ -105,9 +106,10 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static',
-                    '_static/brython/Lib',
-                    ]
+html_static_path = [
+    '_static',
+    # '_static/static',
+]
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -240,35 +242,39 @@ html_logo = '_static/logo.svg'
 html_favicon = '_static/favico.ico'
 
 # autodoc_default_options = [
-    # 'members',
-    # 'no-undoc-members',
-    # 'show-inheritance',
+# 'members',
+# 'no-undoc-members',
+# 'show-inheritance',
 # ]
 
 # autodoc_default_options = {
-    # 'members': 'var1, var2',
-    # 'member-order': 'bysource',
-    # 'special-members': '__init__',
-    # 'undoc-members': True,
-    # 'exclude-members': '__weakref__'
+# 'members': 'var1, var2',
+# 'member-order': 'bysource',
+# 'special-members': '__init__',
+# 'undoc-members': True,
+# 'exclude-members': '__weakref__'
 # }
 
 
 def setup(app):
 
-    app.add_js_file("brython/brython.js")
-    app.add_js_file("brython/brython_stdlib.js")
+    app.add_js_file("static/brython-3.9.5/brython.js")
+    app.add_js_file("static/brython-3.9.5/brython_stdlib.js")
     # app.add_js_file("brython/brython_modules.js")
-    app.add_js_file("brython/load_brython.js")
+    app.add_js_file("static/brython-3.9.5/load_brython.js")
 
     # app.add_js_file("material-components-web/material-components-web.min.js")
-    app.add_css_file("brython/fonts/material-design-icons-3.0.1/iconfont/material-icons.css")
-    app.add_css_file("brython/fonts/fontawesome-free-5.5.0-web/css/all.min.css")
-    app.add_css_file("brython/fonts/roboto-android/roboto.css")
-    app.add_css_file("brython/fonts/roboto-android/roboto-mono.css")
+    app.add_css_file(
+        "static/fonts/material-design-icons-3.0.1/iconfont/material-icons.css")
+    app.add_css_file(
+        "static/fonts/fontawesome-free-5.5.0-web/css/all.min.css")
+    app.add_css_file("static/fonts/roboto-android/roboto.css")
+    app.add_css_file("static/fonts/roboto-android/roboto-mono.css")
 
-    app.add_js_file("brython/material-components-web/material-components-web.min.js")
-    app.add_css_file("brython/material-components-web/material-components-web.min.css")
+    app.add_js_file(
+        "static/material-components-web/material-components-web.min.js")
+    app.add_css_file(
+        "static/material-components-web/material-components-web.min.css")
 
     app.add_css_file("custom.css")
     app.add_css_file("theme.css")
@@ -278,8 +284,8 @@ highlight_language = 'none'
 html_sourcelink_suffix = ''
 
 # nbsphinx_execute_arguments = [
-    # "--InlineBackend.figure_formats={'svg', 'pdf'}",
-    # "--InlineBackend.rc={'figure.dpi': 96}",
+# "--InlineBackend.figure_formats={'svg', 'pdf'}",
+# "--InlineBackend.rc={'figure.dpi': 96}",
 # ]
 
 nbsphinx_execute = 'never'
@@ -309,13 +315,15 @@ def get_notebooks(notebooks_dir, exclude=[]):
     notebooks = []
     for notebook in notebooks_list:
         if notebook not in exclude and notebook.endswith('.ipynb'):
-            notebooks.append(f"{notebooks_dir}/{notebook.replace('.ipynb', '')}")
+            notebooks.append(
+                f"{notebooks_dir}/{notebook.replace('.ipynb', '')}")
 
     notebooks = '\n   '.join(sorted(notebooks))
     return notebooks
 
 
-notebooks = get_notebooks('notebooks', exclude=['readme.ipynb', 'license.ipynb'])
+notebooks = get_notebooks('notebooks', exclude=[
+                          'readme.ipynb', 'license.ipynb'])
 components = get_notebooks('notebooks/components')
 modules = get_notebooks('notebooks/modules')
 

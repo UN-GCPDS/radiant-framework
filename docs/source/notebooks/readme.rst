@@ -63,6 +63,36 @@ Usage
     if __name__ == '__main__':
         BareMinimum()
 
+.. code:: ipython3
+
+    # Radiant modules
+    from radiant.server import RadiantAPI, RadiantServer  # import RadiantServer for advance options
+    
+    from browser import document, html
+    
+    # Main class inheriting RadiantAPI
+    class BareMinimum(RadiantAPI):
+    
+        def __init__(self, *args, **kwargs):
+            """"""
+            super().__init__(*args, **kwargs)
+    
+            #-----------------------------------------------------------
+            # Brython code
+            document.select_one('body') <= html.H1('Hello World')
+            #
+            # ...all your brython code
+            #-----------------------------------------------------------
+            
+    if __name__ == '__main__':
+        # Advance options
+        RadiantServer('BareMinimum',
+                      host='localhost',
+                      port=5000,
+                      brython_version='3.9.1',
+                      debug_level=0,
+                      )
+
 How to works
 ------------
 

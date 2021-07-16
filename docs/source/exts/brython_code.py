@@ -25,7 +25,8 @@ class Brython(Directive):
 
     def run(self):
 
-        temp_id = ''.join([random.choice(ascii_lowercase) for i in range(16)])
+        temp_id = ''.join([random.choice(ascii_lowercase)
+                           for i in range(16)])
         script = self.highlight_code()
 
         script += self.gen_script(temp_id)
@@ -35,7 +36,8 @@ class Brython(Directive):
         else:
             style = ''
 
-        script += '<div class="brython-out" {} id="{}"></div>\n'.format(style, temp_id)
+        script += '<div class="brython-out" {} id="{}"></div>\n'.format(
+            style, temp_id)
 
         attributes = {'format': 'html', }
         node = brython_node(text=script, **attributes)
@@ -89,7 +91,8 @@ class Brython(Directive):
 
 def setup(app):
     app.add_directive('brython', Brython)
-    app.add_node(brython_node, html=(visit_brython, depart_brython), override=True)
+    app.add_node(brython_node, html=(
+        visit_brython, depart_brython), override=True)
 
 
 def visit_brython(self, node):
