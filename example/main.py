@@ -69,6 +69,8 @@ if __name__ == '__main__':
                   handlers=([r'^/ws', ('ws_handler.py', 'WSHandler'), {}], ),
                   template='custom_template.html',
                   mock_imports=['numpy'],
+                  brython_version='3.9.5',
+                  debug_level=0,
                   # theme='custom_theme.xml',
                   )
 
