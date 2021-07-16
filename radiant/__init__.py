@@ -25,11 +25,15 @@ from tornado.httpserver import HTTPServer
 DEBUG = True
 PATH = Union[str, pathlib.Path]
 URL = str
+DEFAULT_IP = 'localhost'
+DEFAULT_PORT = '5000'
+DEFAULT_BRYTHON_VERSION = '3.9.5'
+DEFAULT_BRYTHON_DEBUG = 0
 
 
 ########################################################################
 class RadiantAPI:
-    """Rename Randiant with a arand new class."""
+    """Rename Randiant with a new class."""
 
     # ---------------------------------------------------------------------
     def __init__(self, *args, **kwargs):
@@ -88,7 +92,7 @@ class ThemeHandler(RequestHandler):
                                  'templates', 'default_theme.xml')
 
         tree = ElementTree.parse(theme)
-        theme_css = {child.attrib['name']                     : child.text for child in tree.getroot()}
+        theme_css = {child.attrib['name']: child.text for child in tree.getroot()}
         return theme_css
 
 
@@ -103,11 +107,14 @@ class RadiantHandler(RequestHandler):
         variables.update(self.initial_arguments)
 
         variables['argv'] = json.dumps(variables['argv'])
-        self.render(f"{os.path.realpath(variables['template'])}", **variables)
+        self.render(
+            f"{os.path.realpath(variables['template'])}", **variables)
 
 
 # ----------------------------------------------------------------------
 def make_app(class_: str, /,
+             brython_version: str,
+             debug_level: int,
              template: PATH = os.path.join(os.path.dirname(
                  __file__), 'templates', 'index.html'),
              environ: dict = {},
@@ -117,7 +124,8 @@ def make_app(class_: str, /,
              python: Tuple[PATH, str] = (),
              theme: PATH = None,
              path: PATH = None,
-             autoreload: bool = False):
+             autoreload: bool = False,
+             ):
     """
     Parameters
     ----------
@@ -144,7 +152,7 @@ def make_app(class_: str, /,
 
     settings = {
         "debug": DEBUG,
-        'static_path': os.path.join(os.path.dirname(__file__), 'brython-3.9.1'),
+        'static_path': os.path.join(os.path.dirname(__file__), 'static'),
         'static_url_prefix': '/static/',
         "xsrf_cookies": False,
         'autoreload': autoreload,
@@ -160,6 +168,8 @@ def make_app(class_: str, /,
         'template': template,
         'mock_imports': mock_imports,
         'path': path,
+        'brython_version': brython_version,
+        'debug_level': debug_level,
     })
 
     app = [
@@ -181,7 +191,8 @@ def make_app(class_: str, /,
                 '.'.join(handler[1]).replace('.py', ''), os.path.abspath(handler[1][0]))
             foo = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(foo)
-            app.append(url(handler[0], getattr(foo, handler[1][1]), handler[2]))
+            app.append(url(handler[0], getattr(
+                foo, handler[1][1]), handler[2]))
         else:
             app.append(url(*handler))
 
@@ -195,8 +206,10 @@ def make_app(class_: str, /,
 
 # ----------------------------------------------------------------------
 def RadiantServer(class_: str, /,
-                  host: str = 'localhost',
-                  port: str = '5000',
+                  host: str = DEFAULT_IP,
+                  port: str = DEFAULT_PORT,
+                  brython_version: str = DEFAULT_BRYTHON_VERSION,
+                  debug_level: int = DEFAULT_BRYTHON_DEBUG,
                   template: PATH = os.path.join(os.path.dirname(
                       __file__), 'templates', 'index.html'),
                   environ: dict = {},
@@ -245,7 +258,8 @@ def RadiantServer(class_: str, /,
     print("Radiant server running on port {}".format(port))
     application = make_app(class_, python=python, template=template,
                            handlers=handlers, theme=theme, environ=environ,
-                           mock_imports=mock_imports, path=path)
+                           mock_imports=mock_imports, path=path,
+                           brython_version=brython_version, debug_level=debug_level)
     http_server = HTTPServer(application)
     http_server.listen(port, host)
 
