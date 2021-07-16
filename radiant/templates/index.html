@@ -38,6 +38,7 @@ sys.modules["{{module}}"] = fake()
 
     <script type="text/python">
 {% if path %}
+import sys
 sys.path.append('/path/')
 {% end %}
 
