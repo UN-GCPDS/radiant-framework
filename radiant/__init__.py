@@ -92,7 +92,8 @@ class ThemeHandler(RequestHandler):
                                  'templates', 'default_theme.xml')
 
         tree = ElementTree.parse(theme)
-        theme_css = {child.attrib['name']: child.text for child in tree.getroot()}
+        theme_css = {child.attrib['name']
+            : child.text for child in tree.getroot()}
         return theme_css
 
 
@@ -115,6 +116,7 @@ class RadiantHandler(RequestHandler):
 def make_app(class_: str, /,
              brython_version: str,
              debug_level: int,
+             pages: Tuple[str],
              template: PATH = os.path.join(os.path.dirname(
                  __file__), 'templates', 'index.html'),
              environ: dict = {},
@@ -178,6 +180,13 @@ def make_app(class_: str, /,
         url(r'^/root/(.*)', StaticFileHandler, {'path': sys.path[0]}),
     ]
 
+    for url_, module in pages:
+        file_, class_ = module.split('.')
+        environ_tmp = environ.copy()
+        environ_tmp['file'] = file_
+        environ_tmp['class_'] = class_
+        app.append(url(url_, RadiantHandler, environ_tmp),)
+
     if python:
         spec = importlib.util.spec_from_file_location(
             '.'.join(python).replace('.py', ''), os.path.abspath(python[0]))
@@ -208,6 +217,7 @@ def make_app(class_: str, /,
 def RadiantServer(class_: str, /,
                   host: str = DEFAULT_IP,
                   port: str = DEFAULT_PORT,
+                  pages: Tuple[str] = (),
                   brython_version: str = DEFAULT_BRYTHON_VERSION,
                   debug_level: int = DEFAULT_BRYTHON_DEBUG,
                   template: PATH = os.path.join(os.path.dirname(
@@ -259,7 +269,8 @@ def RadiantServer(class_: str, /,
     application = make_app(class_, python=python, template=template,
                            handlers=handlers, theme=theme, environ=environ,
                            mock_imports=mock_imports, path=path,
-                           brython_version=brython_version, debug_level=debug_level)
+                           brython_version=brython_version, pages=pages,
+                           debug_level=debug_level)
     http_server = HTTPServer(application)
     http_server.listen(port, host)
 

@@ -21,14 +21,15 @@ class MainApp(RadiantAPI):
         """"""
         super().__init__(*args, **kwargs)
 
-        document.select('body')[0] <= html.H1('Hello World')
+        document.select_one('body') <= html.H1('Hello World')
+        document.select_one('body') <= html.A('multipage', href='/multipage')
         submodule_fn()
 
-        document.select('body')[0] <= html.H3(self.MyClass.local_python())
+        document.select_one('body') <= html.H3(self.MyClass.local_python())
 
         a, b = 3, 5
         c = self.MyClass.pitagoras(a, b)
-        document.select('body')[0] <= html.H3(
+        document.select_one('body') <= html.H3(
             f"Pitagoras: {a=}, {b=}, {c=:.3f}")
 
         self.add_css_file('custom_styles.css')
@@ -55,7 +56,7 @@ class MainApp(RadiantAPI):
         value = 'value-5'
         self.select_ = form.mdc.Select('', options=options, selected=value)
 
-        document.select('body')[0] <= form
+        document.select_one('body') <= form
 
     # ----------------------------------------------------------------------
     def on_button(self, evt):
@@ -71,6 +72,7 @@ if __name__ == '__main__':
                   mock_imports=['numpy'],
                   brython_version='3.9.5',
                   debug_level=0,
+                  pages=([r'^/multipage$', 'second_page.Second'], )
                   # theme='custom_theme.xml',
                   )
 

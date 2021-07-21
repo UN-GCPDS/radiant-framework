@@ -20,6 +20,7 @@ if __name__ == '__main__':
                   port=5000,
                   brython_version='3.9.1',
                   debug_level=0,
+                  pages=([r'^/multipage$', 'second_page.Second'], )
                   )
 
 
