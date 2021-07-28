@@ -1,4 +1,5 @@
 from browser import window, timer
+import logging
 
 note_values = {
     'C0': 16.35,
@@ -185,6 +186,8 @@ class Tone:
             self.oscilator.frequency.value = self.note_values[note]
         elif isinstance(note, (int, float)):
             self.oscilator.frequency.value = note
+        else:
+            logging.warning(f"'{note}' is not a valid note.")
 
     # ----------------------------------------------------------------------
     def stop(self):

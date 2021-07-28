@@ -92,8 +92,7 @@ class ThemeHandler(RequestHandler):
                                  'templates', 'default_theme.xml')
 
         tree = ElementTree.parse(theme)
-        theme_css = {child.attrib['name']
-            : child.text for child in tree.getroot()}
+        theme_css = {child.attrib['name']                     : child.text for child in tree.getroot()}
         return theme_css
 
 
@@ -174,15 +173,24 @@ def make_app(class_: str, /,
         'debug_level': debug_level,
     })
 
-    app = [
-        url(r'^/$', RadiantHandler, environ),
+    app = []
+    if class_:
+        app += [url(r'^/$', RadiantHandler, environ)]
+
+    app += [
         url(r'^/theme.css$', ThemeHandler),
         url(r'^/root/(.*)', StaticFileHandler, {'path': sys.path[0]}),
     ]
 
+    if isinstance(pages, str):
+        *package, module_name = pages.split('.')
+        module = importlib.import_module('.'.join(package))
+        pages = getattr(module, module_name)
+
     for url_, module in pages:
-        file_, class_ = module.split('.')
+        *file_, class_ = module.split('.')
         environ_tmp = environ.copy()
+        file_ = '.'.join(file_)
         environ_tmp['file'] = file_
         environ_tmp['class_'] = class_
         app.append(url(url_, RadiantHandler, environ_tmp),)
@@ -214,7 +222,7 @@ def make_app(class_: str, /,
 
 
 # ----------------------------------------------------------------------
-def RadiantServer(class_: str, /,
+def RadiantServer(class_: Optional[str] = None,
                   host: str = DEFAULT_IP,
                   port: str = DEFAULT_PORT,
                   pages: Tuple[str] = (),
@@ -231,6 +239,7 @@ def RadiantServer(class_: str, /,
                   path: Optional[PATH] = None,
                   autoreload: Optional[bool] = False,
                   callbacks: Optional[tuple] = (),
+                  **kwargs,
                   ):
     """Python implementation for move `class_` into a Bython environment.
 
