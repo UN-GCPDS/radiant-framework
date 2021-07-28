@@ -72,8 +72,8 @@ if __name__ == '__main__':
                   mock_imports=['numpy'],
                   brython_version='3.9.5',
                   debug_level=0,
-                  pages=([r'^/multipage$', 'second_page.Second'], )
-                  # theme='custom_theme.xml',
+                  pages=([r'^/multipage$', 'second_page.Second'], ),
+                  theme='custom_theme.xml',
                   )
 
 

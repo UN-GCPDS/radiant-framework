@@ -10,6 +10,9 @@ class BareMinimum(RadiantAPI):
         """"""
         super().__init__(*args, **kwargs)
         document.select_one('body') <= html.H1('Hello World')
+        document.select_one('body') <= html.H1('Multipage support')
+        document.select_one('body') <= html.A(
+            'second page', href='/multipage')
 
         logging.warning('HOLA')
 

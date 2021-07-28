@@ -6,6 +6,7 @@ from browser import document, html
 from mdc.MDCButton import MDCButton
 from mdc.MDCFormField import MDCSelect
 
+
 ########################################################################
 class MainApp(RadiantAPI):
 
@@ -13,8 +14,8 @@ class MainApp(RadiantAPI):
     def __init__(self, *args, **kwargs):
         """"""
         super().__init__(*args, **kwargs)
-
         tone = Tone()
+
         style = {
             'margin-top': '25vh',
             'width': '30vw',
@@ -25,9 +26,11 @@ class MainApp(RadiantAPI):
         }
         parent = html.DIV(style=style)
 
-        select = MDCSelect('Tone', note_values.items(), outline=True)
+        select = MDCSelect(
+            'Tone', note_values.items(), outline=True, selected='B4')
         play_button = MDCButton("Play", raised=True)
-        play_button.bind('click', lambda evt: tone(select.mdc['value'], 100))
+        play_button.bind('click', lambda evt: tone(
+            float(select.mdc.value), 100, 0.5))
 
         parent <= select
         parent <= play_button
