@@ -11,6 +11,11 @@ class BareMinimum(RadiantAPI):
         super().__init__(*args, **kwargs)
         document.select_one('body') <= html.H1('Hello World')
 
+        # <i class = "fa-solid fa-right" > < / i >
+
+        document.select_one('body') <= html.I(
+            Class='fas fa-arrow-right')
+
         logging.warning('HOLA')
 
 

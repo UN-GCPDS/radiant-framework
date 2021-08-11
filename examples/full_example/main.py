@@ -58,6 +58,11 @@ class MainApp(RadiantAPI):
 
         document.select_one('body') <= form
 
+        document.select_one('body') <= html.I(Class='fas fa-arrow-right')
+        document.select_one('body') <= html.I(Class='bi bi-arrow-right')
+        document.select_one('body') <= html.SPAN(
+            'face', Class='material-icons md-24')
+
     # ----------------------------------------------------------------------
     def on_button(self, evt):
         """"""
