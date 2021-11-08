@@ -92,8 +92,21 @@ class ThemeHandler(RequestHandler):
                                  'templates', 'default_theme.xml')
 
         tree = ElementTree.parse(theme)
-        theme_css = {child.attrib['name']                     : child.text for child in tree.getroot()}
+        theme_css = {child.attrib['name']
+            : child.text for child in tree.getroot()}
         return theme_css
+
+
+# ########################################################################
+# class ManifestHandler(RequestHandler):
+
+    # # ----------------------------------------------------------------------
+    # def get(self):
+
+        # with open('/home/yeison/Development/BCI-Framework/brython-radiant/examples/pwa/manifest.json', 'r') as file:
+            # content = file.read()
+
+        # self.write(content)
 
 
 ########################################################################
@@ -163,7 +176,8 @@ def make_app(class_: str, /,
         'class_': class_,
         'python_': python if python else (None, None),
         'module': os.path.split(sys.path[0])[-1],
-        'file': os.path.split(sys.argv[0])[-1].removesuffix('.py'),
+        'file': os.path.split(sys.argv[0])[-1].replace('.py', ''),
+        # 'file': os.path.split(sys.argv[0])[-1].removesuffix('.py'),
         'theme': theme,
         'argv': sys.argv,
         'template': template,
@@ -180,6 +194,7 @@ def make_app(class_: str, /,
     app += [
         url(r'^/theme.css$', ThemeHandler),
         url(r'^/root/(.*)', StaticFileHandler, {'path': sys.path[0]}),
+        # url(r'^/manifest.json$', ManifestHandler),
     ]
 
     if isinstance(pages, str):
@@ -280,7 +295,12 @@ def RadiantServer(class_: Optional[str] = None,
                            mock_imports=mock_imports, path=path,
                            brython_version=brython_version, pages=pages,
                            debug_level=debug_level)
-    http_server = HTTPServer(application)
+    http_server = HTTPServer(application,
+                             # ssl_options={
+                             # 'certfile': 'host.crt',
+                             # 'keyfile': 'host.key',
+                             # },
+                             )
     http_server.listen(port, host)
 
     for handler in callbacks:

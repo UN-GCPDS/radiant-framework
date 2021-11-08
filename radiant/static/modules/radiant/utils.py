@@ -46,7 +46,8 @@ class LocalInterpreter:
             f = lambda *args, **kwargs: self.__request_async__(
                 attr, *args, **kwargs)
         else:
-            f = lambda *args, **kwargs: self.__request__(attr, *args, **kwargs)
+            f = lambda *args, **kwargs: self.__request__(
+                attr, *args, **kwargs)
 
         f.__name__ = attr
         return f
@@ -74,7 +75,8 @@ class LocalInterpreter:
             req = ajax.ajax()
             req.bind('complete', fn)
             req.open('POST', self.url_, True)
-            req.set_header('content-type', 'application/x-www-form-urlencoded')
+            req.set_header(
+                'content-type', 'application/x-www-form-urlencoded')
             req.send({'name': attr, 'args': json.dumps(list(args)), 'kwargs': json.dumps(kwargs),
                       'csrfmiddlewaretoken': self.csrftoken})
 
@@ -115,18 +117,22 @@ class WebSocket:
     # ----------------------------------------------------------------------
     def on_open(cls, evt):
         """"""
+        # print('ON OPEN')
 
     # ----------------------------------------------------------------------
     def on_error(cls, evt):
         """"""
+        # print('ON ERROR')
 
     # ----------------------------------------------------------------------
     def on_message(cls, evt):
         """"""
+        # print('ON MESSAGE')
 
     # ----------------------------------------------------------------------
     def on_close(cls, evt):
         """"""
+        # print('ON CLOSE')
 
     # ----------------------------------------------------------------------
     def send(cls, data):

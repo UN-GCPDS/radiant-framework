@@ -740,7 +740,7 @@ class MDCTextField(MDCTemplate):
 
     # ----------------------------------------------------------------------
 
-    def __new__(self, label, value=False, type='text', leading_icon=False, trailing_icon=False, helper_text=False, helper_text_persistent=True, outlined=False, disabled=False, fullwidth=False, **kwargs):
+    def __new__(self, label, value=False, type='text', leading_icon=False, trailing_icon=False, helper_text=False, helper_text_persistent=True, outlined=False, disabled=False, filled=False, **kwargs):
         """"""
 
         self.element = self.render(locals(), kwargs)
@@ -755,68 +755,88 @@ class MDCTextField(MDCTemplate):
         context['id'] = cls.ID
 
         if context['disabled']:
-            context['input_disabled'] = 'disabled'
+            context['input_disabled'] = 'mdc-text-field--disabled'
         else:
             context['input_disabled'] = ''
 
         if context['value']:
             context['upgraded'] = 'mdc-text-field--upgraded'
-            context['float_above'] = 'mdc-floating-label--float-above'
+            context['floating'] = 'mdc-text-field--label-floating'
+            context[
+                'float_above'] = f'<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">{context["helper_text"]}</span>'
         else:
             context['upgraded'] = ''
+            context['floating'] = ''
             context['float_above'] = ''
 
-        if context['helper_text']:
-            context['helper_text'] = 'aria-controls="username-helper-text" aria-describedby="username-helper-text"'
-        else:
-            context['helper_text'] = ''
+        # if context['helper_text']:
+            # context['helper_text'] = 'aria-controls="username-helper-text" aria-describedby="username-helper-text"'
+        # else:
+            # context['helper_text'] = ''
 
-        if context['leading_icon']:
-            context['icon'] = '<i class="material-icons mdc-text-field__icon" tabindex="0" role="button">{icon}</i>'.format(
-                icon=context['leading_icon'])
-            context['leading_icon'] = 'mdc-text-field--with-leading-icon'
+        # if context['leading_icon']:
+            # context['icon'] = '<i class="material-icons mdc-text-field__icon" tabindex="0" role="button">{icon}</i>'.format(
+                # icon=context['leading_icon'])
+            # context['leading_icon'] = 'mdc-text-field--with-leading-icon'
 
-        elif context['trailing_icon']:
-            context['icon'] = '<i class="material-icons mdc-text-field__icon" tabindex="0" role="button">{icon}</i>'.format(
-                icon=context['trailing_icon'])
-            context['trailing_icon'] = 'mdc-text-field--with-trailing-icon'
+        # elif context['trailing_icon']:
+            # context['icon'] = '<i class="material-icons mdc-text-field__icon" tabindex="0" role="button">{icon}</i>'.format(
+                # icon=context['trailing_icon'])
+            # context['trailing_icon'] = 'mdc-text-field--with-trailing-icon'
 
-        else:
-            context['leading_icon'] = ''
-            context['trailing_icon'] = ''
-            context['icon'] = ''
+        # else:
+            # context['leading_icon'] = ''
+            # context['trailing_icon'] = ''
+            # context['icon'] = ''
 
         if context.get('outlined'):
             code = """
-                <div class="mdc-text-field mdc-text-field--outlined {disabled} {upgraded} {leading_icon} {trailing_icon}">
-                    {icon}
-                  <input type="{type}" id="{id}" class="mdc-text-field__input" {value}>
-                  <div class="mdc-notched-outline">
-                    <div class="mdc-notched-outline__leading"></div>
-                    <div class="mdc-notched-outline__notch">
-                      <label for="{id}" class="mdc-floating-label {float_above}">{label}</label>
+                <label class="mdc-text-field mdc-text-field--outlined {input_disabled} {floating}">
+                  <span class="mdc-notched-outline">
+                    <span class="mdc-notched-outline__leading"></span>
+                    <span class="mdc-notched-outline__notch">
+                      <span class="mdc-floating-label" id="{id}">{label}</span>
+                    </span>
+                    <span class="mdc-notched-outline__trailing"></span>
+                  </span>
+                  <input type="text" class="mdc-text-field__input" aria-labelledby="{id}" {value}>
+                </label>
+            """
+
+        elif context.get('filled'):
+
+            if context.get('value'):
+                code = """
+                    <label class="mdc-text-field mdc-text-field--filled">
+                      <span class="mdc-text-field__ripple"></span>
+                      <span class="mdc-floating-label" id="label-{id}">{label}</span>
+                      <input class="mdc-text-field__input" type="text" id={id}
+                             aria-labelledby="label-{id}"
+                             aria-controls="helper-{id}"
+                             aria-describedby="my-helper-id"
+                             {value}>
+                      <span class="mdc-line-ripple"></span>
+                    </label>
+                    <div class="mdc-text-field-helper-line"><label class="mdc-text-field mdc-text-field--filled mdc-ripple-upgraded" id="[object Object]" style="margin-top: unset;width: 100%;">…</label>flex
+                      <div class="mdc-text-field-helper-text" id="helper-{id}" aria-hidden="true">{helper_text}</div>
                     </div>
-                    <div class="mdc-notched-outline__trailing"></div>
-                  </div>
-                </div>
-            """
+                    """
 
-        elif context.get('fullwidth'):
-            code = """
-            <div class="mdc-text-field mdc-text-field--fullwidth {upgraded} {disabled}">
-              <input class="mdc-text-field__input" id="{id}" type="{type}" {value} placeholder="{label}" aria-label="{label}" {helper_text}>
-            </div>
-            """
-
-        else:
-            code = """
-                <div class="mdc-text-field {disabled} {upgraded} {leading_icon} {trailing_icon}">
-                    {icon}
-                  <input type="{type}" id="{id}" class="mdc-text-field__input" {input_disabled} {value} {helper_text}>
-                  <label class="mdc-floating-label" for="{id}">{label}</label>
-                  <div class="mdc-line-ripple"></div>
-                </div>
-            """
+            else:
+                code = """
+                    <label class="mdc-text-field mdc-text-field--filled">
+                      <span class="mdc-text-field__ripple"></span>
+                      <span class="mdc-floating-label" id="label-{id}">{label}</span>
+                      <input class="mdc-text-field__input" type="text" id={id}
+                             aria-labelledby="label-{id}"
+                             aria-controls="helper-{id}"
+                             aria-describedby="my-helper-id">
+                      <span class="mdc-line-ripple"></span>
+                    </label>
+                    <div class="mdc-text-field-helper-line">
+                      <div class="mdc-text-field-helper-text" id="helper-{id}" aria-hidden="true">{helper_text}</div>
+                    </div>
+                    """
 
         return cls.render_html(code, context)
 

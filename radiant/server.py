@@ -7,7 +7,7 @@ class fake:
         return None
 
 
-brython = ['browser']
+brython = ['browser', 'browser.template']
 for module in brython:
     sys.modules[f"{module}"] = fake()
 
