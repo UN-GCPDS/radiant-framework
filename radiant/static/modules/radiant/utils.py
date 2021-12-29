@@ -137,6 +137,20 @@ class WebSocket:
     # ----------------------------------------------------------------------
     def send(cls, data):
         """"""
+        cls.wait_for_connection(cls._send, data)
+
+    # ----------------------------------------------------------------------
+    def wait_for_connection(cls, callback, data):
+        """"""
+        if cls.ws.readyState == 1:
+            return callback(data)
+        else:
+            timer.set_timeout(lambda: cls.wait_for_connection(
+                callback, data), 1000)
+
+    # ----------------------------------------------------------------------
+    def _send(cls, data):
+        """"""
         if not data:
             return
 
