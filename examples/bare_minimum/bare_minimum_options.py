@@ -21,7 +21,7 @@ if __name__ == '__main__':
     RadiantServer('BareMinimum',
                   host='localhost',
                   port=5000,
-                  brython_version='3.9.1',
+                  brython_version='3.10.3',
                   debug_level=0,
                   pages=([r'^/multipage$', 'second_page.Second'], )
                   )
