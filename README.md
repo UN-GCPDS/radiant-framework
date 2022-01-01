@@ -11,7 +11,7 @@ A Brython Framework for Web Apps development.
 ![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/UN-GCPDS/brython-radiant?)
 [![Documentation Status](https://readthedocs.org/projects/radiant/badge/?version=latest)](https://radiant-framework.readthedocs.io/en/latest/?badge=latest)
 
-Radiant is a [Brython](https://brython.info/) framework for the quick development of web apps wuth pure Python/Brython syntax which means that there is no need to care about (if you don't want) HTML, CSS, or Javascript.  Run over [Tornado](https://www.tornadoweb.org/) servers and includes support to [Websockets](notebooks/02-additional_features.ipynb#WebSockets), [Python Scripts](notebooks/02-additional_features.ipynb#Python-scripting) and [MDC](notebooks/02-additional_features.ipynb#Custom-themes).
+Radiant is a [Brython](https://brython.info/) framework for the quick development of web apps with pure Python/Brython syntax so there is no need to care about (if you don’t want) HTML, CSS, or Javascript. Run over [Tornado](https://www.tornadoweb.org/) servers and include support to [Websockets](notebooks/02-additional_features.ipynb#WebSockets), [Python Scripts](notebooks/02-additional_features.ipynb#Python-scripting) and [MDC](notebooks/02-additional_features.ipynb#Custom-themes).
 
 ## Instalation
 
@@ -21,6 +21,8 @@ pip install radiant
 ```
 
 ## Usage
+
+### Bare minimum
 
 
 ```python
@@ -49,10 +51,12 @@ if __name__ == '__main__':
     BareMinimum()
 ```
 
+### Extra options
+
 
 ```python
 # Radiant modules
-from radiant.server import RadiantAPI, RadiantServer  # import RadiantServer for advance options
+from radiant.server import RadiantAPI, RadiantServer  # import RadiantServer for advanced options
 
 from browser import document, html
 

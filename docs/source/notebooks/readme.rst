@@ -8,10 +8,10 @@ Python Version| |GitHub last commit| |CodeFactor Grade| |Documentation
 Status|
 
 Radiant is a `Brython <https://brython.info/>`__ framework for the quick
-development of web apps wuth pure Python/Brython syntax which means that
-there is no need to care about (if you don’t want) HTML, CSS, or
-Javascript. Run over `Tornado <https://www.tornadoweb.org/>`__ servers
-and includes support to
+development of web apps with pure Python/Brython syntax so there is no
+need to care about (if you don’t want) HTML, CSS, or Javascript. Run
+over `Tornado <https://www.tornadoweb.org/>`__ servers and include
+support to
 `Websockets <notebooks/02-additional_features.ipynb#WebSockets>`__,
 `Python
 Scripts <notebooks/02-additional_features.ipynb#Python-scripting>`__ and
@@ -36,6 +36,9 @@ Instalation
 
 Usage
 -----
+
+Bare minimum
+~~~~~~~~~~~~
 
 .. code:: ipython3
 
@@ -63,10 +66,13 @@ Usage
     if __name__ == '__main__':
         BareMinimum()
 
+Extra options
+~~~~~~~~~~~~~
+
 .. code:: ipython3
 
     # Radiant modules
-    from radiant.server import RadiantAPI, RadiantServer  # import RadiantServer for advance options
+    from radiant.server import RadiantAPI, RadiantServer  # import RadiantServer for advanced options
     
     from browser import document, html
     
