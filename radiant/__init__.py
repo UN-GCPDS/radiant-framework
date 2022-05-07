@@ -4,8 +4,10 @@ Radiant
 """
 # Prevent this file to be imported from Brython
 import sys
+
 try:
     import browser
+
     sys.exit()
 except:
     pass
@@ -27,7 +29,7 @@ PATH = Union[str, pathlib.Path]
 URL = str
 DEFAULT_IP = 'localhost'
 DEFAULT_PORT = '5000'
-DEFAULT_BRYTHON_VERSION = '3.10.3'
+DEFAULT_BRYTHON_VERSION = '3.10.5'
 DEFAULT_BRYTHON_DEBUG = 0
 
 
@@ -54,9 +56,17 @@ class PythonHandler(RequestHandler):
 
         if v := getattr(self, name, None)(*args, **kwargs):
             if v is None:
-                data = json.dumps({'__RDNT__': 0, })
+                data = json.dumps(
+                    {
+                        '__RDNT__': 0,
+                    }
+                )
             else:
-                data = json.dumps({'__RDNT__': v, })
+                data = json.dumps(
+                    {
+                        '__RDNT__': v,
+                    }
+                )
         self.write(data)
 
     # ----------------------------------------------------------------------
@@ -71,8 +81,9 @@ class ThemeHandler(RequestHandler):
     # ----------------------------------------------------------------------
     def get(self):
         theme = self.get_theme()
-        loader = jinja2.FileSystemLoader(os.path.join(
-            os.path.dirname(__file__), 'templates'))
+        loader = jinja2.FileSystemLoader(
+            os.path.join(os.path.dirname(__file__), 'templates')
+        )
         env = jinja2.Environment(autoescape=True, loader=loader)
         env.filters['vector'] = self.hex2vector
         stylesheet = env.get_template('theme.css.template')
@@ -81,37 +92,40 @@ class ThemeHandler(RequestHandler):
     # ----------------------------------------------------------------------
     @staticmethod
     def hex2vector(hex_: str):
-        return ', '.join([str(int(hex_[i:i + 2], 16)) for i in range(1, 6, 2)])
+        return ', '.join(
+            [str(int(hex_[i : i + 2], 16)) for i in range(1, 6, 2)]
+        )
 
     # ----------------------------------------------------------------------
     def get_theme(self):
         theme = self.settings['theme']
 
         if (not theme) or (not os.path.exists(theme)):
-            theme = os.path.join(os.path.dirname(__file__),
-                                 'templates', 'default_theme.xml')
+            theme = os.path.join(
+                os.path.dirname(__file__), 'templates', 'default_theme.xml'
+            )
 
         tree = ElementTree.parse(theme)
-        theme_css = {child.attrib['name']
-            : child.text for child in tree.getroot()}
+        theme_css = {
+            child.attrib['name']: child.text for child in tree.getroot()
+        }
         return theme_css
 
 
 # ########################################################################
 # class ManifestHandler(RequestHandler):
 
-    # # ----------------------------------------------------------------------
-    # def get(self):
+# # ----------------------------------------------------------------------
+# def get(self):
 
-        # with open('/home/yeison/Development/BCI-Framework/brython-radiant/examples/pwa/manifest.json', 'r') as file:
-            # content = file.read()
+# with open('/home/yeison/Development/BCI-Framework/brython-radiant/examples/pwa/manifest.json', 'r') as file:
+# content = file.read()
 
-        # self.write(content)
+# self.write(content)
 
 
 ########################################################################
 class RadiantHandler(RequestHandler):
-
     def initialize(self, **kwargs):
         self.initial_arguments = kwargs
 
@@ -121,25 +135,30 @@ class RadiantHandler(RequestHandler):
 
         variables['argv'] = json.dumps(variables['argv'])
         self.render(
-            f"{os.path.realpath(variables['template'])}", **variables)
+            f"{os.path.realpath(variables['template'])}", **variables
+        )
 
 
 # ----------------------------------------------------------------------
-def make_app(class_: str, /,
-             brython_version: str,
-             debug_level: int,
-             pages: Tuple[str],
-             template: PATH = os.path.join(os.path.dirname(
-                 __file__), 'templates', 'index.html'),
-             environ: dict = {},
-             mock_imports: Tuple[str] = [],
-             handlers: Tuple[URL, Union[List[Union[PATH, str]],
-                                        RequestHandler], dict] = (),
-             python: Tuple[PATH, str] = (),
-             theme: PATH = None,
-             path: PATH = None,
-             autoreload: bool = False,
-             ):
+def make_app(
+    class_: str,
+    /,
+    brython_version: str,
+    debug_level: int,
+    pages: Tuple[str],
+    template: PATH = os.path.join(
+        os.path.dirname(__file__), 'templates', 'index.html'
+    ),
+    environ: dict = {},
+    mock_imports: Tuple[str] = [],
+    handlers: Tuple[
+        URL, Union[List[Union[PATH, str]], RequestHandler], dict
+    ] = (),
+    python: Tuple[PATH, str] = (),
+    theme: PATH = None,
+    path: PATH = None,
+    autoreload: bool = False,
+):
     """
     Parameters
     ----------
@@ -172,20 +191,22 @@ def make_app(class_: str, /,
         'autoreload': autoreload,
     }
 
-    environ.update({
-        'class_': class_,
-        'python_': python if python else (None, None),
-        'module': os.path.split(sys.path[0])[-1],
-        'file': os.path.split(sys.argv[0])[-1].replace('.py', ''),
-        # 'file': os.path.split(sys.argv[0])[-1].removesuffix('.py'),
-        'theme': theme,
-        'argv': sys.argv,
-        'template': template,
-        'mock_imports': mock_imports,
-        'path': path,
-        'brython_version': brython_version,
-        'debug_level': debug_level,
-    })
+    environ.update(
+        {
+            'class_': class_,
+            'python_': python if python else (None, None),
+            'module': os.path.split(sys.path[0])[-1],
+            'file': os.path.split(sys.argv[0])[-1].replace('.py', ''),
+            # 'file': os.path.split(sys.argv[0])[-1].removesuffix('.py'),
+            'theme': theme,
+            'argv': sys.argv,
+            'template': template,
+            'mock_imports': mock_imports,
+            'path': path,
+            'brython_version': brython_version,
+            'debug_level': debug_level,
+        }
+    )
 
     app = []
     if class_:
@@ -208,11 +229,24 @@ def make_app(class_: str, /,
         file_ = '.'.join(file_)
         environ_tmp['file'] = file_
         environ_tmp['class_'] = class_
-        app.append(url(url_, RadiantHandler, environ_tmp),)
+        app.append(
+            url(url_, RadiantHandler, environ_tmp),
+        )
 
     if python:
+
+        if not os.path.isabs(python[0]):
+            python_path = os.path.join(sys.path[0], python[0])
+        else:
+            python_path = python[0]
+
+        print('*' * 40)
+        print(python_path)
+        print('*' * 40)
+
         spec = importlib.util.spec_from_file_location(
-            '.'.join(python).replace('.py', ''), os.path.abspath(python[0]))
+            '.'.join(python).replace('.py', ''), python_path
+        )
         foo = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(foo)
         app.append(url(r'^/python_handler', getattr(foo, python[1])))
@@ -220,16 +254,21 @@ def make_app(class_: str, /,
     for handler in handlers:
         if isinstance(handler[1], tuple):
             spec = importlib.util.spec_from_file_location(
-                '.'.join(handler[1]).replace('.py', ''), os.path.abspath(handler[1][0]))
+                '.'.join(handler[1]).replace('.py', ''),
+                os.path.abspath(handler[1][0]),
+            )
             foo = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(foo)
-            app.append(url(handler[0], getattr(
-                foo, handler[1][1]), handler[2]))
+            app.append(
+                url(handler[0], getattr(foo, handler[1][1]), handler[2])
+            )
         else:
             app.append(url(*handler))
 
     if path:
-        app.append(url(r'^/path/(.*)', StaticFileHandler, {'path': path}),)
+        app.append(
+            url(r'^/path/(.*)', StaticFileHandler, {'path': path}),
+        )
 
     settings.update(environ)
 
@@ -237,25 +276,28 @@ def make_app(class_: str, /,
 
 
 # ----------------------------------------------------------------------
-def RadiantServer(class_: Optional[str] = None,
-                  host: str = DEFAULT_IP,
-                  port: str = DEFAULT_PORT,
-                  pages: Tuple[str] = (),
-                  brython_version: str = DEFAULT_BRYTHON_VERSION,
-                  debug_level: int = DEFAULT_BRYTHON_DEBUG,
-                  template: PATH = os.path.join(os.path.dirname(
-                      __file__), 'templates', 'index.html'),
-                  environ: dict = {},
-                  mock_imports: Tuple[str] = [],
-                  handlers: Tuple[URL, Union[List[Union[PATH, str]],
-                                             RequestHandler], dict] = (),
-                  python: Tuple[PATH, str] = (),
-                  theme: Optional[PATH] = None,
-                  path: Optional[PATH] = None,
-                  autoreload: Optional[bool] = False,
-                  callbacks: Optional[tuple] = (),
-                  **kwargs,
-                  ):
+def RadiantServer(
+    class_: Optional[str] = None,
+    host: str = DEFAULT_IP,
+    port: str = DEFAULT_PORT,
+    pages: Tuple[str] = (),
+    brython_version: str = DEFAULT_BRYTHON_VERSION,
+    debug_level: int = DEFAULT_BRYTHON_DEBUG,
+    template: PATH = os.path.join(
+        os.path.dirname(__file__), 'templates', 'index.html'
+    ),
+    environ: dict = {},
+    mock_imports: Tuple[str] = [],
+    handlers: Tuple[
+        URL, Union[List[Union[PATH, str]], RequestHandler], dict
+    ] = (),
+    python: Tuple[PATH, str] = (),
+    theme: Optional[PATH] = None,
+    path: Optional[PATH] = None,
+    autoreload: Optional[bool] = False,
+    callbacks: Optional[tuple] = (),
+    **kwargs,
+):
     """Python implementation for move `class_` into a Bython environment.
 
     Configure the Tornado server and the Brython environment for run the
@@ -290,23 +332,34 @@ def RadiantServer(class_: Optional[str] = None,
     """
 
     print("Radiant server running on port {}".format(port))
-    application = make_app(class_, python=python, template=template,
-                           handlers=handlers, theme=theme, environ=environ,
-                           mock_imports=mock_imports, path=path,
-                           brython_version=brython_version, pages=pages,
-                           debug_level=debug_level)
-    http_server = HTTPServer(application,
-                             # ssl_options={
-                             # 'certfile': 'host.crt',
-                             # 'keyfile': 'host.key',
-                             # },
-                             )
+    application = make_app(
+        class_,
+        python=python,
+        template=template,
+        handlers=handlers,
+        theme=theme,
+        environ=environ,
+        mock_imports=mock_imports,
+        path=path,
+        brython_version=brython_version,
+        pages=pages,
+        debug_level=debug_level,
+    )
+    http_server = HTTPServer(
+        application,
+        # ssl_options={
+        # 'certfile': 'host.crt',
+        # 'keyfile': 'host.key',
+        # },
+    )
     http_server.listen(port, host)
 
     for handler in callbacks:
         if isinstance(handler, tuple):
             spec = importlib.util.spec_from_file_location(
-                '.'.join(handler).replace('.py', ''), os.path.abspath(handler[0]))
+                '.'.join(handler).replace('.py', ''),
+                os.path.abspath(handler[0]),
+            )
             foo = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(foo)
             getattr(foo, handler[1])()
@@ -315,5 +368,3 @@ def RadiantServer(class_: Optional[str] = None,
             handler()
 
     IOLoop.instance().start()
-
-

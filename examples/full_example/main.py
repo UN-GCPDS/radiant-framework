@@ -30,14 +30,16 @@ class MainApp(RadiantAPI):
         a, b = 3, 5
         c = self.MyClass.pitagoras(a, b)
         document.select_one('body') <= html.H3(
-            f"Pitagoras: {a=}, {b=}, {c=:.3f}")
+            f"Pitagoras: {a=}, {b=}, {c=:.3f}"
+        )
 
         self.add_css_file('custom_styles.css')
 
         document <= MDCButton("Button", raised=False, unelevated=True)
         document <= MDCButton("Button raised", raised=True, unelevated=True)
         button = MDCButton(
-            "Button outlined", raised=False, outlined=True, unelevated=True)
+            "Button outlined", raised=False, outlined=True, unelevated=True
+        )
         button.bind('click', self.on_button)
 
         document <= button
@@ -48,7 +50,7 @@ class MainApp(RadiantAPI):
 
         form = MDCForm()
         label_ = MDCComponent(html.SPAN(f'{label}'))
-        label_ .mdc.typography('subtitle1')
+        label_.mdc.typography('subtitle1')
         form <= label_
         slider_ = form.mdc.Slider('Slider', min=1, max=100, step=5, value=50)
 
@@ -61,7 +63,8 @@ class MainApp(RadiantAPI):
         document.select_one('body') <= html.I(Class='fas fa-arrow-right')
         document.select_one('body') <= html.I(Class='bi bi-arrow-right')
         document.select_one('body') <= html.SPAN(
-            'face', Class='material-icons md-24')
+            'face', Class='material-icons md-24'
+        )
 
     # ----------------------------------------------------------------------
     def on_button(self, evt):
@@ -70,15 +73,14 @@ class MainApp(RadiantAPI):
 
 
 if __name__ == '__main__':
-    RadiantServer('MainApp',
-                  python=('python_foo.py', 'MyClass'),
-                  handlers=([r'^/ws', ('ws_handler.py', 'WSHandler'), {}], ),
-                  template='custom_template.html',
-                  mock_imports=['numpy'],
-                  brython_version='3.9.5',
-                  debug_level=0,
-                  pages=([r'^/multipage$', 'second_page.Second'], ),
-                  theme='custom_theme.xml',
-                  )
-
-
+    RadiantServer(
+        'MainApp',
+        python=('python_foo.py', 'MyClass'),
+        handlers=([r'^/ws', ('ws_handler.py', 'WSHandler'), {}],),
+        template='custom_template.html',
+        mock_imports=['numpy'],
+        brython_version='3.9.5',
+        debug_level=0,
+        pages=([r'^/multipage$', 'second_page.Second'],),
+        theme='custom_theme.xml',
+    )

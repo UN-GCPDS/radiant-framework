@@ -16,4 +16,4 @@ class MyClass(PythonHandler):
 
     def pitagoras(self, a, b):
         """"""
-        return math.sqrt(a ** 2 + b ** 2)
+        return math.sqrt(a**2 + b**2)
