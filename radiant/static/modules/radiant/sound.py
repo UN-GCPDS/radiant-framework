@@ -1,4 +1,7 @@
-from browser import window, timer
+from browser import window, timer, html, document
+import os
+
+# import javascript
 import logging
 
 note_values = {
@@ -19,7 +22,6 @@ note_values = {
     'A#0': 29.14,
     'Bb0': 29.14,
     'B0': 30.87,
-
     'C1': 32.70,
     'C#1': 34.65,
     'Db1': 34.65,
@@ -37,7 +39,6 @@ note_values = {
     'A#1': 58.27,
     'Bb1': 58.27,
     'B1': 61.74,
-
     'C2': 65.41,
     'C#2': 69.30,
     'Db2': 69.30,
@@ -140,7 +141,7 @@ note_values = {
     'A#7': 3729.31,
     'Bb7': 3729.31,
     'B7': 3951.07,
-    'C8': 4186.01
+    'C8': 4186.01,
 }
 
 
@@ -202,8 +203,53 @@ class Tone:
         timer.set_timeout(self.stop, duration)
 
 
+########################################################################
+class Audio:
+    """"""
 
+    # ----------------------------------------------------------------------
+    def __init__(self, filepath=None, loop=False):
+        """Constructor"""
 
+        if filepath:
+            self.audio = html.AUDIO(
+                src=os.path.join('root', filepath),
+                controls=True,
+            )
+        else:
+            self.audio = html.AUDIO(
+                controls=True,
+            )
 
+        self.audio.style = {'display': 'none'}
+        self.audio.loop = loop
+        document <= self.audio
 
+    # ----------------------------------------------------------------------
+    def stop(self, *args, **kwargs):
+        """"""
+        self.audio.pause()
+        self.audio.load()
 
+    # ----------------------------------------------------------------------
+    def load(self, filepath, loop=False):
+        """"""
+        self.audio.src = os.path.join('root', filepath)
+        self.audio.loop = loop
+        self.audio.load()
+
+    # ----------------------------------------------------------------------
+    def play(self, gain=0.5, *args, **kwargs):
+        """"""
+        self.audio.play()
+        self.audio.volume = gain
+
+    # ----------------------------------------------------------------------
+    def pause(self, *args, **kwargs):
+        """"""
+        self.audio.pause()
+
+    # ----------------------------------------------------------------------
+    def set_gain(self, gain):
+        """"""
+        self.audio.volume = gain
