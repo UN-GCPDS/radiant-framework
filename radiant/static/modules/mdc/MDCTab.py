@@ -9,6 +9,7 @@ Brython MDCComponent: MDCTab
 from .core import MDCTemplate
 
 from browser import html, window
+
 # from .MDCButton import MDCButton,  MDCIconToggle
 
 
@@ -19,38 +20,44 @@ class __tabItem__(MDCTemplate):
     NAME = 'tab', 'MDCTab'
 
     MDC_optionals = {
-
         # 'outlined': 'mdc-card--outlined',
         # 'full_bleed': 'mdc-card__actions--full-bleed',
         'icon': '<span class="mdc-tab__icon material-icons" aria-hidden="true">{icon}</span>',
-
         # 'fa_icon': '<i class="mdc-button__icon {fa_style} {fa_icon}"></i>',
         'fa_icon': '<span class="mdc-tab__icon {fa_style} {fa_icon}"></span>',
-
-
         'active': 'mdc-tab--active',
         'indicator_active': 'mdc-tab-indicator--active',
         'stacked': 'mdc-tab--stacked',
-
     }
 
     # ----------------------------------------------------------------------
 
-    def __new__(self, text=None, icon=None, id='#', stacked=False, active=False, **kwargs):
+    def __new__(
+        self,
+        text=None,
+        icon=None,
+        id='#',
+        stacked=False,
+        active=False,
+        **kwargs,
+    ):
         """"""
 
         indicator_active = active
 
         if icon and icon.startswith('fa'):
-            fa_style = icon[:icon.find('-')]
-            fa_icon = 'fa' + icon[icon.find('-'):]
+            fa_style = icon[: icon.find('-')]
+            fa_icon = 'fa' + icon[icon.find('-') :]
             del icon
 
         self.element = self.render(locals(), kwargs)
         self.element.bind('click', self.bind_click(self.element))
 
-        self.element.indicator = window.mdc.tabIndicator.MDCTabIndicator.attachTo(
-            self.element.select(".mdc-tab-indicator")[0])
+        self.element.indicator = (
+            window.mdc.tabIndicator.MDCTabIndicator.attachTo(
+                self.element.select(".mdc-tab-indicator")[0]
+            )
+        )
 
         # self.element.bind('click', lambda ev: [button.deactivate() for button in self.element.parent.children])
         # self.element.bind('click', lambda ev: self.element.indicator.activate())
@@ -63,9 +70,12 @@ class __tabItem__(MDCTemplate):
     @classmethod
     def bind_click(self, element):
         """"""
+
         def inset(event):
-            [button.indicator.deactivate()
-             for button in element.parent.children]
+            [
+                button.indicator.deactivate()
+                for button in element.parent.children
+            ]
             element.indicator.activate()
             element.clicked()
 
@@ -76,7 +86,9 @@ class __tabItem__(MDCTemplate):
     @classmethod
     def __html__(cls, **context):
         """"""
-        if context['text'] and not (context.get('icon', False) or context.get('fa_icon', False)):
+        if context['text'] and not (
+            context.get('icon', False) or context.get('fa_icon', False)
+        ):
             code = """
             <button class="mdc-tab {active}" role="tab" aria-selected="true">
               <span class="mdc-tab__content">
@@ -91,7 +103,9 @@ class __tabItem__(MDCTemplate):
             </button>
             """
 
-        elif not context['text'] and (context.get('icon', False) or context.get('fa_icon', False)):
+        elif not context['text'] and (
+            context.get('icon', False) or context.get('fa_icon', False)
+        ):
             code = """
             <button class="mdc-tab {active}" role="tab" aria-selected="true">
               <span class="mdc-tab__content">
@@ -105,7 +119,9 @@ class __tabItem__(MDCTemplate):
             </button>
             """
 
-        elif context['text'] and (context.get('icon', False) or context.get('fa_icon', False)):
+        elif context['text'] and (
+            context.get('icon', False) or context.get('fa_icon', False)
+        ):
             code = """
             <button class="mdc-tab {active} {stacked}" role="tab" aria-selected="true">
               <span class="mdc-tab__content">
@@ -131,10 +147,10 @@ class __tabItem__(MDCTemplate):
             return self.element.select('.mdc-tab__text-label')[0]
 
         # elif name is 'items_location':
-            # try:
-                # return self.element.select('.mdc-tab-scroller__scroll-content')[0]
-            # except:
-                # return self.element
+        # try:
+        # return self.element.select('.mdc-tab-scroller__scroll-content')[0]
+        # except:
+        # return self.element
 
 
 ########################################################################
@@ -144,22 +160,18 @@ class MDCTabBar(MDCTemplate):
     NAME = 'tabBar', 'MDCTabBar'
 
     CSS_classes = {
-
         # '_16_9': 'mdc-card__media--16-9',
         # 'square': 'mdc-card__media--square',
     }
 
     MDC_optionals = {
-
         # 'outlined': 'mdc-card--outlined',
         # 'full_bleed': 'mdc-card__actions--full-bleed',
         # 'icon': '<i class="material-icons mdc-button__icon" aria-hidden="true">{icon}</i>',
         # 'disabled': 'disabled',
-
     }
 
     # ----------------------------------------------------------------------
-
     def __new__(self, *items, **kwargs):
         """"""
         self.element = self.render(locals(), kwargs)
@@ -190,10 +202,14 @@ class MDCTabBar(MDCTemplate):
         try:
 
             for panel in element.panels.select('.panel'):
-                panel.style = {'display': None, }
+                panel.style = {
+                    'display': 'none',
+                }
 
             # index = element.mdc.getFocusedTabIndex()
-            element.panel[id].style = {'display': 'block', }
+            element.panel[id].style = {
+                'display': 'block',
+            }
 
         except:
             pass
@@ -228,20 +244,27 @@ class MDCTabBar(MDCTemplate):
 
         elif name is 'items_location':
             try:
-                return self.element.select('.mdc-tab-scroller__scroll-content')[0]
+                return self.element.select(
+                    '.mdc-tab-scroller__scroll-content'
+                )[0]
             except:
                 return self.element
 
         # elif name is 'action_icons':
-            # return self.element.select('.mdc-card__action-icons')[0]
+        # return self.element.select('.mdc-card__action-icons')[0]
 
     # ----------------------------------------------------------------------
 
     @classmethod
     def add_item(cls, element, text=None, icon=None, id='#', active=False):
         """"""
-        item = __tabItem__(text=text, icon=icon, id=id,
-                           active=active, stacked=element.stacked)
+        item = __tabItem__(
+            text=text,
+            icon=icon,
+            id=id,
+            active=active,
+            stacked=element.stacked,
+        )
         item.clicked = lambda: cls.__tabchanged__(element, id, item)
         # item.bind('click', lambda event: cls.__tabchanged__(element, id, item))
         cls.get('items_location') <= item
@@ -251,11 +274,17 @@ class MDCTabBar(MDCTemplate):
             display = 'block'
         else:
             active = ''
-            display = None
+            display = 'none'
 
-        panel = html.DIV(Class='panel {}'.format(active),
-                         id=id, role='tabpanel', aria_hidden=True)
-        panel.style = {'display': display, }
+        panel = html.DIV(
+            Class='panel {}'.format(active),
+            id=id,
+            role='tabpanel',
+            aria_hidden=True,
+        )
+        panel.style = {
+            'display': display,
+        }
 
         cls.element.panel[id] = panel
         cls.element.panels <= panel
@@ -265,8 +294,8 @@ class MDCTabBar(MDCTemplate):
     # ----------------------------------------------------------------------
     # @classmethod
     # def title(self, mdc, text):
-        # """"""
-        # self['title'].text = text
+    # """"""
+    # self['title'].text = text
 
 
 ########################################################################
@@ -289,5 +318,3 @@ class MDCTabScroller(MDCTabBar):
         """
 
         return cls.render_html(code, context)
-
-

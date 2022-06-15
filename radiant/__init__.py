@@ -31,6 +31,7 @@ DEFAULT_IP = 'localhost'
 DEFAULT_PORT = '5000'
 DEFAULT_BRYTHON_VERSION = '3.10.5'
 DEFAULT_BRYTHON_DEBUG = 0
+DEFAULT_PYSCRIPT_VERSION = 'alpha'
 
 
 ########################################################################
@@ -144,6 +145,7 @@ def make_app(
     class_: str,
     /,
     brython_version: str,
+    pyscript_version: str,
     debug_level: int,
     pages: Tuple[str],
     template: PATH = os.path.join(
@@ -191,6 +193,20 @@ def make_app(
         'autoreload': autoreload,
     }
 
+    with open(sys.argv[0], 'r') as f:
+        l = f.readline()
+        if l.strip() == '#!pyscript':
+            mode = 'pyscript'
+            reqs = os.path.join(sys.path[0], 'requirements.txt')
+            with open(reqs, 'r') as r:
+                requirements = r.read()
+            requirements = [
+                r.strip() for r in requirements.split('\n') if r.strip()
+            ]
+        else:
+            mode = 'brython'
+            requirements = ''
+
     environ.update(
         {
             'class_': class_,
@@ -198,13 +214,17 @@ def make_app(
             'module': os.path.split(sys.path[0])[-1],
             'file': os.path.split(sys.argv[0])[-1].replace('.py', ''),
             # 'file': os.path.split(sys.argv[0])[-1].removesuffix('.py'),
+            'file_path': sys.argv[0],
             'theme': theme,
             'argv': sys.argv,
             'template': template,
             'mock_imports': mock_imports,
             'path': path,
             'brython_version': brython_version,
+            'pyscript_version': pyscript_version,
             'debug_level': debug_level,
+            'mode': mode,
+            'requirements': requirements,
         }
     )
 
@@ -282,6 +302,7 @@ def RadiantServer(
     port: str = DEFAULT_PORT,
     pages: Tuple[str] = (),
     brython_version: str = DEFAULT_BRYTHON_VERSION,
+    pyscript_version: str = DEFAULT_PYSCRIPT_VERSION,
     debug_level: int = DEFAULT_BRYTHON_DEBUG,
     template: PATH = os.path.join(
         os.path.dirname(__file__), 'templates', 'index.html'
@@ -342,6 +363,7 @@ def RadiantServer(
         mock_imports=mock_imports,
         path=path,
         brython_version=brython_version,
+        pyscript_version=pyscript_version,
         pages=pages,
         debug_level=debug_level,
     )

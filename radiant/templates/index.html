@@ -4,8 +4,15 @@
 
   <head>
     <meta charset="utf-8">
-    <script type="text/javascript" src="/static/brython-{{brython_version}}/brython.js"></script>
-    <script type="text/javascript" src="/static/brython-{{brython_version}}/brython_stdlib.js"></script>
+
+    {% if mode=='brython' %}
+        <script type="text/javascript" src="/static/brython/brython-{{brython_version}}/brython.js"></script>
+        <script type="text/javascript" src="/static/brython/brython-{{brython_version}}/brython_stdlib.js"></script>
+    {% elif  mode=='pyscript' %}
+        <link rel="stylesheet" href="/static/pyscript/pyscript-{{pyscript_version}}/pyscript.css" />
+        <script defer src="/static/pyscript/pyscript-{{pyscript_version}}/pyscript.js"></script>
+    {% end %}
+
     <script type="text/javascript" src="/static/material-components-web/material-components-web.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/material-components-web/material-components-web.min.css">
     <link rel="stylesheet" type="text/css" href="/theme.css">
@@ -21,6 +28,7 @@
 
     {% block html_head %}{% end %}
 
+    {% if mode=='brython' %}
 
     <script type="text/python">
 import sys
@@ -53,11 +61,29 @@ argvs = {{argv}}
 autoinit()
 
     </script>
+    </head>
 
-  </head>
 
-  <body onload="brython({{debug_level}})">
+    <body onload="brython({{debug_level}})"></body>
 
-  </body>
+
+    {% elif  mode=='pyscript' %}
+      <py-env>
+        {% for req in requirements %}
+        - {{req}}
+        {% end %}
+      </py-env>
+
+      </head>
+
+      <body>
+        {{file_path}}
+        <py-script src="{{file_path}}"></py-script>
+      </body>
+
+
+
+    {% end %}
+
 
 </html>
