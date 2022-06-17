@@ -94,7 +94,7 @@ class ThemeHandler(RequestHandler):
     @staticmethod
     def hex2vector(hex_: str):
         return ', '.join(
-            [str(int(hex_[i : i + 2], 16)) for i in range(1, 6, 2)]
+            [str(int(hex_[i: i + 2], 16)) for i in range(1, 6, 2)]
         )
 
     # ----------------------------------------------------------------------
@@ -138,6 +138,11 @@ class RadiantHandler(RequestHandler):
         self.render(
             f"{os.path.realpath(variables['template'])}", **variables
         )
+
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
 
 # ----------------------------------------------------------------------
@@ -214,7 +219,7 @@ def make_app(
             'module': os.path.split(sys.path[0])[-1],
             'file': os.path.split(sys.argv[0])[-1].replace('.py', ''),
             # 'file': os.path.split(sys.argv[0])[-1].removesuffix('.py'),
-            'file_path': sys.argv[0],
+            'file_path': os.path.join('/root', os.path.split(sys.argv[0])[-1]),
             'theme': theme,
             'argv': sys.argv,
             'template': template,
@@ -223,7 +228,7 @@ def make_app(
             'brython_version': brython_version,
             'pyscript_version': pyscript_version,
             'debug_level': debug_level,
-            'mode': mode,
+            'radiant_mode': mode,
             'requirements': requirements,
         }
     )

@@ -5,10 +5,12 @@
   <head>
     <meta charset="utf-8">
 
-    {% if mode=='brython' %}
+    {% if radiant_mode=='brython' %}
+        <!--Brython-->
         <script type="text/javascript" src="/static/brython/brython-{{brython_version}}/brython.js"></script>
         <script type="text/javascript" src="/static/brython/brython-{{brython_version}}/brython_stdlib.js"></script>
-    {% elif  mode=='pyscript' %}
+    {% elif  radiant_mode=='pyscript' %}
+        <!--PyScript-->
         <link rel="stylesheet" href="/static/pyscript/pyscript-{{pyscript_version}}/pyscript.css" />
         <script defer src="/static/pyscript/pyscript-{{pyscript_version}}/pyscript.js"></script>
     {% end %}
@@ -28,13 +30,13 @@
 
     {% block html_head %}{% end %}
 
-    {% if mode=='brython' %}
+    {% if radiant_mode=='brython' %}
 
     <script type="text/python">
 import sys
 
 sys.path.append('/root/')
-sys.path.append('/static/modules/')
+sys.path.append('/static/modules/brython')
 
 from radiant.utils import fake
 {% for module in mock_imports %}
@@ -63,26 +65,19 @@ autoinit()
     </script>
     </head>
 
-
     <body onload="brython({{debug_level}})"></body>
 
-
-    {% elif  mode=='pyscript' %}
+    {% elif  radiant_mode=='pyscript' %}
       <py-env>
-        {% for req in requirements %}
-        - {{req}}
-        {% end %}
+      {% for req in requirements %}
+      - {{req}}
+      {% end %}
       </py-env>
-
       </head>
-
       <body>
-        {{file_path}}
+        <py-script src="/static/modules/pyscript/server.py"></py-script>
         <py-script src="{{file_path}}"></py-script>
       </body>
-
-
-
     {% end %}
 
 

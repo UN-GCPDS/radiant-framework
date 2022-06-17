@@ -17,7 +17,7 @@ class BareMinimum(RadiantAPI):
 
         # self.current_stimuli_url = self.LocalInterpreter.get_url()
         # document.select_one('body') <= html.IFRAME(Class='stimuli-delivery',
-                                                   # src=self.current_stimuli_url)
+        # src=self.current_stimuli_url)
         # timer.set_interval(self.ping, 5000)
 
     # ----------------------------------------------------------------------
@@ -50,7 +50,8 @@ class BareMinimum(RadiantAPI):
         label = MDCComponent(html.SPAN(f'BCI-Framework', Class='bcif-title'))
         label.mdc.typography('headline1')
         label2 = MDCComponent(
-            html.SPAN(f'Stimuli Delivery Server', Class='bcif-tag'))
+            html.SPAN(f'Stimuli Delivery Server', Class='bcif-tag')
+        )
         label2.mdc.typography('subtitle1')
 
         content = html.DIV(Class='bcif-content')
@@ -62,12 +63,11 @@ class BareMinimum(RadiantAPI):
 
 
 if __name__ == '__main__':
-    RadiantServer('BareMinimum',
-                  python=('local.py', 'LocalInterpreter'),
-                  host='0.0.0.0',
-                  port=5000,
-                  brython_version='3.9.5',
-                  debug_level=0,
-                  )
-
-
+    RadiantServer(
+        'BareMinimum',
+        python=('local.py', 'LocalInterpreter'),
+        host='0.0.0.0',
+        port=5001,
+        brython_version='3.9.5',
+        debug_level=0,
+    )

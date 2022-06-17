@@ -1,6 +1,5 @@
 from radiant.server import RadiantAPI, RadiantServer
 from radiant.sound import Tone
-from radiant import icons
 
 from browser import document, html
 from submodule import submodule_fn
@@ -11,6 +10,8 @@ from mdc.MDCFormField import MDCForm
 
 import numpy
 
+
+# from mdc.MDCCard import MDCCard
 
 ########################################################################
 class MainApp(RadiantAPI):
@@ -59,14 +60,11 @@ class MainApp(RadiantAPI):
 
         document.select_one('body') <= form
 
-        document.select_one('body') <= icons.fa('hand')
-        document.select_one('body') <= icons.fa('hand-back-fist')
-        document.select_one('body') <= icons.fa('hand-scissors')
-
-        # document.select_one('body') <= icons.bi('bi-arrow-right')
-        # document.select_one('body') <= icons.fa('arrow-right')
-        # document.select_one('body') <= icons.bi('arrow-right')
-        # document.select_one('body') <= icons.mi('face', size=24)
+        document.select_one('body') <= html.I(Class='fas fa-arrow-right')
+        document.select_one('body') <= html.I(Class='bi bi-arrow-right')
+        document.select_one('body') <= html.SPAN(
+            'face', Class='material-icons md-24'
+        )
 
     # ----------------------------------------------------------------------
     def on_button(self, evt):

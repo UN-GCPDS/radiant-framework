@@ -5,10 +5,6 @@ from matplotlib import pyplot as plt
 from radiant.server import RadiantAPI
 import js
 
-# try:
-# import radiant.ps_init
-# except:
-# pass
 
 ########################################################################
 class BareMinimum(RadiantAPI):
