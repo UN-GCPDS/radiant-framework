@@ -14,8 +14,7 @@ import os
 import sys
 
 # sys.path.insert(0, os.path.abspath('../..'))
-sys.path.insert(0, os.path.abspath(
-    '../../radiant/static/modules'))
+sys.path.insert(0, os.path.abspath('../../radiant/static/modules'))
 sys.path.insert(0, os.path.abspath('exts'))
 
 # -- Project information -----------------------------------------------------
@@ -108,7 +107,8 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = [
     '_static',
-    # '_static/static',
+    '_static/static',
+    '_static/static/modules/brython',
 ]
 
 # Custom sidebar templates, must be a dictionary that maps document names
@@ -326,6 +326,47 @@ components = get_notebooks('notebooks/components')
 modules = get_notebooks('notebooks/modules')
 
 
+# with open('index.rst', 'w') as file:
+    # file.write(f"""
+
+# .. include:: notebooks/readme.rst
+
+# Navigation
+# ----------
+
+# .. toctree::
+   # :maxdepth: 2
+   # :name: mastertoc
+
+   # {notebooks}
+
+# .. toctree::
+   # :glob:
+   # :maxdepth: 2
+   # :name: mastertoc2
+   # :caption: Modules
+
+   # notebooks/modules/*
+
+# .. toctree::
+   # :glob:
+   # :maxdepth: 2
+   # :name: mastertoc3
+   # :caption: MDC Components
+
+   # notebooks/components/*
+
+
+# Indices and tables
+# ------------------
+
+# * :ref:`genindex`
+# * :ref:`modindex`
+# * :ref:`search`
+
+    # """)
+
+
 with open('index.rst', 'w') as file:
     file.write(f"""
 
@@ -339,22 +380,6 @@ Navigation
    :name: mastertoc
 
    {notebooks}
-
-.. toctree::
-   :glob:
-   :maxdepth: 2
-   :name: mastertoc2
-   :caption: Modules
-
-   notebooks/modules/*
-
-.. toctree::
-   :glob:
-   :maxdepth: 2
-   :name: mastertoc3
-   :caption: MDC Components
-
-   notebooks/components/*
 
 
 Indices and tables
