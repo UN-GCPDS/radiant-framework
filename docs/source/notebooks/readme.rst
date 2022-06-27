@@ -60,7 +60,7 @@ Brython: bare minimum
 PyScript: bare minimum
 ----------------------
 
-Thi example use ``requirements.txt`` to install dependencies.
+This example use ``requirements.txt`` to install dependencies.
 
 .. code:: ipython3
 
