@@ -9,8 +9,9 @@ Navigation
    :maxdepth: 2
    :name: mastertoc
 
-   notebooks/01-builtin
-   notebooks/02-additional_features
+   notebooks/01-brython
+   notebooks/02-pyscript
+   notebooks/03-brython_pyscript
 
 .. toctree::
    :glob:

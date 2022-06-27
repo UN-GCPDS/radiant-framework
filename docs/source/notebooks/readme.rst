@@ -1,21 +1,22 @@
-Brython-Radiant
-===============
+Radiant Framework
+=================
 
-A Brython Framework for Web Apps development.
+A Brython/PyScript Framework for Web Apps development.
 
 |GitHub top language| |PyPI - License| |PyPI| |PyPI - Status| |PyPI -
 Python Version| |GitHub last commit| |CodeFactor Grade| |Documentation
 Status|
 
-Radiant is a `Brython <https://brython.info/>`__ framework for the quick
-development of web apps with pure Python/Brython syntax so there is no
-need to care about (if you don’t want) HTML, CSS, or Javascript. Run
-over `Tornado <https://www.tornadoweb.org/>`__ servers and include
-support to
-`Websockets <notebooks/02-additional_features.ipynb#WebSockets>`__,
-`Python
-Scripts <notebooks/02-additional_features.ipynb#Python-scripting>`__ and
-`MDC <notebooks/02-additional_features.ipynb#Custom-themes>`__.
+Radiant is a `Brython <https://brython.info/>`__ and
+`PyScript <https://pyscript.net/>`__ framework for the quick development
+of web apps using *Python* syntax, so there is no need to care about (if
+you don’t want) HTML, CSS, or Javascript. This is basically a set of
+scripts that allows the same file run from *Python* and
+*Brython*/*PyScript*, when is running under *Python* a
+`Tornado <https://www.tornadoweb.org/>`__ server is created and
+configure the local path for serving static files, at the same time a
+custom HTML template is configured at runtime to import the same script,
+this time under *Brython*/*PyScript*.
 
 .. |GitHub top language| image:: https://img.shields.io/github/languages/top/un-gcpds/brython-radiant?
 .. |PyPI - License| image:: https://img.shields.io/pypi/l/radiant?
@@ -34,77 +35,120 @@ Instalation
 
     pip install radiant
 
-Usage
------
-
-Bare minimum
-~~~~~~~~~~~~
+Brython: bare minimum
+---------------------
 
 .. code:: ipython3
 
-    # Radiant modules
+    #!bryhton
+    
     from radiant.server import RadiantAPI
-    
-    # Brython modules
-    from browser import document, html  # This modules are faked after `radiant` inport
-    
-    # Main class inheriting RadiantAPI
-    class BareMinimum(RadiantAPI):
-    
-        # Constructor 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-        
-            #-----------------------------------------------------------
-            # Brython code (finally)
-            document.select_one('body') <= html.H1('Hello World')
-            #
-            # ...all your brython code
-            #-----------------------------------------------------------
-    
-    # Run server
-    if __name__ == '__main__':
-        BareMinimum()
-
-Extra options
-~~~~~~~~~~~~~
-
-.. code:: ipython3
-
-    # Radiant modules
-    from radiant.server import RadiantAPI, RadiantServer  # import RadiantServer for advanced options
-    
     from browser import document, html
     
-    # Main class inheriting RadiantAPI
+    
     class BareMinimum(RadiantAPI):
     
         def __init__(self, *args, **kwargs):
             """"""
             super().__init__(*args, **kwargs)
+            document.select_one('body') <= html.H1('Radiant-Framework')
     
-            #-----------------------------------------------------------
-            # Brython code
-            document.select_one('body') <= html.H1('Hello World')
-            #
-            # ...all your brython code
-            #-----------------------------------------------------------
-            
+    
     if __name__ == '__main__':
-        # Advance options
-        RadiantServer('BareMinimum',
-                      host='localhost',
-                      port=5000,
-                      brython_version='3.9.1',
-                      debug_level=0,
-                      )
+        BareMinimum()
 
-How to works
-------------
+PyScript: bare minimum
+----------------------
 
-This is basically a set of scripts that allows the same file run from
-*Python* and *Brython*, when is running under *Python* a
-`Tornado <https://www.tornadoweb.org/>`__ server is created and
-configure the local path for serving static files, and a custom HTML
-template is configured in runtime to import the same script, this time
-under *Brython*, is very simple.
+Thi example use ``requirements.txt`` to install dependencies.
+
+.. code:: ipython3
+
+    #requirements.txt
+    
+    numpy
+    matplotlib
+
+.. code:: ipython3
+
+    #!pyscript
+    
+    import numpy as np
+    from matplotlib import pyplot as plt
+    from radiant.server import RadiantAPI
+    import js
+    
+    
+    class BareMinimum(RadiantAPI):
+    
+        def __init__(self):
+            print('Radiant-Framework')
+            self.plot()
+    
+        def plot(self):
+            """"""
+            fig = plt.figure()
+            ax = fig.add_subplot(111)
+            x = np.linspace(0, 10, 1000)
+            y = np.sin(x)
+            ax.plot(x, y)
+            js.document.body.prepend(self.fig2img(fig))
+    
+    
+    if __name__ == '__main__':
+        BareMinimum()
+
+Brython + PyScript
+------------------
+
+.. code:: ipython3
+
+    #!brython
+    
+    from radiant.server import RadiantAPI, pyscript
+    from browser import document, html
+    
+    
+    class BareMinimum(RadiantAPI):
+    
+        def __init__(self, *args, **kwargs):
+            """"""
+            super().__init__(*args, **kwargs)
+            document.select_one('body') <= html.H1('Radiant-Framework')
+    
+            document.select_one('body') <= html.DIV(id='mpl')
+            self.plot_sin(f=5)
+    
+            document.select_one('body') <= self.plot_sinc(f=1)
+    
+        @pyscript(output='mpl')
+        def plot_sin(self, f=10):
+            """"""
+            import numpy as np
+            from matplotlib import pyplot as plt
+    
+            fig = plt.figure()
+            ax = fig.add_subplot(111)
+            x = np.linspace(0, 1, 1000)
+            y = np.sin(2 * np.pi * f * x)
+            ax.plot(x, y)
+    
+            return fig
+    
+        @pyscript()
+        def plot_sinc(self, f):
+            """"""
+            import numpy as np
+            from matplotlib import pyplot as plt
+    
+            fig = plt.figure()
+            ax = fig.add_subplot(111)
+            x = np.linspace(0, 10, 1000)
+            y = np.sin(2 * np.pi * f * x)
+            ax.plot(x, y, color='C1')
+    
+            return fig
+    
+    
+    if __name__ == '__main__':
+        BareMinimum()

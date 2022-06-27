@@ -258,16 +258,14 @@ html_favicon = '_static/favico.ico'
 
 def setup(app):
 
-    app.add_js_file("static/brython-3.9.5/brython.js")
-    app.add_js_file("static/brython-3.9.5/brython_stdlib.js")
-    # app.add_js_file("brython/brython_modules.js")
-    app.add_js_file("static/brython-3.9.5/load_brython.js")
+    app.add_js_file("static/brython/brython-3.10.5/brython.js")
+    app.add_js_file("static/brython/brython-3.10.5/brython_stdlib.js")
+    app.add_js_file("static/brython/brython-3.10.5/load_brython.js")
 
     # app.add_js_file("material-components-web/material-components-web.min.js")
     app.add_css_file(
         "static/fonts/material-design-icons-3.0.1/iconfont/material-icons.css")
-    app.add_css_file(
-        "static/fonts/fontawesome-free-5.5.0-web/css/all.min.css")
+    app.add_css_file("static/fonts/fontawesome/css/all.min.css")
     app.add_css_file("static/fonts/roboto-android/roboto.css")
     app.add_css_file("static/fonts/roboto-android/roboto-mono.css")
 

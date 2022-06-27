@@ -5,14 +5,22 @@
   <head>
     <meta charset="utf-8">
 
-    {% if radiant_mode=='brython' %}
+    {% if radiant_mode_brython=='brython' %}
         <!--Brython-->
         <script type="text/javascript" src="/static/brython/brython-{{brython_version}}/brython.js"></script>
         <script type="text/javascript" src="/static/brython/brython-{{brython_version}}/brython_stdlib.js"></script>
-    {% elif  radiant_mode=='pyscript' %}
+    {% end %}
+    {% if  radiant_mode_pyscript=='pyscript' %}
         <!--PyScript-->
-        <link rel="stylesheet" href="/static/pyscript/pyscript-{{pyscript_version}}/pyscript.css" />
+        <!--<link rel="stylesheet" href="/static/pyscript/pyscript-{{pyscript_version}}/pyscript.css" />-->
         <script defer src="/static/pyscript/pyscript-{{pyscript_version}}/pyscript.js"></script>
+        <style>
+        #pyscript-loading-label {
+            display: none;
+        }
+        </style>
+
+
     {% end %}
 
     <script type="text/javascript" src="/static/material-components-web/material-components-web.min.js"></script>
@@ -30,7 +38,7 @@
 
     {% block html_head %}{% end %}
 
-    {% if radiant_mode=='brython' %}
+    {% if radiant_mode_brython=='brython' %}
 
     <script type="text/python">
 import sys
@@ -63,21 +71,34 @@ argvs = {{argv}}
 autoinit()
 
     </script>
-    </head>
+    {% end %}
 
-    <body onload="brython({{debug_level}})"></body>
-
-    {% elif  radiant_mode=='pyscript' %}
+    {% if  radiant_mode_pyscript=='pyscript' %}
       <py-env>
       {% for req in requirements %}
       - {{req}}
       {% end %}
       </py-env>
-      </head>
-      <body>
-        <py-script src="/static/modules/pyscript/server.py"></py-script>
-        <py-script src="{{file_path}}"></py-script>
-      </body>
+    {% end %}
+
+    </head>
+
+
+    {% if radiant_mode_brython=='brython' %}
+        <body onload="brython({{debug_level}})">
+            {% if  radiant_mode_pyscript=='pyscript' %}
+                <py-script src="/static/modules/pyscript/server.py"></py-script>
+            {% end %}
+        </body>
+    {% end %}
+
+    {% if  radiant_mode_pyscript=='pyscript' %}
+        <body>
+            {% if not radiant_mode_brython=='brython' %}
+                <py-script src="/static/modules/pyscript/server.py"></py-script>
+                <py-script src="{{file_path}}"></py-script>
+            {% end %}
+        </body>
     {% end %}
 
 

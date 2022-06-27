@@ -31,7 +31,19 @@ DEFAULT_IP = 'localhost'
 DEFAULT_PORT = '5000'
 DEFAULT_BRYTHON_VERSION = '3.10.5'
 DEFAULT_BRYTHON_DEBUG = 0
-DEFAULT_PYSCRIPT_VERSION = 'alpha'
+DEFAULT_PYSCRIPT_VERSION = '2022.06.1'
+AUTO_PYSCRIPT = False
+
+
+# ----------------------------------------------------------------------
+def pyscript(output=None):
+    """"""
+    global AUTO_PYSCRIPT
+
+    def wrapargs(fn):
+        return fn
+    AUTO_PYSCRIPT = True
+    return wrapargs
 
 
 ########################################################################
@@ -165,6 +177,7 @@ def make_app(
     theme: PATH = None,
     path: PATH = None,
     autoreload: bool = False,
+    # pyscript=False,
 ):
     """
     Parameters
@@ -200,17 +213,23 @@ def make_app(
 
     with open(sys.argv[0], 'r') as f:
         l = f.readline()
-        if l.strip() == '#!pyscript':
-            mode = 'pyscript'
+        requirements = ''
+        radiant_mode_brython = None
+        radiant_mode_pyscript = None
+        if l.strip() == '#!pyscript' or AUTO_PYSCRIPT:
+            radiant_mode_pyscript = 'pyscript'
             reqs = os.path.join(sys.path[0], 'requirements.txt')
-            with open(reqs, 'r') as r:
-                requirements = r.read()
-            requirements = [
-                r.strip() for r in requirements.split('\n') if r.strip()
-            ]
+            if os.path.exists(reqs):
+                with open(reqs, 'r') as r:
+                    requirements = r.read()
+                requirements = [
+                    r.strip() for r in requirements.split('\n') if r.strip()
+                ]
         else:
-            mode = 'brython'
-            requirements = ''
+            radiant_mode_brython = 'brython'
+        # pyscript will always True for Brython
+        if AUTO_PYSCRIPT:  # l.strip() == '#!brython':
+            radiant_mode_brython = 'brython'
 
     environ.update(
         {
@@ -228,7 +247,8 @@ def make_app(
             'brython_version': brython_version,
             'pyscript_version': pyscript_version,
             'debug_level': debug_level,
-            'radiant_mode': mode,
+            'radiant_mode_brython': radiant_mode_brython,
+            'radiant_mode_pyscript': radiant_mode_pyscript,
             'requirements': requirements,
         }
     )
@@ -306,6 +326,7 @@ def RadiantServer(
     host: str = DEFAULT_IP,
     port: str = DEFAULT_PORT,
     pages: Tuple[str] = (),
+    # pyscript=False,
     brython_version: str = DEFAULT_BRYTHON_VERSION,
     pyscript_version: str = DEFAULT_PYSCRIPT_VERSION,
     debug_level: int = DEFAULT_BRYTHON_DEBUG,
@@ -371,6 +392,7 @@ def RadiantServer(
         pyscript_version=pyscript_version,
         pages=pages,
         debug_level=debug_level,
+        # pyscript=pyscript,
     )
     http_server = HTTPServer(
         application,

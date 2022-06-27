@@ -1,8 +1,7 @@
 #!brython
 
-from radiant.server import RadiantAPI, RadiantServer, pyscript
+from radiant.server import RadiantAPI, pyscript
 from browser import document, html
-import logging
 
 
 ########################################################################
@@ -12,19 +11,16 @@ class BareMinimum(RadiantAPI):
     def __init__(self, *args, **kwargs):
         """"""
         super().__init__(*args, **kwargs)
-        document.select_one('body') <= html.H1('Hello World')
+        document.select_one('body') <= html.H1('Radiant-Framework')
 
         document.select_one('body') <= html.DIV(id='mpl')
-        self.plot(f=1)
+        self.plot_sin(f=5)
 
         document.select_one('body') <= self.plot_sinc(f=1)
-        document.select_one('body') <= self.plot_sinc(f=2)
-        document.select_one('body') <= self.plot_sinc(f=4)
-        document.select_one('body') <= self.plot_sinc(f=8)
 
     # ----------------------------------------------------------------------
     @pyscript(output='mpl')
-    def plot(self, f=10):
+    def plot_sin(self, f=10):
         """"""
         import numpy as np
         from matplotlib import pyplot as plt
@@ -54,7 +50,4 @@ class BareMinimum(RadiantAPI):
 
 
 if __name__ == '__main__':
-    RadiantServer(
-        'BareMinimum',
-        pyscript=True,
-    )
+    BareMinimum()
