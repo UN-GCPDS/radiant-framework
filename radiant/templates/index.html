@@ -86,14 +86,16 @@ autoinit()
 
     {% if radiant_mode_brython=='brython' %}
         <body onload="brython({{debug_level}})">
+            {% block html_body %}{% end %}
             {% if  radiant_mode_pyscript=='pyscript' %}
                 <py-script src="/static/modules/pyscript/server.py"></py-script>
             {% end %}
         </body>
-    {% end %}
+    
 
-    {% if  radiant_mode_pyscript=='pyscript' %}
+    {% elif  radiant_mode_pyscript=='pyscript' %}
         <body>
+            {% block html_body %}{% end %}
             {% if not radiant_mode_brython=='brython' %}
                 <py-script src="/static/modules/pyscript/server.py"></py-script>
                 <py-script src="{{file_path}}"></py-script>

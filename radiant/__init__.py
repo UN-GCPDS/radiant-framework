@@ -4,10 +4,10 @@ Radiant
 """
 # Prevent this file to be imported from Brython
 import sys
+import shutil
 
 try:
     import browser
-
     sys.exit()
 except:
     pass
@@ -139,18 +139,30 @@ class ThemeHandler(RequestHandler):
 
 ########################################################################
 class RadiantHandler(RequestHandler):
+
+    # ----------------------------------------------------------------------
     def initialize(self, **kwargs):
         self.initial_arguments = kwargs
 
+    # ----------------------------------------------------------------------
     def get(self):
         variables = self.settings.copy()
         variables.update(self.initial_arguments)
 
         variables['argv'] = json.dumps(variables['argv'])
-        self.render(
-            f"{os.path.realpath(variables['template'])}", **variables
-        )
 
+        if variables['static_app']:
+            html = self.render_string(f"{os.path.realpath(variables['template'])}", **variables)
+            if os.path.exists('static'):
+                shutil.rmtree('static')
+            shutil.copytree(os.path.join(os.path.dirname(__file__), 'static'), 'static')
+
+            with open('index.html', 'wb') as file:
+                file.write(html)
+
+        self.render(f"{os.path.realpath(variables['template'])}", **variables)
+
+    # ----------------------------------------------------------------------
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Access-Control-Allow-Headers", "x-requested-with")
@@ -177,6 +189,7 @@ def make_app(
     theme: PATH = None,
     path: PATH = None,
     autoreload: bool = False,
+    static_app: bool = False,
     # pyscript=False,
 ):
     """
@@ -250,6 +263,7 @@ def make_app(
             'radiant_mode_brython': radiant_mode_brython,
             'radiant_mode_pyscript': radiant_mode_pyscript,
             'requirements': requirements,
+            'static_app': static_app,
         }
     )
 
@@ -343,6 +357,7 @@ def RadiantServer(
     path: Optional[PATH] = None,
     autoreload: Optional[bool] = False,
     callbacks: Optional[tuple] = (),
+    static_app: Optional[bool] = False,
     **kwargs,
 ):
     """Python implementation for move `class_` into a Bython environment.
@@ -392,6 +407,7 @@ def RadiantServer(
         pyscript_version=pyscript_version,
         pages=pages,
         debug_level=debug_level,
+        static_app=static_app,
         # pyscript=pyscript,
     )
     http_server = HTTPServer(

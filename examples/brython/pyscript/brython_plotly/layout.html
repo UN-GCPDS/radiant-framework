@@ -1,0 +1,47 @@
+{% extends "templates/index.html" %}
+
+{% block html_head %}
+
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+
+<script type='text/javascript'>
+    function plot(graph, chart) {
+        var figure = JSON.parse(graph)
+        Plotly.newPlot(chart, figure, {});
+    }
+</script>
+
+
+
+{% end %}
+{% block html_body %}
+
+    <div class="jumbotron">
+        <h1>Weather Data</h1>
+        <p class="lead">
+            Some graphs about the weather in London in 2020
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2 p-2 ml-4 mb-1">
+            <button type="button" class="btn btn-secondary">Select chart from list:</button>
+        </div>
+        <div class="col-sm-4 p-2 mr-4 mb-1">
+            <select class="form-control" id="select">
+                <option value="Tmax">Maximum Temperature</option>
+                <option value="Tmin">Minimum Temperature</option>
+                <option value="Sun">Sun</option>
+                <option value="Rain">Rain</option>
+            
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 p-2 shadow ml-4 mr-4 mb-4 bg-white rounded">
+            <div id="chart1"></div>
+        </div>
+    </div>
+
+{% end %}
