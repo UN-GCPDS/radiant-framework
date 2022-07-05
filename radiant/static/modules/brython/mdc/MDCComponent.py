@@ -7,9 +7,8 @@ Brython MDCComponent: MDCComponent
 
 from .core import MDCTemplate
 
+
 ########################################################################
-
-
 class MDCComponent(MDCTemplate):
     """"""
     NAME = 'base', 'MDCComponent'

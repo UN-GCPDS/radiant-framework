@@ -5,6 +5,7 @@ Radiant
 # Prevent this file to be imported from Brython
 import sys
 import shutil
+import inspect
 
 try:
     import browser
@@ -35,15 +36,51 @@ DEFAULT_PYSCRIPT_VERSION = '2022.06.1'
 AUTO_PYSCRIPT = False
 
 
+PYSCRIPT_FUNCTIONS = os.path.join(
+    os.path.dirname(sys.argv[0]), 'pyscript_fn.py')
+if os.path.exists(PYSCRIPT_FUNCTIONS):
+    os.remove(PYSCRIPT_FUNCTIONS)
+
+# with open(PYSCRIPT_FUNCTIONS, 'w') as file:
+    # file.write('import asyncio')
+
+
 # ----------------------------------------------------------------------
-def pyscript(output=None):
+def pyscript(output=None, inline=False, plotly_out=None, callback=None):
     """"""
     global AUTO_PYSCRIPT
 
     def wrapargs(fn):
+
+        if not inline:
+            sourcecode = f'\n\n# {"-" * 70}\n'
+            sourcecode += '\n'.join(inspect.getsource(
+                fn).replace('\n    ', '\n').split('\n')[1:])
+
+            sourcecode = sourcecode.replace('(self)', '()')
+            sourcecode = sourcecode.replace('(self, ', '(')
+            sourcecode = sourcecode.replace('(self,', '(')
+            sourcecode = sourcecode.replace('self.', '')
+
+            with open(PYSCRIPT_FUNCTIONS, 'a+') as file:
+                file.write(sourcecode)
+
         return fn
     AUTO_PYSCRIPT = True
     return wrapargs
+
+
+########################################################################
+class PyScriptAPI:
+    """"""
+    # ----------------------------------------------------------------------
+    @pyscript()
+    def render_plotly_fig__(self, fig, chart):
+        import json
+        import plotly
+        import js
+        graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+        js.Plotly.newPlot(chart, js.JSON.parse(graphJSON), {})
 
 
 ########################################################################
@@ -152,15 +189,18 @@ class RadiantHandler(RequestHandler):
         variables['argv'] = json.dumps(variables['argv'])
 
         if variables['static_app']:
-            html = self.render_string(f"{os.path.realpath(variables['template'])}", **variables)
+            html = self.render_string(
+                f"{os.path.realpath(variables['template'])}", **variables)
             if os.path.exists('static'):
                 shutil.rmtree('static')
-            shutil.copytree(os.path.join(os.path.dirname(__file__), 'static'), 'static')
+            shutil.copytree(os.path.join(
+                os.path.dirname(__file__), 'static'), 'static')
 
             with open('index.html', 'wb') as file:
                 file.write(html)
 
-        self.render(f"{os.path.realpath(variables['template'])}", **variables)
+        self.render(
+            f"{os.path.realpath(variables['template'])}", **variables)
 
     # ----------------------------------------------------------------------
     def set_default_headers(self):
@@ -244,6 +284,11 @@ def make_app(
         if AUTO_PYSCRIPT:  # l.strip() == '#!brython':
             radiant_mode_brython = 'brython'
 
+        if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'pyscript_fn.py')):
+            pyscript_fn = os.path.join('/root', 'pyscript_fn.py')
+        else:
+            pyscript_fn = None
+
     environ.update(
         {
             'class_': class_,
@@ -252,6 +297,7 @@ def make_app(
             'file': os.path.split(sys.argv[0])[-1].replace('.py', ''),
             # 'file': os.path.split(sys.argv[0])[-1].removesuffix('.py'),
             'file_path': os.path.join('/root', os.path.split(sys.argv[0])[-1]),
+            'pyscript_fn': pyscript_fn,
             'theme': theme,
             'argv': sys.argv,
             'template': template,

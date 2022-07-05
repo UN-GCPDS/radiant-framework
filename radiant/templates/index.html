@@ -14,18 +14,25 @@
         <!--PyScript-->
         <!--<link rel="stylesheet" href="/static/pyscript/pyscript-{{pyscript_version}}/pyscript.css" />-->
         <script defer src="/static/pyscript/pyscript-{{pyscript_version}}/pyscript.js"></script>
-        <style>
-        #pyscript-loading-label {
-            display: none;
-        }
-        </style>
+        <!--<style>-->
+        <!--#pyscript-loading-label {-->
+            <!--display: none;-->
+        <!--}-->
+        <!--</style>-->
 
 
     {% end %}
 
+    <!--MDC-->
     <script type="text/javascript" src="/static/material-components-web/material-components-web.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/material-components-web/material-components-web.min.css">
     <link rel="stylesheet" type="text/css" href="/theme.css">
+
+    <!--Bootstrap-->
+    <script src="/static/js/popper.min.js"></script>
+    <link href="/static/bootstrap/bootstrap-5.2.0-beta1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/bootstrap/bootstrap-5.2.0-beta1/js/bootstrap.min.js"></script>
+
 
     <!--Fonts-->
     <link type="text/css" rel="stylesheet" href="/static/fonts/fontawesome/css/all.min.css">
@@ -88,15 +95,21 @@ autoinit()
         <body onload="brython({{debug_level}})">
             {% block html_body %}{% end %}
             {% if  radiant_mode_pyscript=='pyscript' %}
+                {% if pyscript_fn %}
+                    <py-script src="{{pyscript_fn}}"></py-script>
+                {% end %}
                 <py-script src="/static/modules/pyscript/server.py"></py-script>
             {% end %}
         </body>
-    
+
 
     {% elif  radiant_mode_pyscript=='pyscript' %}
         <body>
             {% block html_body %}{% end %}
             {% if not radiant_mode_brython=='brython' %}
+                {% if pyscript_fn %}
+                    <py-script src="{{pyscript_fn}}"></py-script>
+                {% end %}
                 <py-script src="/static/modules/pyscript/server.py"></py-script>
                 <py-script src="{{file_path}}"></py-script>
             {% end %}

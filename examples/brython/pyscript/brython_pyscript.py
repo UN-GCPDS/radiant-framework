@@ -2,6 +2,7 @@
 
 from radiant.server import RadiantAPI, pyscript
 from browser import document, html
+from mdc.MDCButton import MDCButton
 
 
 ########################################################################
@@ -13,6 +14,15 @@ class BareMinimum(RadiantAPI):
         super().__init__(*args, **kwargs)
         document.select_one('body') <= html.H1('Radiant-Framework')
 
+        b1 = MDCButton('env1', raised=False, outlined=True, unelevated=True)
+        document.select_one('body') <= b1
+        b1.bind('click', self.test)
+
+        self.plot_sin_inline(f=30)
+
+    # ----------------------------------------------------------------------
+    def test(self, *args, **kwargs):
+        """"""
         document.select_one('body') <= html.DIV(id='mpl')
         self.plot_sin(f=5)
 
@@ -36,6 +46,21 @@ class BareMinimum(RadiantAPI):
     # ----------------------------------------------------------------------
     @pyscript()
     def plot_sinc(self, f):
+        """"""
+        import numpy as np
+        from matplotlib import pyplot as plt
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        x = np.linspace(0, 10, 1000)
+        y = np.sin(2 * np.pi * f * x)
+        ax.plot(x, y, color='C1')
+
+        return fig
+
+    # ----------------------------------------------------------------------
+    @pyscript(inline=True)
+    def plot_sin_inline(self, f):
         """"""
         import numpy as np
         from matplotlib import pyplot as plt
