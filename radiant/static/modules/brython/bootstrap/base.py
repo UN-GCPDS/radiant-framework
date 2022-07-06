@@ -56,8 +56,8 @@ class Base:
             if context.get(key, False):
 
                 try:
-                    context[key] = cls.MDC_optionals[key].format(
-                        **context)
+                    #context[key] = cls.MDC_optionals[key].format(**context)
+                    context[key] = eval(f'f"{cls.MDC_optionals[key]}"', context)
                 except:
 
                     context[key] = cls.MDC_optionals[key]
@@ -65,7 +65,8 @@ class Base:
             else:
                 context[key] = ''
 
-        code = code.format(**context)
+        #code = code.format(**context)
+        code = eval(f"""f'''{code}'''""", context)
 
         return cls.render_str(code)
 

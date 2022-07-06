@@ -1,6 +1,7 @@
 from browser import window, html
 from .base import Base
 
+from typing import Literal, Optional
 
 # primary
 # secondary
@@ -11,6 +12,8 @@ from .base import Base
 # light
 # dark
 # link
+
+['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'link']
 
 
 ########################################################################
@@ -23,12 +26,16 @@ class Button(Base):
         # 'unelevated': 'mdc-button--unelevated',
         # 'outlined': 'mdc-button--outlined',
         # 'dense': 'mdc-button--dense',
+        'large': 'btn-lg',
+        'small': 'btn-sm',
 
     }
 
     MDC_optionals = {
 
-        # 'disabled': 'disabled',
+        'outline': '-outline',
+        'disabled': 'disabled',
+
         # # 'reversed': 'style = "margin-left: 8px; margin-right: -4px;"',
         # # Icons
         # 'icon': '<i class="material-icons mdc-button__icon" aria-hidden="true">{icon}</i>',
@@ -40,7 +47,13 @@ class Button(Base):
     }
 
     # ----------------------------------------------------------------------
-    def __new__(self, text, mode='primary', **kwargs):
+    def __new__(self, text,
+                style: Literal['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'link'] = 'primary',
+                tag: Literal['link', 'button', 'input', 'submit', 'reset'] = 'button',
+                outline: Optional[bool] = False,
+                href='#',
+
+                ** kwargs):
         """Constructor"""
         self.element = self.render(locals(), kwargs)
         return self.element
@@ -49,8 +62,14 @@ class Button(Base):
     @classmethod
     def __html__(cls, **context):
         """"""
-        code = """
-        <button type="button" class="btn btn-{mode}" style="margin-right: 4px;">{text}</button>
-        """
+
+        match context['tag']:
+            case 'button':
+                code = """<button type="button" class="btn btn{outline}-{style} {CSS_classes}" style="">{text}</button>"""
+            case 'link':
+                code = """<a class="btn btn{outline}-{style} {CSS_classes}" href="{href}" role="button">{text}</a>"""
+            case _:
+                code = """<input class="btn btn{outline}-{style} {CSS_classes}" type="{tag.replace('input', 'button')}" value="{text}">"""
+
         return cls.render_html(code, context)
 
