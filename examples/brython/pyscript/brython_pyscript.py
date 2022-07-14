@@ -1,8 +1,9 @@
 #!brython
 
-from radiant.server import RadiantAPI, pyscript
+from radiant.server import RadiantAPI, pyscript, pyscript_globals
 from browser import document, html
-from mdc.MDCButton import MDCButton
+import bootstrap as bs
+import logging
 
 
 ########################################################################
@@ -14,44 +15,66 @@ class BareMinimum(RadiantAPI):
         super().__init__(*args, **kwargs)
         document.select_one('body') <= html.H1('Radiant-Framework')
 
-        b1 = MDCButton('env1', raised=False, outlined=True, unelevated=True)
-        document.select_one('body') <= b1
-        b1.bind('click', self.test)
+        document.select_one('body') <= bs.Button('Non-inline Arg', 'primary', on_click=lambda evt: self.plot_non_inline_arg(5))
+        document.select_one('body') <= bs.Button('Non-inline', 'primary', on_click=lambda evt: self.plot_non_inline())
+        document.select_one('body') <= bs.Button('Test callback', 'danger', on_click=lambda evt: self.test_callback())
 
-        self.plot_sin_inline(f=30)
+        self.create_environ()
+        self.test_callback_inline()
+        self.plot_inline_arg(f=30)
+        self.plot_inline()
 
     # ----------------------------------------------------------------------
-    def test(self, *args, **kwargs):
+    def create_environ(self):
         """"""
-        document.select_one('body') <= html.DIV(id='mpl')
-        self.plot_sin(f=5)
-
-        document.select_one('body') <= self.plot_sinc(f=1)
+        for i in range(4):
+            document.select_one('body') <= html.DIV(id=f'mpl{i + 1}')
 
     # ----------------------------------------------------------------------
-    @pyscript(output='mpl')
-    def plot_sin(self, f=10):
+    @pyscript_globals
+    def _(self):
         """"""
         import numpy as np
         from matplotlib import pyplot as plt
+        import json
 
+    # ----------------------------------------------------------------------
+    @pyscript(output='mpl1', callback='callback')
+    def plot_non_inline_arg(self, f):
+        """"""
         fig = plt.figure()
         ax = fig.add_subplot(111)
-        x = np.linspace(0, 1, 1000)
-        y = np.sin(2 * np.pi * f * x)
-        ax.plot(x, y)
+        ax.set_title('Non-inline function [ARG]')
+        x = np.linspace(0, 10, 1000)
+        y = np.sinc(2 * np.pi * f * x)
+        ax.plot(x, y, color='C1')
 
         return fig
 
     # ----------------------------------------------------------------------
-    @pyscript()
-    def plot_sinc(self, f):
+    @pyscript(output='mpl2', callback='callback')
+    def plot_non_inline(self):
+        """"""
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        ax.set_title('Non-inline function')
+        x = np.linspace(0, 10, 1000)
+        y = np.sinc(2 * np.pi * 1 * x)
+        ax.plot(x, y, color='C1')
+
+        return fig
+
+    # ----------------------------------------------------------------------
+    # @pyscript(inline=True, output='mpl3', callback='callback')
+    @pyscript(inline=True, output='mpl3')
+    def plot_inline_arg(self, f):
         """"""
         import numpy as np
         from matplotlib import pyplot as plt
 
         fig = plt.figure()
         ax = fig.add_subplot(111)
+        ax.set_title('Inline function [ARG]')
         x = np.linspace(0, 10, 1000)
         y = np.sin(2 * np.pi * f * x)
         ax.plot(x, y, color='C1')
@@ -60,18 +83,40 @@ class BareMinimum(RadiantAPI):
 
     # ----------------------------------------------------------------------
     @pyscript(inline=True)
-    def plot_sin_inline(self, f):
+    def plot_inline(self, output='mpl4'):
         """"""
         import numpy as np
         from matplotlib import pyplot as plt
 
         fig = plt.figure()
         ax = fig.add_subplot(111)
+        ax.set_title('Inline function')
         x = np.linspace(0, 10, 1000)
-        y = np.sin(2 * np.pi * f * x)
+        y = np.sin(2 * np.pi * 5 * x)
         ax.plot(x, y, color='C1')
 
         return fig
+
+    # ----------------------------------------------------------------------
+    @pyscript(inline=True, callback='callback')
+    def test_callback_inline(self):
+        """"""
+        import json
+        return json.dumps({'A': 100})
+
+    # ----------------------------------------------------------------------
+    @pyscript(callback='callback')
+    def test_callback(self):
+        """"""
+        import json
+        return json.dumps({'A': 100})
+
+    # ----------------------------------------------------------------------
+    def callback(self, *args, **kwargs):
+        """"""
+        logging.warning(f'#' * 20)
+        logging.warning('CALLBACK')
+        logging.warning(f'{args}, {kwargs}')
 
 
 if __name__ == '__main__':

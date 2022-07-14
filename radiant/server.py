@@ -1,5 +1,5 @@
 import sys
-from . import RadiantAPI, RadiantServer, RadiantHandler, pyscript, PyScriptAPI
+from . import RadiantAPI, RadiantServer, RadiantHandler, pyscript, PyScriptAPI, pyscript_globals
 
 
 class fake:

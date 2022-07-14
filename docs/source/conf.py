@@ -64,7 +64,12 @@ templates_path = ['_templates']
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+# source_suffix = '.rst'
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.txt': 'markdown',
+    '.md': 'markdown',
+}
 
 # The master toctree document.
 master_doc = 'index'
@@ -269,10 +274,12 @@ def setup(app):
     app.add_css_file("static/fonts/roboto-android/roboto.css")
     app.add_css_file("static/fonts/roboto-android/roboto-mono.css")
 
-    app.add_js_file(
-        "static/material-components-web/material-components-web.min.js")
-    app.add_css_file(
-        "static/material-components-web/material-components-web.min.css")
+    app.add_js_file("static/material-components-web/material-components-web.min.js")
+    app.add_css_file("static/material-components-web/material-components-web.min.css")
+
+    app.add_js_file("static/js/popper.min.js")
+    app.add_js_file("static/bootstrap/bootstrap-5.2.0-beta1/js/bootstrap.min.js")
+    app.add_css_file("static/bootstrap/bootstrap-5.2.0-beta1/css/bootstrap.min.css")
 
     app.add_css_file("custom.css")
     app.add_css_file("theme.css")
@@ -322,7 +329,7 @@ def get_notebooks(notebooks_dir, exclude=[]):
 
 notebooks = get_notebooks('notebooks', exclude=[
                           'readme.ipynb', 'license.ipynb'])
-components = get_notebooks('notebooks/components')
+components = get_notebooks('notebooks/bootstrap')
 modules = get_notebooks('notebooks/modules')
 
 
@@ -380,6 +387,15 @@ Navigation
    :name: mastertoc
 
    {notebooks}
+
+
+.. toctree::
+   :glob:
+   :maxdepth: 2
+   :name: mastertoc3
+   :caption: Bootstrap
+
+   notebooks/bootstrap/*
 
 
 Indices and tables

@@ -155,6 +155,7 @@ div.brython-out{
     width: -moz-available;
     width: -webkit-fill-available;
     display: inline-flex;
+    margin-bottom: 15px;
 }
 
 

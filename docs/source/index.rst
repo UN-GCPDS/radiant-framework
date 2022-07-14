@@ -12,6 +12,15 @@ Navigation
    
 
 
+.. toctree::
+   :glob:
+   :maxdepth: 2
+   :name: mastertoc3
+   :caption: Bootstrap
+
+   notebooks/bootstrap/*
+
+
 Indices and tables
 ------------------
 

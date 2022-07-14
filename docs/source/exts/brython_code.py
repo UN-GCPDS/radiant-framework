@@ -29,6 +29,10 @@ class Brython(Directive):
                            for i in range(16)])
         script = self.highlight_code()
 
+        print('#' * 20)
+        print(f'Length: {len(self.content)}')
+        print(self.content)
+
         script += self.gen_script(temp_id)
 
         if 'hide-output' in self.options:
@@ -54,9 +58,11 @@ class Brython(Directive):
             script += "\n".join(self.content.data[0].split('; '))
         else:
             script += "\n".join(self.content)
+
         script = script.replace('‘', "'")
         script = script.replace('’', "'")
         script = script.replace('\_', "_")
+        script = script.replace('!!!!', "    ")
 
         script += "</script>\n"
 
@@ -85,6 +91,7 @@ class Brython(Directive):
         code = code.replace('‘', '"')
         code = code.replace('’', '"')
         code = code.replace('\_', "_")
+        code = code.replace('!!!!', "    ")
 
         return highlight(code, Python3Lexer(), HtmlFormatter())
 

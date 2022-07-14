@@ -46,7 +46,7 @@ if os.path.exists(PYSCRIPT_FUNCTIONS):
 
 
 # ----------------------------------------------------------------------
-def pyscript(output=None, inline=False, plotly_out=None, callback=None):
+def pyscript(output=None, inline=False, plotly_out=None, callback=None, ignore=False, **kwargs):
     """"""
     global AUTO_PYSCRIPT
 
@@ -66,15 +66,27 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None):
                 file.write(sourcecode)
 
         return fn
-    AUTO_PYSCRIPT = True
+    if not ignore:
+        AUTO_PYSCRIPT = True
     return wrapargs
+
+
+# ----------------------------------------------------------------------
+def pyscript_globals(fn):
+    """"""
+    with open(PYSCRIPT_FUNCTIONS, 'r') as file:
+        content = file.read()
+    sourcecode = '\n'.join(inspect.getsource(fn).replace('\n        ', '\n').split('\n')[2:])
+    # sourcecode.replace('    ')
+    with open(PYSCRIPT_FUNCTIONS, 'w') as file:
+        file.write(sourcecode + content)
 
 
 ########################################################################
 class PyScriptAPI:
     """"""
     # ----------------------------------------------------------------------
-    @pyscript()
+    @pyscript(ignore=True)
     def render_plotly_fig__(self, fig, chart):
         import json
         import plotly

@@ -12,5 +12,6 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   brython.bootstrap
    brython.mdc
    brython.radiant

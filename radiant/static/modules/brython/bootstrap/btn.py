@@ -1,60 +1,34 @@
 from browser import window, html
-from .base import Base
+from .base import Base, ACCENTS
 
 from typing import Literal, Optional
-
-# primary
-# secondary
-# success
-# danger
-# warning
-# info
-# light
-# dark
-# link
-
-['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'link']
 
 
 ########################################################################
 class Button(Base):
     """"""
+    NAME = 'Button'
 
     CSS_classes = {
-
-        # 'raised': 'mdc-button--raised',
-        # 'unelevated': 'mdc-button--unelevated',
-        # 'outlined': 'mdc-button--outlined',
-        # 'dense': 'mdc-button--dense',
         'large': 'btn-lg',
         'small': 'btn-sm',
-
+        'active': 'active',
     }
 
     MDC_optionals = {
-
         'outline': '-outline',
         'disabled': 'disabled',
-
-        # # 'reversed': 'style = "margin-left: 8px; margin-right: -4px;"',
-        # # Icons
-        # 'icon': '<i class="material-icons mdc-button__icon" aria-hidden="true">{icon}</i>',
-        # 'fa_icon': '<i class="mdc-button__icon {fa_style} {fa_icon}"></i>',
-        # 'label': '<span class="mdc-button__label">{label}</span>',
-        # # <i class="material-icons mdc-button__icon" aria-hidden="true">favorite</i>
-
-
+        'toggle': 'data-bs-toggle="button"',
     }
 
     # ----------------------------------------------------------------------
     def __new__(self, text,
-                style: Literal['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'link'] = 'primary',
+                accent: ACCENTS = 'primary',
                 tag: Literal['link', 'button', 'input', 'submit', 'reset'] = 'button',
                 outline: Optional[bool] = False,
                 href='#',
 
-                ** kwargs):
-        """Constructor"""
+                **kwargs):
         self.element = self.render(locals(), kwargs)
         return self.element
 
@@ -62,14 +36,94 @@ class Button(Base):
     @classmethod
     def __html__(cls, **context):
         """"""
-
         match context['tag']:
             case 'button':
-                code = """<button type="button" class="btn btn{outline}-{style} {CSS_classes}" style="">{text}</button>"""
+                code = """<button type="button" class="btn btn{outline}-{accent} {CSS_classes}" style="" {disabled} {toggle}>{text}</button>"""
             case 'link':
-                code = """<a class="btn btn{outline}-{style} {CSS_classes}" href="{href}" role="button">{text}</a>"""
+                code = """<a class="btn btn{outline}-{accent} {CSS_classes}" href="{href}" role="button" {disabled} {toggle}>{text}</a>"""
             case _:
-                code = """<input class="btn btn{outline}-{style} {CSS_classes}" type="{tag.replace('input', 'button')}" value="{text}">"""
+                code = """<input class="btn btn{outline}-{accent} {CSS_classes}" type="{tag.replace('input', 'button')}" value="{text}" {disabled} {toggle}>"""
 
         return cls.render_html(code, context)
 
+
+########################################################################
+class ButtonGroup(Base):
+    """"""
+    CSS_classes = {
+        'large': 'btn-group-lg',
+        'small': 'btn-group-sm',
+    }
+
+    MDC_optionals = {
+
+        'vertical': '-vertical',
+
+    }
+
+    # ----------------------------------------------------------------------
+    def __new__(self, role: Literal['group', 'toolbar'] = 'group', **kwargs):
+        """"""
+        self.element = self.render(locals(), kwargs)
+        return self.element
+
+    # ----------------------------------------------------------------------
+    @classmethod
+    def __html__(cls, **context):
+        """"""
+        code = """
+        <div class="btn-group{vertical} {CSS_classes}" role="{role}">
+        </div>
+        """
+        return cls.render_html(code, context)
+
+    # ----------------------------------------------------------------------
+    @classmethod
+    def add_button(cls, element, text: str,
+                   accent: Optional[ACCENTS] = 'primary',
+                   checked: Optional[bool] = False,
+                   radio: Optional[bool] = False,
+                   checkbox: Optional[bool] = False):
+        """"""
+        id = cls.new_id()
+        in_ = html.INPUT()
+        if radio:
+            in_.attrs['type'] = 'radio'
+            in_.attrs['name'] = 'btnradio'
+        elif checkbox:
+            in_.attrs['type'] = 'checkbox'
+
+        in_.attrs['id'] = f'btncheck-{id}'
+        in_.attrs['class'] = 'btn-check'
+        in_.attrs['autocomplete'] = 'off'
+
+        lb_ = html.LABEL(text)
+        lb_.attrs['class'] = f'btn btn-outline-{accent}'
+        lb_.attrs['for'] = f'btncheck-{id}'
+
+        if checked:
+            in_.attrs['checked'] = ''
+
+        cls.element <= in_
+        cls.element <= lb_
+
+
+########################################################################
+class ButtonToolbar(Base):
+    """"""
+
+    # ----------------------------------------------------------------------
+    def __new__(self, **kwargs):
+        """"""
+        self.element = self.render(locals(), kwargs)
+        return self.element
+
+    # ----------------------------------------------------------------------
+    @classmethod
+    def __html__(cls, **context):
+        """"""
+        code = """
+        <div class="btn-toolbar" role="toolbar">
+        </div>
+        """
+        return cls.render_html(code, context)

@@ -1,7 +1,8 @@
 #!brython
 
-from radiant.server import RadiantAPI, RadiantServer, pyscript
+from radiant.server import RadiantAPI, RadiantServer, pyscript, pyscript_globals
 from browser import document, html
+import bootstrap as bs
 
 
 ########################################################################
@@ -11,14 +12,14 @@ class BareMinimum(RadiantAPI):
     def __init__(self, *args, **kwargs):
         """"""
         super().__init__(*args, **kwargs)
-        document.select_one('body') <= html.H1('Radiant-Framework')
+        document.select_one('.top') <= html.H1('Radiant-Framework')
 
-        document.select_one('body') <= html.DIV(id='mpl')
-        self.plot()
+        document.select_one('.top') <= html.DIV(id='mpl')
+        document.select_one('.top') <= bs.Button('Plot', 'primary', on_click=lambda evt: self.show_plot())
 
     # ----------------------------------------------------------------------
-    @pyscript(output=None)
-    def plot(self):
+    @pyscript_globals
+    def _(self):
         """"""
         # Import libraries
         import pandas as pd
@@ -28,9 +29,16 @@ class BareMinimum(RadiantAPI):
         import plotly
         import plotly.express as px
 
-        ## Get the data
+        # Get the data
         from pyodide.http import open_url
 
+        from js import document
+        from pyodide import create_proxy
+
+    # ----------------------------------------------------------------------
+    @pyscript(output=None)
+    def show_plot(self):
+        """"""
         url = 'https://raw.githubusercontent.com/alanjones2/uk-historical-weather/main/data/Heathrow.csv'
         url_content = open_url(url)
 
@@ -43,9 +51,6 @@ class BareMinimum(RadiantAPI):
                           width=800, height=400)
             graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
             js.plot(graphJSON, "chart1")
-
-        from js import document
-        from pyodide import create_proxy
 
         def selectChange(event):
             choice = document.getElementById("select").value

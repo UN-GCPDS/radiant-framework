@@ -1,0 +1,10 @@
+.btn-group {
+    margin-right: 0.5rem;
+}
+.btn {
+    margin-right: 0.5rem;
+}
+
+.btn-group >.btn {
+    margin-right: 0px;
+}

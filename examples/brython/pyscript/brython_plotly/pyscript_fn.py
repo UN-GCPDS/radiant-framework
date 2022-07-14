@@ -1,3 +1,17 @@
+""""""
+# Import libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import js
+import json
+import plotly
+import plotly.express as px
+
+# Get the data
+from pyodide.http import open_url
+
+from js import document
+from pyodide import create_proxy
 
 
 # ----------------------------------------------------------------------
@@ -10,19 +24,8 @@ def render_plotly_fig__(fig, chart):
 
 
 # ----------------------------------------------------------------------
-def plot():
+def show_plot():
     """"""
-    # Import libraries
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    import js
-    import json
-    import plotly
-    import plotly.express as px
-
-    ## Get the data
-    from pyodide.http import open_url
-
     url = 'https://raw.githubusercontent.com/alanjones2/uk-historical-weather/main/data/Heathrow.csv'
     url_content = open_url(url)
 
@@ -35,9 +38,6 @@ def plot():
                       width=800, height=400)
         graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
         js.plot(graphJSON, "chart1")
-
-    from js import document
-    from pyodide import create_proxy
 
     def selectChange(event):
         choice = document.getElementById("select").value

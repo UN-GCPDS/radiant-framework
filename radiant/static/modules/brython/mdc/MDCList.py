@@ -167,7 +167,6 @@ class MDCListGroup(MDCTemplate):
         return cls.render_html(code, context)
 
     # ----------------------------------------------------------------------
-
     @classmethod
     def add_list(cls, element, label, list_):
         """"""

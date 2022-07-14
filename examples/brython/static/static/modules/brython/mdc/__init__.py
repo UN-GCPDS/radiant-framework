@@ -1,7 +1,0 @@
-"""
-Brython MDCFramework: Components
-================================
-
-
-
-"""
