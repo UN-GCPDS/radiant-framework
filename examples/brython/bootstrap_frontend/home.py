@@ -18,5 +18,6 @@ class Home(RadiantAPI):
 
         document.select_one('body') <= bs.Button('Buttons', tag='link', href='/buttons')
         document.select_one('body') <= bs.Button('Dropdowns', tag='link', href='/dropdowns')
+        document.select_one('body') <= bs.Button('Forms', tag='link', href='/forms')
 
 

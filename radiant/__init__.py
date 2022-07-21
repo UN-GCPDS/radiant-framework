@@ -71,6 +71,14 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None, ignore=F
     return wrapargs
 
 
+# # ----------------------------------------------------------------------
+# def brython_serializer(fn):
+    # """"""
+    # def inset(*args, **kwargs):
+        # return json.dumps(fn)
+    # return inset
+
+
 # ----------------------------------------------------------------------
 def pyscript_globals(fn):
     """"""
@@ -93,6 +101,12 @@ class PyScriptAPI:
         import js
         graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
         js.Plotly.newPlot(chart, js.JSON.parse(graphJSON), {})
+
+    # # ----------------------------------------------------------------------
+    # @pyscript()
+    # def brython_serializer(self, data):
+        # """"""
+        # return json.dumps(data)
 
 
 ########################################################################

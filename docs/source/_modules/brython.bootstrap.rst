@@ -14,3 +14,5 @@ Submodules
 
    brython.bootstrap.base
    brython.bootstrap.btn
+   brython.bootstrap.dropdown
+   brython.bootstrap.form

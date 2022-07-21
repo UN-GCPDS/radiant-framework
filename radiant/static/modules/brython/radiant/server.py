@@ -97,6 +97,8 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None, id=None)
                 document.select_one(f'#{output_id}').style = {'display': 'none', }
                 out.style = {'display': 'none', }
                 out.class_name += ' RADIANT-HIDE'
+                py_script.style = {'display': 'none', }
+                py_script.class_name += ' RADIANT-HIDE'
 
             if (output is None) and (plotly_out is None) and (not callback):
                 return out
@@ -130,7 +132,7 @@ def on_callback(element, fn, callback, out):
 
     P += 1
     if element.text or P > n:
-        print(f'calling...')
+        print(f'Xxcalling...')
         print(f'Xx{element.text}xX')
         print(f'Xx{out.text}xX')
         try:
