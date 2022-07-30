@@ -28,7 +28,6 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None, id=None)
     def wrapargs(fn):
 
         def wrap(*args, **kwargs):
-
             # Output
             if (output is None) and (plotly_out is None):
                 if id is None:
@@ -58,6 +57,8 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None, id=None)
             else:
                 source = ''
                 # remove_after = True
+
+            # source += f'\n\n{rndr}\n\n'
 
             if plotly_out:
                 if inline:
@@ -91,6 +92,7 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None, id=None)
                 py_script.style = {'display': 'none', }
                 py_script.class_name += ' RADIANT-HIDE'
 
+            print(f'{output}, {plotly_out}')
             if (output is None) and (plotly_out is None):
                 print('%' * 70)
                 print(f'%%%%Hidding out: {output_id}')
@@ -104,7 +106,15 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None, id=None)
                 return out
             # elif output is 'RAW':
             if callback:
-                on_callback(py_script, args[0], callback, out)
+
+                if ':' in callback:
+                    n = int(callback[callback.find(':') + 1:])
+                    callback_ = callback[:callback.find(':')]
+                else:
+                    n = 100
+                    callback_ = callback
+
+                on_callback(py_script, args[0], callback_, out, n)
                 return None
 
         return wrap
@@ -117,32 +127,48 @@ def pyscript_globals(fn):
     return None
 
 
+# ----------------------------------------------------------------------
+def delay(t):
+    """"""
+    def wrap(fn):
+        def inset(*args, **kwargs):
+            print(f'DELAYING: {t}')
+            return timer.set_timeout(lambda: fn(*args, **kwargs), t)
+        return inset
+    return wrap
+
+
+# ----------------------------------------------------------------------
+def pyscript_init(fn):
+    """"""
+
+    timer.set_timeout(fn, 100)
+    return None
+
+
 P = 0
 
 
-def on_callback(element, fn, callback, out):
+def on_callback(element, fn, callback, out, n):
     """"""
     global P
 
-    if ':' in callback:
-        n = int(callback[callback.find(':') + 1:])
-        callback = callback[:callback.find(':')]
-    else:
-        n = 100
-
     P += 1
-    if element.text or P > n:
-        print(f'Xxcalling...')
-        print(f'Xx{element.text}xX')
-        print(f'Xx{out.text}xX')
-        try:
+    if element.text or out.text or P > n:
+        print(f'calling callback [{callback}:{P}/{n}]...')
+        print(f'element.text [{callback}:{P}/{n}]: {element.text}')
+        print(f'out.text [{callback}:{P}]: {out.text}')
+        if element.text:
             getattr(fn, callback)(json.loads(element.text))
-        except:
+        elif out.text:
             getattr(fn, callback)(json.loads(out.text))
+        else:
+            print(f'Error callback [{callback}:{P}/{n}]')
         P = 0
+
     else:
-        print(f'waiting... {element.text}')
-        timer.set_timeout(lambda: on_callback(element, fn, callback, out), 10)
+        print(f'waiting... {element.text}, {out.text}')
+        timer.set_timeout(lambda: on_callback(element, fn, callback, out, n), 10)
 
 
 ########################################################################

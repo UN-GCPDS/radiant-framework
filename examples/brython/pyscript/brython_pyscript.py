@@ -1,6 +1,6 @@
 #!brython
 
-from radiant.server import RadiantAPI, pyscript, pyscript_globals
+from radiant.server import RadiantAPI, pyscript, pyscript_globals, pyscript_init
 from browser import document, html
 import bootstrap as bs
 import logging
@@ -20,9 +20,9 @@ class BareMinimum(RadiantAPI):
         document.select_one('body') <= bs.Button('Test callback', 'danger', on_click=lambda evt: self.test_callback())
 
         self.create_environ()
-        self.test_callback_inline()
-        self.plot_inline_arg(f=30)
-        self.plot_inline()
+        # self.test_callback_inline()
+        # self.plot_inline_arg(f=30)
+        # self.plot_inline()
 
     # ----------------------------------------------------------------------
     def create_environ(self):
@@ -101,22 +101,33 @@ class BareMinimum(RadiantAPI):
     @pyscript(inline=True, callback='callback')
     def test_callback_inline(self):
         """"""
+        print('Callback inline')
         import json
         return json.dumps({'A': 100})
 
     # ----------------------------------------------------------------------
+
     @pyscript(callback='callback')
     def test_callback(self):
         """"""
+        print('Callback not-inline')
         import json
-        return json.dumps({'A': 100})
+        return json.dumps({'B': 100})
 
     # ----------------------------------------------------------------------
     def callback(self, *args, **kwargs):
         """"""
+        print('Callback called')
+        logging.warning('Callback:')
         logging.warning(f'#' * 20)
         logging.warning('CALLBACK')
         logging.warning(f'{args}, {kwargs}')
+
+    # ----------------------------------------------------------------------
+    @pyscript_init
+    def asdf(self):
+        """"""
+        test_callback_inline()
 
 
 if __name__ == '__main__':

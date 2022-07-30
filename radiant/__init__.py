@@ -78,6 +78,13 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None, ignore=F
         # return json.dumps(fn)
     # return inset
 
+# ----------------------------------------------------------------------
+def delay(fn):
+    """"""
+    def wrap(t):
+        return None
+    return wrap
+
 
 # ----------------------------------------------------------------------
 def pyscript_globals(fn):
@@ -88,6 +95,17 @@ def pyscript_globals(fn):
     # sourcecode.replace('    ')
     with open(PYSCRIPT_FUNCTIONS, 'w') as file:
         file.write(sourcecode + content)
+
+
+# ----------------------------------------------------------------------
+def pyscript_init(fn):
+    """"""
+    with open(PYSCRIPT_FUNCTIONS, 'r') as file:
+        content = file.read()
+    sourcecode = '\n'.join(inspect.getsource(fn).replace('\n        ', '\n').split('\n')[2:])
+    # sourcecode.replace('    ')
+    with open(PYSCRIPT_FUNCTIONS, 'w') as file:
+        file.write(content + sourcecode)
 
 
 ########################################################################
@@ -256,6 +274,7 @@ def make_app(
     path: PATH = None,
     autoreload: bool = False,
     static_app: bool = False,
+    templates_path: PATH = None
     # pyscript=False,
 ):
     """
@@ -289,6 +308,9 @@ def make_app(
         "xsrf_cookies": False,
         'autoreload': autoreload,
     }
+
+    if templates_path:
+        settings['template_path'] = templates_path
 
     with open(sys.argv[0], 'r') as f:
         l = f.readline()
@@ -430,6 +452,7 @@ def RadiantServer(
     autoreload: Optional[bool] = False,
     callbacks: Optional[tuple] = (),
     static_app: Optional[bool] = False,
+    templates_path: PATH = None,
     **kwargs,
 ):
     """Python implementation for move `class_` into a Bython environment.
@@ -480,6 +503,7 @@ def RadiantServer(
         pages=pages,
         debug_level=debug_level,
         static_app=static_app,
+        templates_path=templates_path,
         # pyscript=pyscript,
     )
     http_server = HTTPServer(
