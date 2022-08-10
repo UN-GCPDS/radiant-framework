@@ -1,0 +1,28 @@
+{% load static %}
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Dima</title>
+
+        <!--Bootstrap-->
+        <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+        <!--Custom styles-->
+        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+
+
+        {% include 'components/navbar.html' %}
+
+
+    </head>
+    <body>
+
+
+    {% block 'main' %}
+
+    {% endblock %}
+
+    </body>
+</html>

@@ -1,0 +1,72 @@
+body{
+  background-color: #white;
+  width: 100vw;
+    overflow-x: hidden;
+}
+
+code {
+padding: 20px, 0;
+color: blue;
+}
+
+
+plot-container {
+    padding: 15px;
+}
+
+
+.plotly-card {
+
+}
+
+
+#dima-counters{
+display: none;
+margin: 15px 0;
+}
+
+
+#dima-counters .card{
+margin: auto;
+text-align: center;
+height: 132px;
+}
+
+
+
+.dima-form{
+
+    padding: 30px 30px;
+    background-color: #f8f9fa;
+    margin-top: 60px;
+    margin-bottom: 15px;
+
+}
+
+
+.navbar {
+    margin-bottom: 30px;
+}
+
+.display-5 {
+    margin-bottom: 15px;
+}
+
+
+.dima-footer {
+    height: 300px;
+    background-color: #333;
+        position: relative;
+            width: 100vw;
+}
+
+
+#dima-footer-made{
+    color: white;
+    font-size: 90%;
+    text-align: center;
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+}
+

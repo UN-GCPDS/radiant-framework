@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load plotly_dash %}
+
+
+
+{% block 'main' %}
+
+
+{% plotly_app name="SimpleExample" %}
+
+
+<!--<div class="container-lg">-->
+    <!--<div class="row">-->
+      <!--<h1 class="display-6">Dima</h1>-->
+      <!--<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+      <!--<div class="col-6 col-lg-5 col-sm-12">-->
+          <!--<div id="dima-facultades" class="plotly-card"></div>-->
+      <!--</div>-->
+      <!--<div class="col-6 col-lg-7 col-sm-12">-->
+        <!--<div id='dima-counters'></div>-->
+      <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div class='container-fluid dima-form'>-->
+
+  <!--<div class="container-lg">-->
+    <!--<h1 class="display-5">Facultades</h1>-->
+    <!--<p class="lead"></p>-->
+  <!--</div>-->
+  <!--<div class='container' id='faculty'></div>-->
+
+  <!--<div class="container-lg">-->
+    <!--<h1 class="display-5">Departamentos</h1>-->
+    <!--<p class="lead"></p>-->
+  <!--</div>-->
+  <!--<div class='container' id='departamentos'></div>-->
+
+<!--</div>-->
+
+
+
+<!--<div class="container-lg">-->
+  <!--<div class="row">-->
+      <!--<div class="col-12 col-lg-12 col-sm-12">-->
+          <!--<h1 class="display-6">Por área de conocimiento de la OCDE</h1>-->
+          <!--<p class="lead">-->
+          <!--Se trata de una agrupación que se hace de los <b>programas académicos</b>,-->
+          <!--teniendo en cuenta cierta afinidad en los contenidos, en los <b>campos-->
+          <!--específicos del conocimiento</b>, en los campos de acción de la educación-->
+          <!--superior cuyos propósitos de formación conduzcan a la <b>investigación</b> o-->
+          <!--al desempeño de ocupaciones, profesiones y disciplinas.-->
+          <!--</p>-->
+          <!--<div id="chart1" class="plotly-card"></div>-->
+      <!--</div>-->
+      <!--<div class="col-6 col-lg-7 col-sm-12">-->
+          <!--<h1 class="display-6">Por agendas de conocimiento</h1>-->
+          <!--<p class="lead">-->
+          <!--Las <b>agendas de conocimiento</b>, elaboradas entre 2010 y 2012,-->
+          <!--ofrecen un diagnóstico actual de las capacidades de investigación de-->
+          <!--la <b>Universidad Nacional de Colombia</b> a nivel nacional e-->
+          <!--internacional. Se presentan organizadas en áreas que promueven el-->
+          <!--trabajo interdisciplinar.-->
+          <!--</p>-->
+          <!--<div id="dima-agendas" class="plotly-card"></div>-->
+      <!--</div>-->
+      <!--<div class="col-6 col-lg-5 col-sm-12">-->
+          <!--<h1 class="display-6">Por categorías de grupos de investigación</h1>-->
+          <!--<p class="lead">-->
+          <!--Los grupos se clasificarán de acuerdo con las siguientes categorías,-->
+          <!--una vez se haya cumplido con los requisitos para ser <b>Grupo de-->
+          <!--investigación</b>, <b>Desarrollo Tecnológico</b> o de <b>Innovación Reconocido</b>. De-->
+          <!--mayor a menor reconocimiento: <b>A1</b>, <b>A</b>, <b>B</b>, <b>C</b> y <b>D</b>-->
+          <!--</p>-->
+          <!--<div id="dima-categoria" class="plotly-card"></div>-->
+      <!--</div>-->
+
+
+  <!--</div>-->
+<!--</div>-->
+
+<!--<div class='container-fluid dima-form'>-->
+  <!--<div class="container-lg">-->
+    <!--<h1 class="display-5">Grupos de investigación</h1>-->
+    <!--<p class="lead">-->
+      <!--Se define grupo de investigación científica o tecnológica como el conjunto de personas que se reúnen para realizar investigación en una temática dada, formulan uno o varios problemas de su interés, trazan un plan estratégico de largo o mediano plazo para trabajar en él y producir unos resultados de conocimiento sobre el tema cuestión. Un grupo existe siempre y cuando demuestre producción de resultados tangibles y verificables, fruto de proyectos y otras actividades de investigación convenientemente expresadas en un plan de acción (proyectos) debidamente formalizado.-->
+    <!--</p>-->
+  <!--</div>-->
+  <!--<div class='container' id='groups'></div>-->
+<!--</div>-->
+
+
+<!--<div class="container-lg">-->
+  <!--<div class="row">-->
+      <!--<div class="col-12 col-lg-12 col-sm-12">-->
+        <!--<h1 class="dima-group"></h1>-->
+      <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+{% endblock %}
