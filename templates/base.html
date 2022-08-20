@@ -1,16 +1,22 @@
 {% load static %}
 
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Dima</title>
 
         <!--Bootstrap-->
+        <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
         <!--Custom styles-->
         <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+
+        <!--Plotly-->
+        <script src='https://cdn.plot.ly/plotly-2.14.0.min.js'></script>
 
 
         {% include 'components/navbar.html' %}
@@ -24,5 +30,6 @@
 
     {% endblock %}
 
+    {% include 'footer.html' %}
     </body>
 </html>

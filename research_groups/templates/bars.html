@@ -1,0 +1,43 @@
+<div id="myDiv"></div>
+
+
+
+
+
+<script>
+
+
+
+
+
+var trace1 = {
+  x: {{faculties|safe}},
+  y: {{faculties_count|safe}},
+  type: 'bar',
+  text: {{faculties|safe}},
+  marker: {
+    color: 'rgb(142,124,195)'
+  }
+};
+
+var data = [trace1];
+
+var layout = {
+  title: 'Number of Graphs Made this Week',
+  font:{
+    family: 'Raleway, sans-serif'
+  },
+  showlegend: false,
+  xaxis: {
+    tickangle: -45
+  },
+  yaxis: {
+    zeroline: false,
+    gridwidth: 2
+  },
+  bargap :0.05
+};
+
+Plotly.newPlot('myDiv', data, layout);
+
+</script>

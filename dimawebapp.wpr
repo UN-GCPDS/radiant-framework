@@ -4,6 +4,7 @@
 # Wing project file                                              #
 ##################################################################
 [project attributes]
+proj.debug-sub-processes = True
 proj.directory-list = [{'dirloc': loc('.'),
                         'excludes': (),
                         'filter': '*',
@@ -12,7 +13,7 @@ proj.directory-list = [{'dirloc': loc('.'),
                         'watch_for_changes': True}]
 proj.file-type = 'shared'
 proj.launch-config = {loc('manage.py'): ('project',
-        ('runserver 0.0.0.0:8000',
+        ('runserver',
          ''))}
 proj.main-file = loc('manage.py')
 testing.test-framework = {None: ':internal djangotest'}

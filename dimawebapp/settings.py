@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import sys
+import django.views.debug
 import os
 from pathlib import Path
 
@@ -26,6 +28,17 @@ SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
+
+def wing_debug_hook(*args, **kwargs):
+    if __debug__ and 'WINGDB_ACTIVE' in os.environ:
+        exc_type, exc_value, traceback = sys.exc_info()
+        sys.excepthook(exc_type, exc_value, traceback)
+    return old_technical_500_response(*args, **kwargs)
+
+
+old_technical_500_response = django.views.debug.technical_500_response
+django.views.debug.technical_500_response = wing_debug_hook
 
 
 # Application definition

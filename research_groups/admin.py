@@ -10,7 +10,7 @@ admin.site.unregister(auth.models.Group)
 
 @admin.register(Researcher)
 class ResearcherAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'role')
+    list_display = ('first_name', 'last_name')
 
 
 @admin.register(ResearchGroup)
