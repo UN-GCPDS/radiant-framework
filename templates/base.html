@@ -14,22 +14,28 @@
 
         <!--Custom styles-->
         <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'dima-styles.css' %}">
 
         <!--Plotly-->
         <script src='https://cdn.plot.ly/plotly-2.14.0.min.js'></script>
 
+        <!--Brython-->
+        <script type="text/javascript" src="{% static 'brython/brython.js' %}"></script>
+        <script type="text/javascript" src="{% static 'brython/brython_stdlib.js' %}"></script>
+
+        <script type="text/python" src="{% static 'py/scripts.py' %}"></script>
+
 
         {% include 'components/navbar.html' %}
 
+        <script>
+            var CSRF_TOKEN = '{{ csrf_token }}';
+        </script>
+
 
     </head>
-    <body>
-
-
-    {% block 'main' %}
-
-    {% endblock %}
-
+    <body onload="brython(0)">
+    {% block 'main' %}{% endblock %}
     {% include 'footer.html' %}
     </body>
 </html>

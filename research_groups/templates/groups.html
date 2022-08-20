@@ -9,7 +9,7 @@
       <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       <div class="col-6 col-lg-7 col-sm-12">
         <div id="dima-facultades" class="plotly-card">
-          {% include 'bars2.html' with id='facultades' x=faculties_count|safe  y=faculties|safe height='200px' %}
+          {% include 'bars.html' with id='facultades' x=faculties_count|safe  y=faculties|safe height='200px' %}
         </div>
       </div>
       <div class="col-56 col-lg-5 col-sm-12">
@@ -61,7 +61,7 @@
           al desempeño de ocupaciones, profesiones y disciplinas.
           </p>
           <div id="chart1" class="plotly-card">
-          {% include 'bars2.html' with  id='ocde' x=ocde_count|safe  y=ocde|safe height='300px' %}
+          {% include 'bars.html' with  id='ocde' x=ocde_count|safe  y=ocde|safe height='300px' %}
           </div>
       </div>
       <div class="col-6 col-lg-7 col-sm-12">
@@ -74,7 +74,7 @@
           trabajo interdisciplinar.
           </p>
           <div id="dima-agendas" class="plotly-card">
-          {% include 'bars2.html' with  id='knowledge' x=knowledge_count|safe  y=knowledge|safe height='500px' %}
+          {% include 'bars.html' with  id='knowledge' x=knowledge_count|safe  y=knowledge|safe height='500px' %}
           </div>
       </div>
       <div class="col-6 col-lg-5 col-sm-12">
@@ -138,9 +138,14 @@
 
 
         <div class="btn-group">
-          <a href="#" class="btn btn-outline-primary">Productos</a>
-          <a href="#" class="btn btn-outline-primary">Convocatorias</a>
-          <a href="#" class="btn btn-outline-primary">Publicaciones</a>
+          <a class="btn btn-outline-primary" id='test-button'>Productos</a>
+          <a class="btn btn-outline-primary">Convocatorias</a>
+          <a class="btn btn-outline-primary">Publicaciones</a>
+        </div>
+
+
+        <div id='placeholder'>
+
         </div>
 
 

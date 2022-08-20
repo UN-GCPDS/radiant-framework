@@ -9,6 +9,7 @@ from .plotly_views import sample
 from .models import Researcher, ResearchGroup
 
 import pickle
+import json
 
 
 ########################################################################
@@ -96,3 +97,14 @@ class ResearcherView(View):
             g.save()
 
         return HttpResponse("Database created!", content_type='text/json')
+
+
+class CustomTemplateView(TemplateView):
+
+    def post(self, request, *args, **kwargs):
+
+        data = json.loads(request.POST['data'])
+        self.template_name = f"{data['template']}.html"
+        context = self.get_context_data(**kwargs)
+        context.update(data)
+        return self.render_to_response(context)
