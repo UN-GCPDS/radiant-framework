@@ -18,7 +18,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+
     path("", include('research_groups.urls')),
+    path("", include('visualizations.urls')),
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
 
 ]

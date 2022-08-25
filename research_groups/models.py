@@ -83,9 +83,8 @@ class ResearchGroup(models.Model):
     )
 
     FACULTIES = (
-
         'Facultad de administración',
-        'Facultad de ciencias excatas y naturales',
+        'Facultad de ciencias exactas y naturales',
         'Facultad de ingeniería y arquitectura',
     )
 

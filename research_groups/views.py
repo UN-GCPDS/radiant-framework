@@ -3,54 +3,87 @@ from django.views.generic.base import TemplateView
 from django.http import HttpResponse
 from django.views import View
 
-from .plotly_views import sample
-
-
 from .models import Researcher, ResearchGroup
+
+from visualizations.views import fix_filters
 
 import pickle
 import json
 
 
 ########################################################################
-class ResearchGroupView(TemplateView):
+class HomeView(TemplateView):
     template_name = "groups.html"
 
     # ----------------------------------------------------------------------
     def get_context_data(self, **kwargs):
         """"""
         context = super().get_context_data(**kwargs)
-        # context['groups'] = ResearchGroup.objects.all()
-
-        context['faculties_count'] = [ResearchGroup.objects.filter(faculty=key).count() for key, label in ResearchGroup._meta.get_field('faculty').choices]
-        context['faculties'] = [label for key, label in ResearchGroup._meta.get_field('faculty').choices]
-
-        context['ocde_count'] = [ResearchGroup.objects.filter(ocde=key).count() for key, label in ResearchGroup._meta.get_field('ocde').choices]
-        context['ocde'] = [label for key, label in ResearchGroup._meta.get_field('ocde').choices]
-
-        context['knowledge_count'] = [ResearchGroup.objects.filter(knowledge=key).count() for key, label in ResearchGroup._meta.get_field('knowledge').choices]
-        context['knowledge'] = [label for key, label in ResearchGroup._meta.get_field('knowledge').choices]
-
-        context['category_count'] = [ResearchGroup.objects.filter(category=key).count() for key, label in ResearchGroup._meta.get_field('category').choices]
-        context['category'] = [label for key, label in ResearchGroup._meta.get_field('category').choices]
+        context['groups'] = ResearchGroup.objects.all()
+        context['faculties'] = ResearchGroup.FACULTIES
+        context['departaments'] = ResearchGroup.DEPARTAMENTS
+        context['categories'] = ResearchGroup.CATEGORIES
 
         context['cards'] = [
             ('Grupos de investigación', ResearchGroup.objects.count()),
             ('Departamentos', len(ResearchGroup._meta.get_field('departament').choices)),
             ('Investigadores', Researcher.objects.count()),
         ]
-
-        context['groups'] = ResearchGroup.objects.values_list('id', 'name')
-
-        if group := self.request.GET.dict().get('group', False):
-            context['group'] = ResearchGroup.objects.get(id=group)
-
         return context
 
 
 ########################################################################
 class DashSampleView(TemplateView):
     template_name = "sample.html"
+
+
+########################################################################
+class GroupView(TemplateView):
+
+    # ----------------------------------------------------------------------
+    def post(self, request, *args, **kwargs):
+        """"""
+        self.template_name = "group_summary.html"
+        context = self.get_context_data(**kwargs)
+
+        data = json.loads(request.POST['data'])
+        context['group'] = ResearchGroup.objects.get(**data)
+
+        return self.render_to_response(context)
+
+    # ----------------------------------------------------------------------
+    def get(self, request, *args, **kwargs):
+        """"""
+        self.template_name = "group_view.html"
+        context = self.get_context_data(**kwargs)
+
+        id = json.loads(request.GET['id'][0])
+        context['group'] = ResearchGroup.objects.get(id=id)
+
+        return self.render_to_response(context)
+
+
+########################################################################
+class GenerateFilteredOptionsView(View):
+    """"""
+
+    # ----------------------------------------------------------------------
+    def post(self, request, *args, **kwargs):
+        """"""
+        data = {}
+        filters = json.loads(request.POST['filters'])
+        filters = fix_filters(filters)
+
+        data['groups'] = [str(g[0]) for g in ResearchGroup.objects.filter(**{k: filters[k]
+                                                                             for k in ['faculty', 'departament', 'category'] if k in
+                                                                             filters}).values_list('id')]
+
+        departaments = set([d[0] for d in ResearchGroup.objects.filter(**{k: filters[k]
+                                                                          for k in ['faculty'] if k in
+                                                                          filters}).values_list('departament')])
+        data['departaments'] = [dict(ResearchGroup._meta.get_field('departament').choices)[d] for d in departaments]
+
+        return HttpResponse(json.dumps(data), content_type='text/json')
 
 
 ########################################################################
@@ -98,13 +131,3 @@ class ResearcherView(View):
 
         return HttpResponse("Database created!", content_type='text/json')
 
-
-class CustomTemplateView(TemplateView):
-
-    def post(self, request, *args, **kwargs):
-
-        data = json.loads(request.POST['data'])
-        self.template_name = f"{data['template']}.html"
-        context = self.get_context_data(**kwargs)
-        context.update(data)
-        return self.render_to_response(context)

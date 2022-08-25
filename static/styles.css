@@ -34,14 +34,6 @@ height: 132px;
 
 
 
-.dima-form{
-
-    padding: 30px 30px;
-    background-color: #f8f9fa;
-    margin-top: 60px;
-    margin-bottom: 15px;
-
-}
 
 
 .navbar {
@@ -54,7 +46,7 @@ height: 132px;
 
 
 .dima-footer {
-    margin-top: 300px;
+    margin-top: 30px;
     height: 300px;
     background-color: #333;
         position: relative;

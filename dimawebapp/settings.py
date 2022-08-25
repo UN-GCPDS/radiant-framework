@@ -50,8 +50,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    'rest_framework',
+
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+
     'research_groups.apps.ResearchGroupsConfig',
+
+    'visualizations.apps.VisualizationsConfig',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +150,12 @@ STATICFILES_DIRS = [
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

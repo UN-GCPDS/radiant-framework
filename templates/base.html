@@ -23,6 +23,11 @@
         <script type="text/javascript" src="{% static 'brython/brython.js' %}"></script>
         <script type="text/javascript" src="{% static 'brython/brython_stdlib.js' %}"></script>
 
+        <!--Brython scripts-->
+        <script type="text/python">
+        import sys
+        sys.path.append("{% static 'py' %}")
+        </script>
         <script type="text/python" src="{% static 'py/scripts.py' %}"></script>
 
 

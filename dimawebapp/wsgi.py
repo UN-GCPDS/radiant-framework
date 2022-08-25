@@ -7,10 +7,14 @@ For more information on this file, see
 https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/
 """
 
-import os
-
 from django.core.wsgi import get_wsgi_application
+import os
+import sys
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dimawebapp.settings")
+sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
+
+
+#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'namae.settings')
+os.environ["DJANGO_SETTINGS_MODULE"] = "namae.settings"
 
 application = get_wsgi_application()

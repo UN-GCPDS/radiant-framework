@@ -1,10 +1,4 @@
-<div id="{{id}}" style="height: {{height}};"></div>
-
-
-
-
-
-<script id="{{id}}-script" >
+<script id="{{id}}-script" dima-size="{{x|length}}">
 
 trace1 = {
   meta: {columnNames: {
@@ -15,21 +9,21 @@ trace1 = {
     }},
   mode: 'markers',
   type: 'bar',
-  xsrc: 'yencardonaal:4:44fce7',
+  xsrc: 'yencardonaal:13:44fce7',
   x: {{x|safe}},
-  ysrc: 'yencardonaal:4:400d20',
+  ysrc: 'yencardonaal:13:400d20',
   y: {{y|safe}},
   marker: {line: {width: 0}},
   opacity: 1,
-  textsrc: 'yencardonaal:4:44fce7',
+  textsrc: 'yencardonaal:13:44fce7',
   text: {{x|safe}},
-  textfont: {size: 15},
+  textfont: {size: 12},
   hoverinfo: 'none',
   textangle: 'auto',
   cliponaxis: true,
   orientation: 'h',
   textposition: 'inside',
-  texttemplate: '',
+  texttemplate: '(%{x} grupos)',
   constraintext: 'inside',
   hovertemplate: ''
 };
@@ -50,18 +44,19 @@ layout = {
     showticklabels: false
   },
   yaxis: {
-    side: 'right',
+    side: 'left',
     type: 'category',
     range: [-0.5, 2.5],
-    anchor: 'free',
+    anchor: 'x',
     domain: [0, 1],
     showline: false,
     tickfont: {
       size: 12,
-      color: 'rgb(243, 245, 248)'
+      color: 'rgb(42, 63, 95)'
     },
     autorange: true,
-    tickprefix: '     '
+    tickprefix: '     ',
+    ticksuffix: '  '
   },
   bargap: 0.30000000000000004,
   margin: {
@@ -411,6 +406,7 @@ layout = {
   showlegend: false,
   bargroupgap: 0
 };
+
 
 Plotly.newPlot('{{id}}', {
   data: data,

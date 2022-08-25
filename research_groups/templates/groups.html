@@ -9,7 +9,9 @@
       <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       <div class="col-6 col-lg-7 col-sm-12">
         <div id="dima-facultades" class="plotly-card">
-          {% include 'bars.html' with id='facultades' x=faculties_count|safe  y=faculties|safe height='200px' %}
+
+          <div class='dima-plot' id='dima-plot--faculties'></div>
+
         </div>
       </div>
       <div class="col-56 col-lg-5 col-sm-12">
@@ -32,21 +34,36 @@
 </div>
 
 <div class='container-fluid dima-form'>
-
   <div class="container-lg">
-    <h1 class="display-5">Facultades</h1>
-    <p class="lead"></p>
-  </div>
-  <div class='container' id='faculty'></div>
+    <div class="row">
 
-  <div class="container-lg">
-    <h1 class="display-5">Departamentos</h1>
-    <p class="lead"></p>
-  </div>
-  <div class='container' id='departamentos'></div>
+      <!--<div class="col-5">-->
+      <div class="col-lg-6 col-sm-12">
+        <h1 class="display-8">Por facultades</h1>
+        <p class="lead"></p>
+        <select class="form-select" id='dima-select--faculty' aria-label="Default select example">
+         <option value="All">Todas las facultades</option>
+          {% for f in faculties %}
+            <option value="{{f}}">{{f}}</option>
+          {% endfor %}
+        </select>
+      </div>
 
+      <!--<div class="col-5 offset-2">-->
+      <div class="col-lg-6 col-sm-12">
+        <h1 class="display-8">Por departamentos</h1>
+        <p class="lead"></p>
+        <select class="form-select" id='dima-select--departament' aria-label="Default select example">
+          <option value="All">Todos los departamentos</option>
+          {% for d in departaments %}
+            <option value="{{d}}">{{d}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+    </div>
+  </div>
 </div>
-
 
 
 <div class="container-lg">
@@ -61,7 +78,7 @@
           al desempeño de ocupaciones, profesiones y disciplinas.
           </p>
           <div id="chart1" class="plotly-card">
-          {% include 'bars.html' with  id='ocde' x=ocde_count|safe  y=ocde|safe height='300px' %}
+          <div class='dima-plot' id='dima-plot--ocde'></div>
           </div>
       </div>
       <div class="col-6 col-lg-7 col-sm-12">
@@ -74,7 +91,7 @@
           trabajo interdisciplinar.
           </p>
           <div id="dima-agendas" class="plotly-card">
-          {% include 'bars.html' with  id='knowledge' x=knowledge_count|safe  y=knowledge|safe height='500px' %}
+          <div class='dima-plot' id='dima-plot--knowledge'></div>
           </div>
       </div>
       <div class="col-6 col-lg-5 col-sm-12">
@@ -86,72 +103,68 @@
           mayor a menor reconocimiento: <b>A1</b>, <b>A</b>, <b>B</b>, <b>C</b> y <b>D</b>
           </p>
           <div id="dima-categoria" class="plotly-card">
-          {% include 'pie.html' with  id='category' x=category_count|safe  y=category|safe height='400px' %}
+          <div class='dima-plot' id='dima-plot--categories'></div>
+
           </div>
       </div>
 
-
   </div>
 </div>
+
+
+<div class='container-fluid'>
+  <div class="container-lg">
+    <div class="row">
+
+
+      <div class="col-lg-12 col-sm-12">
+        <h1 class="display-5">Grupos de investigación</h1>
+        <p class="lead">
+          Se define grupo de investigación científica o tecnológica como el conjunto de personas que se reúnen para realizar investigación en una temática dada, formulan uno o varios problemas de su interés, trazan un plan estratégico de largo o mediano plazo para trabajar en él y producir unos resultados de conocimiento sobre el tema cuestión. Un grupo existe siempre y cuando demuestre producción de resultados tangibles y verificables, fruto de proyectos y otras actividades de investigación convenientemente expresadas en un plan de acción (proyectos) debidamente formalizado.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 
 <div class='container-fluid dima-form'>
   <div class="container-lg">
-    <h1 class="display-5">Grupos de investigación</h1>
-    <p class="lead">
-      Se define grupo de investigación científica o tecnológica como el conjunto de personas que se reúnen para realizar investigación en una temática dada, formulan uno o varios problemas de su interés, trazan un plan estratégico de largo o mediano plazo para trabajar en él y producir unos resultados de conocimiento sobre el tema cuestión. Un grupo existe siempre y cuando demuestre producción de resultados tangibles y verificables, fruto de proyectos y otras actividades de investigación convenientemente expresadas en un plan de acción (proyectos) debidamente formalizado.
-    </p>
-  </div>
-  <div class='container' id='groups'>
+    <div class="row">
 
 
 
-  <select class="form-select" aria-label="Default select example" onchange="location=this.value;">
-    <option selected>
-
-    {% if group %}
-    {{group.name}}
-    {% else %}
-    Seleccionar grupo...
-    {% endif %}
-
-    </option>
-    {% for id, name in groups %}
-    <option value="?group={{id}}">{{name}}</option>
-    {% endfor %}
-  </select>
-
-  </div>
-</div>
-
-
-<div class="container-lg">
-  <div class="row">
-      <div class="col-12 col-lg-12 col-sm-12">
-        <h1 class="dima-group">
-        {% if group %}
-          <h1 class='display-1' style='float: right; color: #636efa;'>{{group.category_prety}}</h1>
-          <h1 class='display-4'>{{group.name}}</h1>
-          <h1 class='h3'>{{group.faculty_prety}}: {{group.departament_prety}}</h1>
-          <h1 class='h5'>Director: {{group.leader.full_name}}</h1>
-        {% endif %}
-        </h1>
-
-
-        <div class="btn-group">
-          <a class="btn btn-outline-primary" id='test-button'>Productos</a>
-          <a class="btn btn-outline-primary">Convocatorias</a>
-          <a class="btn btn-outline-primary">Publicaciones</a>
-        </div>
-
-
-        <div id='placeholder'>
-
-        </div>
-
-
+      <div class="col-lg-3 col-sm-6">
+        <h1 class="display-8">Por categoría</h1>
+        <p class="lead"></p>
+        <select class="form-select" id='dima-select--category' aria-label="Default select example">
+          <option value="All">Todas las categorías</option>
+          {% for c in categories %}
+            <option value="{{c}}">{{c}}</option>
+          {% endfor %}
+        </select>
       </div>
+
+      <div class="col-lg-8 col-sm-5">
+        <h1 class="display-8">Grupos</h1>
+        <p class="lead"></p>
+
+        <select class="form-select" id='dima-select--group' aria-label="Default select example">
+          <option value="All">Grupo de investigación...</option>
+          {% for group in groups %}
+            <option value="{{group.id}}">{{group.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+    </div>
   </div>
 </div>
+
+<div class='dima-render' id='dima-render--group'></div>
+
 
 
 {% endblock %}
