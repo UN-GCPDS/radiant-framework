@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 import json
 # Create your views here.
 
-from research_groups.models import ResearchGroup
+from groups.models import ResearchGroup
 
 
 # ----------------------------------------------------------------------
@@ -57,7 +57,7 @@ class BarsTemplatePlot(TemplateView):
         self.template_name = "bars.html"
         if 'category' in filters:
             filters.pop('category')
-        x, y = zip(*[(ResearchGroup.objects.filter(knowledge=key, **filters).count(), label) for key, label in ResearchGroup._meta.get_field('knowledge').choices])
+        x, y = zip(*[(ResearchGroup.objects.filter(knowledge_area=key, **filters).count(), label) for key, label in ResearchGroup._meta.get_field('knowledge_area').choices])
         if sum(x) == 0:
             x, y = [], []
         else:

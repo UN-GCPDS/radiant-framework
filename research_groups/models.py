@@ -15,8 +15,8 @@ def to_choice(items: Iterable, prefix: str, n: int = 2) -> tuple:
 class Researcher(models.Model):
     """"""
     # ROLES = (
-            # ('pr', 'Professor'),
-            # ('st', 'Student'),
+    # ('pr', 'Professor'),
+    # ('st', 'Student'),
     # )
     first_name = models.CharField(max_length=2**6)
     last_name = models.CharField(max_length=2**6)
@@ -37,80 +37,28 @@ class Researcher(models.Model):
 ########################################################################
 class ResearchGroup(models.Model):
     """"""
-    SUB_OCDE = (
-
-        'bbb',
-    )
-
-    OCDE = (
-        'Ciencias naturales',
-        'Ingeniería y tecnología',
-        'Ciencias médicas y de la salud',
-        'Ciencias agrícolas',
-        'Ciencias sociales',
-        'Humanidades',
-
-    )
-
-    KNOWLEDGE = (
-
-        'Ambiente y biodiversidad',
-        'Arte y culturas',
-        'Biotecnología',
-        'Ciencia y tecnología de minerales y materiales',
-        'Ciencias agrarias y desarrollo rural',
-        'Construcción de ciudadanía e inclusión social',
-        'Desarrollo organizacional, económico e industrial',
-        'Energía',
-        'Estados, sistemas políticos y jurídicos',
-        'Hábitat, ciudad y territorio',
-        'Salud y vida',
-        'Tecnologías de la información y las comunicaciones (TIC)',
-
-    )
-
-    DEPARTAMENTS = (
-        'Departamento de administración',
-        'Departamento de ciencias humanas',
-        'Departamento de física y química',
-        'Departamento de informática y computación',
-        'Departamento de ingeniería civil',
-        'Departamento de ingeniería eléctrica, electrónica y computación',
-        'Departamento de ingeniería industrial',
-        'Departamento de ingeniería química',
-        'Departamento de matemáticas',
-        'Escuela de arquitectura y urbanismo',
-    )
-
-    FACULTIES = (
-        'Facultad de administración',
-        'Facultad de ciencias exactas y naturales',
-        'Facultad de ingeniería y arquitectura',
-    )
-
-    CATEGORIES = (
-        'A',
-        'A1',
-        'A2',
-        'B',
-        'C',
-        'No reconcido',
-    )
 
     name = models.CharField(max_length=2**6)
-    leader = models.OneToOneField(Researcher, on_delete=models.SET_NULL, null=True, blank=True, related_name='leader')
+    leader = models.OneToOneField(
+        Researcher, on_delete=models.SET_NULL, null=True, blank=True, related_name='leader')
     # leader = models.OneToOneField(Researcher, on_delete=models.SET_NULL, null=True, blank=True, related_name='leader', limit_choices_to=Q(role='pr'))
 
-    faculty = models.CharField(max_length=6, choices=to_choice(FACULTIES, prefix='fac_'))
-    departament = models.CharField(max_length=6, choices=to_choice(DEPARTAMENTS, prefix='dep_'))
+    faculty = models.CharField(
+        max_length=6, choices=to_choice(FACULTIES, prefix='fac_'))
+    departament = models.CharField(
+        max_length=6, choices=to_choice(DEPARTAMENTS, prefix='dep_'))
 
-    category = models.CharField(max_length=6, choices=to_choice(CATEGORIES, prefix='cat_'))
+    category = models.CharField(
+        max_length=6, choices=to_choice(CATEGORIES, prefix='cat_'))
 
-    sub_ocde = models.CharField(max_length=11, choices=to_choice(SUB_OCDE, prefix='sub_ocde_'))
-    ocde = models.CharField(max_length=7, choices=to_choice(OCDE, prefix='ocde_'))
-    knowledge = models.CharField(max_length=7, choices=to_choice(KNOWLEDGE, prefix='area_'))
+    # sub_ocde = models.CharField(max_length=11, choices=to_choice(SUB_OCDE, prefix='sub_ocde_'))
+    ocde = models.CharField(
+        max_length=7, choices=to_choice(OCDE, prefix='ocde_'))
+    knowledge = models.CharField(
+        max_length=7, choices=to_choice(KNOWLEDGE, prefix='area_'))
 
-    researchers = models.ManyToManyField(Researcher, related_name='researchers')
+    researchers = models.ManyToManyField(
+        Researcher, related_name='researchers')
 
     # ----------------------------------------------------------------------
     @property

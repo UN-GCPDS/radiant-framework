@@ -57,8 +57,8 @@ class GroupView(TemplateView):
         self.template_name = "group_view.html"
         context = self.get_context_data(**kwargs)
 
-        id = json.loads(request.GET['id'][0])
-        context['group'] = ResearchGroup.objects.get(id=id)
+        id = json.loads(request.GET['pk'])
+        context['group'] = ResearchGroup.objects.get(pk=id)
 
         return self.render_to_response(context)
 

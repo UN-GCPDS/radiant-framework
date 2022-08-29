@@ -15,6 +15,6 @@ sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
 
 
 #os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'namae.settings')
-os.environ["DJANGO_SETTINGS_MODULE"] = "namae.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "dimawebapp.settings"
 
 application = get_wsgi_application()

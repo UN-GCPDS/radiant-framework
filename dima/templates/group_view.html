@@ -1,3 +1,9 @@
+{% extends "base.html" %}
+
+
+{% block 'main' %}
+
+
 <div class="container-lg">
   <div class="row">
 
@@ -7,9 +13,7 @@
 
     <div class="col-9" style="margin-top: 42px;">
 
-        <a href='/group?pk={{group.id}}' style='text-decoration: none;'>
-          <p class='display-6 dima-group--name'>{{group.name}}</p>
-        </a>
+        <p class='display-6' style='color: #636efa;'>{{group.name}}</p>
         <p class='h4'><small class="text-muted">{{group.faculty_prety}} / {{group.departament_prety}}</small></p>
         {% if group.leader.full_name %}
           <p class='h5'>Director: {{group.leader.full_name}}</p>
@@ -17,8 +21,6 @@
         <p class='h5'>{{group.researchers.count}} investigadores</p>
 
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-          <button type="button" class="btn btn-outline-primary">Productos</button>
-          <button type="button" class="btn btn-outline-primary">Investigadores</button>
         </div>
 
     </div>
@@ -26,3 +28,9 @@
 
   </div>
 </div>
+
+
+
+
+
+{% endblock %}

@@ -1,10 +1,10 @@
 from research_groups.models import Researcher, ResearchGroup
-from django_plotly_dash.models import DashApp, StatelessApp
+# from django_plotly_dash.models import DashApp, StatelessApp
 from django.contrib import admin, auth
 
 # Hide apps from admin
-admin.site.unregister(DashApp)
-admin.site.unregister(StatelessApp)
+# admin.site.unregister(DashApp)
+# admin.site.unregister(StatelessApp)
 admin.site.unregister(auth.models.Group)
 
 
