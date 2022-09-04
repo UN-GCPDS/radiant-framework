@@ -1,13 +1,42 @@
+{% load static %}
+
 <div class="dima-footer">
   <div class="container-lg">
     <div class="row">
-        <div class="col-12 col-lg-12 col-sm-12">
 
+        <div class="col-4 col-lg-4 col-sm-12 col-md-12 col-xs-12">
 
-
+          <img style="width: 80%; opacity: 0.2;" src="{% static 'assets/dima_logo.svg' %}"></img>
+          <ul class='dima-footer--list_main'>
+            <!--<li>Presentación</li>-->
+            <li>Última actualización en 01/09/2022</li>
+            <li>Made with <i class="bi bi-heart-fill"></i> by DunderLab</li>
+          </ul>
         </div>
+
+        <div class="col-2 col-offset-4 col-lg-2 offset-lg-4 col-sm-12 offset-sm-0 col-md-12 offset-md-0  col-xs-12 offset-xs-0">
+          <h5>Acerca de</h5>
+          <ul class='dima-footer--list'>
+            <li><a href='/presentation'>Presentación</a></li>
+            <li><a href='/mision_y_vision'>Misión y visión</a></li>
+            <li><a href='/apoyo_proyectos'>Apoyo proyectos</a></li>
+            <li><a href='/equipo_de_trabajo'>Equipo de trabajo</a></li>
+          </ul>
+        </div>
+
+        <div class="col-2 col-lg-2 col-sm-12 col-md-12 col-xs-12">
+          <h5>Convocatorias</h5>
+          <ul class='dima-footer--list'>
+            <li><a href='http://investigacion.manizales.unal.edu.co/convocatorias-internas/' target='blank'>Convocatorias Internas</a></li>
+            <li><a href='http://investigacion.manizales.unal.edu.co/convocatorias-externas/' target='blank'>Convocatorias Externas</a></li>
+            <li><a href='http://investigacion.manizales.unal.edu.co/eventos-unal/' target='blank'>Eventos UNAL</a></li>
+          </ul>
+        </div>
+
+
+
     </div>
   </div>
-  <div class="lead" id='dima-footer-made' >Made with <i class="bi bi-heart-fill"></i> by DunderLab</div>
+  <!--<div class="lead" id='dima-footer-made' >Made with <i class="bi bi-heart-fill"></i> by DunderLab</div>-->
 </div>
 

@@ -63,6 +63,9 @@ INSTALLED_APPS = [
     'researchers.apps.ResearchersConfig',
     'groups.apps.GroupsConfig',
     'dima.apps.DimaConfig',
+    'projects.apps.ProjectsConfig',
+    'bulk_data.apps.BulkDataConfig',
+    'unal_plantilla_web.apps.UnalPlantillaWebConfig',
 ]
 
 MIDDLEWARE = [
@@ -98,13 +101,24 @@ WSGI_APPLICATION = "dimawebapp.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'mysite',
+            'USER': 'mysite',
+            'PASSWORD': 'electronica',
+            'HOST': '/tmp/mysql.sock',
+        }
+    }
 
 
 # Password validation
@@ -143,6 +157,8 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'resources')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -153,14 +169,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
-}
+# REST_FRAMEWORK = {
+# # Use Django's standard `django.contrib.auth` permissions,
+# # or allow read-only access for unauthenticated users.
+# 'DEFAULT_PERMISSION_CLASSES': [
+# 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+# ]
+# }

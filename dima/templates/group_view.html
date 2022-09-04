@@ -1,10 +1,22 @@
-{% extends "base.html" %}
+{% extends "base_unal.html" %}
 
+{% block 'head-title' %} - {{group.name}}{% endblock %}
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">Está en:<a href="/">Inicio</a></li>
+      <li class="breadcrumb-item"><a href="/groups">Grupos de investigación</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="#">{{group.name}}</a></li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
 
 {% block 'main' %}
 
-
-<div class="container-lg">
+<div class="container-lg" style="margin-bottom: 100vh;">
   <div class="row">
 
     <div class="col-3">
@@ -18,7 +30,7 @@
         {% if group.leader.full_name %}
           <p class='h5'>Director: {{group.leader.full_name}}</p>
         {% endif %}
-        <p class='h5'>{{group.researchers.count}} investigadores</p>
+        <!--<p class='h5'>{{group.researchers.count}} investigadores</p>-->
 
         <div class="btn-group" role="group" aria-label="Basic outlined example">
         </div>

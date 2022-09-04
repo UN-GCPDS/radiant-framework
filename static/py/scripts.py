@@ -5,14 +5,12 @@ import json
 FILTERS = {}
 
 
-# ----------------------------------------------------------------------
-@bind('#dima-select--group', 'change')
-def load_group_view(evt):
-    """"""
-    data = {
-        'id': evt.target.value,
-    }
-    ajax_render('dima-render--group', "/group", data)
+# # ----------------------------------------------------------------------
+# @bind('.dima-group--view', 'click')
+# def load_group_view(evt):
+# """"""
+# print('@' * 70)
+# print(evt.target)
 
 
 # ----------------------------------------------------------------------
@@ -25,6 +23,7 @@ def load_group_view(evt):
     else:
         FILTERS['category'] = evt.target.value
 
+    ajax_render('dima-render--group', "/group", FILTERS)
     update_all_options()
 
 
@@ -80,13 +79,15 @@ def update_all_options(req=None):
             option.style = {'display': 'block'}
 
     # Update groups options
-    for option in document.select_one('#dima-select--group').children[1:]:
-        if not option.attrs['value'] in req.json['groups']:
-            option.style = {'display': 'none'}
-        else:
-            option.style = {'display': 'block'}
+    # for option in document.select_one('#dima-select--group').children[1:]:
+        # if not option.attrs['value'] in req.json['groups']:
+            # option.style = {'display': 'none'}
+        # else:
+            # option.style = {'display': 'block'}
 
-    document.select_one('#dima-select--group').value = 'All'
+    ajax_render('dima-render--group', "/group", FILTERS)
+
+    # document.select_one('#dima-select--group').value = 'All'
 
 
 if __name__.startswith('__main__'):

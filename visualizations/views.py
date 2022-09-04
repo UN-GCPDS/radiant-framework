@@ -4,16 +4,19 @@ import json
 # Create your views here.
 
 from groups.models import ResearchGroup
+from django.http import HttpResponse
+from django.views import View
 
 
 # ----------------------------------------------------------------------
-def fix_filters(filters):
+def fix_filters(model, filters):
     """"""
     if not filters:
         return {}
 
     for k in filters:
-        filters[k] = [c for c in ResearchGroup._meta.get_field(k).choices if filters[k] in c][0][0]
+        k_plain = k.replace('~', '')
+        filters[k] = [c for c in model._meta.get_field(k_plain).choices if filters[k] in c][0][0]
 
     return filters
 
@@ -34,7 +37,7 @@ class BarsTemplatePlot(TemplateView):
         else:
             plot = data['id'].split('--')[-1]
 
-        context.update(getattr(self, f'render_{plot}')(fix_filters(data['filters'])))
+        context.update(getattr(self, f'render_{plot}')(fix_filters(ResearchGroup, data['filters'])))
         return self.render_to_response(context)
 
     # ----------------------------------------------------------------------
@@ -90,3 +93,25 @@ class BarsTemplatePlot(TemplateView):
 
         return locals()
 
+
+########################################################################
+class GenerateFilteredOptionsView(View):
+    """"""
+
+    # ----------------------------------------------------------------------
+    def post(self, request, *args, **kwargs):
+        """"""
+        data = {}
+        filters = json.loads(request.POST['filters'])
+        filters = fix_filters(ResearchGroup, filters)
+
+        data['groups'] = [str(g[0]) for g in ResearchGroup.objects.filter(**{k: filters[k]
+                                                                             for k in ['faculty', 'departament', 'category'] if k in
+                                                                             filters}).values_list('pk')]
+
+        departaments = set([d[0] for d in ResearchGroup.objects.filter(**{k: filters[k]
+                                                                          for k in ['faculty'] if k in
+                                                                          filters}).values_list('departament')])
+        data['departaments'] = [dict(ResearchGroup._meta.get_field('departament').choices)[d] for d in departaments]
+
+        return HttpResponse(json.dumps(data), content_type='text/json')

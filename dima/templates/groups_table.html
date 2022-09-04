@@ -1,18 +1,20 @@
-<table class="table">
+<table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">Nombre</th>
       <th scope="col">Categoría</th>
-      <th scope="col">Investigadores</th>
+      <th scope="col">Antigüedad</th>
     </tr>
   </thead>
   <tbody>
 
     {% for group in groups %}
     <tr>
-      <td>{{group.name}}</td>
+      <td class='dima-group--view' data-pk='{{group.pk}}'><a class="btn btn-link" href="/group?pk={{group.pk}}" role="button">{{group.name}}</a></td>
+
       <td>{{group.category_prety}}</td>
-      <td>{{group.researchers.count}}</td>
+      <td>{{group.founded|timesince}}</td>
+
     </tr>
     {% endfor %}
 

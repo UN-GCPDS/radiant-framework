@@ -1,24 +1,29 @@
-{% extends "base.html" %}
+{% extends "base_unal.html" %}
+{% load static %}
 
 
 {% block 'main' %}
 
 <div class="container-lg">
     <div class="row">
-      <h1 class="display-6">Dima</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <div class="col-6 col-lg-7 col-sm-12">
+
+      <div class="col-12" style="margin-bottom: 15px;">
+        <p>
+          La Dirección de Investigaciones de Manizales DIMA tiene como objeto principal orientar, promover y financiar a través de los recursos que se le asignen, las actividades de investigación en la Sede.
+        </p>
+      </div>
+
+      <div class="col-lg-5 col-md-12 col-sm-12">
         <div id="dima-facultades" class="plotly-card">
-
           <div class='dima-plot' id='dima-plot--faculties'></div>
-
         </div>
       </div>
-      <div class="col-56 col-lg-5 col-sm-12">
+
+      <div class="col-lg-7 col-md-12 col-sm-12">
         <div id='dima-counters'>
 
               {% for label, value in cards %}
-              <div class="card" style="width: 10rem;">
+              <div class="card" style="width: 15rem; margin: 5px 5px;">
                 <div class="card-body">
                   <h1 class="card-title">{{value}}</h1>
                   <p class="card-text">{{label}}</p>
@@ -38,9 +43,9 @@
     <div class="row">
 
       <!--<div class="col-5">-->
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
         <h1 class="display-8">Por facultades</h1>
-        <p class="lead"></p>
+        <p></p>
         <select class="form-select" id='dima-select--faculty' aria-label="Default select example">
          <option value="All">Todas las facultades</option>
           {% for f in faculties %}
@@ -50,9 +55,9 @@
       </div>
 
       <!--<div class="col-5 offset-2">-->
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
         <h1 class="display-8">Por departamentos</h1>
-        <p class="lead"></p>
+        <p></p>
         <select class="form-select" id='dima-select--departament' aria-label="Default select example">
           <option value="All">Todos los departamentos</option>
           {% for d in departaments %}
@@ -68,66 +73,66 @@
 
 <div class="container-lg">
   <div class="row">
-      <div class="col-12 col-lg-12 col-sm-12">
+
+      <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
           <h1 class="display-6">Por área de conocimiento de la OCDE</h1>
-          <p class="lead">
-          Se trata de una agrupación que se hace de los <b>programas académicos</b>,
-          teniendo en cuenta cierta afinidad en los contenidos, en los <b>campos
-          específicos del conocimiento</b>, en los campos de acción de la educación
-          superior cuyos propósitos de formación conduzcan a la <b>investigación</b> o
+          <p>
+          Se trata de una agrupación que se hace de los programas académicos,
+          teniendo en cuenta cierta afinidad en los contenidos, en los campos
+          específicos del conocimiento, en los campos de acción de la educación
+          superior cuyos propósitos de formación conduzcan a la investigación o
           al desempeño de ocupaciones, profesiones y disciplinas.
           </p>
           <div id="chart1" class="plotly-card">
-          <div class='dima-plot' id='dima-plot--ocde'></div>
+            <div class='dima-plot' id='dima-plot--ocde'></div>
           </div>
       </div>
-      <div class="col-6 col-lg-7 col-sm-12">
+
+      <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
           <h1 class="display-6">Por agendas de conocimiento</h1>
-          <p class="lead">
-          Las <b>agendas de conocimiento</b>, elaboradas entre 2010 y 2012,
+          <p>
+          Las agendas de conocimiento, elaboradas entre 2010 y 2012,
           ofrecen un diagnóstico actual de las capacidades de investigación de
-          la <b>Universidad Nacional de Colombia</b> a nivel nacional e
+          la Universidad Nacional de Colombia a nivel nacional e
           internacional. Se presentan organizadas en áreas que promueven el
           trabajo interdisciplinar.
           </p>
           <div id="dima-agendas" class="plotly-card">
-          <div class='dima-plot' id='dima-plot--knowledge'></div>
+            <div class='dima-plot' id='dima-plot--knowledge'></div>
           </div>
       </div>
-      <div class="col-6 col-lg-5 col-sm-12">
-          <h1 class="display-6">Por categorías de grupos de investigación</h1>
-          <p class="lead">
+
+
+      <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+        <h1 class="display-6">Grupos de investigación</h1>
+        <p>
+          Se define grupo de investigación científica o tecnológica como el
+          conjunto de personas que se reúnen para realizar investigación en una
+          temática dada, formulan uno o varios problemas de su interés, trazan
+          un plan estratégico de largo o mediano plazo para trabajar en él y
+          producir unos resultados de conocimiento sobre el tema cuestión. Un
+          grupo existe siempre y cuando demuestre producción de resultados
+          tangibles y verificables, fruto de proyectos y otras actividades de
+          investigación convenientemente expresadas en un plan de acción
+          (proyectos) debidamente formalizado.
+        </p>
+        <p>
           Los grupos se clasificarán de acuerdo con las siguientes categorías,
-          una vez se haya cumplido con los requisitos para ser <b>Grupo de
-          investigación</b>, <b>Desarrollo Tecnológico</b> o de <b>Innovación Reconocido</b>. De
+          una vez se haya cumplido con los requisitos para ser Grupo de
+          investigación, Desarrollo Tecnológico o de Innovación Reconocido. De
           mayor a menor reconocimiento: <b>A1</b>, <b>A</b>, <b>B</b>, <b>C</b> y <b>D</b>
-          </p>
-          <div id="dima-categoria" class="plotly-card">
-          <div class='dima-plot' id='dima-plot--categories'></div>
-
-          </div>
-      </div>
-
-  </div>
-</div>
-
-
-<div class='container-fluid'>
-  <div class="container-lg">
-    <div class="row">
-
-
-      <div class="col-lg-12 col-sm-12">
-        <h1 class="display-5">Grupos de investigación</h1>
-        <p class="lead">
-          Se define grupo de investigación científica o tecnológica como el conjunto de personas que se reúnen para realizar investigación en una temática dada, formulan uno o varios problemas de su interés, trazan un plan estratégico de largo o mediano plazo para trabajar en él y producir unos resultados de conocimiento sobre el tema cuestión. Un grupo existe siempre y cuando demuestre producción de resultados tangibles y verificables, fruto de proyectos y otras actividades de investigación convenientemente expresadas en un plan de acción (proyectos) debidamente formalizado.
         </p>
       </div>
 
-    </div>
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+        <div id="dima-categoria" class="plotly-card">
+          <div class='dima-plot' id='dima-plot--categories' dima-size='6'></div>
+        </div>
+      </div>
+
+
   </div>
 </div>
-
 
 
 <div class='container-fluid dima-form'>
@@ -138,7 +143,7 @@
 
       <div class="col-lg-3 col-sm-6">
         <h1 class="display-8">Por categoría</h1>
-        <p class="lead"></p>
+        <p></p>
         <select class="form-select" id='dima-select--category' aria-label="Default select example">
           <option value="All">Todas las categorías</option>
           {% for c in categories %}
@@ -147,23 +152,36 @@
         </select>
       </div>
 
-      <div class="col-lg-8 col-sm-5">
-        <h1 class="display-8">Grupos</h1>
-        <p class="lead"></p>
+      <!--<div class="col-lg-8 col-sm-5">-->
+        <!--<h1 class="display-8">Grupos</h1>-->
+        <!--<p></p>-->
 
-        <select class="form-select" id='dima-select--group' aria-label="Default select example">
-          <option value="All">Grupo de investigación...</option>
-          {% for group in groups %}
-            <option value="{{group.id}}">{{group.name}}</option>
-          {% endfor %}
-        </select>
+        <!--<select class="form-select" id='dima-select--group' aria-label="Default select example">-->
+          <!--<option value="All">Grupo de investigación...</option>-->
+          <!--{% for group in groups %}-->
+            <!--<option value="{{group.pk}}">{{group.name}}</option>-->
+          <!--{% endfor %}-->
+        <!--</select>-->
+      <!--</div>-->
+
+    </div>
+  </div>
+</div>
+
+
+<div class='container-fluid'>
+  <div class="container-lg">
+    <div class="row">
+
+
+      <div class="col-lg-12 col-sm-12">
+        <div class='dima-render' id='dima-render--group'>{% include 'groups_table.html' %}</div>
       </div>
 
     </div>
   </div>
 </div>
 
-<div class='dima-render' id='dima-render--group'></div>
 
 
 

@@ -24,6 +24,7 @@ urlpatterns = [
     path("researcher/", include('researchers.urls')),
     path("group/", include('researchers.urls')),
     path("", include('visualizations.urls')),
+    path("", include('unal_plantilla_web.urls')),
 
     # path("", include('research_groups.urls')),
     # path('django_plotly_dash/', include('django_plotly_dash.urls')),

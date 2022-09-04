@@ -1,0 +1,502 @@
+#pestania-accesibilidad {
+    float: right;
+    cursor: pointer;
+    background-color: rgba(41, 41, 41, 0.8);
+    color: #fff;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 40px;
+    font-weight: bold;
+    padding: 0 10px;
+    position: relative
+}
+
+#pestania-accesibilidad::before {
+    position: absolute;
+    left: -35px;
+    top: 0;
+    content: '';
+    background-image: url(../images/access-icon.jpg);
+    width: 35px;
+    height: 35px
+}
+
+body {
+    font-size: 14px
+}
+
+body.tamanio-letra-110 {
+    font-size: calc(15px + 1.5px)
+}
+
+body.tamanio-letra-110 p,
+body.tamanio-letra-110 li,
+body.tamanio-letra-110 b,
+body.tamanio-letra-110 ul,
+body.tamanio-letra-110 a,
+body.tamanio-letra-110 ol,
+body.tamanio-letra-110 h3,
+body.tamanio-letra-110 h4
+{
+    font-size: calc(15px + 1.5px)
+}
+
+body.tamanio-letra-110 .tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    width: 64%
+}
+
+body.tamanio-letra-110 h1 {
+    font-size: 37.5px
+}
+body.tamanio-letra-110 h2 {
+    font-size: 31.5px
+}
+
+body.tamanio-letra-110 .tx-unal-accesibilidad {
+    top: 148px
+}
+
+body.tamanio-letra-110 .site-url a {
+    font-size: 31.5px
+}
+
+
+
+body.tamanio-letra-120 {
+    font-size: calc(15px + 3px)
+}
+
+body.tamanio-letra-120 p,
+body.tamanio-letra-120 li,
+body.tamanio-letra-120 b,
+body.tamanio-letra-120 ul,
+body.tamanio-letra-120 a,
+body.tamanio-letra-120 ol,
+body.tamanio-letra-120 h3,
+body.tamanio-letra-120 h4 {
+    font-size: calc(15px + 3px)
+}
+
+body.tamanio-letra-120 h1 {
+    font-size: calc(1.7em + 3px)
+}
+
+body.tamanio-letra-120 h2 {
+    font-size: calc(1.4em + 3px)
+}
+
+body.tamanio-letra-120 .tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    width: 64%
+}
+
+body.tamanio-letra-120 .site-url a {
+    font-size: calc(30px + 3px)
+}
+
+body.tamanio-letra-120 .tx-unal-accesibilidad {
+    top: 154px
+}
+
+body.tamanio-letra-120 main.accesibility-on {
+    padding-top: 230px
+}
+
+body.tamanio-letra-130 {
+    font-size: calc(15px + 4.5px)
+}
+
+body.tamanio-letra-130 p,
+body.tamanio-letra-130 li,
+body.tamanio-letra-130 b,
+body.tamanio-letra-130 ul,
+body.tamanio-letra-130 a,
+body.tamanio-letra-130 ol,
+body.tamanio-letra-130 h3,
+body.tamanio-letra-130 h4 {
+    font-size: calc(15px + 4.5px)
+}
+
+body.tamanio-letra-130 h1 {
+    font-size: calc(1.7em + 4.5px)
+}
+
+body.tamanio-letra-130 h2 {
+    font-size: calc(1.4em + 4.5px)
+}
+
+body.tamanio-letra-130 .site-url a {
+    font-size: calc(30px + 4.5px)
+}
+
+body.tamanio-letra-130 .tx-unal-accesibilidad {
+    top: 160px
+}
+
+body.tamanio-letra-130 .tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    width: 62%
+}
+
+body.tamanio-letra-130 main.accesibility-on {
+    padding-top: 270px
+}
+
+
+body.tamanio-letra-140 {
+    font-size: calc(15px + 6px)
+}
+
+body.tamanio-letra-140 p,
+body.tamanio-letra-140 li,
+body.tamanio-letra-140 b,
+body.tamanio-letra-140 ul,
+body.tamanio-letra-140 a,
+body.tamanio-letra-140 ol,
+body.tamanio-letra-140 h3,
+body.tamanio-letra-140 h4 {
+    font-size: calc(15px + 6px)
+}
+
+body.tamanio-letra-140 h1 {
+    font-size: calc(1.7em + 6px)
+}
+
+body.tamanio-letra-140 h2 {
+    font-size: calc(1.4em + 6px)
+}
+
+body.tamanio-letra-140 .site-url a {
+    font-size: calc(30px + 6px)
+}
+
+body.tamanio-letra-140 .tx-unal-accesibilidad {
+    top: 169px
+}
+
+body.tamanio-letra-140 .tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    width: 60%
+}
+
+body.tamanio-letra-140 main.accesibility-on {
+    padding-top: 280px
+}
+
+
+body.tamanio-letra-140 main.detail .rightContent h1 {
+    font-size: calc(1.7em + 6px)
+}
+
+body.tamanio-letra-140 main.detail .rightContent h2 {
+    font-size: calc(1.4em + 6px)
+}
+
+body.tamanio-letra-150 {
+    font-size: calc(15px + 7.5px)
+}
+
+body.tamanio-letra-150 p,
+body.tamanio-letra-150 li,
+body.tamanio-letra-150 b,
+body.tamanio-letra-150 ul,
+body.tamanio-letra-150 a,
+body.tamanio-letra-150 ol,
+body.tamanio-letra-150 h3,
+body.tamanio-letra-150 h4 {
+    font-size:  calc(15px + 7.5px)
+}
+
+body.tamanio-letra-150 h1 {
+    font-size: calc(1.7em + 7.5px)
+}
+
+body.tamanio-letra-150 h2 {
+    font-size: calc(1.4em + 7.5px)
+}
+
+body.tamanio-letra-150 .site-url a {
+    font-size: calc(30px + 7.5px)
+}
+
+body.tamanio-letra-150 .tx-unal-accesibilidad {
+    top: 175px
+}
+
+body.tamanio-letra-150 .tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    width: 58%
+}
+
+body.tamanio-letra-150 main.accesibility-on {
+    padding-top: 300px
+}
+
+
+body.tamanio-letra-160 {
+    font-size: calc(15px + 9px)
+}
+
+body.tamanio-letra-160 p,
+body.tamanio-letra-160 li,
+body.tamanio-letra-160 b,
+body.tamanio-letra-160 ul,
+body.tamanio-letra-160 a,
+body.tamanio-letra-160 ol,
+body.tamanio-letra-160 h3,
+body.tamanio-letra-160 h4 {
+    font-size: calc(15px + 9px)
+}
+
+body.tamanio-letra-160 h1 {
+    font-size: calc(1.7em + 9px)
+}
+
+body.tamanio-letra-160 h2 {
+    font-size: calc(1.4em + 9px)
+}
+
+body.tamanio-letra-160 .tx-unal-accesibilidad {
+    top: 181px
+}
+
+body.tamanio-letra-160 .tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    width: 55%
+}
+
+body.tamanio-letra-160 .site-url a {
+    font-size: calc(30px + 9px)
+}
+
+body.tamanio-letra-160 main.accesibility-on {
+    padding-top: 320px
+}
+
+
+body.tamanio-letra-170 {
+    font-size: calc(15px + 10.5px)
+}
+
+body.tamanio-letra-170 p,
+body.tamanio-letra-170 li,
+body.tamanio-letra-170 b,
+body.tamanio-letra-170 ul,
+body.tamanio-letra-170 a,
+body.tamanio-letra-170 ol,
+body.tamanio-letra-170 h3,
+body.tamanio-letra-170 h4 {
+    font-size: calc(15px + 10.5px)
+}
+
+body.tamanio-letra-170 h1 {
+    font-size: calc(1.7em + 10.5px)
+}
+
+body.tamanio-letra-170 h2 {
+    font-size: calc(1.4em + 10.5px)
+}
+
+body.tamanio-letra-170 .site-url a {
+    font-size: calc(30px + 10.5px)
+}
+
+body.tamanio-letra-170 .tx-unal-accesibilidad {
+    top: 187px
+}
+
+body.tamanio-letra-170 .tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    width: 54%
+}
+
+body.tamanio-letra-170 main.accesibility-on {
+    padding-top: 330px
+}
+
+
+body.tamanio-letra-180 {
+    font-size: calc(15px + 12px)
+}
+
+body.tamanio-letra-180 p,
+body.tamanio-letra-180 li,
+body.tamanio-letra-180 b,
+body.tamanio-letra-180 ul,
+body.tamanio-letra-180 a,
+body.tamanio-letra-180 ol,
+body.tamanio-letra-180 h3,
+body.tamanio-letra-180 h4 {
+    font-size: calc(15px +  12px)
+}
+
+body.tamanio-letra-180 h1 {
+    font-size: calc(1.7em +  12px)
+}
+
+body.tamanio-letra-180 h2 {
+    font-size: calc(1.4em +  12px)
+}
+
+body.tamanio-letra-180 .site-url a {
+    font-size: calc(30px +  12px)
+}
+
+body.tamanio-letra-180 .tx-unal-accesibilidad {
+    top: 196px
+}
+
+body.tamanio-letra-180 .tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    width: 50%
+}
+
+body.tamanio-letra-180 main.accesibility-on {
+    padding-top: 340px
+}
+
+
+body.tamanio-letra-190 {
+    font-size: calc(15px + 13.5px)
+}
+
+body.tamanio-letra-190 p,
+body.tamanio-letra-190 li,
+body.tamanio-letra-190 b,
+body.tamanio-letra-190 ul,
+body.tamanio-letra-190 a,
+body.tamanio-letra-190 ol,
+body.tamanio-letra-190 h3,
+body.tamanio-letra-190 h4 {
+    font-size: calc(15px + 13.5px)
+}
+
+body.tamanio-letra-190 h1 {
+    font-size: calc(1.7em + 13.5px)
+}
+
+body.tamanio-letra-190 h2 {
+    font-size: calc(1.4em + 13.5px)
+}
+
+body.tamanio-letra-190 .site-url a {
+    font-size: calc(30px + 13.5px)
+}
+
+body.tamanio-letra-190 .tx-unal-accesibilidad {
+    top: 202px
+}
+
+body.tamanio-letra-190 .tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    width: 45%
+}
+
+body.tamanio-letra-190 main.accesibility-on {
+    padding-top: 350px
+}
+
+body.tamanio-letra-200 {
+    font-size: calc(15px + 15px)
+}
+
+body.tamanio-letra-200 p,
+body.tamanio-letra-200 li,
+body.tamanio-letra-200 b,
+body.tamanio-letra-200 ul,
+body.tamanio-letra-200 a,
+body.tamanio-letra-200 ol,
+body.tamanio-letra-200 h3,
+body.tamanio-letra-200 h4 {
+    font-size: calc(15px +  15px)
+}
+
+body.tamanio-letra-200 h1 {
+    font-size: calc(1.7em +  15px)
+}
+
+body.tamanio-letra-200 h2 {
+    font-size: calc(1.4em + 15px)
+}
+
+body.tamanio-letra-200 .site-url a {
+    font-size: calc(30px +  15px)
+}
+
+body.tamanio-letra-200 .tx-unal-accesibilidad {
+    top: 208px
+}
+
+body.tamanio-letra-200 .tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    width: 40%
+}
+
+body.tamanio-letra-200 main.accesibility-on {
+    padding-top: 350px
+}
+
+
+main.accesibility-on {
+    padding-top: 200px
+}
+
+.tx-unal-accesibilidad {
+    
+    z-index: 2;
+    top: 103px;
+    width: 100%;
+    left: 0;
+    background-color: transparent;
+}
+/*ajuste para el desplegable*/
+main.home {
+    margin-top: -35px;
+}
+
+.tx-unal-accesibilidad .panel-content {
+    padding: 1em;
+    border-bottom: 3px solid #292929;
+    float: left;
+    width: 100%;
+    padding: 3em 4em;
+    background-color: #fff
+}
+
+.tx-unal-accesibilidad .panel-content .boton-panel {
+    padding: 10px;
+    background-color: #292929;
+    border: none;
+    color: #fff;
+    margin-right: 5px;
+    font-weight: bold
+}
+
+.tx-unal-accesibilidad .panel-content .boton-panel:hover,
+.tx-unal-accesibilidad .panel-content .boton-panel:focus {
+    background-color: #0763c8
+}
+
+.tx-unal-accesibilidad .panel-content .border {
+    border-right: #292929 solid 1px
+}
+
+.tx-unal-accesibilidad .panel-content h4 {
+    color: #292929;
+    font-weight: normal;
+    margin-bottom: 10px
+}
+
+.tx-unal-accesibilidad .panel-content input.letras-porcentaje {
+    height: 35px;
+    line-height: 35px;
+    border: none;
+    background-color: rgba(41, 41, 41, 0.2);
+    font-weight: bold;
+    padding: 0px 10px;
+    width: auto;
+    text-align: center
+}
+
+.contraste-1 {
+    background-color: red
+}
+
+.contraste-2 {
+    background-color: green
+}
+
+.contraste-3 {
+    background-color: blue
+}

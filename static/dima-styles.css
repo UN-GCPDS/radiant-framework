@@ -1,10 +1,5 @@
 
 
-
-.dima-main {
-display: inline-flex;
-}
-
 .dima-sidebar {
     background-color: red;
     width: 20vw;
@@ -18,6 +13,12 @@ display: inline-flex;
 
 .display-8 {
     font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.display-10 {
+    font-size: 1.5rem;
     font-weight: 300;
     line-height: 1.2;
 }
@@ -46,6 +47,8 @@ display: inline-flex;
     background-color: #f8f9fa;
     margin-top: 30px;
     margin-bottom: 30px;
+    width: calc(100% + 30px);
+    margin-left: -15px;
 
 }
 
@@ -53,4 +56,38 @@ display: inline-flex;
 .dima-plot {
     margin-bottom: 30px;
 
+}
+
+
+
+main.detalle {
+    background-color: white;
+    padding: 15px;
+    margin-top: 15px !important;
+    border-radius: 8px;
+    box-shadow: 0 0 6px #555;
+}
+
+main .breadcrumb-class {
+    margin-bottom: 30px !important;
+}
+
+main {
+    font-family: 'Ancizar Sans Light' !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Ancizar Sans Light", "MS Sans", "New York", Sans !important;
+    color: #14a8df!important;
+}
+
+
+.dima-main {
+    font-size: 150%;
+    line-height: 120%;
+}
+
+
+.dima-logo {
+    padding: 5px 15px;
 }

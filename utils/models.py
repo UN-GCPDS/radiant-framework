@@ -6,7 +6,11 @@ class Choices:
     """"""
 
     SUB_OCDE = (
-        'SUB_OCDE',
+        'Economía y negocios',
+        'Ingeniería civil',
+        'Ingeniería química',
+        'Ingenierías eléctrica, electrónica e informática',
+        'Otras ingenierías y tecnologías',
     )
 
     OCDE = (
@@ -30,7 +34,13 @@ class Choices:
         'Estados, sistemas políticos y jurídicos',
         'Hábitat, ciudad y territorio',
         'Salud y vida',
-        'Tecnologías de la información y las comunicaciones (TIC)',
+        'Tecnologías de la información y las comunicaciones',
+
+        'Desarrollo organizacional económico e industrial',
+        'Energía',
+        'Hábitat, ciudad y territorio',
+        'Tecnologías de la información y las comunicaciones'
+
     )
 
     DEPARTAMENT = (
@@ -68,6 +78,21 @@ class Choices:
         'B',
         'C',
         'No reconcido',
+    )
+
+    CALL_TYPE = (
+        'Minciencias',
+        'Regalías',
+        'Interna',
+        'Otra',
+    )
+
+    PROJECT_STATE = (
+        'Propuesto',
+        'No aprobado',
+        'Activo',
+        'Finalizado',
+        'Sin finalizar',
     )
 
     # ----------------------------------------------------------------------

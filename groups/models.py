@@ -5,8 +5,10 @@ from utils.models import Choices
 ########################################################################
 class ResearchGroup(models.Model):
     """"""
-    cod_minciencias = models.CharField('Minciencias code', primary_key=True, max_length=2**5)
-    cod_hermes = models.CharField('Hermes code', max_length=2**5)
+    leader = models.ForeignKey('researchers.Professor', on_delete=models.CASCADE, null=True, blank=True)
+
+    minciencias_code = models.CharField('Minciencias code', primary_key=True, max_length=2**5)
+    hermes_code = models.CharField('Hermes code', max_length=2**5)
 
     name = models.CharField('Name', max_length=2**6)
     founded = models.DateField('Founded', default='django.utils.timezone.now')
@@ -23,3 +25,19 @@ class ResearchGroup(models.Model):
 
     class Meta:
         verbose_name = "Research group"
+
+    # # ----------------------------------------------------------------------
+    # @property
+    # def category_prety(self):
+        # """"""
+        # return dict(self._meta.get_field('category').choices)[getattr(self, 'category')]
+
+    # ----------------------------------------------------------------------
+    def __getattr__(self, attr):
+        """"""
+        if attr.endswith('_prety'):
+            field = attr.replace('_prety', '')
+            if field in [field.name for field in self._meta.fields]:
+                return dict(self._meta.get_field(field).choices)[getattr(self, field)]
+
+        return super().__getattr__(attr)

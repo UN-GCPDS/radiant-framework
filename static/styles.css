@@ -21,8 +21,9 @@ plot-container {
 
 
 #dima-counters{
-display: flex;
-margin: 15px 0;
+    display: flex;
+    margin: 15px 0;
+    flex-direction: row-reverse;
 }
 
 
@@ -47,19 +48,59 @@ height: 132px;
 
 .dima-footer {
     margin-top: 30px;
-    height: 300px;
-    background-color: #333;
-        position: relative;
-            width: 100vw;
+    background-color: #f8f9fa;
+    position: relative;
+    width: 100vw;
+    padding: 70px 0;
 }
 
 
 #dima-footer-made{
-    color: white;
+    color: #495057;
     font-size: 90%;
     text-align: center;
-    position: absolute;
     bottom: 30px;
     width: 100%;
+    padding: 30px 0;
 }
+
+
+.dima-footer--list_main,
+.dima-footer--list {
+    list-style: none;
+    padding-left: 0;
+    color: #495057;
+}
+
+.dima-footer--list_main li,
+.dima-footer--list li{
+    color: #495057;
+}
+
+.dima-footer--list a {
+    text-decoration: none;
+    color: #495057;
+}
+
+
+.dima-footer--list_main {
+    font-size: 80%;
+    margin-top: 10px;
+}
+
+.dima-footer--list_main li{
+    padding: 5px 0
+}
+
+
+table.table {
+font-size: 90%;
+}
+
+table.table a {
+    font-size: 90% !important;
+    text-decoration: none !important;
+}
+
+
 
