@@ -1,9 +1,12 @@
-a {
-text-decoration: none;
+a,
+.site-url a,
+.btn-group a:hover {
+    text-decoration: none;
 }
 
-
-
+.dropdown-toggle::after {
+    color: #94b43b;
+}
 
 
 
