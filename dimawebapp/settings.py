@@ -177,23 +177,21 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 APPEND_SLASH = True
 
 CSRF_COOKIE_HTTPONLY = True
 CSRF_USE_SESSIONS = True
-
 CSRF_COOKIE_SAMESITE = 'Strict'
+
 SESSION_COOKIE_SAMESITE = 'Strict'
-
-SECURE_CONTENT_TYPE_NOSNIFF = True
-
-mimetypes.add_type("text/css", ".css", True)
-mimetypes.add_type("text/html", ".html", True)
-
+# mimetypes.add_type("text/css", ".css", True)
+# mimetypes.add_type("text/html", ".html", True)
 
 STYLE_HASHES = [
-
     'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=',
     'sha256-aiTj2pLXNZHW9Z9KTiqS/nAlzlmLv82TyKGz+I/RMeE=',
     'sha256-iH23oQFQFzAwzg6myWBu40yKvLxWiaNJtPaJUQmn1R8=',
@@ -202,22 +200,19 @@ STYLE_HASHES = [
     'sha256-6hLz0852u+x0xB22EdtSAOB0auGKeD1w7gJUvgIJ4I0=',
     'sha256-cUFuwp4e078DeooEUfiR1pq5f2G7IrZQoHa/JYi5B+4=',
     'sha256-vCpS8VyHtSqXbN/JkDhke+jauUq+p7lBAVCL+C75wZo='
-    # '',
 ]
 
 SRC_HASHES = [
-
     'sha256-qdaIOdxVXcIztjBR66IohY2PwX8bhu2A4QaVkQmqlHo=',
     'sha256-PX4TD8hriRso3HL8sYY68HAq+dAa2fOjejIlZcsCyEM=',
     'sha256-jqZuiIXV/j//M8wzFf3TcM9ILcc1us445Jk/TgGEHPA=',
     'sha256-YjTxNZcoFhMDTI70uRNH1V6gP6qpJNGnAlWVb7gVcHM=',
     'sha256-8maZJNlpOzTu6EL0u4JmdqQTIAdNJ6ySEtH2WAbiWb8=',
-
 ]
 
 
-CSP_DEFAULT_SRC = ["'self'"]
+# CSP_DEFAULT_SRC = ["'self'"]
 CSP_IMG_SRC = ["'self'", "https:", "http:", "data:"]
 CSP_STYLE_SRC = ["'self'", "https:", "http:", "'unsafe-hashes'"] + [f"'{hash_}'" for hash_ in STYLE_HASHES]
-CSP_SCRIPT_SRC = ["'self'", "https:", "http:", "'unsafe-hashes'", "'unsafe-eval'", 'https://*.google.com/', 'http://*.google.com/'] + [f"'{hash_}'" for hash_ in SRC_HASHES]
-CSP_INCLUDE_NONCE_IN = ['script-src']
+CSP_SCRIPT_SRC = ["'self'", "https:", "http:", "'unsafe-eval'", 'https://*.google.com/', 'http://*.google.com/'] + [f"'{hash_}'" for hash_ in SRC_HASHES]
+CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']

@@ -6,5 +6,9 @@ wget -c https://github.com/UN-Dima/dimawebapp/archive/refs/heads/main.zip
 unzip main.zip
 mv dimawebapp-main/ dimawebapp/
 
+cd dimawebapp
+python manage.py collectstatic
+cd ..
+
 sudo chown -R `whoami` /www/
 sudo service apache24 restart
