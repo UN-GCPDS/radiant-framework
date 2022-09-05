@@ -1,7 +1,6 @@
 {% extends "base_unal.html" %}
 {% load static %}
 
-
 {% block 'main' %}
 
 <div class="container-lg">
@@ -14,9 +13,7 @@
       </div>
 
       <div class="col-lg-5 col-md-12 col-sm-12">
-        <div id="dima-facultades" class="plotly-card">
-          <div class='dima-plot' id='dima-plot--faculties'></div>
-        </div>
+        <div class='dima-plot' id='dima-plot--faculties'></div>
       </div>
 
       <div class="col-lg-7 col-md-12 col-sm-12">
@@ -31,8 +28,6 @@
               </div>
               {% endfor %}
 
-
-
         </div>
       </div>
     </div>
@@ -42,7 +37,6 @@
   <div class="container-lg">
     <div class="row">
 
-      <!--<div class="col-5">-->
       <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
         <h1 class="display-8">Por facultades</h1>
         <p></p>
@@ -54,7 +48,6 @@
         </select>
       </div>
 
-      <!--<div class="col-5 offset-2">-->
       <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
         <h1 class="display-8">Por departamentos</h1>
         <p></p>
@@ -70,7 +63,6 @@
   </div>
 </div>
 
-
 <div class="container-lg">
   <div class="row">
 
@@ -83,9 +75,7 @@
           superior cuyos propósitos de formación conduzcan a la investigación o
           al desempeño de ocupaciones, profesiones y disciplinas.
           </p>
-          <div id="chart1" class="plotly-card">
-            <div class='dima-plot' id='dima-plot--ocde'></div>
-          </div>
+          <div class='dima-plot' id='dima-plot--ocde'></div>
       </div>
 
       <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
@@ -97,9 +87,7 @@
           internacional. Se presentan organizadas en áreas que promueven el
           trabajo interdisciplinar.
           </p>
-          <div id="dima-agendas" class="plotly-card">
-            <div class='dima-plot' id='dima-plot--knowledge'></div>
-          </div>
+          <div class='dima-plot' id='dima-plot--knowledge'></div>
       </div>
 
 
@@ -125,11 +113,8 @@
       </div>
 
       <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-        <div id="dima-categoria" class="plotly-card">
-          <div class='dima-plot' id='dima-plot--categories' dima-size='6'></div>
-        </div>
+        <div class='dima-plot' id='dima-plot--categories' dima-size='6'></div>
       </div>
-
 
   </div>
 </div>
@@ -138,8 +123,6 @@
 <div class='container-fluid dima-form'>
   <div class="container-lg">
     <div class="row">
-
-
 
       <div class="col-lg-3 col-sm-6">
         <h1 class="display-8">Por categoría</h1>
@@ -152,22 +135,9 @@
         </select>
       </div>
 
-      <!--<div class="col-lg-8 col-sm-5">-->
-        <!--<h1 class="display-8">Grupos</h1>-->
-        <!--<p></p>-->
-
-        <!--<select class="form-select" id='dima-select--group' aria-label="Default select example">-->
-          <!--<option value="All">Grupo de investigación...</option>-->
-          <!--{% for group in groups %}-->
-            <!--<option value="{{group.pk}}">{{group.name}}</option>-->
-          <!--{% endfor %}-->
-        <!--</select>-->
-      <!--</div>-->
-
     </div>
   </div>
 </div>
-
 
 <div class='container-fluid'>
   <div class="container-lg">

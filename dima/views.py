@@ -5,6 +5,7 @@ from groups.models import ResearchGroup
 from researchers.models import Researcher, Professor
 import json
 from visualizations.views import fix_filters
+from django.http import HttpResponseNotFound
 
 
 ########################################################################
@@ -50,6 +51,9 @@ class GroupView(TemplateView):
         self.template_name = "group_view.html"
         context = self.get_context_data(**kwargs)
 
-        context['group'] = ResearchGroup.objects.get(pk=request.GET['pk'])
+        try:
+            context['group'] = ResearchGroup.objects.get(pk=request.GET['pk'])
+        except:
+            return HttpResponseNotFound('<h1>Page not found</h1>')
 
         return self.render_to_response(context)

@@ -37,8 +37,11 @@ class BarsTemplatePlot(TemplateView):
         else:
             plot = data['id'].split('--')[-1]
 
-        context.update(getattr(self, f'render_{plot}')(fix_filters(ResearchGroup, data['filters'])))
-        return self.render_to_response(context)
+        try:
+            context.update(getattr(self, f'render_{plot}')(fix_filters(ResearchGroup, data['filters'])))
+            return self.render_to_response(context)
+        except:
+            return HttpResponseNotFound('<h1>Page not found</h1>')
 
     # ----------------------------------------------------------------------
     def render_ocde(self, filters):

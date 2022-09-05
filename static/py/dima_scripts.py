@@ -9,9 +9,9 @@ def ajax_render(id, url, data=None):
     def read(req):
         document.select_one(f'#{id}').html = req.text
         if script := document.select_one(f'#{id}-script'):
-            if size := script.attrs.get('dima-size', False):
+            if size := document.select_one(f'#{id}').attrs.get('dima-size', False):
                 document.select_one(f'#{id}').style = {'height': f'{60 * float(size)}px'}
-            elif size := document.select_one(f'#{id}').attrs.get('dima-size', False):
+            elif size := script.attrs.get('dima-size', False):
                 document.select_one(f'#{id}').style = {'height': f'{60 * float(size)}px'}
             window.eval(script.innerHTML)
 

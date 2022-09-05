@@ -13,6 +13,7 @@ import sys
 import django.views.debug
 import os
 from pathlib import Path
+import mimetypes
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,20 +26,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', False) == 'True'
+# DEBUG = False
 
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 ALLOWED_HOSTS = ['*']
 
+if DEBUG:
+    def wing_debug_hook(*args, **kwargs):
+        if __debug__ and 'WINGDB_ACTIVE' in os.environ:
+            exc_type, exc_value, traceback = sys.exc_info()
+            sys.excepthook(exc_type, exc_value, traceback)
+        return old_technical_500_response(*args, **kwargs)
 
-def wing_debug_hook(*args, **kwargs):
-    if __debug__ and 'WINGDB_ACTIVE' in os.environ:
-        exc_type, exc_value, traceback = sys.exc_info()
-        sys.excepthook(exc_type, exc_value, traceback)
-    return old_technical_500_response(*args, **kwargs)
-
-
-old_technical_500_response = django.views.debug.technical_500_response
-django.views.debug.technical_500_response = wing_debug_hook
+    old_technical_500_response = django.views.debug.technical_500_response
+    django.views.debug.technical_500_response = wing_debug_hook
 
 
 # Application definition
@@ -76,6 +78,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'csp.middleware.CSPMiddleware',
 ]
 
 ROOT_URLCONF = "dimawebapp.urls"
@@ -101,11 +104,13 @@ WSGI_APPLICATION = "dimawebapp.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-if DEBUG:
+
+db_file = os.path.join(BASE_DIR, "db.sqlite3")
+if DEBUG or os.path.exists(db_file):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": db_file,
         }
     }
 
@@ -175,12 +180,29 @@ STATICFILES_FINDERS = [
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+APPEND_SLASH = True
 
+CSRF_COOKIE_HTTPONLY = True
+CSRF_USE_SESSIONS = True
 
-# REST_FRAMEWORK = {
-# # Use Django's standard `django.contrib.auth` permissions,
-# # or allow read-only access for unauthenticated users.
-# 'DEFAULT_PERMISSION_CLASSES': [
-# 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-# ]
-# }
+CSRF_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_SAMESITE = 'Strict'
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("text/html", ".html", True)
+
+CSP_DEFAULT_SRC = ["'self'", "'unsafe-inline'"]
+CSP_IMG_SRC = ["'self'", "'unsafe-inline'", "https:", "http:"]
+CSP_STYLE_SRC = ["'self'", "'unsafe-inline'", "https:"]
+CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'", "'unsafe-inline'", 'https://*.google.com/', 'http://*.google.com/']
+# CSP_INCLUDE_NONCE_IN = ['script-src']
+
+# CSP_REPORT_URI = ["http://localhost:8000/fake-report-uri/"]
+# CSP_REPORT_ONLY = True
+
+# CSP_INCLUDE_NONCE_IN = ["script-src", "style-src"]
+
+# CSP_DEFAULT_SRC = ("'self'", 'http://www.google.com/')
+# CSP_STYLE_SRC = ("'unsafe-inline'", "https:")

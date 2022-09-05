@@ -15,10 +15,6 @@ plot-container {
 }
 
 
-.plotly-card {
-
-}
-
 
 #dima-counters{
     display: flex;
@@ -102,13 +98,3 @@ table.table a {
     text-decoration: none !important;
 }
 
-
-.btn-group a:hover {
-
-    text-decoration: none;
-}
-
-.dropdown-toggle::after {
-
-    color: #94b43b;
-}
