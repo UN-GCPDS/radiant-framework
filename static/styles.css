@@ -98,3 +98,10 @@ table.table a {
     text-decoration: none !important;
 }
 
+main.detalle + container-lg {
+
+}
+
+main.accesibility-on {
+    padding-top: 15px !important;
+}

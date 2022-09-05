@@ -1,7 +1,7 @@
 {% load static %}
 
 <!--Bootstrap-->
-<script nonce="{{request.request.csp_nonce}}" type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<script nonce="{{request.csp_nonce}}" type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
 <script nonce="{{request.csp_nonce}}" type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 <link nonce="{{request.csp_nonce}}" rel="stylesheet" href={% static 'bootstrap-icons/bootstrap-icons.css' %}>
@@ -19,20 +19,15 @@
 
 <!--Brython scripts-->
 <script nonce="{{request.csp_nonce}}" type="text/python">
-import sys
-sys.path.append("{% static 'py' %}")
+    import sys
+    sys.path.append("{% static 'py' %}")
 </script>
 <script type="text/python" src="{% static 'py/scripts.py' %}"></script>
 
+<!--Javascript-->
 <script nonce="{{request.csp_nonce}}" type="application/javascript">
-
-document.addEventListener('DOMContentLoaded', function() {
-    brython(0);
-}, false);
-</script>
-
-<script nonce="{{request.csp_nonce}}" type="application/javascript">
-    var CSRF_TOKEN = '{{ csrf_token }}';
+    document.addEventListener('DOMContentLoaded', brython, false);
+    var CSRF_TOKEN = '{{csrf_token}}';
 </script>
 
 

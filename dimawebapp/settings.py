@@ -177,7 +177,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'SAMEORIGIN'
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -188,8 +188,9 @@ CSRF_USE_SESSIONS = True
 CSRF_COOKIE_SAMESITE = 'Strict'
 
 SESSION_COOKIE_SAMESITE = 'Strict'
-# mimetypes.add_type("text/css", ".css", True)
-# mimetypes.add_type("text/html", ".html", True)
+SESSION_COOKIE_HTTPONLY = True
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("text/html", ".html", True)
 
 STYLE_HASHES = [
     'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=',
@@ -199,7 +200,8 @@ STYLE_HASHES = [
     'sha256-aV3p0L0H4ndj7jdNR4+mI4+7d697pGiRmrTzmBsGxzI=',
     'sha256-6hLz0852u+x0xB22EdtSAOB0auGKeD1w7gJUvgIJ4I0=',
     'sha256-cUFuwp4e078DeooEUfiR1pq5f2G7IrZQoHa/JYi5B+4=',
-    'sha256-vCpS8VyHtSqXbN/JkDhke+jauUq+p7lBAVCL+C75wZo='
+    'sha256-vCpS8VyHtSqXbN/JkDhke+jauUq+p7lBAVCL+C75wZo=',
+    'sha256-ZqhM5xQOj0Og/l+8qEbc5F5YYumTdWvc5mtn7dECFuE=',
 ]
 
 SRC_HASHES = [
@@ -213,6 +215,6 @@ SRC_HASHES = [
 
 # CSP_DEFAULT_SRC = ["'self'"]
 CSP_IMG_SRC = ["'self'", "https:", "http:", "data:"]
-CSP_STYLE_SRC = ["'self'", "https:", "http:", "'unsafe-hashes'"] + [f"'{hash_}'" for hash_ in STYLE_HASHES]
-CSP_SCRIPT_SRC = ["'self'", "https:", "http:", "'unsafe-eval'", 'https://*.google.com/', 'http://*.google.com/'] + [f"'{hash_}'" for hash_ in SRC_HASHES]
+CSP_STYLE_SRC = ["'self'", "'unsafe-hashes'"] + [f"'{hash_}'" for hash_ in STYLE_HASHES]
+CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'", 'https://*.google.com/', 'http://*.google.com/'] + [f"'{hash_}'" for hash_ in SRC_HASHES]
 CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']

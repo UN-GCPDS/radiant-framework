@@ -1,13 +1,7 @@
 {% load static %}
 
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
-<!--[if IE 7]> <html class="ie7 oldie"> <![endif]-->
-<!--[if IE 8]> <html class="ie8 oldie"> <![endif]-->
-<!--[if IE 9]> <html class="ie9 oldie"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
+
 <html>
-<!--<![endif]-->
 
 <head>
   <meta charset="utf-8">
@@ -30,29 +24,23 @@
 
   {% include 'dima_backend.html' %}
 
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/frontend.css' %}" media="all">
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/accesibilidad.css' %}" media="all">
-  <!--<link rel="stylesheet" type="text/css" href="{% static 'unal/css/bootstrap.min.css' %}" media="all">-->
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/bootstrap-theme.min.css' %}" media="all">
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/reset.css' %}" media="all">
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/unal.css' %}" media="all">
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/base.css' %}" media="all">
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/tablet.css' %}" media="all">
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/phone.css' %}" media="all">
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/small.css' %}" media="all">
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/printer.css' %}" media="print">
-  <link rel="stylesheet" type="text/css" href="{% static 'unal/css/fix_styles_bs42bs5.css' %}" media="all">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/frontend.css' %}" media="all">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/accesibilidad.css' %}" media="all">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/bootstrap-theme.min.css' %}" media="all">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/reset.css' %}" media="all">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/unal.css' %}" media="all">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/base.css' %}" media="all">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/tablet.css' %}" media="all">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/phone.css' %}" media="all">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/small.css' %}" media="all">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/printer.css' %}" media="print">
+  <link nonce="{{request.csp_nonce}}" rel="stylesheet" type="text/css" href="{% static 'unal/css/fix_styles_bs42bs5.css' %}" media="all">
 
-  <script src="{% static 'unal/js/jquery.js' %}" type="text/javascript"></script>
-  <script src="{% static 'unal/js/unal.js' %}" type="text/javascript"></script>
-  <script src="{% static 'unal/js/accesibilidad.js' %}" type="text/javascript"></script>
-  <!--<script src="{% static 'unal/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>-->
-  <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+  <script nonce="{{request.csp_nonce}}" src="{% static 'unal/js/jquery.js' %}" type="text/javascript"></script>
+  <script nonce="{{request.csp_nonce}}" src="{% static 'unal/js/unal.js' %}" type="text/javascript"></script>
+  <script nonce="{{request.csp_nonce}}" src="{% static 'unal/js/accesibilidad.js' %}" type="text/javascript"></script>
+  <script nonce="{{request.csp_nonce}}" type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
 
-<!--[if lt IE 9]><script src="js/html5shiv.js"
-type="text/javascript"></script><![endif]-->
-<!--[if lt IE 9]><script src="js/respond.js"
-  type="text/javascript"></script><![endif]-->
 
   <title>Inicio: Universidad Nacional de Colombia</title>
   </head>
@@ -429,8 +417,6 @@ id="panel-accesibilidad"
       </nav>
     </div>
   {% endblock %}
-
-
   <div class="dima-main">{% block 'main' %}{% endblock %}</div>
   </main>
 

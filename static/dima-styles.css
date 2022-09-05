@@ -66,6 +66,7 @@ main.detalle {
     margin-top: 15px !important;
     border-radius: 8px;
     box-shadow: 0 0 6px #555;
+    padding-bottom: 180px;
 }
 
 main .breadcrumb-class {
@@ -90,4 +91,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .dima-logo {
     padding: 5px 15px;
+}
+
+
+.dima-card {
+    width: 15rem;
+    margin: 5px 5px;
 }
