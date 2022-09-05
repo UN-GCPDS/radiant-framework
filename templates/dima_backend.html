@@ -24,6 +24,12 @@ sys.path.append("{% static 'py' %}")
 </script>
 <script type="text/python" src="{% static 'py/scripts.py' %}"></script>
 
+<script nonce="{{request.csp_nonce}}" type="application/javascript">
+
+document.addEventListener('DOMContentLoaded', function() {
+    brython(0);
+}, false);
+</script>
 
 <script nonce="{{request.csp_nonce}}" type="application/javascript">
     var CSRF_TOKEN = '{{ csrf_token }}';

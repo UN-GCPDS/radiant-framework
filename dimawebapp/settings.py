@@ -27,10 +27,8 @@ SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False) == 'True'
-# DEBUG = False
 
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246']
 
 if DEBUG:
     def wing_debug_hook(*args, **kwargs):
@@ -193,16 +191,33 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 mimetypes.add_type("text/css", ".css", True)
 mimetypes.add_type("text/html", ".html", True)
 
-CSP_DEFAULT_SRC = ["'self'", "'unsafe-inline'"]
-CSP_IMG_SRC = ["'self'", "'unsafe-inline'", "https:", "http:"]
-CSP_STYLE_SRC = ["'self'", "'unsafe-inline'", "https:"]
-CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'", "'unsafe-inline'", 'https://*.google.com/', 'http://*.google.com/']
-# CSP_INCLUDE_NONCE_IN = ['script-src']
 
-# CSP_REPORT_URI = ["http://localhost:8000/fake-report-uri/"]
-# CSP_REPORT_ONLY = True
+STYLE_HASHES = [
 
-# CSP_INCLUDE_NONCE_IN = ["script-src", "style-src"]
+    'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=',
+    'sha256-aiTj2pLXNZHW9Z9KTiqS/nAlzlmLv82TyKGz+I/RMeE=',
+    'sha256-iH23oQFQFzAwzg6myWBu40yKvLxWiaNJtPaJUQmn1R8=',
+    'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE=',
+    'sha256-aV3p0L0H4ndj7jdNR4+mI4+7d697pGiRmrTzmBsGxzI=',
+    'sha256-6hLz0852u+x0xB22EdtSAOB0auGKeD1w7gJUvgIJ4I0=',
+    'sha256-cUFuwp4e078DeooEUfiR1pq5f2G7IrZQoHa/JYi5B+4=',
+    'sha256-vCpS8VyHtSqXbN/JkDhke+jauUq+p7lBAVCL+C75wZo='
+    # '',
+]
 
-# CSP_DEFAULT_SRC = ("'self'", 'http://www.google.com/')
-# CSP_STYLE_SRC = ("'unsafe-inline'", "https:")
+SRC_HASHES = [
+
+    'sha256-qdaIOdxVXcIztjBR66IohY2PwX8bhu2A4QaVkQmqlHo=',
+    'sha256-PX4TD8hriRso3HL8sYY68HAq+dAa2fOjejIlZcsCyEM=',
+    'sha256-jqZuiIXV/j//M8wzFf3TcM9ILcc1us445Jk/TgGEHPA=',
+    'sha256-YjTxNZcoFhMDTI70uRNH1V6gP6qpJNGnAlWVb7gVcHM=',
+    'sha256-8maZJNlpOzTu6EL0u4JmdqQTIAdNJ6ySEtH2WAbiWb8=',
+
+]
+
+
+CSP_DEFAULT_SRC = ["'self'"]
+CSP_IMG_SRC = ["'self'", "https:", "http:", "data:"]
+CSP_STYLE_SRC = ["'self'", "https:", "http:", "'unsafe-hashes'"] + [f"'{hash_}'" for hash_ in STYLE_HASHES]
+CSP_SCRIPT_SRC = ["'self'", "https:", "http:", "'unsafe-hashes'", "'unsafe-eval'", 'https://*.google.com/', 'http://*.google.com/'] + [f"'{hash_}'" for hash_ in SRC_HASHES]
+CSP_INCLUDE_NONCE_IN = ['script-src']
