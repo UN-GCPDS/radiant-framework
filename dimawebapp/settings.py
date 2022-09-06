@@ -177,6 +177,8 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
+# SECURE_SSL_REDIRECT = True
+
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'SAMEORIGIN'
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
@@ -213,8 +215,8 @@ SRC_HASHES = [
 ]
 
 
-# CSP_DEFAULT_SRC = ["'self'"]
+CSP_DEFAULT_SRC = ["'self'"]
 CSP_IMG_SRC = ["'self'", "https:", "http:", "data:"]
-CSP_STYLE_SRC = ["'self'", "'unsafe-hashes'"] + [f"'{hash_}'" for hash_ in STYLE_HASHES]
+CSP_STYLE_SRC = ["'self'"] + [f"'{hash_}'" for hash_ in STYLE_HASHES]
 CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'", 'https://*.google.com/', 'http://*.google.com/'] + [f"'{hash_}'" for hash_ in SRC_HASHES]
 CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']
