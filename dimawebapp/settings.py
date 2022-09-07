@@ -26,8 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv('DEBUG', False) == 'True'
-DEBUG = False
+DEBUG = os.getenv('DEBUG', False) == 'True'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246']
 
@@ -215,11 +214,10 @@ SRC_HASHES = [
     'sha256-8maZJNlpOzTu6EL0u4JmdqQTIAdNJ6ySEtH2WAbiWb8=',
 ]
 
-
-CSP_DEFAULT_SRC = ["'self'"]
+CSP_DEFAULT_SRC = ["'self'", "https:", "http:", ]
 CSP_IMG_SRC = ["'self'", "https:", "http:", "data:"]
 CSP_STYLE_SRC = ["'self'", 'http://*.google.com/', 'https://*.google.com/'] + [f"'{hash_}'" for hash_ in STYLE_HASHES]
-CSP_SCRIPT_SRC = ["'self'", 'http://*.google.com/', 'https://*.google.com/'] + [f"'{hash_}'" for hash_ in SRC_HASHES]
+CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'", 'http://*.google.com/', 'https://*.google.com/'] + [f"'{hash_}'" for hash_ in SRC_HASHES]
 CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']
-CSP_FRAME_ANCESTORS = ["'self'", "none"]
-CSP_FORM_ACTION = ["none"]
+CSP_FRAME_ANCESTORS = ["'self'"]
+CSP_FORM_ACTION = ["'self'"]
