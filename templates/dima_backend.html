@@ -13,6 +13,8 @@
 <!--Plotly-->
 <script nonce="{{request.csp_nonce}}" src="{% static 'plotly/plotly-2.14.0.min.js' %}"></script>
 
+{% comment %}
+
 <!--Brython-->
 <script nonce="{{request.csp_nonce}}" type="text/javascript" src="{% static 'brython/brython.js' %}"></script>
 <script nonce="{{request.csp_nonce}}" type="text/javascript" src="{% static 'brython/brython_stdlib.js' %}"></script>
@@ -30,4 +32,4 @@
     var CSRF_TOKEN = '{{csrf_token}}';
 </script>
 
-
+{% endcomment %}
