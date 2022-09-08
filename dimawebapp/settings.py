@@ -192,8 +192,8 @@ CSRF_COOKIE_SAMESITE = 'Strict'
 
 SESSION_COOKIE_SAMESITE = 'Strict'
 SESSION_COOKIE_HTTPONLY = True
-mimetypes.add_type("text/css", ".css", True)
-mimetypes.add_type("text/html", ".html", True)
+# mimetypes.add_type("text/css", ".css", True)
+# mimetypes.add_type("text/html", ".html", True)
 
 STYLE_HASHES = [
     'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=',
