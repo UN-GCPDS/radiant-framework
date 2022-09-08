@@ -13,7 +13,6 @@ import sys
 import django.views.debug
 import os
 from pathlib import Path
-import mimetypes
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -179,8 +178,10 @@ STATICFILES_FINDERS = [
 
 # SECURE_SSL_REDIRECT = True
 
+SECURE_BROWSER_XSS_FILTER = True
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'SAMEORIGIN'
 SECURE_CONTENT_TYPE_NOSNIFF = True
+
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 APPEND_SLASH = True
@@ -206,7 +207,7 @@ STYLE_HASHES = [
     'sha256-ZqhM5xQOj0Og/l+8qEbc5F5YYumTdWvc5mtn7dECFuE=',
 ]
 
-SRC_HASHES = [
+SCRIPT_HASHES = [
     'sha256-qdaIOdxVXcIztjBR66IohY2PwX8bhu2A4QaVkQmqlHo=',
     'sha256-PX4TD8hriRso3HL8sYY68HAq+dAa2fOjejIlZcsCyEM=',
     'sha256-jqZuiIXV/j//M8wzFf3TcM9ILcc1us445Jk/TgGEHPA=',
@@ -214,10 +215,16 @@ SRC_HASHES = [
     'sha256-8maZJNlpOzTu6EL0u4JmdqQTIAdNJ6ySEtH2WAbiWb8=',
 ]
 
+SCRIPT_EXTERN = [
+    'http://www.google.com/',
+    'http://cse.google.com/',
+]
+
+
 CSP_DEFAULT_SRC = ["'self'", "https:", "http:", ]
 CSP_IMG_SRC = ["'self'", "https:", "http:", "data:"]
-CSP_STYLE_SRC = ["'self'", 'http://*.google.com/', 'https://*.google.com/'] + [f"'{hash_}'" for hash_ in STYLE_HASHES]
-CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'", 'http://*.google.com/', 'https://*.google.com/'] + [f"'{hash_}'" for hash_ in SRC_HASHES]
+CSP_STYLE_SRC = ["'self'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
+CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
 CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']
 CSP_FRAME_ANCESTORS = ["'self'"]
 CSP_FORM_ACTION = ["'self'"]

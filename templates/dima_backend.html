@@ -26,12 +26,6 @@
 
 <!--Javascript-->
 <script nonce="{{request.csp_nonce}}" type="application/javascript">
-  var BRYTHON_LOADED = false;
-  document.addEventListener("mousemove", () => {
-    if (!BRYTHON_LOADED) {
-      brython();
-      BRYTHON_LOADED = true;
-      }
-  });
   var CSRF_TOKEN = '{{csrf_token}}';
+  document.addEventListener("DOMContentLoaded", () => {brython();});
 </script>

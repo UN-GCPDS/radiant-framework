@@ -40,7 +40,7 @@ class Bulker():
             if k in fields_in_dict:
                 element[k] = fields_in_dict[k][element[k]]
 
-        if ['leader'] in element:
+        if 'leader' in element:
             element['leader'] = Professor.objects.get(pk=element['leader'])
         return element
 
