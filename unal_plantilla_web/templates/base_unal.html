@@ -408,7 +408,7 @@ id="panel-accesibilidad"
 
 <!-- Contenido -->
   <main class="detalle">
-  <div class="dima-logo"><img src="{% static 'assets/dima_logo.svg' %}"></img></div>
+  <div class="dima-logo"><a href="{% url 'home' %}"><img src="{% static 'assets/dima_logo.svg' %}"></img></a></div>
   {% block 'breadcrumb' %}
     <div class="breadcrumb-class">
       <nav aria-label="breadcrumb">
