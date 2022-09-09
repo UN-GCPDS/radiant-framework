@@ -221,10 +221,14 @@ SCRIPT_EXTERN = [
 ]
 
 
-CSP_DEFAULT_SRC = ["'self'", "https:", "http:", ]
-CSP_IMG_SRC = ["'self'", "https:", "http:", "data:"]
 CSP_STYLE_SRC = ["'self'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
 CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
 CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']
-CSP_FRAME_ANCESTORS = ["'self'"]
+CSP_FRAME_ANCESTORS = ["'none'"]
 CSP_FORM_ACTION = ["'self'"]
+CSP_IMG_SRC = ["'self'", "data:"]
+CSP_FONT_SRC = ["'self'"]
+CSP_CONNECT_SRC = ["'self'"]
+CSP_OBJECT_SRC = ["'none'"]
+CSP_BASE_URI = ["'none'"]
+CSP_DEFAULT_SRC = ["'none'"]
