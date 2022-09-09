@@ -192,8 +192,6 @@ CSRF_COOKIE_SAMESITE = 'Strict'
 
 SESSION_COOKIE_SAMESITE = 'Strict'
 SESSION_COOKIE_HTTPONLY = True
-# mimetypes.add_type("text/css", ".css", True)
-# mimetypes.add_type("text/html", ".html", True)
 
 STYLE_HASHES = [
     'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=',
@@ -220,7 +218,6 @@ SCRIPT_EXTERN = [
     'http://cse.google.com/',
 ]
 
-
 CSP_STYLE_SRC = ["'self'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
 CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
 CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']
@@ -232,8 +229,3 @@ CSP_CONNECT_SRC = ["'self'"]
 CSP_OBJECT_SRC = ["'none'"]
 CSP_BASE_URI = ["'none'"]
 CSP_DEFAULT_SRC = ["'none'"]
-
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-
-
