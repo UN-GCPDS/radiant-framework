@@ -38,7 +38,10 @@ class Bulker():
         fields_in_dict = {field.name: dict([c[::-1] for c in field.choices]) for field in self.target_model._meta.fields if field.choices}
         for k in element:
             if k in fields_in_dict:
-                element[k] = fields_in_dict[k][element[k]]
+                if element[k] in fields_in_dict[k]:
+                    element[k] = fields_in_dict[k][element[k]]
+                else:
+                    print(f'{element[k]} not in {k}')
 
         if 'leader' in element:
             element['leader'] = Professor.objects.get(pk=element['leader'])

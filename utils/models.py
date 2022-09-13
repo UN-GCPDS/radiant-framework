@@ -5,26 +5,59 @@ from typing import Iterable
 class Choices:
     """"""
 
-    SUB_OCDE = (
-        'Economía y negocios',
-        'Ingeniería civil',
-        'Ingeniería química',
-        'Ingenierías eléctrica, electrónica e informática',
-        'Otras ingenierías y tecnologías',
-    )
-
     OCDE = (
-        'Ciencias naturales',
-        'Ingeniería y tecnología',
-        'Ciencias médicas y de la salud',
-        'Ciencias agrícolas',
-        'Ciencias sociales',
-        'Humanidades',
+        'Matemática',
+        'Computación y ciencias de la información',
+        'Ciencias físicas',
+        'Ciencias químicas',
+        'Ciencias de la tierra y medioambientales',
+        'Ciencias biológicas',
+        'Otras ciencias naturales',
+
+        'Ingeniería civil',
+        'Ingenierías eléctrica, electrónica e informática',
+        'Ingeniería mecánica',
+        'Ingeniería química',
+        'Ingeniería de materiales',
+        'Ingeniería médica',
+        'Ingeniería ambiental',
+        'Biotecnología ambiental',
+        'Biotecnología industrial',
+        'Nanotecnología',
+        'Otras ingenierías tecnologías',
+
+        'Medicina básica',
+        'Medicina clínica',
+        'Ciencias de la salud',
+        'Biotecnología en salud',
+        'Otras ciencias médicas',
+
+        'Agricultura, silvicultura y pesca',
+        'Ciencias animales y lechería',
+        'Ciencias veterinarias',
+        'Biotecnología agrícola',
+        'Otras ciencias agrícolas',
+
+        'Psicología',
+        'Economía y negocios',
+        'Ciencias de la educación',
+        'Sociología',
+        'Derecho',
+        'Ciencias políticas',
+        'Geografía social y económica',
+        'Periodismo y comunicaciones',
+        'Otras ciencias sociales',
+
+        'Historia y arqueología',
+        'Idiomas y literatura',
+        'Otras historias',
+        'Arte',
+        'Otras humanidades'
     )
 
     KNOWLEDGE = (
         'Ambiente y biodiversidad',
-        'Arte y culturas',
+        'Arte y cultura',
         'Biotecnología',
         'Ciencia y tecnología de minerales y materiales',
         'Ciencias agrarias y desarrollo rural',
@@ -35,12 +68,6 @@ class Choices:
         'Hábitat, ciudad y territorio',
         'Salud y vida',
         'Tecnologías de la información y las comunicaciones',
-
-        'Desarrollo organizacional económico e industrial',
-        'Energía',
-        'Hábitat, ciudad y territorio',
-        'Tecnologías de la información y las comunicaciones'
-
     )
 
     DEPARTAMENT = (
@@ -77,7 +104,7 @@ class Choices:
         'A',
         'B',
         'C',
-        'No reconcido',
+        'No reconocido',
     )
 
     CALL_TYPE = (

@@ -43,6 +43,10 @@ if DEBUG:
 # Application definition
 
 INSTALLED_APPS = [
+
+    'admin_interface',
+    'colorfield',
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -75,8 +79,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'csp.middleware.CSPMiddleware',
 ]
+
+if not DEBUG:
+    MIDDLEWARE.append('csp.middleware.CSPMiddleware')
 
 ROOT_URLCONF = "dimawebapp.urls"
 
@@ -176,56 +182,55 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# SECURE_SSL_REDIRECT = True
+if not DEBUG:
 
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CROSS_ORIGIN_OPENER_POLICY = 'SAMEORIGIN'
-SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CROSS_ORIGIN_OPENER_POLICY = 'SAMEORIGIN'
+    SECURE_CONTENT_TYPE_NOSNIFF = True
 
+    X_FRAME_OPTIONS = 'SAMEORIGIN'
+    APPEND_SLASH = True
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-APPEND_SLASH = True
+    CSRF_COOKIE_HTTPONLY = True
+    CSRF_USE_SESSIONS = True
+    CSRF_COOKIE_SAMESITE = 'Strict'
 
-CSRF_COOKIE_HTTPONLY = True
-CSRF_USE_SESSIONS = True
-CSRF_COOKIE_SAMESITE = 'Strict'
+    SESSION_COOKIE_SAMESITE = 'Strict'
+    SESSION_COOKIE_HTTPONLY = True
 
-SESSION_COOKIE_SAMESITE = 'Strict'
-SESSION_COOKIE_HTTPONLY = True
+    STYLE_HASHES = [
+        'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=',
+        'sha256-aiTj2pLXNZHW9Z9KTiqS/nAlzlmLv82TyKGz+I/RMeE=',
+        'sha256-iH23oQFQFzAwzg6myWBu40yKvLxWiaNJtPaJUQmn1R8=',
+        'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE=',
+        'sha256-aV3p0L0H4ndj7jdNR4+mI4+7d697pGiRmrTzmBsGxzI=',
+        'sha256-6hLz0852u+x0xB22EdtSAOB0auGKeD1w7gJUvgIJ4I0=',
+        'sha256-cUFuwp4e078DeooEUfiR1pq5f2G7IrZQoHa/JYi5B+4=',
+        'sha256-vCpS8VyHtSqXbN/JkDhke+jauUq+p7lBAVCL+C75wZo=',
+        'sha256-ZqhM5xQOj0Og/l+8qEbc5F5YYumTdWvc5mtn7dECFuE=',
+    ]
 
-STYLE_HASHES = [
-    'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=',
-    'sha256-aiTj2pLXNZHW9Z9KTiqS/nAlzlmLv82TyKGz+I/RMeE=',
-    'sha256-iH23oQFQFzAwzg6myWBu40yKvLxWiaNJtPaJUQmn1R8=',
-    'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE=',
-    'sha256-aV3p0L0H4ndj7jdNR4+mI4+7d697pGiRmrTzmBsGxzI=',
-    'sha256-6hLz0852u+x0xB22EdtSAOB0auGKeD1w7gJUvgIJ4I0=',
-    'sha256-cUFuwp4e078DeooEUfiR1pq5f2G7IrZQoHa/JYi5B+4=',
-    'sha256-vCpS8VyHtSqXbN/JkDhke+jauUq+p7lBAVCL+C75wZo=',
-    'sha256-ZqhM5xQOj0Og/l+8qEbc5F5YYumTdWvc5mtn7dECFuE=',
-]
+    SCRIPT_HASHES = [
+        'sha256-qdaIOdxVXcIztjBR66IohY2PwX8bhu2A4QaVkQmqlHo=',
+        'sha256-PX4TD8hriRso3HL8sYY68HAq+dAa2fOjejIlZcsCyEM=',
+        'sha256-jqZuiIXV/j//M8wzFf3TcM9ILcc1us445Jk/TgGEHPA=',
+        'sha256-YjTxNZcoFhMDTI70uRNH1V6gP6qpJNGnAlWVb7gVcHM=',
+        'sha256-8maZJNlpOzTu6EL0u4JmdqQTIAdNJ6ySEtH2WAbiWb8=',
+    ]
 
-SCRIPT_HASHES = [
-    'sha256-qdaIOdxVXcIztjBR66IohY2PwX8bhu2A4QaVkQmqlHo=',
-    'sha256-PX4TD8hriRso3HL8sYY68HAq+dAa2fOjejIlZcsCyEM=',
-    'sha256-jqZuiIXV/j//M8wzFf3TcM9ILcc1us445Jk/TgGEHPA=',
-    'sha256-YjTxNZcoFhMDTI70uRNH1V6gP6qpJNGnAlWVb7gVcHM=',
-    'sha256-8maZJNlpOzTu6EL0u4JmdqQTIAdNJ6ySEtH2WAbiWb8=',
-]
+    SCRIPT_EXTERN = [
+        'http://www.google.com/',
+        'http://cse.google.com/',
+    ]
 
-SCRIPT_EXTERN = [
-    'http://www.google.com/',
-    'http://cse.google.com/',
-]
-
-CSP_STYLE_SRC = ["'self'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
-CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
-CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']
-CSP_FRAME_ANCESTORS = ["'none'"]
-CSP_FORM_ACTION = ["'self'"]
-CSP_IMG_SRC = ["'self'", "data:"]
-CSP_FONT_SRC = ["'self'"]
-CSP_CONNECT_SRC = ["'self'"]
-CSP_OBJECT_SRC = ["'none'"]
-CSP_BASE_URI = ["'none'"]
-CSP_DEFAULT_SRC = ["'none'"]
+    CSP_STYLE_SRC = ["'self'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
+    CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
+    CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']
+    CSP_FRAME_ANCESTORS = ["'none'"]
+    CSP_FORM_ACTION = ["'self'"]
+    CSP_IMG_SRC = ["'self'", "data:"]
+    CSP_FONT_SRC = ["'self'"]
+    CSP_CONNECT_SRC = ["'self'"]
+    CSP_OBJECT_SRC = ["'none'"]
+    CSP_BASE_URI = ["'none'"]
+    CSP_DEFAULT_SRC = ["'none'"]

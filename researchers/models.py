@@ -46,10 +46,10 @@ class Professor(PersonBase, models.Model):
     last_name = models.CharField(max_length=2**6)
 
     professor_id = models.BigIntegerField('Professor ID', primary_key=True)
-    category = models.CharField('category', **Choices('RESEARCHER_CATEGORY'))
+    category = models.CharField('Category', **Choices('RESEARCHER_CATEGORY'))
 
-    faculty = models.CharField('faculty', **Choices('FACULTY'))
-    departament = models.CharField('departament', **Choices('DEPARTAMENT'))
+    faculty = models.CharField('Faculty', **Choices('FACULTY'))
+    departament = models.CharField('Departament', **Choices('DEPARTAMENT'))
 
     class Meta:
         verbose_name = "Professor"
