@@ -26,6 +26,7 @@ SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False) == 'True'
+PROTECT = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246']
 
@@ -69,6 +70,7 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'bulk_data.apps.BulkDataConfig',
     'unal_plantilla_web.apps.UnalPlantillaWebConfig',
+    'intellectual_property.apps.IntellectualPropertyConfig',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +83,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-if not DEBUG:
+if PROTECT:
     MIDDLEWARE.append('csp.middleware.CSPMiddleware')
 
 ROOT_URLCONF = "dimawebapp.urls"
@@ -182,7 +184,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-if not DEBUG:
+if PROTECT:
 
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CROSS_ORIGIN_OPENER_POLICY = 'SAMEORIGIN'

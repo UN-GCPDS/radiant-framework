@@ -122,6 +122,11 @@ class Choices:
         'Sin finalizar',
     )
 
+    PATENT_TYPE = (
+        'Patente de invención',
+        'Patente modelo de utilidad',
+    )
+
     # ----------------------------------------------------------------------
     def __new__(self, choices: str) -> dict:
         """"""

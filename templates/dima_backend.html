@@ -26,6 +26,7 @@
 
 <!--Javascript-->
 <script nonce="{{request.csp_nonce}}" type="application/javascript">
+  window.alert = function() {};
   var CSRF_TOKEN = '{{csrf_token}}';
   document.addEventListener("DOMContentLoaded", brython);
 </script>

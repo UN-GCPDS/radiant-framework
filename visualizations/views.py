@@ -4,7 +4,7 @@ import json
 # Create your views here.
 
 from groups.models import ResearchGroup
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.views import View
 
 
@@ -28,16 +28,16 @@ class BarsTemplatePlot(TemplateView):
     # ----------------------------------------------------------------------
     def post(self, request, *args, **kwargs):
         """"""
-        context = self.get_context_data(**kwargs)
-        data = json.loads(request.POST['data'])
-        context.update(data)
-
-        if ctx := data['context']:
-            plot = ctx
-        else:
-            plot = data['id'].split('--')[-1]
-
         try:
+            context = self.get_context_data(**kwargs)
+            data = json.loads(request.POST['data'])
+            context.update(data)
+
+            if ctx := data['context']:
+                plot = ctx
+            else:
+                plot = data['id'].split('--')[-1]
+
             context.update(getattr(self, f'render_{plot}')(fix_filters(ResearchGroup, data['filters'])))
             return self.render_to_response(context)
         except:
