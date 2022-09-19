@@ -26,6 +26,8 @@ SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False) == 'True'
+
+SQLITE = DEBUG
 PROTECT = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246']
@@ -110,12 +112,11 @@ WSGI_APPLICATION = "dimawebapp.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-db_file = os.path.join(BASE_DIR, "db.sqlite3")
-if DEBUG or os.path.exists(db_file):
+if SQLITE:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": db_file,
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
 

@@ -44,8 +44,9 @@ class Bulker():
             elements = df.loc[df['pk'].isin(to_create)].to_dict('records')
             bulk = [target_model(**self.fix_arguments(element, target_model, to_ignore=many_to_many)) for element in elements]
             for m in many_to_many:
-                [getattr(blk, m).set(json.loads(element[m])) for blk, element in zip(bulk, elements)]
-            target_model.objects.bulk_create(bulk)
+                if m in [f.name for f in target_model._meta.fields]:
+                    [getattr(blk, m).set(json.loads(element[m])) for blk, element in zip(bulk, elements)]
+                target_model.objects.bulk_create(bulk)
 
         if to_update:
             elements = df.loc[df['pk'].isin(to_update)].to_dict('records')
