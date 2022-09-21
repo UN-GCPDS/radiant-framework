@@ -10,7 +10,7 @@ Status|
 Radiant is a `Brython <https://brython.info/>`__ and
 `PyScript <https://pyscript.net/>`__ framework for the quick development
 of web apps using *Python* syntax, so there is no need to care about (if
-you don’t want) HTML, CSS, or Javascript. This is basically a set of
+you don’t want) HTML, CSS, or JavaScript. This is basically a set of
 scripts that allows the same file run from *Python* and
 *Brython*/*PyScript*, when is running under *Python* a
 `Tornado <https://www.tornadoweb.org/>`__ server is created and
@@ -117,10 +117,12 @@ Brython + PyScript
             document.select_one('body') <= html.H1('Radiant-Framework')
     
             document.select_one('body') <= html.DIV(id='mpl')
-            self.plot_sin(f=5)
+            self.plot_sin(f=5)  # will render on #mpl every time
     
-            document.select_one('body') <= self.plot_sinc(f=1)
+            document.select_one('body') <= self.plot_sinc(f=1)  
     
+            
+        # will render on #mpl every time
         @pyscript(output='mpl')
         def plot_sin(self, f=10):
             """"""
@@ -135,6 +137,8 @@ Brython + PyScript
     
             return fig
     
+        
+        # will return the image object
         @pyscript()
         def plot_sinc(self, f):
             """"""

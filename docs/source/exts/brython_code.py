@@ -29,9 +29,9 @@ class Brython(Directive):
                            for i in range(16)])
         script = self.highlight_code()
 
-        print('#' * 20)
-        print(f'Length: {len(self.content)}')
-        print(self.content)
+        # print('#' * 20)
+        # print(f'Length: {len(self.content)}')
+        # print(self.content)
 
         script += self.gen_script(temp_id)
 

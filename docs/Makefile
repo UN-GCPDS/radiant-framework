@@ -23,7 +23,7 @@ help:
 buildapi:
 
 	rm -f source/_modules/*
-	#sphinx-apidoc -fMeET -o source/_modules ../radiant
+	sphinx-apidoc -fMeET -o source/_modules ../radiant
 	sphinx-apidoc -fMeET -o source/_modules ../radiant/static/modules/
 	#sphinx-apidoc -fMeET -o source/_modules ../radiant/static/modules/mdc
 	#sphinx-apidoc -fMeET -o source/_modules ../radiant/static/modules/radiant

@@ -11,7 +11,7 @@ A Brython/PyScript Framework for Web Apps development.
 ![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/UN-GCPDS/brython-radiant?)
 [![Documentation Status](https://readthedocs.org/projects/radiant/badge/?version=latest)](https://radiant-framework.readthedocs.io/en/latest/?badge=latest)
 
-Radiant is a [Brython](https://brython.info/) and [PyScript](https://pyscript.net/) framework for the quick development of web apps using _Python_ syntax, so there is no need to care about (if you don’t want) HTML, CSS, or Javascript. This is basically a set of scripts that allows the same file run from _Python_ and _Brython_/_PyScript_, when is running under _Python_ a [Tornado](https://www.tornadoweb.org/) server is created and configure the local path for serving static files, at the same time a custom HTML template is configured at runtime to import the same script, this time under _Brython_/_PyScript_.
+Radiant is a [Brython](https://brython.info/) and [PyScript](https://pyscript.net/) framework for the quick development of web apps using _Python_ syntax, so there is no need to care about (if you don’t want) HTML, CSS, or JavaScript. This is basically a set of scripts that allows the same file run from _Python_ and _Brython_/_PyScript_, when is running under _Python_ a [Tornado](https://www.tornadoweb.org/) server is created and configure the local path for serving static files, at the same time a custom HTML template is configured at runtime to import the same script, this time under _Brython_/_PyScript_.
 
 ## Instalation
 
@@ -102,10 +102,12 @@ class BareMinimum(RadiantAPI):
         document.select_one('body') <= html.H1('Radiant-Framework')
 
         document.select_one('body') <= html.DIV(id='mpl')
-        self.plot_sin(f=5)
+        self.plot_sin(f=5)  # will render on #mpl every time
 
-        document.select_one('body') <= self.plot_sinc(f=1)
+        document.select_one('body') <= self.plot_sinc(f=1)  
 
+        
+    # will render on #mpl every time
     @pyscript(output='mpl')
     def plot_sin(self, f=10):
         """"""
@@ -120,6 +122,8 @@ class BareMinimum(RadiantAPI):
 
         return fig
 
+    
+    # will return the image object
     @pyscript()
     def plot_sinc(self, f):
         """"""

@@ -9,7 +9,7 @@ Navigation
    :maxdepth: 2
    :name: mastertoc
 
-   
+   notebooks/01-brython
 
 
 .. toctree::

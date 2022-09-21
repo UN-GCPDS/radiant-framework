@@ -2,13 +2,14 @@
 Radiant
 
 """
-# Prevent this file to be imported from Brython
 import sys
 import shutil
 import inspect
 
 try:
+    # Prevent this file to be imported from Brython
     import browser
+
     sys.exit()
 except:
     pass
@@ -30,23 +31,23 @@ PATH = Union[str, pathlib.Path]
 URL = str
 DEFAULT_IP = 'localhost'
 DEFAULT_PORT = '5000'
-DEFAULT_BRYTHON_VERSION = '3.10.5'
+DEFAULT_BRYTHON_VERSION = '3.10.7'
 DEFAULT_BRYTHON_DEBUG = 0
 DEFAULT_PYSCRIPT_VERSION = '2022.06.1'
 AUTO_PYSCRIPT = False
 
-
-PYSCRIPT_FUNCTIONS = os.path.join(
-    os.path.dirname(sys.argv[0]), 'pyscript_fn.py')
+PYSCRIPT_FUNCTIONS = os.path.join(os.path.dirname(sys.argv[0]), 'pyscript_fn.py')
 if os.path.exists(PYSCRIPT_FUNCTIONS):
     os.remove(PYSCRIPT_FUNCTIONS)
 
 # with open(PYSCRIPT_FUNCTIONS, 'w') as file:
-    # file.write('import asyncio')
+# file.write('import asyncio')
 
 
 # ----------------------------------------------------------------------
-def pyscript(output=None, inline=False, plotly_out=None, callback=None, ignore=False, **kwargs):
+def pyscript(
+    output=None, inline=False, plotly_out=None, callback=None, ignore=False, **kwargs
+):
     """"""
     global AUTO_PYSCRIPT
 
@@ -54,8 +55,9 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None, ignore=F
 
         if not inline:
             sourcecode = f'\n\n# {"-" * 70}\n'
-            sourcecode += '\n'.join(inspect.getsource(
-                fn).replace('\n    ', '\n').split('\n')[1:])
+            sourcecode += '\n'.join(
+                inspect.getsource(fn).replace('\n    ', '\n').split('\n')[1:]
+            )
 
             sourcecode = sourcecode.replace('(self)', '()')
             sourcecode = sourcecode.replace('(self, ', '(')
@@ -66,6 +68,7 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None, ignore=F
                 file.write(sourcecode)
 
         return fn
+
     if not ignore:
         AUTO_PYSCRIPT = True
     return wrapargs
@@ -81,18 +84,28 @@ def pyscript(output=None, inline=False, plotly_out=None, callback=None, ignore=F
 # ----------------------------------------------------------------------
 def delay(fn):
     """"""
+
     def wrap(t):
         return None
+
     return wrap
+
+
+# ----------------------------------------------------------------------
+def _get_source_code(fn):
+    """"""
+    with open(PYSCRIPT_FUNCTIONS, 'r') as file:
+        content = file.read()
+    sourcecode = '\n'.join(
+        inspect.getsource(fn).replace('\n        ', '\n').split('\n')[2:]
+    )
+    return content, sourcecode
 
 
 # ----------------------------------------------------------------------
 def pyscript_globals(fn):
     """"""
-    with open(PYSCRIPT_FUNCTIONS, 'r') as file:
-        content = file.read()
-    sourcecode = '\n'.join(inspect.getsource(fn).replace('\n        ', '\n').split('\n')[2:])
-    # sourcecode.replace('    ')
+    content, sourcecode = _get_source_code(fn)
     with open(PYSCRIPT_FUNCTIONS, 'w') as file:
         file.write(sourcecode + content)
 
@@ -100,10 +113,7 @@ def pyscript_globals(fn):
 # ----------------------------------------------------------------------
 def pyscript_init(fn):
     """"""
-    with open(PYSCRIPT_FUNCTIONS, 'r') as file:
-        content = file.read()
-    sourcecode = '\n'.join(inspect.getsource(fn).replace('\n        ', '\n').split('\n')[2:])
-    # sourcecode.replace('    ')
+    content, sourcecode = _get_source_code(fn)
     with open(PYSCRIPT_FUNCTIONS, 'w') as file:
         file.write(content + sourcecode)
 
@@ -111,20 +121,22 @@ def pyscript_init(fn):
 ########################################################################
 class PyScriptAPI:
     """"""
+
     # ----------------------------------------------------------------------
     @pyscript(ignore=True)
     def render_plotly_fig__(self, fig, chart):
         import json
         import plotly
         import js
+
         graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
         js.Plotly.newPlot(chart, js.JSON.parse(graphJSON), {})
 
     # # ----------------------------------------------------------------------
     # @pyscript()
     # def brython_serializer(self, data):
-        # """"""
-        # return json.dumps(data)
+    # """"""
+    # return json.dumps(data)
 
 
 ########################################################################
@@ -186,9 +198,7 @@ class ThemeHandler(RequestHandler):
     # ----------------------------------------------------------------------
     @staticmethod
     def hex2vector(hex_: str):
-        return ', '.join(
-            [str(int(hex_[i: i + 2], 16)) for i in range(1, 6, 2)]
-        )
+        return ', '.join([str(int(hex_[i: i + 2], 16)) for i in range(1, 6, 2)])
 
     # ----------------------------------------------------------------------
     def get_theme(self):
@@ -200,9 +210,7 @@ class ThemeHandler(RequestHandler):
             )
 
         tree = ElementTree.parse(theme)
-        theme_css = {
-            child.attrib['name']: child.text for child in tree.getroot()
-        }
+        theme_css = {child.attrib['name']: child.text for child in tree.getroot()}
         return theme_css
 
 
@@ -234,17 +242,16 @@ class RadiantHandler(RequestHandler):
 
         if variables['static_app']:
             html = self.render_string(
-                f"{os.path.realpath(variables['template'])}", **variables)
+                f"{os.path.realpath(variables['template'])}", **variables
+            )
             if os.path.exists('static'):
                 shutil.rmtree('static')
-            shutil.copytree(os.path.join(
-                os.path.dirname(__file__), 'static'), 'static')
+            shutil.copytree(os.path.join(os.path.dirname(__file__), 'static'), 'static')
 
             with open('index.html', 'wb') as file:
                 file.write(html)
 
-        self.render(
-            f"{os.path.realpath(variables['template'])}", **variables)
+        self.render(f"{os.path.realpath(variables['template'])}", **variables)
 
     # ----------------------------------------------------------------------
     def set_default_headers(self):
@@ -261,14 +268,10 @@ def make_app(
     pyscript_version: str,
     debug_level: int,
     pages: Tuple[str],
-    template: PATH = os.path.join(
-        os.path.dirname(__file__), 'templates', 'index.html'
-    ),
+    template: PATH = os.path.join(os.path.dirname(__file__), 'templates', 'index.html'),
     environ: dict = {},
     mock_imports: Tuple[str] = [],
-    handlers: Tuple[
-        URL, Union[List[Union[PATH, str]], RequestHandler], dict
-    ] = (),
+    handlers: Tuple[URL, Union[List[Union[PATH, str]], RequestHandler], dict] = (),
     python: Tuple[PATH, str] = (),
     theme: PATH = None,
     path: PATH = None,
@@ -412,9 +415,7 @@ def make_app(
             )
             foo = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(foo)
-            app.append(
-                url(handler[0], getattr(foo, handler[1][1]), handler[2])
-            )
+            app.append(url(handler[0], getattr(foo, handler[1][1]), handler[2]))
         else:
             app.append(url(*handler))
 
@@ -438,14 +439,10 @@ def RadiantServer(
     brython_version: str = DEFAULT_BRYTHON_VERSION,
     pyscript_version: str = DEFAULT_PYSCRIPT_VERSION,
     debug_level: int = DEFAULT_BRYTHON_DEBUG,
-    template: PATH = os.path.join(
-        os.path.dirname(__file__), 'templates', 'index.html'
-    ),
+    template: PATH = os.path.join(os.path.dirname(__file__), 'templates', 'index.html'),
     environ: dict = {},
     mock_imports: Tuple[str] = [],
-    handlers: Tuple[
-        URL, Union[List[Union[PATH, str]], RequestHandler], dict
-    ] = (),
+    handlers: Tuple[URL, Union[List[Union[PATH, str]], RequestHandler], dict] = (),
     python: Tuple[PATH, str] = (),
     theme: Optional[PATH] = None,
     path: Optional[PATH] = None,

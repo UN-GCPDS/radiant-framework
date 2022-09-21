@@ -190,3 +190,16 @@ p.caption .caption-text{
 font-size: 180%;
 
 }
+
+div.body h1,
+div.body h2,
+div.body h3,
+div.body h4,
+body {
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+div.highlight pre {
+    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
