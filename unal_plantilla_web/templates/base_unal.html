@@ -310,6 +310,7 @@ class="navbar-toggler collapsed d-block d-md-none"
 
 <!-- defaultpanel -->
 
+{% comment %}
 <!-- Panel de accesibilidad -->
 <div class="tx-unal-accesibilidad">
 <!-- defaultpanel -->
@@ -404,9 +405,15 @@ id="panel-accesibilidad"
     <div id="pestania-accesibilidad" class="">Panel de Accesibilidad</div>
   </div>
 
+{% endcomment %}
+
   <!-- /content wrapper for padding -->
 
-<!-- Contenido -->
+  <!--Carousel-->
+
+  {% block 'top-page' %}{% endblock %}
+
+  <!-- Contenido -->
   <main class="detalle">
   <div class="dima-logo"><a href="{% url 'home' %}"><img src="{% static 'assets/dima_logo.svg' %}"></img></a></div>
   {% block 'breadcrumb' %}
@@ -424,10 +431,10 @@ id="panel-accesibilidad"
     <!-- Footer -->
   <footer class="clear container-fluid">
 <div class="row">
-  <nav class="col-lg-3 col-md-3 col-sm-4 col-6 gobiernoLinea">
-  <a href="http://www.legal.unal.edu.co" target="_top">Régimen Legal</a>
-    <a href="http://personal.unal.edu.co" target="_top">Talento humano</a>
-      <a href="http://contratacion.unal.edu.co" target="_top">Contratación</a>
+       <nav class="col-lg-3 col-md-3 col-sm-4 col-6 gobiernoLinea">
+        <a href="http://www.legal.unal.edu.co" target="_top">Régimen Legal</a>
+        <a href="http://personal.unal.edu.co" target="_top">Talento humano</a>
+        <a href="http://contratacion.unal.edu.co" target="_top">Contratación</a>
         <a href="http://personal.unal.edu.co" target="_top">Ofertas de empleo</a>
         <a href="http://launalcuenta.unal.edu.co/" target="_top">Rendición de cuentas</a>
         <a href="http://docentes.unal.edu.co/concurso-profesoral/" target="_top">Concurso docente</a>
@@ -435,36 +442,38 @@ id="panel-accesibilidad"
         <a href="http://controlinterno.unal.edu.co/" target="_top">Control interno</a>
         <a href="http://siga.unal.edu.co" target="_top">Calidad</a>
         <a href="http://unal.edu.co/buzon-de-notificaciones/" target="_self">Buzón de notificaciones</a>
-        </nav>
-        <nav class="col-lg-3 col-md-3 col-sm-4 col-6 gobiernoLinea">
+      </nav>
+
+      <nav class="col-lg-3 col-md-3 col-sm-4 col-6 gobiernoLinea">
         <a href="http://correo.unal.edu.co" target="_top">Correo institucional</a>
-      <a href="index.html#">Mapa del sitio</a>
-      <a href="http://redessociales.unal.edu.co" target="_top">Redes Sociales</a>
-        <a href="index.html#">FAQ</a>
+        <!--<a href="index.html#">Mapa del sitio</a>-->
+        <a href="http://redessociales.unal.edu.co" target="_top">Redes Sociales</a>
+        <!--<a href="index.html#">FAQ</a>-->
         <a href="http://unal.edu.co/quejas-y-reclamos/" target="_self">Quejas y reclamos</a>
         <a href="http://unal.edu.co/atencion-en-linea/" target="_self">Atención en línea</a>
         <a href="http://unal.edu.co/encuesta/" target="_self">Encuesta</a>
-        <a href="index.html#">Contáctenos</a>
+        <!--<a href="index.html#">Contáctenos</a>-->
         <a href="http://estadisticas.unal.edu.co/" target="_top">Estadísticas</a>
-        <a href="index.html#">Glosario</a>
-        </nav>
+        <!--<a href="index.html#">Glosario</a>-->
+      </nav>
+
         <div class="col-lg-4 col-md-4 col-sm-4 col-12 footer-info">
         <div class="row footer-info-spacing">
       <p class="col-lg-6 col-md-12 col-sm-12 col-6 contacto">
       <b>Contacto página web:</b><br/>
-        Dirección ...<br/>
-          Edificio ...<br/>
-            Bogotá D.C., Colombia<br/>
-            (+57 1) 316 5000 Ext.
-            </p>
+          Carrera 27 #64-60<br/>
+          Bloque H Piso 3  - Oficina de dirección<br/>
+          Manizales, Colombia<br/>
+            PBX: (57+6) 8879300 Ext 50239.
+          </p>
             <p class="col-lg-6 col-md-12 col-sm-12 col-6 derechos">
-            <a href="https://unal.edu.co/fileadmin/user_upload/docs/legal.pdf" target="_blank">&copy; Copyright 2019</a><br/>
+            <a href="https://unal.edu.co/fileadmin/user_upload/docs/legal.pdf" target="_blank">&copy; Copyright 2022</a><br/>
           Algunos derechos reservados.<br/>
           <a
             title="Comuníquese con el administrador de este sitio web"
-            href="mailto:EMAIL@unal.edu.co">EMAIL@unal.edu.co</a><br/>
-            <a href="index.html#">Acerca de este sitio web</a><br/>
-            Actualización:14/05/21
+            href="mailto:yencardonaal@unal.edu.co">yencardonaal@unal.edu.co</a><br/>
+            <!--<a href="index.html#">Acerca de este sitio web</a><br/>-->
+            Actualización:29/09/22
             </p>
             </div>
             </div>

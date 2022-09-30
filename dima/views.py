@@ -6,9 +6,11 @@ from researchers.models import Researcher, Professor
 import json
 from visualizations.views import fix_filters
 from django.http import HttpResponseNotFound
-
+from .models import Newsletter, Broadcast
 
 ########################################################################
+
+
 class HomeView(TemplateView):
     template_name = "home.html"
 
@@ -17,6 +19,7 @@ class HomeView(TemplateView):
         """"""
         context = super().get_context_data(**kwargs)
         context['groups'] = ResearchGroup.objects.all()
+        context['broadcasts'] = Broadcast.objects.all()
         context['faculties'] = Choices.FACULTY
         context['departaments'] = Choices.DEPARTAMENT
         context['categories'] = Choices.GROUPS_CATEGORY
@@ -57,3 +60,15 @@ class GroupView(TemplateView):
             return HttpResponseNotFound('<h1>Page not found</h1>')
 
         return self.render_to_response(context)
+
+
+########################################################################
+class NewsletterView(TemplateView):
+    template_name = "newsletter.html"
+
+    # ----------------------------------------------------------------------
+    def get_context_data(self, **kwargs):
+        """"""
+        context = super().get_context_data(**kwargs)
+        context['newsletters'] = Newsletter.objects.all()
+        return context

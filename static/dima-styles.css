@@ -63,7 +63,8 @@
 main.detalle {
     background-color: white;
     padding: 15px;
-    margin-top: 15px !important;
+    margin-top: 30px !important;
+    padding-top: 30px;
     border-radius: 8px;
     box-shadow: 0 0 6px #555;
     padding-bottom: 180px;
@@ -103,3 +104,95 @@ h1, h2, h3, h4, h5, h6 {
 .dima-logo img {
 width: 25vw;
 }
+
+.dima-newsletter {
+
+}
+
+.dima-newsletter--thumbnail {
+width: 25vh;
+    display: inline-grid;
+    margin: 30px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+}
+
+/* [1] The container */
+.img-hover-zoom {
+  overflow: hidden; /* [1.2] Hide the overflowing of child elements */
+}
+
+/* [2] Transition property for smooth transformation of images */
+.img-hover-zoom img {
+  transition: transform .5s ease;
+}
+
+/* [3] Finally, transforming the image when container gets hovered */
+.img-hover-zoom:hover img {
+  transform: scale(1.1);
+}
+
+
+.dima--carousel-item {
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.dima--carousel-blur {
+    filter: blur(7px) brightness(0.5);
+    position: absolute;
+    z-index: -1;
+    height: calc(100% + 30px);
+    width: 120%;
+    margin: 0px -10px;
+    margin-top: -10px;
+    margin-left: -10%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.dima--carousel-item img {
+    margin: 20px auto;
+    height: 45vh;
+    z-index: 10;
+    filter: drop-shadow(2px 4px 6px #5b5b5b);
+        border-radius: 4px;
+}
+
+#dima-carousel {
+
+
+}
+
+.dima--carousel-separator {
+    background-color: #5b5b5b;
+    width: 100%;
+    height: 60px;
+}
+
+
+.carousel-indicators {
+    margin-bottom: 1.3rem;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 2rem;
+    right: 40px;
+    color: #fff;
+    text-align: left;
+    background-color: #5b5b5bcc;
+    padding: 30px;
+    left: auto;
+    width: 30vw;
+}
+
+.dima-carousel-caption__link {
+    line-height: 30px;
+}
+.dima-carousel-caption__link:hover {
+    color: #b9cd83;
+}
+

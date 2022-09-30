@@ -1,0 +1,55 @@
+
+
+<div id="dima-carousel" class="carousel slide carousel-fade" data-bs-ride="true">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#dima-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#dima-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#dima-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    {% for broadcast in broadcasts %}
+
+      <style nonce="{{request.csp_nonce}}">
+        .dima--carousel-item_{{forloop.counter}} {
+          #background-color: {{broadcast.dominant}};
+          background-image: url({{broadcast.image.url}});
+        }
+      </style>
+
+      <div class="carousel-item dima--carousel-item {% if not forloop.counter0 %}active{% endif %}">
+        <div class="dima--carousel-blur dima--carousel-item_{{forloop.counter}}"></div>
+        <a href='{% if broadcast.link %}{{broadcast.link}}{% else %}#{% endif %}'>
+          <img src="{{broadcast.image.url}}" class="d-block"></img>
+        </a>
+
+      {% if broadcast.title or broadcast.description %}
+        <div class="carousel-caption d-none d-md-block">
+          {% if broadcast.title %}
+            <h5>{{broadcast.title}}</h5>
+          {% endif %}
+          {% if broadcast.description %}
+            <p>{{broadcast.description}}</p>
+          {% endif %}
+          {% if broadcast.link %}
+            <a class='dima-carousel-caption__link' href='{{broadcast.link}}'>visitar enlace <i class="bi bi-box-arrow-up-right"></i></a>
+          {% endif %}
+
+
+        </div>
+      {% endif %}
+
+
+      </div>
+    {% endfor %}
+  </div>
+  <div class='dima--carousel-separator'></div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#dima-carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#dima-carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

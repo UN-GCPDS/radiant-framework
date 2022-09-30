@@ -1,10 +1,11 @@
 from django.urls import path
 from django.views.generic import TemplateView
-from .views import HomeView, GroupView
+from .views import HomeView, GroupView, NewsletterView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('group', GroupView.as_view(), name='group'),
+    path('newsletters', NewsletterView.as_view(), name='newsletters'),
 
     path('presentation', TemplateView.as_view(template_name="presentation.html")),
     path('mision_y_vision', TemplateView.as_view(template_name="mission_and_vision.html")),

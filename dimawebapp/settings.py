@@ -26,8 +26,7 @@ SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False) == 'True'
-
-SQLITE = DEBUG
+SQLITE = True
 PROTECT = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246']
@@ -167,8 +166,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'resources')
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.relpath(os.path.join(BASE_DIR, 'media_root'))
+
+SCRIPTS_ROOT = os.path.join(BASE_DIR, 'scripts')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -211,6 +215,10 @@ if PROTECT:
         'sha256-cUFuwp4e078DeooEUfiR1pq5f2G7IrZQoHa/JYi5B+4=',
         'sha256-vCpS8VyHtSqXbN/JkDhke+jauUq+p7lBAVCL+C75wZo=',
         'sha256-ZqhM5xQOj0Og/l+8qEbc5F5YYumTdWvc5mtn7dECFuE=',
+        'sha256-aRudTzAWmAKFl6QugRMNLPDKDPIL4nu+Wb0wlfVutP8=',
+        'sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY=',
+
+        'FhooaR7Rh/dW8wipO49t4R7hXOosoY0mraLlD7krcKU=',
     ]
 
     SCRIPT_HASHES = [
@@ -219,6 +227,7 @@ if PROTECT:
         'sha256-jqZuiIXV/j//M8wzFf3TcM9ILcc1us445Jk/TgGEHPA=',
         'sha256-YjTxNZcoFhMDTI70uRNH1V6gP6qpJNGnAlWVb7gVcHM=',
         'sha256-8maZJNlpOzTu6EL0u4JmdqQTIAdNJ6ySEtH2WAbiWb8=',
+
     ]
 
     SCRIPT_EXTERN = [

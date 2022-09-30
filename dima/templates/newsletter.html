@@ -1,0 +1,33 @@
+{% extends "base_unal.html" %}
+{% block 'head-title' %} - Apoyo proyectos{% endblock %}
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">Está en:<a href="/">Inicio</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="#">Boletines DIMA</a></li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+{% block 'main' %}
+
+<div class="container-lg">
+  <div class="row">
+    <h1 class="display-3">Boletines DIMA</h1>
+    <div class="d-flex justify-content-around flex-wrap">
+      {% for newsletter in newsletters %}
+        <div class="img-hover-zoom">
+          <a href='{{newsletter.file.url}}'>
+            <img class='dima-newsletter--thumbnail' src={{newsletter.thumbnail.url}}></img>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

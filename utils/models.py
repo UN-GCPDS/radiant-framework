@@ -1,6 +1,5 @@
 from typing import Iterable
 
-
 ########################################################################
 class Choices:
     """"""
@@ -139,5 +138,5 @@ class Choices:
         choices = [(f'{prefix}_{str(i).rjust(n, "0")}', choice)
                    for i, choice in enumerate(choices, start=1)]
 
-        return {'max_length': len(choices[0][0]), 'choices': choices, }
+        return {'max_length': len(choices[0][0]) + 100, 'choices': choices, }
 

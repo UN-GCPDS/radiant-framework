@@ -6,7 +6,7 @@
 [project attributes]
 proj.debug-sub-processes = True
 proj.directory-list = [{'dirloc': loc('.'),
-                        'excludes': (),
+                        'excludes': ['groups/admin.py'],
                         'filter': '*',
                         'include_hidden': False,
                         'recursive': True,
