@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False) == 'True'
 SQLITE = True
-PROTECT = True
+PROTECT = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246']
 
@@ -46,7 +46,7 @@ if DEBUG:
 
 INSTALLED_APPS = [
 
-    'admin_interface',
+    'admin_interface.apps.AdminInterfaceConfig',
     'colorfield',
 
     "django.contrib.admin",
@@ -115,7 +115,7 @@ if SQLITE:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+            "NAME": os.path.join(BASE_DIR, 'db', "db.sqlite3"),
         }
     }
 
@@ -129,6 +129,15 @@ else:
             'HOST': '/tmp/mysql.sock',
         }
     }
+
+DATABASES.update({
+    'dima_database': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        "NAME": os.path.join(BASE_DIR, 'db', "fixed.sqlite3"),
+    }
+})
+
+DATABASE_ROUTERS = ['dima.db_router.DimaDBRouter', 'db_router.AdminInterfaceRouter']
 
 
 # Password validation
@@ -189,6 +198,11 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = '/'
+
 if PROTECT:
 
     SECURE_BROWSER_XSS_FILTER = True
@@ -217,8 +231,13 @@ if PROTECT:
         'sha256-ZqhM5xQOj0Og/l+8qEbc5F5YYumTdWvc5mtn7dECFuE=',
         'sha256-aRudTzAWmAKFl6QugRMNLPDKDPIL4nu+Wb0wlfVutP8=',
         'sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY=',
+        'sha256-lRLpUwcaP0UNkP/WubTqJnoym8+vtWLnF3Zd0MHLNjg=',
+        'sha256-46YToXZ0fbPs96OLoLEQElmTESeKXjFZQKJtBU9ga0A=',
+        'sha256-VQaWNPlDvkQDjhMc2Dz0+hxaXQDi2bu44aG5P9THJ38=',
+        'sha256-Uu66nCv3OKzuAS8ATrVHPwOun2YUE+KWfO73GgRTP9Q=',
 
         'FhooaR7Rh/dW8wipO49t4R7hXOosoY0mraLlD7krcKU=',
+
     ]
 
     SCRIPT_HASHES = [
@@ -227,7 +246,7 @@ if PROTECT:
         'sha256-jqZuiIXV/j//M8wzFf3TcM9ILcc1us445Jk/TgGEHPA=',
         'sha256-YjTxNZcoFhMDTI70uRNH1V6gP6qpJNGnAlWVb7gVcHM=',
         'sha256-8maZJNlpOzTu6EL0u4JmdqQTIAdNJ6ySEtH2WAbiWb8=',
-
+        'sha256-4dO14pLSN45tf+fdniWKcINh7CAdLn2ueAm4zJTPCUw=',
     ]
 
     SCRIPT_EXTERN = [

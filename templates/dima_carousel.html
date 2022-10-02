@@ -1,10 +1,10 @@
+{% load admin_urls %}
 
-
-<div id="dima-carousel" class="carousel slide carousel-fade" data-bs-ride="true">
+<div id="dima-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#dima-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#dima-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#dima-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    {% for broadcast in broadcasts %}
+      <button type="button" data-bs-target="#dima-carousel" data-bs-slide-to="{{forloop.counter0}}" {% if not forloop.counter0 %}class="active" aria-current="true"{% endif %} aria-label="Slide {{forloop.counter0}}"></button>
+    {% endfor %}
   </div>
   <div class="carousel-inner">
     {% for broadcast in broadcasts %}
@@ -21,6 +21,11 @@
         <a href='{% if broadcast.link %}{{broadcast.link}}{% else %}#{% endif %}'>
           <img src="{{broadcast.image.url}}" class="d-block"></img>
         </a>
+      {% if user.is_authenticated %}
+        <div class="carousel-caption carousel-caption--auth d-none d-md-block">
+          <a class='' href='{% url broadcasts_admin|admin_urlname:'change' broadcast.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+        </div>
+      {% endif %}
 
       {% if broadcast.title or broadcast.description %}
         <div class="carousel-caption d-none d-md-block">
@@ -33,13 +38,10 @@
           {% if broadcast.link %}
             <a class='dima-carousel-caption__link' href='{{broadcast.link}}'>visitar enlace <i class="bi bi-box-arrow-up-right"></i></a>
           {% endif %}
-
-
         </div>
       {% endif %}
-
-
       </div>
+
     {% endfor %}
   </div>
   <div class='dima--carousel-separator'></div>

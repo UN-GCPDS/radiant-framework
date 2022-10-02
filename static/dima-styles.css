@@ -196,3 +196,22 @@ width: 25vh;
     color: #b9cd83;
 }
 
+.carousel-caption.carousel-caption--auth {
+    left: 20vw;
+    right: unset;
+    width: auto;
+    text-align: center;
+    padding: 15px 20px;
+}
+
+.dima-link--edit {
+    position: absolute;
+    padding: 10px;
+    z-index: 9999999;
+}
+
+.carousel-caption.carousel-caption--auth a:hover,
+.dima-link--edit:hover {
+    color: #b9cd83;
+}
+

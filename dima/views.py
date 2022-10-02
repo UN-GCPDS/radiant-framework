@@ -19,7 +19,9 @@ class HomeView(TemplateView):
         """"""
         context = super().get_context_data(**kwargs)
         context['groups'] = ResearchGroup.objects.all()
+        context['groups_admin'] = ResearchGroup._meta
         context['broadcasts'] = Broadcast.objects.all()
+        context['broadcasts_admin'] = Broadcast._meta
         context['faculties'] = Choices.FACULTY
         context['departaments'] = Choices.DEPARTAMENT
         context['categories'] = Choices.GROUPS_CATEGORY
@@ -71,4 +73,5 @@ class NewsletterView(TemplateView):
         """"""
         context = super().get_context_data(**kwargs)
         context['newsletters'] = Newsletter.objects.all()
+        context['newsletters_admin'] = Newsletter._meta
         return context

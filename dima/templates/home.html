@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block 'top-page' %}
-  {% include 'dima_carousel.html' %}
+  {% if broadcasts %}
+    {% include 'dima_carousel.html' %}
+  {% endif %}
 {% endblock %}
 
 {% block 'main' %}

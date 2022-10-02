@@ -105,3 +105,31 @@ main.detalle + container-lg {
 main.accesibility-on {
     padding-top: 15px !important;
 }
+
+
+#unalTop .navigation .mainMenu .btn-group__right {
+    float: right;
+    margin-right: unset !important;
+}
+
+
+#unalTop .navigation .mainMenu .btn-group__right-last{
+    margin-right: 85px !important;
+}
+
+
+#unalTop {
+    margin-right: 15px;
+}
+
+.btn-group.btn-plain:hover {
+    background-color: unset !important;
+    border-color: unset !important;
+}
+
+
+
+
+.text-muted {
+    font-size: 0.4em !important;
+}
