@@ -203,6 +203,8 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = '/'
 
+APPEND_SLASH = True
+
 if PROTECT:
 
     SECURE_BROWSER_XSS_FILTER = True
@@ -210,7 +212,6 @@ if PROTECT:
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
     X_FRAME_OPTIONS = 'SAMEORIGIN'
-    APPEND_SLASH = True
 
     CSRF_COOKIE_HTTPONLY = True
     CSRF_USE_SESSIONS = True
@@ -235,10 +236,7 @@ if PROTECT:
         'sha256-46YToXZ0fbPs96OLoLEQElmTESeKXjFZQKJtBU9ga0A=',
         'sha256-VQaWNPlDvkQDjhMc2Dz0+hxaXQDi2bu44aG5P9THJ38=',
         'sha256-Uu66nCv3OKzuAS8ATrVHPwOun2YUE+KWfO73GgRTP9Q=',
-
         'sha256-LsV6mnSAm91ihslanFghBzuRSVySo9roFgMn4sdOwgQ=',
-        'sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY=',
-
         'FhooaR7Rh/dW8wipO49t4R7hXOosoY0mraLlD7krcKU=',
 
     ]

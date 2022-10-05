@@ -9,7 +9,9 @@ mv dimawebapp-main/ dimawebapp/
 
 . ./venv39/bin/activate
 cd dimawebapp
+sudo chown -R www:www db
 python manage.py collectstatic
+python manage.py makemigrations && python manage.py migrate && python manage.py migrate --database=dima_database
 cd ..
 
 sudo chown -R `whoami` /www/
