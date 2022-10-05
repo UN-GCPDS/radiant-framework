@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False) == 'True'
 SQLITE = True
-PROTECT = False
+PROTECT = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246']
 
@@ -235,6 +235,9 @@ if PROTECT:
         'sha256-46YToXZ0fbPs96OLoLEQElmTESeKXjFZQKJtBU9ga0A=',
         'sha256-VQaWNPlDvkQDjhMc2Dz0+hxaXQDi2bu44aG5P9THJ38=',
         'sha256-Uu66nCv3OKzuAS8ATrVHPwOun2YUE+KWfO73GgRTP9Q=',
+
+        'sha256-LsV6mnSAm91ihslanFghBzuRSVySo9roFgMn4sdOwgQ=',
+        'sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY=',
 
         'FhooaR7Rh/dW8wipO49t4R7hXOosoY0mraLlD7krcKU=',
 
