@@ -137,7 +137,7 @@ DATABASES.update({
     }
 })
 
-DATABASE_ROUTERS = ['dima.db_router.DimaDBRouter', 'db_router.AdminInterfaceRouter']
+DATABASE_ROUTERS = ['dima.db_router.DimaDBRouter', 'dimawebapp.db_router.AdminInterfaceRouter']
 
 
 # Password validation
