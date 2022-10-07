@@ -10,10 +10,9 @@
       <li><a class="dropdown-item" href="http://investigacion.manizales.unal.edu.co/servicios/avales-para-grupos/">Avales para grupos</a></li>
       <li><a class="dropdown-item" href="http://investigacion.manizales.unal.edu.co/servicios/publicaciones/">Pulicaciones</a></li>
       <div class="dropdown-divider"></div>
-      <li><a class="dropdown-item" href="/presentation">Presentación</a></li>
-      <li><a class="dropdown-item" href="#">Misión y visión</a></li>
-      <li><a class="dropdown-item" href="#">Equipo de trabajo</a></li>
-      <li><a class="dropdown-item" href="#">Normativa</a></li>
+      <li><a class="dropdown-item" href="{% url 'presentation' %}">Presentación</a></li>
+      <li><a class="dropdown-item" href="{% url 'mision_y_vision' %}">Misión y visión</a></li>
+      <li><a class="dropdown-item" href="{% url 'equipo_de_trabajo' %}">Equipo de trabajo</a></li>
     </ul>
 </div>
 
@@ -23,6 +22,7 @@
     Servicios<span class="caret"></span>
   </div>
     <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="http://investigacion.unal.edu.co/acerca-de/normatividad/">Normativa</a></li>
       <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/convocatorias/">Convocatorias</a></li>
       <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/agendas-de-conocimiento/">Agendas de conocimiento</a></li>
       <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/capacidades-de-investigacion/">Capacidades de investigación</a></li>
