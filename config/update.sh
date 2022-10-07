@@ -9,10 +9,12 @@ mv dimawebapp-main/ dimawebapp/
 
 . ./venv39/bin/activate
 cd dimawebapp
-sudo chown -R www:www db
-python manage.py collectstatic
+sudo chown -R $USER db
+python manage.py collectstatic --noinput
 python manage.py makemigrations && python manage.py migrate && python manage.py migrate --database=dima_database
+python manage.py createsuperuser --username yeison --email yencardonaal@unal.edu.co
 cd ..
 
-sudo chown -R `whoami` /www/
+sudo chown -R $USER /www/
+sudo chown -R www:www /www/dimawebapp/db
 sudo service apache24 restart
