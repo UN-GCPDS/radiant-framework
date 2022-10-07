@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from django.conf import settings
 from admin_interface.models import Theme
-from .models import Newsletter, Broadcast
+from .models import Newsletter, Broadcast, Team
 
 admin.site.unregister(Group)
 # admin.site.unregister(User)
@@ -15,9 +15,16 @@ if not settings.DEBUG:
 class NewsletterAdmin(admin.ModelAdmin):
     list_display = ('file', 'upload')
     exclude = ('thumbnail',)
+    list_display_links = ['file']
 
 
 @admin.register(Broadcast)
 class BroadcastAdmin(admin.ModelAdmin):
-    list_display = ('title', 'upload', 'dominant')
-    list_display_links = ['title']
+    list_display = ('upload', 'expiration', 'title', 'link')
+    list_display_links = ['upload']
+
+
+@admin.register(Team)
+class TeamAdmin(admin.ModelAdmin):
+    list_display = ('area',)
+    list_display_links = ['area']

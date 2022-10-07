@@ -6,7 +6,7 @@ from researchers.models import Researcher, Professor
 import json
 from visualizations.views import fix_filters
 from django.http import HttpResponseNotFound
-from .models import Newsletter, Broadcast
+from .models import Newsletter, Broadcast, Team
 
 ########################################################################
 
@@ -74,4 +74,17 @@ class NewsletterView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['newsletters'] = Newsletter.objects.all()
         context['newsletters_admin'] = Newsletter._meta
+        return context
+
+
+########################################################################
+class TeamView(TemplateView):
+    template_name = "equipo_de_trabajo.html"
+
+    # ----------------------------------------------------------------------
+    def get_context_data(self, **kwargs):
+        """"""
+        context = super().get_context_data(**kwargs)
+        context['teams'] = Team.objects.all()
+        context['teams_admin'] = Team._meta
         return context

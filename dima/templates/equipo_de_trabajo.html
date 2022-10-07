@@ -1,4 +1,6 @@
 {% extends "base_unal.html" %}
+{% load admin_urls %}
+
 {% block 'head-title' %} - Equipo de trabajo{% endblock %}
 
 {% block 'breadcrumb' %}
@@ -14,9 +16,41 @@
 
 {% block 'main' %}
 <div class="container-lg">
-  <div class="row">
 
     <h1 class="display-3">Equipo de trabajo</h1>
+
+    <div class="row">
+    {% for team in teams %}
+
+      <div class="col-6 dima-teams--team">
+        <h1 class="display-8">{{team.area}}
+        {% if user.is_authenticated %}
+          <a class='dima-edit' href='{% url teams_admin|admin_urlname:'change' team.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+        </h1>
+
+        {% for name in team.names_split %}
+          {{name}}</br>
+        {% endfor %}
+        <dl class="row">
+          <dt class="col-md-3 col-lg-2">Email:</dt>
+          <dd class="col-md-9 col-lg-10">
+            {% for email in team.email_split %}
+              <p>{{email}}</p>
+            {% endfor %}
+          </dd>
+          <dt class="col-md-3 col-lg-2">Ext:</dt>
+          <dd class="col-md-9 col-lg-10">
+            <p>{{team.ext}}
+          </dd>
+        </dl>
+      </div>
+
+    {% endfor %}
+    </div>
+
+
+
 
 
 
