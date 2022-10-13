@@ -115,7 +115,7 @@ if SQLITE:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, 'db', "db.sqlite3"),
+            "NAME": os.path.join(BASE_DIR, 'db', "default_database.sqlite3"),
         }
     }
 
@@ -133,7 +133,7 @@ else:
 DATABASES.update({
     'dima_database': {
         'ENGINE': 'django.db.backends.sqlite3',
-        "NAME": os.path.join(BASE_DIR, 'db', "fixed.sqlite3"),
+        "NAME": os.path.join(BASE_DIR, 'db', "dima_database.sqlite3"),
     }
 })
 
