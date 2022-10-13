@@ -6,11 +6,12 @@ from researchers.models import Researcher, Professor
 import json
 from visualizations.views import fix_filters
 from django.http import HttpResponseNotFound
-from .models import Newsletter, Broadcast, Team
+from .models import Newsletter, Broadcast, Team, Content
+
+from datetime import date
+
 
 ########################################################################
-
-
 class HomeView(TemplateView):
     template_name = "home.html"
 
@@ -20,7 +21,7 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['groups'] = ResearchGroup.objects.all()
         context['groups_admin'] = ResearchGroup._meta
-        context['broadcasts'] = Broadcast.objects.all()
+        context['broadcasts'] = Broadcast.objects.filter(expiration__gt=date.today())
         context['broadcasts_admin'] = Broadcast._meta
         context['faculties'] = Choices.FACULTY
         context['departaments'] = Choices.DEPARTAMENT
@@ -87,4 +88,43 @@ class TeamView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['teams'] = Team.objects.all()
         context['teams_admin'] = Team._meta
+        return context
+
+
+########################################################################
+class PresentationView(TemplateView):
+    template_name = "presentation.html"
+
+    # ----------------------------------------------------------------------
+    def get_context_data(self, **kwargs):
+        """"""
+        context = super().get_context_data(**kwargs)
+        context['presentation'] = Content.objects.get(label='presentation')
+        context['presentation_admin'] = Content._meta
+        return context
+
+
+########################################################################
+class MisionView(TemplateView):
+    template_name = "mission_and_vision.html"
+
+    # ----------------------------------------------------------------------
+    def get_context_data(self, **kwargs):
+        """"""
+        context = super().get_context_data(**kwargs)
+        context['mission_and_vision'] = Content.objects.get(label='mission_and_vision')
+        context['mission_and_vision_admin'] = Content._meta
+        return context
+
+
+########################################################################
+class AvalesView(TemplateView):
+    template_name = "avales_para_grupos.html"
+
+    # ----------------------------------------------------------------------
+    def get_context_data(self, **kwargs):
+        """"""
+        context = super().get_context_data(**kwargs)
+        context['avales'] = Content.objects.get(label='avales')
+        context['avales_admin'] = Content._meta
         return context

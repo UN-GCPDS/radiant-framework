@@ -1,6 +1,6 @@
 from django.urls import path
 from django.views.generic import TemplateView
-from .views import HomeView, GroupView, NewsletterView, TeamView
+from .views import HomeView, GroupView, NewsletterView, TeamView, PresentationView, MisionView, AvalesView
 from django.contrib.auth import views as auth_views
 
 
@@ -16,9 +16,17 @@ urlpatterns = [
     path('newsletters', NewsletterView.as_view(), name='newsletters'),
     path('equipo_de_trabajo', TeamView.as_view(), name='equipo_de_trabajo'),
 
-    path('presentation', TemplateView.as_view(template_name="presentation.html"), name='presentation'),
-    path('mision_y_vision', TemplateView.as_view(template_name="mission_and_vision.html"), name='mision_y_vision'),
-    path('apoyo_proyectos', TemplateView.as_view(template_name="apoyo_proyectos.html"), name='apoyo_proyectos'),
+    path('presentation', PresentationView.as_view(), name='presentation'),
+    # path('presentation', TemplateView.as_view(template_name="presentation.html"), name='presentation'),
+
+    path('mision_y_vision', MisionView.as_view(), name='mision_y_vision'),
+    # path('mision_y_vision', TemplateView.as_view(template_name="mission_and_vision.html"), name='mision_y_vision'),
+
+
+    path('apoyo_proyectos', TemplateView.as_view(), name='apoyo_proyectos'),
+
+
+    path('avales', AvalesView.as_view(), name='avales'),
 
     # path('group', GroupView.as_view(), name='group'),
     # path('options', GenerateFilteredOptionsView.as_view(), name='options'),

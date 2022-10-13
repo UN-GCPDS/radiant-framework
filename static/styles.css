@@ -133,3 +133,19 @@ main.accesibility-on {
 .text-muted {
     font-size: 0.4em !important;
 }
+
+
+strong {
+    font-weight: bold !important;
+}
+
+.lead {
+    margin-bottom: 16px;
+}
+
+
+pre {
+    font-size: 0.7em !important;
+    color: darkgrey;
+
+}

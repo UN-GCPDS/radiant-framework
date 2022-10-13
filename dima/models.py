@@ -23,6 +23,13 @@ def run_command(command):
 
 
 ########################################################################
+class Content(models.Model):
+    """"""
+    label = models.CharField('label', primary_key=True, max_length=2**7)
+    content = models.TextField('content', max_length=2**15)
+
+
+########################################################################
 class Team(models.Model):
     """"""
     area = models.CharField('area', max_length=2**8)
@@ -39,9 +46,8 @@ class Team(models.Model):
 
         return super().__getattr__(attr)
 
+
 ########################################################################
-
-
 class Newsletter(models.Model):
     """"""
     file = models.FileField('newsletter', upload_to=upload_to_newsletter)

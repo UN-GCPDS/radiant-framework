@@ -1,34 +1,36 @@
+
 {% extends "base_unal.html" %}
 {% load admin_urls %}
 
-{% block 'head-title' %} - Misión y visión{% endblock %}
+{% block 'head-title' %} - Avales para grupos{% endblock %}
 
 {% block 'breadcrumb' %}
 <div class="breadcrumb-class">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">Está en:<a href="/">Inicio</a></li>
-      <li class="breadcrumb-item active" aria-current="page"><a href="#">Misión y visión</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="#">Avales para grupos</a></li>
     </ol>
   </nav>
 </div>
 {% endblock %}
 
 {% block 'main' %}
+
 <div class="container-lg">
   <div class="row">
 
-    <h1 class="display-3">Misión y visión
+    <h1 class="display-3">Avales para grupos
       <small class="text-muted">
         {% if user.is_authenticated %}
-          <a class='dima-edit' href='{% url mission_and_vision_admin|admin_urlname:'change' mission_and_vision.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+          <a class='dima-edit' href='{% url avales_admin|admin_urlname:'change' avales.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </small>
     </h1>
-    {{mission_and_vision.content|safe}}
+    {{avales.content|safe}}
+
 
   </div>
 </div>
 {% endblock %}
-
 

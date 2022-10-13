@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from django.conf import settings
 from admin_interface.models import Theme
-from .models import Newsletter, Broadcast, Team
+from .models import Newsletter, Broadcast, Team, Content
 
 admin.site.unregister(Group)
 # admin.site.unregister(User)
@@ -28,3 +28,9 @@ class BroadcastAdmin(admin.ModelAdmin):
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('area',)
     list_display_links = ['area']
+
+
+@admin.register(Content)
+class ContentAdmin(admin.ModelAdmin):
+    list_display = ('label', 'content',)
+    list_display_links = ['label']
