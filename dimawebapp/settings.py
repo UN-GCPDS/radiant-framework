@@ -57,6 +57,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     'django_extensions',
+
+    'tinymce',
+
     # 'rest_framework',
 
     # 'django_plotly_dash.apps.DjangoPlotlyDashConfig',
@@ -205,6 +208,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 APPEND_SLASH = True
 
+
 if PROTECT:
 
     SECURE_BROWSER_XSS_FILTER = True
@@ -237,7 +241,16 @@ if PROTECT:
         'sha256-VQaWNPlDvkQDjhMc2Dz0+hxaXQDi2bu44aG5P9THJ38=',
         'sha256-Uu66nCv3OKzuAS8ATrVHPwOun2YUE+KWfO73GgRTP9Q=',
         'sha256-LsV6mnSAm91ihslanFghBzuRSVySo9roFgMn4sdOwgQ=',
-        'FhooaR7Rh/dW8wipO49t4R7hXOosoY0mraLlD7krcKU=',
+        # 'sha256-FhooaR7Rh/dW8wipO49t4R7hXOosoY0mraLlD7krcKU=',
+        'sha256-VvGfYkabMjxZJPSTc0b+KuD5cZRLutP/FtCK0W8NJ1s=',
+        'sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY=',
+        'sha256-9p05vWz7JuUd6fR6erXru6EEugTSZHY2+WzbRfpXzB0=',
+        'sha256-qjQQeJE2qcHD76CsmkdqAoqs06duyV9gJhq9G+D+IpM=',
+        'sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY=',
+
+
+        'sha256-5FCr0iy0hQM4XcG9cQ1Vg/F9IyaUpP52lyn30NEVVGk=',
+        'sha256-RvAvREUHojDuwHylTVWZp9DhleqLs6ml8G7LpjCF+EY=',
 
     ]
 
@@ -248,21 +261,55 @@ if PROTECT:
         'sha256-YjTxNZcoFhMDTI70uRNH1V6gP6qpJNGnAlWVb7gVcHM=',
         'sha256-8maZJNlpOzTu6EL0u4JmdqQTIAdNJ6ySEtH2WAbiWb8=',
         'sha256-4dO14pLSN45tf+fdniWKcINh7CAdLn2ueAm4zJTPCUw=',
+        'sha256-j9iYvgmktxTWkIAzdTTgld3Zxo4/2VOPIh2ugA/yJBs=',
+        'sha256-IQ5ZzgH+Dbb/uT5KH6MlfONxOpv2fq/7qpej+gfKRFQ=',
+        'sha256-jEpd2X511XGIaKfnFBQydn4NVOTkY84e3H2xVR5bewM=',
+        'sha256-9N1pR+hg4o/+z8EPuKBlwEniCNYMoJWtb2VgjKo9fNA=',
+        'sha256-t4YxutMXg20vbcEDdroNzK1yK3DGcPKc8yMgAdFBqeI=',
+        'sha256-3UWUK1ZEnDETUa34alUUIbaqgLE3yQr/xboGWN+kWlk=',
+        # 'nonce-summernote',
+        # 'sha256-UrlmDfxevC9ZoXNkI7HEfmOY/sbWFtnoI6y82n+YGi8=',
+        # 'sha256-J00VKAmU8X8JM7tPF8/QAo/XsChimytRzrAFUNBfo+Y=',
+        # 'sha256-ZkVcnKYucOm3wARvV4sWX/6aGz+GfZ7486aY8XdlrRM=',
+        # 'sha256-S0JS1i34/J/5gBG5YIm99txTh+aCULCAhdwMFz+sIbg=',
+        # 'sha256-/xFYfh8sP0ijKZUYIKk4NIv6oOQVg7oXS+pcTVBLMlE=',
+        # 'sha256-XwqYcxvEay03doa5ks00esGyD1wri0A2LRoJLe6jmsE=',
+        # 'sha256-O/tJHbgRUjnyH+MUwF2Pd8HOPeBWBGtKTIP7gXyANyA=',
+        # 'sha256-rRJ11oE3XgfquNzdtKr4qosXr9F6zdOq/TK7GP685Fw=',
+        # 'sha256-Pts70rmymFzx6FX72b69cMDo+1JpCdRSASw7+ECJQUo=',
+        # 'sha256-PKg3sAsJ5ocRxK7iSlJSU0lUfNs5KhfGUEGcGM2XfSw=',
+        # 'sha256-wrYthA6c7J9fpT2fKIpVmioEVEcxDAiNniYDBFfTMGM=',
+        # 'sha256-5CpKeBKU3P99ppPbfg8iQhpuPbIcALyFiUfF5HMz/28=',
+        # 'sha256-kLEONfsTx85h5x32L8EwvhNovy3ExV0AxbEDo5D0/1c=',
+        # 'sha256-sel0WLI9+tjojZPwc+/kt47f0xW/2BHcvDPuwECyNXs=',
+        # 'sha256-Y97uXlqx3F/3Tz+4p0MoRt/CAOwKy1de20DJOy3jgGE=',
+
+
     ]
 
     SCRIPT_EXTERN = [
         'http://www.google.com/',
         'http://cse.google.com/',
+        'http://stackpath.bootstrapcdn.com/',
+        'http://cdn.jsdelivr.net/',
+        'http://code.jquery.com/',
+        'http://cdn.quilljs.com/',
+        'http://cdnjs.cloudflare.com/'
     ]
 
-    CSP_STYLE_SRC = ["'self'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
-    CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
+    CSP_STYLE_SRC = ["'self'", "'unsafe-hashes'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
+    # CSP_STYLE_SRC_ELEM = ["'self'", "'unsafe-hashes'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
+
+    CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'", "'unsafe-hashes'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
+    # CSP_SCRIPT_SRC_ELEM = ["'self'", "'unsafe-eval'", "'unsafe-hashes'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
+
     CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']
-    CSP_FRAME_ANCESTORS = ["'none'"]
     CSP_FORM_ACTION = ["'self'"]
     CSP_IMG_SRC = ["'self'", "data:"]
     CSP_FONT_SRC = ["'self'"]
     CSP_CONNECT_SRC = ["'self'"]
     CSP_OBJECT_SRC = ["'none'"]
     CSP_BASE_URI = ["'none'"]
-    CSP_DEFAULT_SRC = ["'none'"]
+    CSP_FRAME_ANCESTORS = ["'self'"]
+    CSP_DEFAULT_SRC = ["'self'"]
+

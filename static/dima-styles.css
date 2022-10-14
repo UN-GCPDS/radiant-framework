@@ -17,6 +17,12 @@
     line-height: 1.2;
 }
 
+.display-9 {
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
 .display-10 {
     font-size: 1.5rem;
     font-weight: 300;
@@ -222,6 +228,7 @@ width: 25vh;
 .dima-teams--team {
 margin-top: 60px;
 line-height: 130%;
+    font-size: 80%;
 }
 
 .dima-edit{

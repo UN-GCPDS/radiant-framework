@@ -1,0 +1,22 @@
+{% extends "base_unal.html" %}
+{% load admin_urls %}
+
+{% block 'main' %}
+<div class="container-lg">
+  <div class="row">
+
+    <h1 class="display-3">Sandbox
+      <small class="text-muted">
+        {% if user.is_authenticated %}
+          <a class='dima-edit' href='{% url sandbox_admin|admin_urlname:'change' sandbox.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+      </small>
+    </h1>
+    {{sandbox.content|safe}}
+
+  </div>
+</div>
+{% endblock %}
+
+
+

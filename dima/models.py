@@ -5,6 +5,8 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from tinymce.models import HTMLField
+
 
 upload_to_newsletter = os.path.join('uploads', 'newsletter')
 upload_to_broadcast = os.path.join('uploads', 'broadcast')
@@ -26,7 +28,7 @@ def run_command(command):
 class Content(models.Model):
     """"""
     label = models.CharField('label', primary_key=True, max_length=2**7)
-    content = models.TextField('content', max_length=2**15)
+    content = HTMLField('content', max_length=2**15)
 
 
 ########################################################################

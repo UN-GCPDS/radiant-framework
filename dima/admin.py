@@ -34,3 +34,10 @@ class TeamAdmin(admin.ModelAdmin):
 class ContentAdmin(admin.ModelAdmin):
     list_display = ('label', 'content',)
     list_display_links = ['label']
+
+
+# @admin.register(Content)
+# class ContentAdmin(SummernoteModelAdmin):
+    # list_display = ('label', 'content',)
+    # list_display_links = ['label']
+    # summernote_fields = ('content',)

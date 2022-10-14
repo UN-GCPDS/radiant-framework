@@ -92,39 +92,14 @@ class TeamView(TemplateView):
 
 
 ########################################################################
-class PresentationView(TemplateView):
-    template_name = "presentation.html"
-
-    # ----------------------------------------------------------------------
-    def get_context_data(self, **kwargs):
-        """"""
-        context = super().get_context_data(**kwargs)
-        context['presentation'] = Content.objects.get(label='presentation')
-        context['presentation_admin'] = Content._meta
-        return context
-
-
-########################################################################
-class MisionView(TemplateView):
-    template_name = "mission_and_vision.html"
-
-    # ----------------------------------------------------------------------
-    def get_context_data(self, **kwargs):
-        """"""
-        context = super().get_context_data(**kwargs)
-        context['mission_and_vision'] = Content.objects.get(label='mission_and_vision')
-        context['mission_and_vision_admin'] = Content._meta
-        return context
-
-
-########################################################################
-class AvalesView(TemplateView):
+class ContentView(TemplateView):
     template_name = "avales_para_grupos.html"
+    label = ''
 
     # ----------------------------------------------------------------------
     def get_context_data(self, **kwargs):
         """"""
         context = super().get_context_data(**kwargs)
-        context['avales'] = Content.objects.get(label='avales')
-        context['avales_admin'] = Content._meta
+        context[self.label] = Content.objects.get(label=self.label)
+        context[f'{self.label}_admin'] = Content._meta
         return context
