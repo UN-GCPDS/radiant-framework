@@ -12,24 +12,9 @@
       <li><a class="dropdown-item" href="{% url 'equipo_de_trabajo' %}">Equipo de trabajo</a></li>
       <div class="dropdown-divider"></div>
       <li><a class="dropdown-item" href="{% url 'avales' %}">Avales para grupos</a></li>
-      <li><a class="dropdown-item" href="http://investigacion.manizales.unal.edu.co/servicios/convocatorias-un/">Convocatorias UN</a></li>
-    </ul>
-</div>
-
-
-<div class="btn-group">
-  <div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">
-    Servicios<span class="caret"></span>
-  </div>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="http://investigacion.unal.edu.co/acerca-de/normatividad/">Normativa</a></li>
-      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/convocatorias/">Convocatorias</a></li>
-      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/agendas-de-conocimiento/">Agendas de conocimiento</a></li>
-      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/capacidades-de-investigacion/">Capacidades de investigación</a></li>
-      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/propiedad-intelectual-un/">Propiedad Intelectual UN</a></li>
-      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/tramites-ambientales/">Trámites ambientales</a></li>
-      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/buenas-practicas-en-la-investigacion">Buenas prácticas para la Investigación</a></li>
-      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/proyectos-ctei-regalias/">Proyectos CteI Regalías</a></li>
+      <li><a class="dropdown-item" href="{% url 'contact' %}">Contáctenos</a></li>
+      <li><a class="dropdown-item" href="{% url 'newsletters' %}">Boletines DIMA</a></li>
+      <!--<li><a class="dropdown-item" href="http://investigacion.manizales.unal.edu.co/servicios/convocatorias-un/">Convocatorias UN</a></li>-->
     </ul>
 </div>
 
@@ -44,29 +29,22 @@
     </ul>
 </div>
 
-<!--<div class="btn-group">-->
-  <!--<div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown"> Acerca de<span class="caret"></span>-->
-  <!--</div>-->
-    <!--<ul class="dropdown-menu">-->
-      <!--<li><a class="dropdown-item" href="/presentation">Presentación</a></li>-->
-      <!--<li><a class="dropdown-item" href="#">Misión y visión</a></li>-->
-      <!--<li><a class="dropdown-item" href="#">Equipo de trabajo</a></li>-->
-      <!--<li><a class="dropdown-item" href="#">Normativa</a></li>-->
-    <!--</ul>-->
-<!--</div>-->
-
 <div class="btn-group">
-  <a href="{% url 'contact' %}" class="btn btn-default">Contáctenos</a>
+  <div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">
+    Servicios investigación<span class="caret"></span>
+  </div>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/acerca-de/normatividad/">Normativa</a></li>
+      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/convocatorias/">Convocatorias</a></li>
+      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/agendas-de-conocimiento/">Agendas de conocimiento</a></li>
+      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/capacidades-de-investigacion/">Capacidades de investigación</a></li>
+      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/propiedad-intelectual-un/">Propiedad intelectual UN</a></li>
+      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/tramites-ambientales/">Trámites ambientales</a></li>
+      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/buenas-practicas-en-la-investigacion">Buenas prácticas para la investigación</a></li>
+      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/servicios/proyectos-ctei-regalias/">Proyectos CteI Regalías</a></li>
+      <li><a class="dropdown-item" href="https://investigacion.unal.edu.co/boletin">Boletín un investiga</a></li>
+    </ul>
 </div>
-<div class="btn-group">
-  <a href="{% url 'newsletters' %}" class="btn btn-default">Boletines Dima</a>
-</div>
-<div class="btn-group">
-  <a href="http://www.investigacion.unal.edu.co/boletin" target='blank' class="btn btn-default">Boletín un investiga</a>
-</div>
-
-
-
 
 
 

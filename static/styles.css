@@ -9,6 +9,9 @@ padding: 20px, 0;
 color: blue;
 }
 
+.breadcrumb-class__no-border {
+    border: none !important;
+}
 
 plot-container {
     padding: 15px;
@@ -29,7 +32,7 @@ text-align: center;
 height: 132px;
 }
 
-
+    margin-top: -50px;
 
 
 
@@ -148,4 +151,19 @@ pre {
     font-size: 0.7em !important;
     color: darkgrey;
 
+}
+
+
+.dima-nav-tabs {
+    margin-top: -50px;
+    margin-bottom: 40px;
+}
+
+.dima-nav-tabs button{
+    color: #94b43b;
+}
+
+.dima-nav-tabs button:hover,
+.dima-nav-tabs button{
+    color: #94b43b;
 }

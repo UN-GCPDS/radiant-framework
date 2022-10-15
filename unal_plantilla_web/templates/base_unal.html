@@ -31,7 +31,7 @@
       <script nonce="{{request.csp_nonce}}" src="{% static 'unal/js/unal.js' %}" type="text/javascript"></script>
       <script nonce="{{request.csp_nonce}}" src="{% static 'unal/js/accesibilidad.js' %}" type="text/javascript"></script>
       <script nonce="{{request.csp_nonce}}" type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
-      <title>Inicio: Universidad Nacional de Colombia</title>
+      <title>{% block 'head-title' %}{% endblock %} DIMA - Universidad Nacional de Colombia</title>
    </head>
    <body>
       <!-- Servicios -->
@@ -161,21 +161,22 @@
                   </div>
 
                   <!--Admin-->
-                  <div class="btn-group btn-plain">
-                     {% if user.is_authenticated %}
-                        <a href="{% url 'logout' %}" class="btn btn-default">
-                        <i class="bi bi-box-arrow-in-left"></i>
-                        Logout ({{user}})
-                        </a>
-                     {% else %}
+                  {% if user.is_authenticated %}
+                     <div class="collapse btn-group dropstart languageMenu d-none d-md-block">
+                        <div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">{{user}}<span class="caret"></span></div>
+                        <ul class="dropdown-menu dropdown-menu-right dima-dropdown-menu">
+                           <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                           <li><a href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                     </div>
+                  {% else %}
+                     <div class="btn-group btn-plain">
                         <a href="{% url 'login' %}" class="btn btn-default">
-                        <i class="bi bi-box-arrow-in-right"></i>
-                        Admin
+                           <i class="bi bi-box-arrow-in-right"></i>
+                           Admin
                         </a>
-                     {% endif %}
-                   </div>
-
-
+                     </div>
+                  {% endif %}
 
                </nav>
             </div>

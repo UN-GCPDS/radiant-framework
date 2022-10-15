@@ -15,3 +15,7 @@ a,
 
 
 
+.dropstart .dropdown-toggle::before {
+    vertical-align: 0;
+    color: #94b43b;
+}

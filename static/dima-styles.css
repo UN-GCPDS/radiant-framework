@@ -283,3 +283,51 @@ font-size: 60%;
 .dima-content a {
     border-bottom: 1px dotted;
 }
+
+
+.dima-nav__container {
+
+background-color: #5b5b5b;
+border-top: 2px solid #666666;
+
+}
+
+.dima-nav__container ul {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+}
+
+.dima-nav__container li {
+    background-color: #666666;
+    margin: 10px 5px;
+    padding: 10px 30px;
+    display: flex;
+}
+
+.dima-nav__container li a:focus,
+.dima-nav__container li a:hover,
+.dima-nav__container li a {
+    color: white;
+    text-decoration: none;
+    font-family: "Ancizar sans light";
+    line-height: 31px;
+    font-size: 80%;
+    text-transform: uppercase;
+}
+
+.dima-nav__container li img {
+    width: 45px;
+    height: 45px;
+}
+
+
+
+
+
+
+
+.dima-dropdown-menu {
+top: 10px !important;
+}
+
