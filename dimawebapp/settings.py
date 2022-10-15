@@ -207,7 +207,7 @@ LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = '/'
 
 APPEND_SLASH = True
-
+LANGUAGE_CODE = "es"
 
 if PROTECT:
 

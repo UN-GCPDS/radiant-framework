@@ -33,6 +33,16 @@
     </ul>
 </div>
 
+<div class="btn-group">
+  <div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">
+    Convocatorias<span class="caret"></span>
+  </div>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'calls_int' %}">Convocatorias internas</a></li>
+      <li><a class="dropdown-item" href="{% url 'calls_aux' %}">Convocatorias estudiantes auxiliares</a></li>
+      <li><a class="dropdown-item" href="{% url 'calls_search' %}">Búsqueda de convocatorias</a></li>
+    </ul>
+</div>
 
 <!--<div class="btn-group">-->
   <!--<div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown"> Acerca de<span class="caret"></span>-->
@@ -46,7 +56,7 @@
 <!--</div>-->
 
 <div class="btn-group">
-  <a href="http://investigacion.manizales.unal.edu.co/boletines-dima/" class="btn btn-default">Contáctenos</a>
+  <a href="{% url 'contact' %}" class="btn btn-default">Contáctenos</a>
 </div>
 <div class="btn-group">
   <a href="{% url 'newsletters' %}" class="btn btn-default">Boletines Dima</a>

@@ -1,14 +1,14 @@
 {% extends "base_unal.html" %}
 {% load admin_urls %}
 
-{% block 'head-title' %} - Presentación{% endblock %}
+{% block 'head-title' %} - Contacto{% endblock %}
 
 {% block 'breadcrumb' %}
 <div class="breadcrumb-class">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">Está en:<a href="/">Inicio</a></li>
-      <li class="breadcrumb-item active" aria-current="page"><a href="#">Presentación</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="#">Contacto</a></li>
     </ol>
   </nav>
 </div>
@@ -19,14 +19,16 @@
 <div class="container-lg">
   <div class="row">
 
-    <h1 class="display-3">Presentación
+    <h1 class="display-3">Contáctenos
       <small class="text-muted">
         {% if user.is_authenticated %}
-          <a class='dima-edit' href='{% url presentation_admin|admin_urlname:'change' presentation.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+          <a href='{% url contact_admin|admin_urlname:'change' contact.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </small>
     </h1>
-    {{presentation.content|safe}}
+    <div class="dima-content">
+      {{contact.content|safe}}
+    </div>
 
 
   </div>

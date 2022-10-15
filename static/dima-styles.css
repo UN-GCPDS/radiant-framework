@@ -234,3 +234,52 @@ line-height: 130%;
 .dima-edit{
 font-size: 60%;
 }
+
+
+.dima-content {
+    margin-top: 20px;
+}
+
+.dima-content p {
+    margin: 15px 0;
+}
+
+
+.dima-content p:first-child {
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+/*.dima-content h1 {*/
+ /*text-transform: lowercase;*/
+/*}*/
+
+/*.dima-content h1::first-letter {*/
+ /*text-transform: uppercase;*/
+/*}*/
+
+
+.dima-content ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+
+.dima-content ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.dima-content a {
+    border-bottom: 1px dotted;
+}

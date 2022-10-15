@@ -12,21 +12,28 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='admin/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
+
+    # Dynamic
     path('group', GroupView.as_view(), name='group'),
     path('newsletters', NewsletterView.as_view(), name='newsletters'),
+
+    # Static
     path('equipo_de_trabajo', TeamView.as_view(), name='equipo_de_trabajo'),
+    path('presentacion', ContentView.as_view(label='presentation', template_name="static/presentacion.html"), name='presentation'),
+    path('mision_y_vision', ContentView.as_view(label='mision', template_name="static/mision.html"), name='mision_y_vision'),
+    path('avales', ContentView.as_view(label='avales', template_name="static/avales.html"), name='avales'),
+    path('contacto', ContentView.as_view(label='contact', template_name="static/contact.html"), name='contact'),
 
-    path('presentacion', ContentView.as_view(label='presentation', template_name="presentacion.html"), name='presentation'),
-    path('mision_y_vision', ContentView.as_view(label='mision', template_name="mision.html"), name='mision_y_vision'),
-    path('avales', ContentView.as_view(label='avales', template_name="avales.html"), name='avales'),
-    path('sandbox', ContentView.as_view(label='sandbox', template_name="sandbox.html"), name='sandbox'),
+    # Convocatorias
+    path('convocatorias_internas', TemplateView.as_view(), name='calls_int'),
+    path('convocatorias_estudiantes_auxiliares', TemplateView.as_view(), name='calls_aux'),
+    path('busqueda_de_convocatorias', TemplateView.as_view(), name='calls_search'),
 
-    path('apoyo_proyectos', TemplateView.as_view(), name='apoyo_proyectos'),
 
+
+    # path('apoyo_proyectos', TemplateView.as_view(), name='apoyo_proyectos'),
     # path('group', GroupView.as_view(), name='group'),
     # path('options', GenerateFilteredOptionsView.as_view(), name='options'),
-
-
     # path('test', DashSampleView.as_view(), name='dash_sample'),
     # path('bulk_data', ResearcherView.as_view(), name='researchers'),
 

@@ -41,7 +41,7 @@ class GroupView(TemplateView):
     # ----------------------------------------------------------------------
     def post(self, request, *args, **kwargs):
         """"""
-        self.template_name = "groups_table.html"
+        self.template_name = "dynamic/groups_table.html"
         context = self.get_context_data(**kwargs)
 
         filters = fix_filters(ResearchGroup, json.loads(request.POST['data']))
@@ -54,7 +54,7 @@ class GroupView(TemplateView):
     # ----------------------------------------------------------------------
     def get(self, request, *args, **kwargs):
         """"""
-        self.template_name = "group_view.html"
+        self.template_name = "dynamic/group_view.html"
         context = self.get_context_data(**kwargs)
 
         try:
@@ -67,7 +67,7 @@ class GroupView(TemplateView):
 
 ########################################################################
 class NewsletterView(TemplateView):
-    template_name = "newsletter.html"
+    template_name = "dynamic/newsletter.html"
 
     # ----------------------------------------------------------------------
     def get_context_data(self, **kwargs):
@@ -80,7 +80,7 @@ class NewsletterView(TemplateView):
 
 ########################################################################
 class TeamView(TemplateView):
-    template_name = "equipo_de_trabajo.html"
+    template_name = "static/equipo_de_trabajo.html"
 
     # ----------------------------------------------------------------------
     def get_context_data(self, **kwargs):
@@ -93,7 +93,7 @@ class TeamView(TemplateView):
 
 ########################################################################
 class ContentView(TemplateView):
-    template_name = "avales_para_grupos.html"
+    template_name = ''
     label = ''
 
     # ----------------------------------------------------------------------
