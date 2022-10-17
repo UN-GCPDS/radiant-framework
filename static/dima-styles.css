@@ -1,132 +1,117 @@
-
-
 .dima-sidebar {
-    background-color: red;
-    width: 20vw;
-    height: 100vh;
+  background-color: red;
+  width: 20vw;
+  height: 100vh;
 }
 
-
-.dima-body {
-
-}
+.dima-body {}
 
 .display-8 {
-    font-size: 2rem;
-    font-weight: 300;
-    line-height: 1.2;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.2;
 }
 
 .display-9 {
-    font-size: 1.75rem;
-    font-weight: 300;
-    line-height: 1.2;
+  font-size: 1.75rem;
+  font-weight: 300;
+  line-height: 1.2;
 }
 
 .display-10 {
-    font-size: 1.5rem;
-    font-weight: 300;
-    line-height: 1.2;
-}
-
-
-
-.dima-group--name {
-    color: #636efa;
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 5px;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2;
 }
 
 .dima-group--name {
-    color: #636efa;
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 5px;
+  color: #636efa;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
 }
 
-
-
-.dima-form{
-
-    padding: 30px 30px;
-    background-color: #f8f9fa;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    width: calc(100% + 30px);
-    margin-left: -15px;
-
+.dima-group--name {
+  color: #636efa;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
 }
 
+.dima-form {
+  padding: 30px 30px;
+  background-color: #f8f9fa;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: calc(100% + 30px);
+  margin-left: -15px;
+}
 
 .dima-plot {
-    margin-bottom: 30px;
-
+  margin-bottom: 30px;
 }
 
-
-
 main.detalle {
-    background-color: white;
-    padding: 15px;
-    margin-top: 30px !important;
-    padding-top: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 6px #555;
-    padding-bottom: 180px;
-    overflow-x: hidden;
+  background-color: white;
+  padding: 15px;
+  margin-top: 30px !important;
+  padding-top: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px #555;
+  padding-bottom: 180px;
+  overflow-x: hidden;
 }
 
 main .breadcrumb-class {
-    margin-bottom: 30px !important;
+  margin-bottom: 30px !important;
 }
 
 main {
-    font-family: 'Ancizar Sans Light' !important;
+  font-family: 'Ancizar Sans Light' !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Ancizar Sans Light", "MS Sans", "New York", Sans !important;
-    color: #14a8df!important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Ancizar Sans Light", "MS Sans", "New York", Sans !important;
+  color: #14a8df !important;
 }
-
 
 .dima-main {
-    font-size: 150%;
-    line-height: 120%;
+  font-size: 150%;
+  line-height: 120%;
 }
-
 
 .dima-logo {
-    padding: 5px 15px;
+  padding: 5px 15px;
 }
-
 
 .dima-card {
-    width: 15rem;
-    margin: 5px 5px;
+  width: 15rem;
+  margin: 5px 5px;
 }
-
 
 .dima-logo img {
-width: 25vw;
+  width: 25vw;
 }
 
-.dima-newsletter {
-
-}
+.dima-newsletter {}
 
 .dima-newsletter--thumbnail {
-width: 25vh;
-    display: inline-grid;
-    margin: 30px;
-    border: 1px solid #dddddd;
-    border-radius: 4px;
+  width: 25vh;
+  display: inline-grid;
+  margin: 30px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
 }
 
 /* [1] The container */
 .img-hover-zoom {
-  overflow: hidden; /* [1.2] Hide the overflowing of child elements */
+  overflow: hidden;
+  /* [1.2] Hide the overflowing of child elements */
 }
 
 /* [2] Transition property for smooth transformation of images */
@@ -139,195 +124,190 @@ width: 25vh;
   transform: scale(1.1);
 }
 
-
 .dima--carousel-item {
-    background-size: cover;
-    background-position: center;
-    z-index: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
 }
 
 .dima--carousel-blur {
-    filter: blur(7px) brightness(0.5);
-    position: absolute;
-    z-index: -1;
-    height: calc(100% + 30px);
-    width: 120%;
-    margin: 0px -10px;
-    margin-top: -10px;
-    margin-left: -10%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  filter: blur(7px) brightness(0.5);
+  position: absolute;
+  z-index: -1;
+  height: calc(100% + 30px);
+  width: 120%;
+  margin: 0px -10px;
+  margin-top: -10px;
+  margin-left: -10%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .dima--carousel-item img {
-    margin: 20px auto;
-    height: 45vh;
-    z-index: 10;
-    filter: drop-shadow(2px 4px 6px #5b5b5b);
-    border-radius: 4px;
-    max-width: 90%;
+  margin: 20px auto;
+  height: 45vh;
+  z-index: 10;
+  filter: drop-shadow(2px 4px 6px #5b5b5b);
+  border-radius: 4px;
+  max-width: 90%;
 }
 
-#dima-carousel {
-
-
-}
+#dima-carousel {}
 
 .dima--carousel-separator {
-    background-color: #5b5b5b;
-    width: 100%;
-    height: 60px;
+  background-color: #5b5b5b;
+  width: 100%;
+  height: 30px;
 }
 
-
 .carousel-indicators {
-    margin-bottom: 1.3rem;
+  margin-bottom: 0.3rem;
 }
 
 .carousel-caption {
-    position: absolute;
-    bottom: 2rem;
-    right: 40px;
-    color: #fff;
-    text-align: left;
-    background-color: #5b5b5bcc;
-    padding: 30px;
-    left: auto;
-    width: 30vw;
+  position: absolute;
+  bottom: 2rem;
+  right: 40px;
+  color: #fff;
+  text-align: left;
+  background-color: #5b5b5bcc;
+  padding: 30px;
+  left: auto;
+  width: 30vw;
 }
 
 .dima-carousel-caption__link {
-    line-height: 30px;
+  line-height: 30px;
 }
+
 .dima-carousel-caption__link:hover {
-    color: #b9cd83;
+  color: #b9cd83;
 }
 
 .carousel-caption.carousel-caption--auth {
-    left: 20vw;
-    right: unset;
-    width: auto;
-    text-align: center;
-    padding: 15px 20px;
+  left: 20vw;
+  right: unset;
+  width: auto;
+  text-align: center;
+  padding: 15px 20px;
 }
 
 .dima-link--edit {
-    position: absolute;
-    padding: 10px;
-    z-index: 9999999;
+  position: absolute;
+  padding: 10px;
+  z-index: 9999999;
 }
 
 .carousel-caption.carousel-caption--auth a:hover,
 .dima-link--edit:hover {
-    color: #b9cd83;
+  color: #b9cd83;
 }
 
-.dima-teams {
-}
+.dima-teams {}
+
 .dima-teams--team {
-margin-top: 60px;
-line-height: 130%;
-    font-size: 80%;
+  margin-top: 60px;
+  line-height: 130%;
+  font-size: 80%;
 }
 
-.dima-edit{
-font-size: 60%;
+.dima-edit {
+  font-size: 60%;
 }
-
 
 .dima-content {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .dima-content p {
-    margin: 15px 0;
+  margin: 15px 0;
 }
 
-
 .dima-content p:first-child {
-    margin: 0;
-    margin-bottom: 15px;
+  margin: 0;
+  margin-bottom: 15px;
 }
 
 /*.dima-content h1 {*/
- /*text-transform: lowercase;*/
+/*text-transform: lowercase;*/
 /*}*/
-
 /*.dima-content h1::first-letter {*/
- /*text-transform: uppercase;*/
+/*text-transform: uppercase;*/
 /*}*/
-
-
 .dima-content ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
 }
 
-
 .dima-content ol {
-    display: block;
-    list-style-type: decimal;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
+  display: block;
+  list-style-type: decimal;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
 }
 
 .dima-content a {
-    border-bottom: 1px dotted;
+  border-bottom: 1px dotted;
 }
 
+.dima-content a:hover {
+    text-decoration: none;
+    color: #4d640d;
+}
 
 .dima-nav__container {
-
-background-color: #5b5b5b;
-border-top: 2px solid #666666;
-
+  background-color: #5b5b5b;
+  border-top: 2px solid #666666;
 }
 
 .dima-nav__container ul {
-    display: flex;
-    align-items: right;
-    justify-content: right;
+  display: flex;
+  align-items: right;
+  justify-content: right;
+  margin-right: 10px;
 }
 
 .dima-nav__container li {
-    background-color: #666666;
-    margin: 10px 5px;
-    padding: 10px 30px;
-    display: flex;
+  background-color: #666666;
+  margin: 10px 5px;
+  padding: 10px 30px;
+  display: flex;
 }
 
 .dima-nav__container li a:focus,
 .dima-nav__container li a:hover,
 .dima-nav__container li a {
-    color: white;
-    text-decoration: none;
-    font-family: "Ancizar sans light";
-    line-height: 31px;
-    font-size: 80%;
-    text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  font-family: "Ancizar sans light";
+  line-height: 31px;
+  font-size: 80%;
+  text-transform: uppercase;
 }
 
 .dima-nav__container li img {
-    width: 45px;
-    height: 45px;
+  width: 45px;
+  height: 45px;
 }
-
-
-
-
-
-
 
 .dima-dropdown-menu {
-top: 10px !important;
+  top: 10px !important;
 }
 
+.dima-bi {
+  font-size: 50%;
+}
+
+.dima-list-noindent {
+  padding-left: 1em !important;
+  margin-block-start: 0 !important;
+}

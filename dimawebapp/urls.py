@@ -22,21 +22,22 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    path('tinymce/', include('tinymce.urls')),
-    # path('ckeditor/', include('ckeditor_uploader.urls')),
-    # path('api-auth/', include('rest_framework.urls')),
-
     path("", include('dima.urls')),
-    path("researcher/", include('researchers.urls')),
-    path("group/", include('researchers.urls')),
-    path("", include('visualizations.urls')),
-    path("", include('unal_plantilla_web.urls')),
 
-    # path("", include('research_groups.urls')),
-    # path('django_plotly_dash/', include('django_plotly_dash.urls')),
+    path("groups/", include('groups.urls')),
+    path("researchers/", include('researchers.urls')),
+
+    path("", include('visualizations.urls')),
+    # path("", include('unal_plantilla_web.urls')),
+
+
+
+    # Third party modules
+    path('tinymce/', include('tinymce.urls')),
 
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
 

@@ -140,7 +140,8 @@ DATABASES.update({
     }
 })
 
-DATABASE_ROUTERS = ['dima.db_router.DimaDBRouter', 'dimawebapp.db_router.AdminInterfaceRouter']
+DATABASE_ROUTERS = ['dima.db_router.DimaDBRouter',
+                    'dimawebapp.db_router.AdminInterfaceRouter']
 
 
 # Password validation
@@ -297,10 +298,12 @@ if PROTECT:
         'http://cdnjs.cloudflare.com/'
     ]
 
-    CSP_STYLE_SRC = ["'self'", "'unsafe-hashes'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
+    CSP_STYLE_SRC = ["'self'", "'unsafe-hashes'"] + \
+        SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
     # CSP_STYLE_SRC_ELEM = ["'self'", "'unsafe-hashes'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in STYLE_HASHES]
 
-    CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'", "'unsafe-hashes'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
+    CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'", "'unsafe-hashes'"] + \
+        SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
     # CSP_SCRIPT_SRC_ELEM = ["'self'", "'unsafe-eval'", "'unsafe-hashes'"] + SCRIPT_EXTERN + [f"'{hash_}'" for hash_ in SCRIPT_HASHES]
 
     CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']

@@ -1,169 +1,147 @@
-body{
+body {
   background-color: #white;
   width: 100vw;
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 code {
-padding: 20px, 0;
-color: blue;
+  padding: 20px, 0;
+  color: blue;
 }
 
 .breadcrumb-class__no-border {
-    border: none !important;
+  border: none !important;
 }
 
 plot-container {
-    padding: 15px;
+  padding: 15px;
 }
 
-
-
-#dima-counters{
-    display: flex;
-    margin: 15px 0;
-    flex-direction: row-reverse;
+#dima-counters {
+  display: flex;
+  margin: 15px 0;
+  flex-direction: row-reverse;
 }
 
-
-#dima-counters .card{
-margin: auto;
-text-align: center;
-height: 132px;
+#dima-counters .card {
+  margin: auto;
+  text-align: center;
+  height: 132px;
 }
 
-    margin-top: -50px;
-
-
+margin-top: -50px;
 
 .navbar {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .display-5 {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
-
 
 .dima-footer {
-    margin-top: 30px;
-    background-color: #f8f9fa;
-    position: relative;
-    width: 100vw;
-    padding: 70px 0;
+  margin-top: 30px;
+  background-color: #f8f9fa;
+  position: relative;
+  width: 100vw;
+  padding: 70px 0;
 }
 
-
-#dima-footer-made{
-    color: #495057;
-    font-size: 90%;
-    text-align: center;
-    bottom: 30px;
-    width: 100%;
-    padding: 30px 0;
+#dima-footer-made {
+  color: #495057;
+  font-size: 90%;
+  text-align: center;
+  bottom: 30px;
+  width: 100%;
+  padding: 30px 0;
 }
-
 
 .dima-footer--list_main,
 .dima-footer--list {
-    list-style: none;
-    padding-left: 0;
-    color: #495057;
+  list-style: none;
+  padding-left: 0;
+  color: #495057;
 }
 
 .dima-footer--list_main li,
-.dima-footer--list li{
-    color: #495057;
+.dima-footer--list li {
+  color: #495057;
 }
 
 .dima-footer--list a {
-    text-decoration: none;
-    color: #495057;
+  text-decoration: none;
+  color: #495057;
 }
-
 
 .dima-footer--list_main {
-    font-size: 80%;
-    margin-top: 10px;
+  font-size: 80%;
+  margin-top: 10px;
 }
 
-.dima-footer--list_main li{
-    padding: 5px 0
+.dima-footer--list_main li {
+  padding: 5px 0
 }
-
 
 table.table {
-font-size: 90%;
+  font-size: 90%;
 }
 
 table.table a {
-    font-size: 90% !important;
-    text-decoration: none !important;
+  font-size: 90% !important;
+  text-decoration: none !important;
 }
 
-main.detalle + container-lg {
-
-}
+main.detalle+container-lg {}
 
 main.accesibility-on {
-    padding-top: 15px !important;
+  padding-top: 15px !important;
 }
-
 
 #unalTop .navigation .mainMenu .btn-group__right {
-    float: right;
-    margin-right: unset !important;
+  float: right;
+  margin-right: unset !important;
 }
 
-
-#unalTop .navigation .mainMenu .btn-group__right-last{
-    margin-right: 85px !important;
+#unalTop .navigation .mainMenu .btn-group__right-last {
+  margin-right: 85px !important;
 }
-
 
 #unalTop {
-    margin-right: 15px;
+  margin-right: 15px;
 }
 
 .btn-group.btn-plain:hover {
-    background-color: unset !important;
-    border-color: unset !important;
+  background-color: unset !important;
+  border-color: unset !important;
 }
-
-
-
 
 .text-muted {
-    font-size: 0.4em !important;
+  font-size: 0.4em !important;
 }
 
-
 strong {
-    font-weight: bold !important;
+  font-weight: bold !important;
 }
 
 .lead {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
-
 
 pre {
-    font-size: 0.7em !important;
-    color: darkgrey;
-
+  font-size: 0.7em !important;
+  color: darkgrey;
 }
-
 
 .dima-nav-tabs {
-    margin-top: -50px;
-    margin-bottom: 40px;
+  margin-top: -50px;
+  margin-bottom: 40px;
 }
 
-.dima-nav-tabs button{
-    color: #94b43b;
+.dima-nav-tabs button {
+  color: #94b43b;
 }
 
 .dima-nav-tabs button:hover,
-.dima-nav-tabs button{
-    color: #94b43b;
+.dima-nav-tabs button {
+  color: #94b43b;
 }

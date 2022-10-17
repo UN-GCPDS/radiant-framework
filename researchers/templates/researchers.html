@@ -1,0 +1,60 @@
+
+{% load admin_urls %}
+
+
+<div class='container-fluid dima-form'>
+  <div class="container-lg">
+    <div class="row">
+
+      <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12">
+        <h1 class="display-8">Por tipo de investigador</h1>
+        <p></p>
+        <select class="form-select" id='dima-select--category__researchers' aria-label="Default select example">
+          <option value="All">Todas los investigadores</option>
+          {% for c in researcher_categories %}
+            {% if c != 'Sin información' %}
+              <option value="{{c}}">{{c}}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12">
+        <h1 class="display-8">Por facultades</h1>
+        <p></p>
+        <select class="form-select" id='dima-select--faculty__researchers' aria-label="Default select example">
+         <option value="All">Todas las facultades</option>
+          {% for f in faculties %}
+            <option value="{{f}}">{{f}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12">
+        <h1 class="display-8">Por departamentos</h1>
+        <p></p>
+        <select class="form-select" id='dima-select--departament__researchers' aria-label="Default select example">
+          <option value="All">Todos los departamentos</option>
+          {% for d in departaments %}
+            <option value="{{d}}">{{d}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class='container-fluid'>
+  <div class="container-lg">
+    <div class="row">
+
+      <div id="dima-placeholder__researchers">
+        {% include 'researchers_list.html' %}
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -54,7 +54,8 @@ class Newsletter(models.Model):
     """"""
     file = models.FileField('newsletter', upload_to=upload_to_newsletter)
     upload = models.DateTimeField('upload', auto_now_add=True)
-    thumbnail = models.ImageField('thumbnail', upload_to=upload_to_newsletter, blank=True, null=True)
+    thumbnail = models.ImageField(
+        'thumbnail', upload_to=upload_to_newsletter, blank=True, null=True)
 
     # ----------------------------------------------------------------------
     def save(self):
@@ -70,10 +71,13 @@ class Broadcast(models.Model):
     image = models.FileField('broadcast', upload_to=upload_to_broadcast)
     expiration = models.DateField('expiration')
     link = models.URLField('link', blank=True, null=True)
-    title = models.CharField('title', max_length=2**10, blank=True, null=True)
-    description = models.TextField('description', max_length=2**10, blank=True, null=True)
+    title = models.CharField('title', max_length=2 **
+                             10, blank=True, null=True)
+    description = models.TextField(
+        'description', max_length=2**10, blank=True, null=True)
     upload = models.DateTimeField('upload', auto_now_add=True)
-    dominant = models.CharField('dominant', max_length=7, blank=True, null=True)
+    dominant = models.CharField(
+        'dominant', max_length=7, blank=True, null=True)
 
     # ----------------------------------------------------------------------
     def save(self):

@@ -1,0 +1,101 @@
+{% extends "base_unal.html" %}
+{% load admin_urls %}
+{% block 'head-title' %}{{group.name}} - {% endblock %}
+
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        Está en:
+        <a href="/">
+          Inicio
+        </a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="#">
+          {{group.name}}
+        </a>
+      </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+
+{% block 'main' %}
+<div class="container-lg">
+
+
+
+    <h1 class="display-3">{{group.name}}
+      <small class="text-muted">
+        {% if user.is_authenticated %}
+          <a href='{% url group_admin|admin_urlname:'change' group.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+      </small>
+    </h1>
+
+
+    {% if group.category_pretty != 'No reconocido' %}
+      <h1>Categoría <strong>{{group.category_pretty}}</strong> de Minciencias
+      | <a href='{{group.gruplac}}' target='blank'>GrupLAC <i class="dima-bi bi bi-box-arrow-up-right"></i></a>
+      </h1>
+    {% endif %}
+
+
+    <div class="dima-content">
+
+
+        <div class="row">
+
+
+        <div class="col-lg-6">
+          <dl class="row">
+            <dt class="col-sm-4">Director:</dt>
+            <dd class="col-sm-8"><a href='{% url 'researchers' group.leader.pk %}'>{{group.leader.full_name}}</a></dd>
+          </dl>
+        </div>
+
+        <div class="col-lg-6">
+          <dl class="row">
+            <dt class="col-sm-4">Facultad:</dt>
+            <dd class="col-sm-8">{{group.faculty_pretty}}</dd>
+
+            <dt class="col-sm-4">Departamento:</dt>
+            <dd class="col-sm-8">{{group.departament_pretty}}</dd>
+
+            <dt class="col-sm-4">Área del conocimiento:</dt>
+            <dd class="col-sm-8">{{group.knowledge_area_pretty}}</dd>
+
+            <dt class="col-sm-4">Líneas de investigación:</dt>
+            <dd class="col-sm-8">
+              <ul class="dima-list-noindent">
+              {% for research in group.research_json %}
+              <li>{{research}}</li>
+              {% endfor %}
+              </ul>
+            </dd>
+          </dl>
+        </div>
+
+        </div>
+
+
+    <strong>Integrantes:</strong>
+
+    <div class="row">
+      {% for researcher in group.researchers_json %}
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <a href='{{researcher.1}}' target='blank'>{{researcher.0}}</a>
+      </div>
+      {% endfor %}
+    </div>
+
+
+
+
+    </div>
+</div>
+{% endblock %}

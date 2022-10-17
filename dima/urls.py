@@ -1,6 +1,6 @@
 from django.urls import path
 from django.views.generic import TemplateView
-from .views import HomeView, GroupView, NewsletterView, TeamView, ContentView
+from .views import HomeView, NewsletterView, TeamView, ContentView
 from django.contrib.auth import views as auth_views
 
 
@@ -14,20 +14,25 @@ urlpatterns = [
 
 
     # Dynamic
-    path('group', GroupView.as_view(), name='group'),
     path('newsletters', NewsletterView.as_view(), name='newsletters'),
 
     # Static
     path('equipo_de_trabajo', TeamView.as_view(), name='equipo_de_trabajo'),
-    path('presentacion', ContentView.as_view(label='presentation', template_name="static/presentacion.html"), name='presentation'),
-    path('mision_y_vision', ContentView.as_view(label='mision', template_name="static/mision.html"), name='mision_y_vision'),
-    path('avales', ContentView.as_view(label='avales', template_name="static/avales.html"), name='avales'),
-    path('contacto', ContentView.as_view(label='contact', template_name="static/contact.html"), name='contact'),
+    path('presentacion', ContentView.as_view(label='presentation',
+         template_name="static/presentacion.html"), name='presentation'),
+    path('mision_y_vision', ContentView.as_view(label='mision',
+         template_name="static/mision.html"), name='mision_y_vision'),
+    path('avales', ContentView.as_view(label='avales',
+         template_name="static/avales.html"), name='avales'),
+    path('contacto', ContentView.as_view(label='contact',
+         template_name="static/contact.html"), name='contact'),
 
     # Convocatorias
     path('convocatorias_internas', TemplateView.as_view(), name='calls_int'),
-    path('convocatorias_estudiantes_auxiliares', TemplateView.as_view(), name='calls_aux'),
-    path('busqueda_de_convocatorias', TemplateView.as_view(), name='calls_search'),
+    path('convocatorias_estudiantes_auxiliares',
+         TemplateView.as_view(), name='calls_aux'),
+    path('busqueda_de_convocatorias',
+         TemplateView.as_view(), name='calls_search'),
 
 
 

@@ -13,13 +13,13 @@
     {% for group in groups %}
     <tr>
       <td class='dima-group--view' data-pk='{{group.pk}}'>
-        <a class="btn btn-link" href="/group?pk={{group.pk}}" role="button">{{group.name}}</a>
+        <a class="btn btn-link" href="{% url 'group' group.pk %}" role="button">{{group.name}}</a>
         {% if user.is_authenticated %}
           <a class='' href='{% url groups_admin|admin_urlname:'change' group.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </td>
 
-      <td>{{group.category_prety}}</td>
+      <td>{{group.category_pretty}}</td>
       <td>{{group.founded|timesince}}</td>
 
     </tr>

@@ -38,6 +38,20 @@ class PersonBase():
             return {'first_name': ' '.join(name[-2:]).replace('_', ' ').title(),
                     'last_name': ' '.join(name[:-2]).replace('_', ' ').title()}
 
+    # ----------------------------------------------------------------------
+    def __getattr__(self, attr):
+        """"""
+        if attr.endswith('_pretty'):
+            field = attr.replace('_pretty', '')
+            if field in [field.name for field in self._meta.fields]:
+                return dict(self._meta.get_field(field).choices)[getattr(self, field)]
+
+        elif attr.endswith('_json'):
+            field = attr.replace('_json', '')
+            return json.loads(getattr(self, field))
+
+        return super().__getattr__(attr)
+
 
 ########################################################################
 class Professor(PersonBase, models.Model):

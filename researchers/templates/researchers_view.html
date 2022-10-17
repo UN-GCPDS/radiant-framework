@@ -1,0 +1,101 @@
+
+{% extends "base_unal.html" %}
+{% load admin_urls %}
+{% block 'head-title' %}{{professor.full_name}} - {% endblock %}
+
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        Está en: <a href="/">Inicio</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="#">Researchers</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="#">{{professor.full_name}}</a>
+      </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+
+{% block 'main' %}
+<div class="container-lg">
+
+    <h1 class="display-3">{{professor.full_name}}
+      <small class="text-muted">
+        {% if user.is_authenticated %}
+          <a href='{% url professor_admin|admin_urlname:'change' professor.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+      </small>
+    </h1>
+
+        <h1>{{professor.category_pretty}} de Minciencias
+    | <a href='#' target='blank'>CvLAC <i class="dima-bi bi bi-box-arrow-up-right"></i></a>
+    </h1>
+
+
+    <div class="dima-content">
+
+
+
+
+
+        <div class="row">
+
+        {% if professor.groups.count %}
+
+        <div class="col-6">
+          <dl class="row">
+            <dt class="col-sm-4">Grupos de investigación:</dt>
+            <dd class="col-sm-8">
+              <ul class="dima-list-noindent">
+                {% for group in professor.groups.all %}
+                  <li><a href='{% url 'group' group.pk %}'>{{group.name}}</a></li>
+                {% endfor %}
+              </ul>
+            </dd>
+          </dl>
+        </div>
+        {% endif %}
+
+
+        <div class="col-lg-6">
+          <dl class="row">
+            <dt class="col-sm-4">Facultad:</dt>
+            <dd class="col-sm-8">{{professor.faculty_pretty}}</dd>
+
+            <dt class="col-sm-4">Departamento:</dt>
+            <dd class="col-sm-8">{{professor.departament_pretty}}</dd>
+
+            <!--<dt class="col-sm-4">Área del conocimiento:</dt>-->
+            <!--<dd class="col-sm-8">{{group.knowledge_area_pretty}}</dd>-->
+
+            <!--<dt class="col-sm-4">Líneas de investigación:</dt>-->
+            <!--<dd class="col-sm-8">-->
+              <!--<ul class="dima-list-noindent">-->
+              <!--{% for research in group.research_json %}-->
+              <!--<li>{{research}}</li>-->
+              <!--{% endfor %}-->
+              <!--</ul>-->
+            <!--</dd>-->
+
+          </dl>
+        </div>
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+</div>
+{% endblock %}

@@ -28,14 +28,14 @@
     </div>
 </div>
 
-<div class='container-fluid dima-form'>
+<div class='container-fluid dima-form dima-form__groups'>
   <div class="container-lg">
     <div class="row">
 
       <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
         <h1 class="display-8">Por facultades</h1>
         <p></p>
-        <select class="form-select" id='dima-select--faculty' aria-label="Default select example">
+        <select class="form-select" id='dima-select--faculty__groups' aria-label="Default select example">
          <option value="All">Todas las facultades</option>
           {% for f in faculties %}
             <option value="{{f}}">{{f}}</option>
@@ -46,7 +46,7 @@
       <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
         <h1 class="display-8">Por departamentos</h1>
         <p></p>
-        <select class="form-select" id='dima-select--departament' aria-label="Default select example">
+        <select class="form-select" id='dima-select--departament__groups' aria-label="Default select example">
           <option value="All">Todos los departamentos</option>
           {% for d in departaments %}
             <option value="{{d}}">{{d}}</option>
@@ -115,21 +115,20 @@
 </div>
 
 
-<div class='container-fluid dima-form'>
+<div class='container-fluid dima-form dima-form__groups'>
   <div class="container-lg">
     <div class="row">
 
-      <div class="col-lg-3 col-sm-6">
+      <div class="col-lg-4">
         <h1 class="display-8">Por categoría</h1>
         <p></p>
-        <select class="form-select" id='dima-select--category' aria-label="Default select example">
+        <select class="form-select" id='dima-select--category__groups' aria-label="Default select example">
           <option value="All">Todas las categorías</option>
           {% for c in categories %}
             <option value="{{c}}">{{c}}</option>
           {% endfor %}
         </select>
       </div>
-
     </div>
   </div>
 </div>
@@ -140,7 +139,7 @@
 
 
       <div class="col-lg-12 col-sm-12">
-        <div class='dima-render' id='dima-render--group'>{% include 'dynamic/groups_table.html' %}</div>
+        <div class='dima-render' id='dima-render--group'>{% include 'groups_table.html' %}</div>
       </div>
 
     </div>
