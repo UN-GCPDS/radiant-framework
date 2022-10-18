@@ -482,6 +482,7 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
                        'toolbox-percent': 1.0,
                        'toolbox-tree-sel': ''})],
 <<<<<<< HEAD
+<<<<<<< HEAD
         'primary_view_state': {'editor_states': ({'bookmarks': ([[loc('visualizations/views.py'),
         {'attrib-starts': [('BarsTemplatePlot|0|',
                             25),
@@ -519,6 +520,8 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
           'zoom': 0},
          1666143352.030124],
 =======
+=======
+>>>>>>> 9aefa1b (Update)
         'primary_view_state': {'editor_states': ({'bookmarks': ([[loc('visualizations/templates/pie.html'),
         {'attrib-starts': [],
          'code-line': 'data = [trace1];\n',
@@ -638,6 +641,23 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
                              122)],
           'code-line': '                "/researchers/", FILTERS_RESEARCHERS)\n',
           'first-line': 117,
+=======
+        'primary_view_state': {'editor_states': ({'bookmarks': ([[loc('researchers/templates/researchers_view.html'),
+        {'attrib-starts': [],
+         'code-line': '    | <a href=\'{{professor.gruplac}}\' target=\'blank\'>CvLAC <i class="dima-bi bi bi-box-arrow-up-right"></i></a>\n',
+         'first-line': 38,
+         'folded-linenos': [],
+         'sel-line': 37,
+         'sel-line-start': 991,
+         'selection_end': 1049,
+         'selection_start': 1044,
+         'zoom': 0},
+        1666024366.0243108],
+        [loc('groups/templates/group_view.html'),
+         {'attrib-starts': [],
+          'code-line': '        <div class="row">\n',
+          'first-line': 35,
+>>>>>>> 663b903 (Update)
           'folded-linenos': [],
           'sel-line': 131,
           'sel-line-start': 4170,
@@ -783,6 +803,7 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
           'selection_end': 0,
           'selection_start': 0,
           'zoom': 0},
+<<<<<<< HEAD
          1666549903.0466824),
         (loc('dimawebapp/settings.py'),
          {'attrib-starts': [],
@@ -796,6 +817,21 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
           'zoom': 0},
          1666707827.316443),
         (loc('dimawebapp/settings.py'),
+=======
+         1666025642.8757544],
+        [loc('researchers/templates/researchers_view.html'),
+         {'attrib-starts': [],
+          'code-line': '        {% endif %}\n',
+          'first-line': 44,
+          'folded-linenos': [],
+          'sel-line': 62,
+          'sel-line-start': 1643,
+          'selection_end': 1662,
+          'selection_start': 1662,
+          'zoom': 0},
+         1666101772.5455635],
+        [loc('dimawebapp/settings.py'),
+>>>>>>> 663b903 (Update)
          {'attrib-starts': [],
           'code-line': 'PROTECT = True\n',
           'first-line': 22,
@@ -805,6 +841,7 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
           'selection_end': 922,
           'selection_start': 922,
           'zoom': 0},
+<<<<<<< HEAD
          1666707830.394599)],
         17),
 >>>>>>> 2ef2a1e (Added percentages to bars)
@@ -818,6 +855,31 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
                                 'sel-line-start': 319,
                                 'selection_end': 355,
                                 'selection_start': 355,
+=======
+         1666101776.6863081],
+        [loc('dimawebapp/wsgi.py'),
+         {'attrib-starts': [],
+          'code-line': '"""\n',
+          'first-line': 9,
+          'folded-linenos': [],
+          'sel-line': 0,
+          'sel-line-start': 0,
+          'selection_end': 0,
+          'selection_start': 0,
+          'zoom': 0},
+         1666101780.398869]],
+        20),
+        'current-loc': loc('researchers/templates/researchers_view.html'),
+        'editor-state-list': [(loc('researchers/templates/researchers_view.html'),
+                               {'attrib-starts': [],
+                                'code-line': '        </div>\n',
+                                'first-line': 44,
+                                'folded-linenos': [],
+                                'sel-line': 61,
+                                'sel-line-start': 1628,
+                                'selection_end': 1642,
+                                'selection_start': 1642,
+>>>>>>> 663b903 (Update)
                                 'zoom': 0}),
                               (loc('visualizations/views.py'),
                                {'attrib-starts': [('BarsTemplatePlot|0|',
@@ -954,13 +1016,33 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
                               (loc('dimawebapp/settings.py'),
                                {'attrib-starts': [],
                                 'code-line': 'PROTECT = True\n',
+<<<<<<< HEAD
                                 'first-line': 311,
+=======
+                                'first-line': 22,
+>>>>>>> 663b903 (Update)
                                 'folded-linenos': [],
                                 'sel-line': 29,
                                 'sel-line-start': 908,
                                 'selection_end': 922,
                                 'selection_start': 922,
+<<<<<<< HEAD
 >>>>>>> 2ef2a1e (Added percentages to bars)
+=======
+<<<<<<< HEAD
+=======
+                                'zoom': 0}),
+                              (loc('dimawebapp/wsgi.py'),
+                               {'attrib-starts': [],
+                                'code-line': '"""\n',
+                                'first-line': 9,
+                                'folded-linenos': [],
+                                'sel-line': 0,
+                                'sel-line-start': 0,
+                                'selection_end': 0,
+                                'selection_start': 0,
+>>>>>>> 663b903 (Update)
+>>>>>>> 9aefa1b (Update)
                                 'zoom': 0})],
         'has-focus': False,
         'locked': False},
@@ -974,6 +1056,7 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
          loc('static/py/dima_scripts.py'),
          loc('static/py/scripts.py'),
          loc('researchers/views.py'),
+<<<<<<< HEAD
          loc('researchers/templates/researchers_list.html'),
 <<<<<<< HEAD
          loc('../venv310/lib/python3.10/site-packages/django/template/base.py')]),
@@ -993,8 +1076,19 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
          loc('dimawebapp/settings.py')]),
                                'open_files': ['dimawebapp/urls.py',
         'researchers/urls.py',
+=======
+         loc('researchers/templates/researchers.html'),
+         loc('groups/models.py'),
+         loc('../venv310/lib/python3.10/site-packages/django/template/base.py'),
+         loc('dimawebapp/settings.py'),
+         loc('dimawebapp/wsgi.py')]),
+                               'open_files': ['groups/models.py',
+        'groups/templates/group_view.html',
+        'researchers/templates/researchers.html',
+>>>>>>> 663b903 (Update)
         'researchers/views.py',
         'static/dima-styles.css',
+<<<<<<< HEAD
         'static/py/scripts.py',
         'visualizations/templates/bars.html',
         'visualizations/templates/bars_overlay.html',
@@ -1005,11 +1099,17 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
         'static/py/dima_scripts.py',
 >>>>>>> 2ef2a1e (Added percentages to bars)
         'researchers/templates/researchers_list.html']},
+=======
+        'dimawebapp/settings.py',
+        'dimawebapp/wsgi.py',
+        'researchers/templates/researchers_view.html']},
+>>>>>>> 663b903 (Update)
         'saved_notebook_display': 'normal',
         'split_percents': {0: 0.574468085106383},
         'splits': 2,
         'tab_location': 'top',
         'traversal_pos': ((0,
+<<<<<<< HEAD
 <<<<<<< HEAD
                            0),
                           1666143889.0048807),
@@ -1017,6 +1117,14 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
                            6),
                           1666144198.3718998),
 >>>>>>> 2ef2a1e (Added percentages to bars)
+=======
+                           6),
+                          1666144198.3718998),
+=======
+                           7),
+                          1666111160.7030177),
+>>>>>>> 663b903 (Update)
+>>>>>>> 9aefa1b (Update)
         'user_data': {}},
                  'saved_notebook_display': 'normal',
                  'split_percents': {0: 1.0},
@@ -1026,6 +1134,7 @@ guimgr.overall-gui-state = {'windowing-policy': 'combined-window',
                                     0),
                                    1666019382.4055388),
                  'user_data': {}},
+<<<<<<< HEAD
         'window-alloc': (439,
                          189,
                          1232,
@@ -1047,7 +1156,20 @@ guimgr.recent-documents = [loc('researchers/templates/researchers_list.html'),
                            loc('static/py/dima_scripts.py'),
                            loc('dimawebapp/settings.py'),
                            loc('../venv310/lib/python3.10/site-packages/django/template/base.py')]
+<<<<<<< HEAD
 >>>>>>> 2ef2a1e (Added percentages to bars)
+=======
+=======
+        'window-alloc': (2325,
+                         0,
+                         1230,
+                         790)}]}
+guimgr.recent-documents = [loc('researchers/templates/researchers_view.html'),
+                           loc('dimawebapp/wsgi.py'),
+                           loc('dimawebapp/settings.py'),
+                           loc('static/dima-styles.css')]
+>>>>>>> 663b903 (Update)
+>>>>>>> 9aefa1b (Update)
 guimgr.visual-state = {loc('../../../../../usr/lib/python3.10/json/decoder.py'): {'attrib-starts': [('JSONDecoder|0|',
         253),
         ('JSONDecoder|0|.decode|0|',
