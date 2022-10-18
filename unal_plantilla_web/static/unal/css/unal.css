@@ -15,6 +15,10 @@
 }
 
 @font-face {
+	font-family: 'Ancizar sans light'; font-weight: light; font-style: normal; src: url("../fonts/ancizar_sans_regular-webfont.eot"), url("../fonts/ancizar_sans-light-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/ancizar_sans-light-webfont.woff") format('woff'), url("../fonts/ancizar_san-light-webfont.ttf") format('truetype'), url("../fonts/ancizar_sans-light-webfont.svg#ancisar_sans_light") format('svg');
+}
+
+@font-face {
 	font-family: 'Ancizar serif'; font-weight: bold; font-style: italic; src: url("../fonts/ancizarserif_bold_italic-webfont.eot"), url("../fonts/ancizarserif_bold_italic-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/ancizarserif_bold_italic-webfont.woff") format('woff'), url("../fonts/ancizarserif_bold_italic-webfont.ttf") format('truetype'), url("../fonts/ancizarserif_bold_italic-webfont.svg#ancizar_sansbold_italic") format('svg');
 }
 

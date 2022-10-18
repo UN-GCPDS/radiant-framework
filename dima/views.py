@@ -43,6 +43,7 @@ class HomeView(TemplateView):
 ########################################################################
 class NewsletterView(TemplateView):
     template_name = "newsletter.html"
+    
 
     # ----------------------------------------------------------------------
     def get_context_data(self, **kwargs):

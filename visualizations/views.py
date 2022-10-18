@@ -54,7 +54,9 @@ class BarsTemplatePlot(TemplateView):
             x, y = [], []
         else:
             x, y = map(list, (zip(*filter(lambda l: l[0], zip(x, y)))))
-
+            x = [round(100*xi/sum(x)) for xi in x]
+        bar_text = "%{x}%"
+        
         return locals()
 
     # ----------------------------------------------------------------------
@@ -68,6 +70,9 @@ class BarsTemplatePlot(TemplateView):
             x, y = [], []
         else:
             x, y = map(list, (zip(*filter(lambda l: l[0], zip(x, y)))))
+            x = [round(100*xi/sum(x)) for xi in x]
+        bar_text = "%{x}%"
+        
         return locals()
 
     # ----------------------------------------------------------------------
@@ -79,7 +84,9 @@ class BarsTemplatePlot(TemplateView):
             x, y = [], []
         else:
             x, y = map(list, (zip(*filter(lambda l: l[0], zip(x, y)))))
-
+            x = [round(100*xi/sum(x)) for xi in x]
+        bar_text = "%{x}%"
+        
         return locals()
 
     # ----------------------------------------------------------------------
@@ -93,6 +100,7 @@ class BarsTemplatePlot(TemplateView):
             x, y = [], []
         else:
             x, y = map(list, (zip(*filter(lambda l: l[0], zip(x, y)))))
+            #x = [round(100*xi/sum(x)) for xi in x]
 
         return locals()
 

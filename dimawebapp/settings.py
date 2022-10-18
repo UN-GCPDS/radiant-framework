@@ -57,15 +57,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     'django_extensions',
-
     'tinymce',
-
-    # 'rest_framework',
-
-    # 'django_plotly_dash.apps.DjangoPlotlyDashConfig',
-
-    # 'research_groups.apps.ResearchGroupsConfig',
-
+    
     'visualizations.apps.VisualizationsConfig',
 
     'researchers.apps.ResearchersConfig',
