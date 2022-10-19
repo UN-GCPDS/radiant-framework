@@ -60,6 +60,7 @@ main.detalle {
   box-shadow: 0 0 6px #555;
   padding-bottom: 180px;
   overflow-x: hidden;
+  text-align: justify;
 }
 
 main .breadcrumb-class {

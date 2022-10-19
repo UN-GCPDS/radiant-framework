@@ -1,4 +1,5 @@
 {% load admin_urls %}
+{% load dima_utils %}
 
 <table class="table table-hover">
   <thead>
@@ -12,6 +13,11 @@
 
   <tbody>
   {% for professor in professors %}
+
+    {% replace professor.category_pretty 'Investigador' '' as category %}
+    {% replace professor.faculty_pretty 'Facultad de' '' as faculty %}
+    {% replace professor.departament_pretty 'Departamento de' '' as departament %}
+
     {% if professor.category_pretty != 'Sin información' %}
     <tr>
       <td class='dima-group--view' data-pk='{{professor.pk}}'>
@@ -20,9 +26,9 @@
           <a class='' href='{% url professors_admin|admin_urlname:'change' professor.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </td>
-      <td>{{professor.category_pretty}}</td>
-      <td>{{professor.faculty_pretty}}</td>
-      <td>{{professor.departament_pretty}}</td>
+      <td>{{category|capfirst}}</td>
+      <td>{{faculty|capfirst}}</td>
+      <td>{{departament|capfirst}}</td>
     </tr>
     {% endif %}
   {% endfor %}
