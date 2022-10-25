@@ -13,7 +13,7 @@ class ResearchGroup(models.Model):
         'Minciencias code', primary_key=True, max_length=2**5)
     hermes_code = models.CharField('Hermes code', max_length=2**5)
 
-    name = models.CharField('Name', max_length=2**6)
+    name = models.CharField('Name', max_length=2**7)
     research = models.CharField('Research', max_length=2**10)
     founded = models.DateField(
         'Founded', default='django.utils.timezone.now')
@@ -27,7 +27,7 @@ class ResearchGroup(models.Model):
         'Knowledge area', **Choices('KNOWLEDGE'))
 
     researchers = models.TextField(
-        'Researchers', max_length=2**10, null=True, blank=True)
+        'Researchers', max_length=2**16, null=True, blank=True)
 
     gruplac = models.URLField('GrupLAC', null=True, blank=True)
 

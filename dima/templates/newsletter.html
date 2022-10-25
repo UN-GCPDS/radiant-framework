@@ -26,14 +26,20 @@
     </h1>
 
     <div class="d-flex justify-content-around flex-wrap">
-      {% for newsletter in newsletters %}
-        <div class="img-hover-zoom">
-          <a href='{{newsletter.file.url}}'>
-            <img class='dima-newsletter--thumbnail' src={{newsletter.thumbnail.url}}></img>
-          </a>
-        </div>
+    
 
-      {% endfor %}
+        <div class="row">
+          {% for newsletter in newsletters %}
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="img-hover-zoom">
+                <a href='{{newsletter.file.url}}'>
+                  <img class='dima-newsletter--thumbnail' src={{newsletter.thumbnail.url}}></img>
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      
     </div>
   </div>
 </div>

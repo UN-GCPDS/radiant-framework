@@ -1,6 +1,7 @@
 
 {% extends "base_unal.html" %}
 {% load admin_urls %}
+{% load dima_utils %}
 {% block 'head-title' %}{{professor.full_name}} - {% endblock %}
 
 
@@ -35,7 +36,12 @@
     </h1>
 
         <h1>{{professor.category_pretty}} de Minciencias
-    | <a href='#' target='blank'>CvLAC <i class="dima-bi bi bi-box-arrow-up-right"></i></a>
+        
+        
+    {% if professor.cvlac %}
+    | <a href='{{professor.cvlac}}' target='blank'>CvLAC <i class="dima-bi bi bi-box-arrow-up-right"></i></a>
+    {% endif %}
+    
     </h1>
 
 
@@ -48,7 +54,7 @@
         <div class="row">
 
         {% if professor.groups.count %}
-        <div class="col-6">
+        <div class="col-md-12 col-lg-6">
           <dl class="row">
             <dt class="col-sm-4">Grupos de investigación:</dt>
             <dd class="col-sm-8">
@@ -63,7 +69,7 @@
         {% endif %}
 
 
-        <div class="col-lg-6">
+        <div class="col-md-12 col-lg-6">
           <dl class="row">
             <dt class="col-sm-4">Facultad:</dt>
             <dd class="col-sm-8">{{professor.faculty_pretty}}</dd>
@@ -73,15 +79,18 @@
 
             <!--<dt class="col-sm-4">Área del conocimiento:</dt>-->
             <!--<dd class="col-sm-8">{{group.knowledge_area_pretty}}</dd>-->
-
-            <!--<dt class="col-sm-4">Líneas de investigación:</dt>-->
-            <!--<dd class="col-sm-8">-->
-              <!--<ul class="dima-list-noindent">-->
-              <!--{% for research in group.research_json %}-->
-              <!--<li>{{research}}</li>-->
-              <!--{% endfor %}-->
-              <!--</ul>-->
-            <!--</dd>-->
+            
+            {% if professor.patents.count %}
+              <dt class="col-sm-4">Patentes:</dt>
+              <dd class="col-sm-8">
+                <ul class="dima-list-noindent">
+                {% for patent in professor.patents.all %}
+                  {% replace patent.pk '/' '-' as url_ %}
+                  <li><a href="{% url 'patents' url_ %}">{{patent.pk}}</a></li>
+                {% endfor %}
+                </ul>
+              </dd>
+            {% endif %}
 
           </dl>
         </div>

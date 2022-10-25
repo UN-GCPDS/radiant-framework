@@ -60,6 +60,9 @@ main.detalle {
   box-shadow: 0 0 6px #555;
   padding-bottom: 180px;
   overflow-x: hidden;
+}
+
+main.detalle p{
   text-align: justify;
 }
 
@@ -102,7 +105,6 @@ h6 {
 .dima-newsletter {}
 
 .dima-newsletter--thumbnail {
-  width: 25vh;
   display: inline-grid;
   margin: 30px;
   border: 1px solid #dddddd;
@@ -152,6 +154,7 @@ h6 {
   filter: drop-shadow(2px 4px 6px #5b5b5b);
   border-radius: 4px;
   max-width: 90%;
+  max-height: 30vh;
 }
 
 #dima-carousel {}
@@ -311,4 +314,8 @@ h6 {
 .dima-list-noindent {
   padding-left: 1em !important;
   margin-block-start: 0 !important;
+}
+
+.dima--table-btn-link {
+text-align: left;
 }

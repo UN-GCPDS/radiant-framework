@@ -29,7 +29,10 @@ DEBUG = os.getenv('DEBUG', False) == 'True'
 SQLITE = True
 PROTECT = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246']
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246']
 
 if DEBUG:
     def wing_debug_hook(*args, **kwargs):
@@ -245,6 +248,8 @@ if PROTECT:
 
         'sha256-5FCr0iy0hQM4XcG9cQ1Vg/F9IyaUpP52lyn30NEVVGk=',
         'sha256-RvAvREUHojDuwHylTVWZp9DhleqLs6ml8G7LpjCF+EY=',
+        
+        'sha256-7IRE3uD8GuJOoYGrkFqmwWDgCCRmzXCf56zI3C+Wnvs=',
 
     ]
 

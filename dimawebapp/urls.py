@@ -26,6 +26,7 @@ urlpatterns = [
 
     path("groups/", include('groups.urls')),
     path("researchers/", include('researchers.urls')),
+    path("intellectual_property/", include('intellectual_property.urls')),
 
     path("", include('visualizations.urls')),
     # path("", include('unal_plantilla_web.urls')),

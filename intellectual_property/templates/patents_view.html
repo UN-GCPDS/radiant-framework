@@ -1,0 +1,89 @@
+
+{% extends "base_unal.html" %}
+{% load admin_urls %}
+{% block 'head-title' %}{{patent.name}} - {% endblock %}
+
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        Está en: <a href="/">Inicio</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="#">Patents</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="#">{{patent.pk}}</a>
+      </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+
+{% block 'main' %}
+<div class="container-lg">
+
+    <h1 class="display-3">{{patent.pk}}<br>
+      <small class="text-muted"> {{patent.name}}
+        {% if user.is_authenticated %}
+          <a href='{% url patent_admin|admin_urlname:'change' patent.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+      </small>
+    </h1>
+  
+    <div class="dima-content">
+        <div class="row">
+
+        <div class="col-md-12 col-lg-6">
+          <dl class="row">
+            <dt class="col-sm-4">Tipo de patente:</dt>
+            <dd class="col-sm-8">{{patent.patent_type_pretty}}</dd>
+
+            <dt class="col-sm-4">Departamento:</dt>
+            <dd class="col-sm-8">{{patent.departament_pretty}}</dd>
+            
+            {% if patent.co_ownership %}
+              <dt class="col-sm-4">Cotitularidad:</dt>
+              <dd class="col-sm-8">{{patent.co_ownership}}</dd>
+            {% endif %}
+            
+            <dt class="col-sm-4">Inventores:</dt>
+            <dd class="col-sm-8">
+              <ul class="dima-list-noindent">
+              {% for professor in patent.inventors.all %}
+                <li><a href="{% url 'researchers' professor.pk %}">{{professor.full_name}}</a></li>
+              {% endfor %}
+              </ul>
+            </dd>
+
+          </dl>
+        </div>
+
+
+
+        <div class="col-md-12 col-lg-6">
+          <dl class="row">
+          
+          <dt class="col-sm-4">Presentada:</dt>
+          <dd class="col-sm-8">{{patent.filling}} ({{patent.filling|timesince}})</dd>
+          
+          <dt class="col-sm-4">Publicada:</dt>
+          <dd class="col-sm-8">{{patent.publication}} ({{patent.publication|timesince}})</dd>
+
+          <dt class="col-sm-4">Concedida:</dt>
+          <dd class="col-sm-8">{{patent.grant}} ({{patent.grant|timesince}})</dd>
+
+          </dl>
+        </div>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

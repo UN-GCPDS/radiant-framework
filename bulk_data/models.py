@@ -18,7 +18,7 @@ class Bulker():
     # ----------------------------------------------------------------------
     def save(self):
         """"""
-        for field in [f.name for f in self._meta.fields if f.name.startswith('bulk')]:
+        for field in [f.name for f in (self._meta.fields + self._meta.many_to_many) if f.name.startswith('bulk')]:
             if not bool(getattr(self, field)):
                 continue
             df = pd.read_csv(getattr(self, field))
@@ -44,7 +44,7 @@ class Bulker():
             elements = df.loc[df['pk'].isin(to_create)].to_dict('records')
             bulk = [target_model(**self.fix_arguments(element, target_model, to_ignore=many_to_many)) for element in elements]
             for m in many_to_many:
-                if m in [f.name for f in target_model._meta.fields]:
+                if m in [f.name for f in target_model._meta.fields]+[f.name for f in target_model._meta.many_to_many]:
                     [getattr(blk, m).set(json.loads(element[m])) for blk, element in zip(bulk, elements)]
                 target_model.objects.bulk_create(bulk)
 
@@ -54,7 +54,7 @@ class Bulker():
 
             fields = list(df.columns)
             for m in many_to_many:
-                if m in [f.name for f in target_model._meta.fields]:
+                if m in [f.name for f in target_model._meta.fields]+[f.name for f in target_model._meta.many_to_many]:
                     [getattr(blk, m).set(json.loads(element[m])) for blk, element in zip(bulk, elements)]
                 if m in fields:
                     fields.remove(m)
@@ -65,7 +65,7 @@ class Bulker():
     # ----------------------------------------------------------------------
     def fix_arguments(self, element, target_model, to_ignore=[]):
         """"""
-        fields_in_dict = {field.name: dict([c[::-1] for c in field.choices]) for field in target_model._meta.fields if field.choices}
+        fields_in_dict = {field.name: dict([c[::-1] for c in field.choices]) for field in (target_model._meta.fields+target_model._meta.many_to_many) if field.choices}
         for k in element:
             if k in fields_in_dict:
                 if element[k] in fields_in_dict[k]:

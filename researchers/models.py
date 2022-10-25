@@ -64,6 +64,8 @@ class Professor(PersonBase, models.Model):
 
     faculty = models.CharField('Faculty', **Choices('FACULTY'))
     departament = models.CharField('Departament', **Choices('DEPARTAMENT'))
+    
+    cvlac = models.URLField('CvLAC', null=True, blank=True)
 
     class Meta:
         verbose_name = "Professor"

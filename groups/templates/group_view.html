@@ -40,7 +40,9 @@
 
     {% if group.category_pretty != 'No reconocido' %}
       <h1>Categoría <strong>{{group.category_pretty}}</strong> de Minciencias
+      {% if group.gruplac != 'nan' %}
       | <a href='{{group.gruplac}}' target='blank'>GrupLAC <i class="dima-bi bi bi-box-arrow-up-right"></i></a>
+      {% endif %}
       </h1>
     {% endif %}
 
@@ -82,8 +84,9 @@
 
         </div>
 
-
-    <strong>Integrantes:</strong>
+    {% if group.researchers_json %}
+      <strong>Integrantes:</strong>
+    {% endif %}
 
     <div class="row">
       {% for researcher in group.researchers_json %}

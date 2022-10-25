@@ -7,6 +7,7 @@ import json
 from visualizations.views import fix_filters
 from django.http import HttpResponseNotFound
 from .models import Newsletter, Broadcast, Team, Content
+from intellectual_property.models import Patent
 
 from datetime import date
 
@@ -28,8 +29,11 @@ class HomeView(TemplateView):
         context['departaments'] = Choices.DEPARTAMENT
         context['categories'] = Choices.GROUPS_CATEGORY
         context['professors'] = Professor.objects.all()
+        context['patents'] = Patent.objects.all()
+        context['patents_admin'] = Patent._meta
         context['professors_admin'] = Professor._meta
         context['researcher_categories'] = Choices.RESEARCHER_CATEGORY
+        context['patents_types'] = Choices.PATENT_TYPE
 
         context['cards'] = [
             ('Grupos de investigación', ResearchGroup.objects.count()),

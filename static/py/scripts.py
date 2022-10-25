@@ -5,6 +5,7 @@ import logging
 
 FILTERS_GROUPS = {}
 FILTERS_RESEARCHERS = {}
+FILTERS_PATENTS = {}
 
 
 # ----------------------------------------------------------------------
@@ -130,6 +131,36 @@ def update_researcher_category(evt):
 
     ajax_render('dima-placeholder__researchers',
                 "/researchers/", FILTERS_RESEARCHERS)
+
+
+# ----------------------------------------------------------------------
+@bind('#dima-select--departament__patents', 'change')
+def update_patents_departament(evt):
+    """"""
+    global FILTERS_PATENTS
+    if evt.target.value == 'All':
+        FILTERS_PATENTS.pop('departament')
+    else:
+        FILTERS_PATENTS['departament'] = evt.target.value
+
+    ajax_render('dima-placeholder__patents',
+                "intellectual_property/patents/", FILTERS_PATENTS)
+
+
+# ----------------------------------------------------------------------
+@bind('#dima-select--patent_type__patents', 'change')
+def update_patents_types(evt):
+    """"""
+    global FILTERS_PATENTS
+    if evt.target.value == 'All':
+        FILTERS_PATENTS.pop('patent_type')
+    else:
+        FILTERS_PATENTS['patent_type'] = evt.target.value
+
+    ajax_render('dima-placeholder__patents',
+                "intellectual_property/patents/", FILTERS_PATENTS)
+
+    
 
 
 if __name__.startswith('__main__'):

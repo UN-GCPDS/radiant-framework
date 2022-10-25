@@ -37,7 +37,7 @@ class Team(models.Model):
     area = models.CharField('area', max_length=2**8)
     names = models.CharField('names (separated by comma)', max_length=2**8)
     email = models.CharField('emails (separated by comma)', max_length=2**8)
-    ext = models.IntegerField('extention (separated by comma)', max_length=6)
+    ext = models.IntegerField('extention (separated by comma)')
 
     # ----------------------------------------------------------------------
     def __getattr__(self, attr):
