@@ -1,21 +1,23 @@
 
 <script id="{{id}}-script" dima-size="{{x|length}}">
+
 trace1 = {
   meta: {columnNames: {
       labels: 'A',
       values: 'B'
     }},
   mode: 'markers',
-  name: '',
+  name: '<br>',
   type: 'pie',
   textfont: {size: 16},
   textinfo: 'label+percent',
-  hoverinfo: 'percent',
-  labelssrc: 'yencardonaal:9:7aed9a',
+  hoverinfo: 'value',
+  labelssrc: 'yencardonaal:26:86409b',
   labels: {{y|safe}},
-  valuessrc: 'yencardonaal:9:b38439',
+  valuessrc: 'yencardonaal:26:39567d',
   values: {{x|safe}},
-  hovertemplate: '{{hovertemplate}}'
+  hovertemplate: '%{value} grupos',
+  insidetextorientation: 'horizontal'
 };
 data = [trace1];
 layout = {
@@ -28,13 +30,14 @@ layout = {
     autorange: true
   },
   margin: {
-    b: 50,
-    l: 50,
-    r: 50,
-    t: 50,
+    b: 0,
+    l: 0,
+    r: 0,
+    t: 0,
     pad: 0
   },
   autosize: true,
+  colorway: ['#636efa', '#EF553B', '#00cc96', '#ab63fa', '#19d3f3', '#e763fa', '#fecb52', '#ffa15a', '#ff6692', '#b6e880'],
   template: {
     data: {
       bar: [
@@ -350,8 +353,7 @@ layout = {
         },
         bgcolor: 'white'
       },
-      <!--colorway: ['#636efa', '#EF553B', '#00cc96', '#ab63fa', '#19d3f3', '#e763fa', '#fecb52', '#ffa15a', '#ff6692', '#b6e880'], -->
-      colorway: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'],
+      colorway: ['#636efa', '#EF553B', '#00cc96', '#ab63fa', '#19d3f3', '#e763fa', '#fecb52', '#ffa15a', '#ff6692', '#b6e880'],
       hovermode: 'closest',
       colorscale: {
         diverging: [['0', '#8e0152'], ['0.1', '#c51b7d'], ['0.2', '#de77ae'], ['0.3', '#f1b6da'], ['0.4', '#fde0ef'], ['0.5', '#f7f7f7'], ['0.6', '#e6f5d0'], ['0.7', '#b8e186'], ['0.8', '#7fbc41'], ['0.9', '#4d9221'], ['1', '#276419']],
@@ -373,7 +375,9 @@ layout = {
     },
     themeRef: 'PLOTLY_WHITE'
   },
-  showlegend: false
+  colorscale: {sequential: [['0', '#440154'], ['0.1111111111111111', '#482878'], ['0.2222222222222222', '#3e4989'], ['0.3333333333333333', '#31688e'], ['0.4444444444444444', '#26828e'], ['0.5555555555555556', '#1f9e89'], ['0.6666666666666666', '#35b779'], ['0.7777777777777778', '#6ece58'], ['0.8888888888888888', '#b5de2b'], ['1', '#fde725']]},
+  showlegend: false,
+  piecolorway: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f']
 };
 
 

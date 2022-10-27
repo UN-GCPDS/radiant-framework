@@ -7,6 +7,15 @@ from groups.models import ResearchGroup
 from django.http import HttpResponse, HttpResponseNotFound
 from django.views import View
 
+import numpy as np
+import textwrap
+
+
+# ----------------------------------------------------------------------
+def break_words(words, width=30, break_='<br>'):
+    """"""
+    return [break_.join(textwrap.wrap(y_, width=width, break_long_words=False)) for y_ in words]
+
 
 # ----------------------------------------------------------------------
 def fix_filters(model, filters):
@@ -48,16 +57,26 @@ class BarsTemplatePlot(TemplateView):
     # ----------------------------------------------------------------------
     def render_ocde(self, filters):
         """"""
-        self.template_name = "bars.html"
+        self.template_name = "pie_nested.html"
         if 'category' in filters:
             filters.pop('category')
         x, y = zip(*[(ResearchGroup.objects.filter(ocde=key, **filters).count(), label)
                    for key, label in ResearchGroup._meta.get_field('ocde').choices])
         if sum(x) == 0:
-            x, y = [], []
+            c1, c2, c3 = [], [], []
         else:
-            x, y = map(list, (zip(*filter(lambda l: l[0], zip(x, y)))))
-            percentages = [round(100 * xi / sum(x)) for xi in x]
+            x = np.array(x)
+            data = np.array([[s.strip() for s in y_.split('|')] for y_ in y])
+
+            c1 = data[:, 0][np.argwhere(x != 0)[:, 0]].tolist()
+            c2 = data[:, 1][np.argwhere(x != 0)[:, 0]].tolist()
+            c3 = data[:, 2][np.argwhere(x != 0)[:, 0]].tolist()
+            x = x[np.argwhere(x != 0)[:, 0]].tolist()
+
+            c1 = break_words(c1, width=30, break_='<br>')
+            c2 = break_words(c2, width=30, break_='<br>')
+            c3 = break_words(c3, width=30, break_='<br>')
+
         texttemplate = "%{x}%"
         hovertemplate = "%{text} grupos"
         # 636EFA
@@ -77,6 +96,8 @@ class BarsTemplatePlot(TemplateView):
         else:
             x, y = map(list, (zip(*filter(lambda l: l[0], zip(x, y)))))
             percentages = [round(100 * xi / sum(x)) for xi in x]
+            y = break_words(y, width=30, break_='<br>')
+
         texttemplate = "%{x}%"
         hovertemplate = "%{text} grupos"
 
