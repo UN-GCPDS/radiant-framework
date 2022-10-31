@@ -6,6 +6,11 @@ import logging
 FILTERS_GROUPS = {}
 FILTERS_RESEARCHERS = {}
 FILTERS_PATENTS = {}
+filters = {
+    'FILTERS_GROUPS': FILTERS_GROUPS,
+    'FILTERS_RESEARCHERS': FILTERS_RESEARCHERS,
+    'FILTERS_PATENTS': FILTERS_PATENTS,
+}
 
 
 # ----------------------------------------------------------------------
@@ -18,8 +23,10 @@ def load_group_view(evt):
     else:
         FILTERS_GROUPS['category'] = evt.target.value
 
-    ajax_render('dima-render--group', "/groups/group", FILTERS_GROUPS)
-    update_all_options()
+    update_all_plots(filters_to_use='FILTERS_GROUPS')
+    update_all_options(filters_to_use='FILTERS_GROUPS',
+                       id='#dima-select--departament__groups')
+    ajax_render('dima-render--group', "/groups/", FILTERS_GROUPS)
 
 
 # ----------------------------------------------------------------------
@@ -36,10 +43,12 @@ def update_faculty_filter(evt):
     if 'departament' in FILTERS_GROUPS:
         FILTERS_GROUPS.pop('departament')
 
-    document.select_one(
-        '.dima-form__groups #dima-select--departament').value = 'All'
-    update_all_plots()
-    update_all_options()
+    document.select_one('#dima-select--departament__groups').value = 'All'
+
+    update_all_plots(filters_to_use='FILTERS_GROUPS')
+    update_all_options(filters_to_use='FILTERS_GROUPS',
+                       id='#dima-select--departament__groups')
+    ajax_render('dima-render--group', "/groups/", FILTERS_GROUPS)
 
 
 # ----------------------------------------------------------------------
@@ -51,31 +60,34 @@ def update_departament_filter(evt):
         FILTERS_GROUPS.pop('departament')
     else:
         FILTERS_GROUPS['departament'] = evt.target.value
-    update_all_plots()
-    update_all_options()
+    update_all_plots(filters_to_use='FILTERS_GROUPS')
+    # update_all_options(filters_to_use='FILTERS_GROUPS')
+    ajax_render('dima-render--group', "/groups/", FILTERS_GROUPS)
 
 
 # ----------------------------------------------------------------------
-def update_all_plots():
+def update_all_plots(filters_to_use):
     """"""
     for element in document.select('.dima-plot'):
-        update_plot(element.attrs['id'], filters=FILTERS_GROUPS)
+
+        if filters_to_use == element.attrs['filters']:
+            update_plot(element.attrs['id'], filters=filters[filters_to_use])
 
 
 # ----------------------------------------------------------------------
-def update_all_options(req=None):
+def update_all_options(filters_to_use, id, req=None):
     """"""
     if req is None:
-        return ajax_request('options', data={'filters': json.dumps(FILTERS_GROUPS), }, callback=update_all_options)
+        return ajax_request('options', data={'filters': json.dumps(filters[filters_to_use]), }, callback=lambda evt: update_all_options(filters_to_use, id, evt))
 
     # Update departaments options
-    for option in document.select_one('#dima-select--departament__groups').children[1:]:
+    for option in document.select_one(id).children[1:]:
         if not option.attrs['value'] in req.json['departaments']:
             option.style = {'display': 'none'}
         else:
             option.style = {'display': 'block'}
 
-    ajax_render('dima-render--group', "/groups/group", FILTERS_GROUPS)
+    # ajax_render('dima-render--group', "/groups/", filters[filters_to_use])
 
 
 # # ----------------------------------------------------------------------
@@ -89,7 +101,7 @@ def update_all_options(req=None):
 
 
 # ----------------------------------------------------------------------
-@bind('#dima-select--faculty__researchers', 'change')
+@ bind('#dima-select--faculty__researchers', 'change')
 def update_faculty_filter_(evt):
     """"""
     global FILTERS_RESEARCHERS
@@ -104,9 +116,15 @@ def update_faculty_filter_(evt):
     ajax_render('dima-placeholder__researchers',
                 "/researchers/", FILTERS_RESEARCHERS)
 
+    document.select_one(
+        '#dima-select--departament__researchers').value = 'All'
+    update_all_plots(filters_to_use='FILTERS_RESEARCHERS')
+    update_all_options(filters_to_use='FILTERS_RESEARCHERS',
+                       id='#dima-select--departament__researchers')
+
 
 # ----------------------------------------------------------------------
-@bind('#dima-select--departament__researchers', 'change')
+@ bind('#dima-select--departament__researchers', 'change')
 def update_departament_filter_(evt):
     """"""
     global FILTERS_RESEARCHERS
@@ -117,10 +135,11 @@ def update_departament_filter_(evt):
 
     ajax_render('dima-placeholder__researchers',
                 "/researchers/", FILTERS_RESEARCHERS)
+    update_all_plots(filters_to_use='FILTERS_RESEARCHERS')
 
 
 # ----------------------------------------------------------------------
-@bind('#dima-select--category__researchers', 'change')
+@ bind('#dima-select--category__researchers', 'change')
 def update_researcher_category(evt):
     """"""
     global FILTERS_RESEARCHERS
@@ -131,10 +150,11 @@ def update_researcher_category(evt):
 
     ajax_render('dima-placeholder__researchers',
                 "/researchers/", FILTERS_RESEARCHERS)
+    update_all_plots(filters_to_use='FILTERS_RESEARCHERS')
 
 
 # ----------------------------------------------------------------------
-@bind('#dima-select--departament__patents', 'change')
+@ bind('#dima-select--departament__patents', 'change')
 def update_patents_departament(evt):
     """"""
     global FILTERS_PATENTS
@@ -148,7 +168,7 @@ def update_patents_departament(evt):
 
 
 # ----------------------------------------------------------------------
-@bind('#dima-select--patent_type__patents', 'change')
+@ bind('#dima-select--patent_type__patents', 'change')
 def update_patents_types(evt):
     """"""
     global FILTERS_PATENTS
@@ -160,9 +180,21 @@ def update_patents_types(evt):
     ajax_render('dima-placeholder__patents',
                 "intellectual_property/patents/", FILTERS_PATENTS)
 
-    
+
+# ----------------------------------------------------------------------
+@ bind('#investigadores-tab', 'click')
+def update_researchers_plot(evt):
+    """"""
+    update_all_plots(filters_to_use='FILTERS_RESEARCHERS')
+
+
+# ----------------------------------------------------------------------
+@ bind('#grupos-tab', 'click')
+def update_groups_plot(evt):
+    """"""
+    update_all_plots(filters_to_use='FILTERS_GROUPS')
 
 
 if __name__.startswith('__main__'):
-    update_all_plots()
+    update_all_plots(filters_to_use='FILTERS_GROUPS')
 

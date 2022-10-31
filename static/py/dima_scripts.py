@@ -7,7 +7,11 @@ import logging
 def ajax_render(id, url, data=None, callback=None, execute_scripts=True):
     """"""
     def read(req):
-        document.select_one(f'#{id}').html = req.text
+        if req.text:
+            document.select_one(f'#{id}').html = req.text
+            document.select_one(f'#{id}').style = {'display': 'block', }
+        else:
+            document.select_one(f'#{id}').style = {'display': 'none', }
 
         if execute_scripts:
             if script := document.select_one(f'#{id}-script'):

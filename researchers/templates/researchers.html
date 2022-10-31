@@ -7,7 +7,7 @@
     <div class="row">
 
       <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12">
-        <h1 class="display-8">Por tipo de investigador</h1>
+        <h1 class="display-8">Por categoría de investigador</h1>
         <p></p>
         <select class="form-select" id='dima-select--category__researchers' aria-label="Default select example">
           <option value="All">Todos los investigadores</option>
@@ -19,7 +19,26 @@
         </select>
       </div>
 
-      <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12">
+    </div>
+  </div>
+</div>
+
+
+
+<div class='container-fluid'>
+  <div class="container-lg">
+    <div class="row">
+    <div class='dima-plot' id='dima-plot--researchers_category' filters='FILTERS_RESEARCHERS'></div>
+    </div>
+  </div>
+</div>
+
+
+<div class='container-fluid dima-form'>
+  <div class="container-lg">
+    <div class="row">
+
+      <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
         <h1 class="display-8">Por facultades</h1>
         <p></p>
         <select class="form-select" id='dima-select--faculty__researchers' aria-label="Default select example">
@@ -30,7 +49,7 @@
         </select>
       </div>
 
-      <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12">
+      <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
         <h1 class="display-8">Por departamentos</h1>
         <p></p>
         <select class="form-select" id='dima-select--departament__researchers' aria-label="Default select example">
@@ -50,6 +69,16 @@
 <div class='container-fluid'>
   <div class="container-lg">
     <div class="row">
+
+
+      <div class="row">
+        <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+          <div class='dima-plot' id='dima-plot--researchers_faculty' filters='FILTERS_RESEARCHERS'></div>
+        </div>
+        <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+          <div class='dima-plot' id='dima-plot--researchers_departament' filters='FILTERS_RESEARCHERS'></div>
+        </div>
+      </div>
 
       <div id="dima-placeholder__researchers">
         {% include 'researchers_list.html' %}

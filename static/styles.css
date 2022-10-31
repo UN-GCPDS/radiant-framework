@@ -145,3 +145,8 @@ pre {
 .dima-nav-tabs button {
   color: #94b43b;
 }
+
+
+.card-text:last-child {
+    text-align: center;
+}
