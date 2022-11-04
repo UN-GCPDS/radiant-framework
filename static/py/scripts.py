@@ -185,16 +185,8 @@ def update_patents_types(evt):
 @bind('#patentes-tab', 'click')
 def update_patentes__plot(evt):
     """"""
-    update_all_plots(filters_to_use='FILTERS_RESEARCHERS')
-
-    if not window.location.href.endswith('#patentes'):
-        window.location.href += '#patentes'
-
-    document.select_one(
-        '.dima-breadcrumb').style = {'display': 'block', }
-    document.select_one('.dima-breadcrumb').clear()
-    document.select_one(
-        '.dima-breadcrumb') <= html.A('Patentes', href='#patentes')
+    update_all_plots(filters_to_use='FILTERS_PATENTS')
+    update_tabs('patentes', 'Propiedad intelectual')
 
 
 # ----------------------------------------------------------------------
@@ -202,15 +194,15 @@ def update_patentes__plot(evt):
 def update_researchers_plot(evt):
     """"""
     update_all_plots(filters_to_use='FILTERS_RESEARCHERS')
+    update_tabs('investigadores', 'Investigadores')
 
-    if not window.location.href.endswith('#investigadores'):
-        window.location.href += '#investigadores'
 
-    document.select_one(
-        '.dima-breadcrumb').style = {'display': 'block', }
-    document.select_one('.dima-breadcrumb').clear()
-    document.select_one(
-        '.dima-breadcrumb') <= html.A('Investigadores', href='#investigadores')
+# ----------------------------------------------------------------------
+@bind('#proyectos-tab', 'click')
+def update_proyectos_plot(evt):
+    """"""
+    update_all_plots(filters_to_use='FILTERS_PATENTS')
+    update_tabs('proyectos', 'Proyectos')
 
 
 # ----------------------------------------------------------------------
@@ -218,7 +210,20 @@ def update_researchers_plot(evt):
 def update_groups_plot(evt):
     """"""
     update_all_plots(filters_to_use='FILTERS_GROUPS')
+    update_tabs('grupos', 'Grupos de investigación')
+
+
+def update_tabs(tab, breadcrumb):
+    """"""
+
+    if not window.location.href.endswith(f'#{tab}'):
+        window.location.href = window.location.href[:window.location.href.find('#')] + f'#{tab}'
+
+    document.select_one(
+        '.dima-breadcrumb').style = {'display': 'block', }
     document.select_one('.dima-breadcrumb').clear()
+    document.select_one(
+        '.dima-breadcrumb') <= html.A(breadcrumb, href=f'#{tab}')
 
 
 # ----------------------------------------------------------------------
