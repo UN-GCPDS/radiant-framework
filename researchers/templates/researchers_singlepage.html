@@ -1,0 +1,22 @@
+{% extends "base_unal.html" %}
+{% load admin_urls %}
+{% load dima_utils %}
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        Está en: <a href="/">Inicio</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="#">Researchers</a>
+      </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+{% block 'main' %}
+  {% include 'researchers.html' %}
+{% endblock %}

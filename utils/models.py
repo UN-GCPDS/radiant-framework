@@ -222,31 +222,31 @@ class Choices:
     )
 
     DEPARTAMENT = (
-        'Departamento de administración',
-        'Departamento de ciencias humanas',
-        'Departamento de física y química',
-        'Departamento de informática y computación',
-        'Departamento de ingeniería civil',
-        'Departamento de ingeniería eléctrica, electrónica y computación',
-        'Departamento de ingeniería industrial',
-        'Departamento de ingeniería química',
-        'Departamento de matemáticas',
-        'Escuela de arquitectura y urbanismo',
-        'Instituto de estudios ambientales - idea - manizales'
+        'Departamento de Administración',
+        'Departamento de Ciencias Humanas',
+        'Departamento de Física y Química',
+        'Departamento de Informática y Computación',
+        'Departamento de Ingeniería Civil',
+        'Departamento de Ingeniería Eléctrica, Electrónica y Computación',
+        'Departamento de Ingeniería Industrial',
+        'Departamento de Ingeniería Química',
+        'Departamento de Matemáticas',
+        'Escuela de Arquitectura y Urbanismo',
+        # 'Instituto de estudios ambientales - idea - manizales'
     )
 
     FACULTY = (
-        'Facultad de administración',
-        'Facultad de ciencias exactas y naturales',
-        'Facultad de ingeniería y arquitectura',
-        'Instituto de estudios ambientales - idea - manizales'
+        'Facultad de Administración',
+        'Facultad de Ciencias Exactas y Naturales',
+        'Facultad de Ingeniería y Arquitectura',
+        # 'Instituto de estudios ambientales - idea - manizales'
     )
 
     RESEARCHER_CATEGORY = (
-        'Investigador asociado',
-        'Investigador emerito',
-        'Investigador junior',
-        'Investigador senior',
+        'Investigador Asociado',
+        'Investigador Emérito',
+        'Investigador Junior',
+        'Investigador Senior',
         'Sin información'
     )
 

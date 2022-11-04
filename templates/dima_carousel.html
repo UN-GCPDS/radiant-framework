@@ -1,57 +1,84 @@
 {% load admin_urls %}
 
+<style>
+.carousel-control--display{
+  display: none;
+}
+</style>
+
 <div id="dima-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-indicators">
     {% for broadcast in broadcasts %}
-      <button type="button" data-bs-target="#dima-carousel" data-bs-slide-to="{{forloop.counter0}}" {% if not forloop.counter0 %}class="active" aria-current="true"{% endif %} aria-label="Slide {{forloop.counter0}}"></button>
+      {% if user.is_authenticated or broadcast.active %}
+        <button type="button" data-bs-target="#dima-carousel" data-bs-slide-to="{{forloop.counter0}}" {% if not forloop.counter0 %}class="active" aria-current="true"{% endif %} aria-label="Slide {{forloop.counter0}}"></button>
+        <style>
+        .carousel-control--display{
+          display: block;
+        }
+        </style>
+      {% endif %}
     {% endfor %}
   </div>
   <div class="carousel-inner">
     {% for broadcast in broadcasts %}
+      {% if user.is_authenticated or broadcast.active %}
 
-      <style nonce="{{request.csp_nonce}}">
-        .dima--carousel-item_{{forloop.counter}} {
-          #background-color: {{broadcast.dominant}};
-          background-image: url({{broadcast.image.url}});
-        }
-      </style>
+        <style nonce="{{request.csp_nonce}}">
+          .dima--carousel-item_{{forloop.counter}} {
+            #background-color: {{broadcast.dominant}};
+            background-image: url({{broadcast.image.url}});
+          }
+        </style>
 
-      <div class="carousel-item dima--carousel-item {% if not forloop.counter0 %}active{% endif %}">
-        <div class="dima--carousel-blur dima--carousel-item_{{forloop.counter}}"></div>
-        <a href='{% if broadcast.link %}{{broadcast.link}}{% else %}#{% endif %}'>
-          <img src="{{broadcast.image.url}}" class="d-block"></img>
-        </a>
-      {% if user.is_authenticated %}
-        <div class="carousel-caption carousel-caption--auth d-none d-md-block">
-          <a class='' href='{% url broadcasts_admin|admin_urlname:'change' broadcast.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+        <div class="carousel-item dima--carousel-item {% if not forloop.counter0 %}active{% endif %}">
+          <div class="dima--carousel-blur dima--carousel-item_{{forloop.counter}}"></div>
+          <a href='{% if broadcast.link %}{{broadcast.link}}{% else %}#{% endif %}'>
+            <img src="{{broadcast.image.url}}" class="d-block"></img>
+          </a>
+        {% if user.is_authenticated %}
+          <div class="carousel-caption carousel-caption--auth d-none d-md-block">
+            <a class='' href='{% url broadcasts_admin|admin_urlname:'change' broadcast.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+          </div>
+        {% endif %}
+
+        {% if broadcast.title or broadcast.description %}
+          <div class="carousel-caption d-none d-md-block">
+            {% if broadcast.title %}
+              <h5>{{broadcast.title}}</h5>
+            {% endif %}
+            {% if broadcast.description %}
+              <p>{{broadcast.description}}</p>
+            {% endif %}
+            {% if broadcast.link %}
+              <a class='dima-carousel-caption__link' href='{{broadcast.link}}'>visitar enlace <i class="bi bi-box-arrow-up-right"></i></a>
+            {% endif %}
+          </div>
+        {% endif %}
         </div>
       {% endif %}
-
-      {% if broadcast.title or broadcast.description %}
-        <div class="carousel-caption d-none d-md-block">
-          {% if broadcast.title %}
-            <h5>{{broadcast.title}}</h5>
-          {% endif %}
-          {% if broadcast.description %}
-            <p>{{broadcast.description}}</p>
-          {% endif %}
-          {% if broadcast.link %}
-            <a class='dima-carousel-caption__link' href='{{broadcast.link}}'>visitar enlace <i class="bi bi-box-arrow-up-right"></i></a>
-          {% endif %}
-        </div>
-      {% endif %}
-      </div>
-
     {% endfor %}
   </div>
   <div class='dima--carousel-separator'></div>
 
-  <button class="carousel-control-prev" type="button" data-bs-target="#dima-carousel" data-bs-slide="prev">
+  <button class="carousel-control-prev carousel-control--display" type="button" data-bs-target="#dima-carousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#dima-carousel" data-bs-slide="next">
+  <button class="carousel-control-next carousel-control--display" type="button" data-bs-target="#dima-carousel" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+
+
 </div>
+
+{% if user.is_authenticated %}
+<div class='container'>
+  <div class="dima-alert alert alert-danger" role="alert">
+    El carrusel puede ser editado desde <a href="{% url broadcasts_admin|admin_urlname:'add' %}" target='_blank'>este link</a>.<br>
+    Requiere obligatoriamente una imagen, y opcionalmente un título, una descripción y un link que se activa al hacer click en la imagen.<br>
+    Adicionalmente se debe configurar una fecha de expiración, a prtir de la cual la imagen no se mostrará.
+  </div>
+</div>
+{% endif %}
+

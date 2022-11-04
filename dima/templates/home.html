@@ -14,6 +14,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">Está en:<a href="/">Inicio</a></li>
+      <li class="breadcrumb-item dima-breadcrumb"></li>
     </ol>
   </nav>
 
@@ -24,13 +25,12 @@
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="investigadores-tab" data-bs-toggle="tab" data-bs-target="#investigadores-tab-pane" type="button" role="tab" aria-controls="investigadores-tab-pane" aria-selected="false">
+      <button class="nav-link" href='#investigadores' id="investigadores-tab" data-bs-toggle="tab" data-bs-target="#investigadores-tab-pane" type="button" role="tab" aria-controls="investigadores-tab-pane" aria-selected="false">
       Investigadores
       </button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="patentes-tab" data-bs-toggle="tab" data-bs-target="#patentes-tab-pane" type="button" role="tab" aria-controls="patentes-tab-pane" aria-selected="false">
-      <!--Patentes y producción científica-->
       Propiedad intelectual
       </button>
     </li>
@@ -42,15 +42,9 @@
   </ul>
 
 
-
-
-
 </div>
-
-
-
-
 {% endblock %}
+
 
 {% block 'main' %}
 

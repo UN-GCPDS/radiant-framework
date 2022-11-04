@@ -78,6 +78,7 @@ class Broadcast(models.Model):
     upload = models.DateTimeField('upload', auto_now_add=True)
     dominant = models.CharField(
         'dominant', max_length=7, blank=True, null=True)
+    active = models.BooleanField('active', default=True)
 
     # ----------------------------------------------------------------------
     def save(self):

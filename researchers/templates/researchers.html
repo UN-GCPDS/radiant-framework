@@ -1,5 +1,13 @@
-
 {% load admin_urls %}
+
+
+{% if user.is_authenticated %}
+  <div class='container'>
+    <div class="dima-alert alert alert-danger" role="alert">
+      Los docentes se pueden editar desde <a href="{% url professors_admin|admin_urlname:'changelist' %}" target='_blank'>este link</a>.
+    </div>
+  </div>
+{% endif %}
 
 
 <div class='container-fluid dima-form'>
@@ -79,6 +87,14 @@
           <div class='dima-plot' id='dima-plot--researchers_departament' filters='FILTERS_RESEARCHERS'></div>
         </div>
       </div>
+
+      {% if user.is_authenticated %}
+        <div class='container'>
+          <div class="dima-alert alert alert-danger" role="alert">
+            Sólo se muestran los docentes con una categoría de investigador en Minciencias.
+          </div>
+        </div>
+      {% endif %}
 
       <div id="dima-placeholder__researchers">
         {% include 'researchers_list.html' %}

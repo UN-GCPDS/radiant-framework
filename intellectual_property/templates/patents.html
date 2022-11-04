@@ -1,3 +1,13 @@
+{% load admin_urls %}
+
+{% if user.is_authenticated %}
+  <div class='container'>
+    <div class="dima-alert alert alert-danger" role="alert">
+      Las patentes se pueden editar desde <a href="{% url patent_admin|admin_urlname:'changelist' %}" target='_blank'>este link</a>.
+    </div>
+  </div>
+{% endif %}
+
 <div class='container-fluid dima-form'>
   <div class="container-lg">
     <div class="row">

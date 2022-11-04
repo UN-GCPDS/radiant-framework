@@ -1,4 +1,3 @@
-
 {% extends "base_unal.html" %}
 {% load admin_urls %}
 {% load dima_utils %}
@@ -36,12 +35,12 @@
     </h1>
 
         <h1>{{professor.category_pretty}} de Minciencias
-        
-        
+
+
     {% if professor.cvlac %}
     | <a href='{{professor.cvlac}}' target='blank'>CvLAC <i class="dima-bi bi bi-box-arrow-up-right"></i></a>
     {% endif %}
-    
+
     </h1>
 
 
@@ -79,7 +78,7 @@
 
             <!--<dt class="col-sm-4">Área del conocimiento:</dt>-->
             <!--<dd class="col-sm-8">{{group.knowledge_area_pretty}}</dd>-->
-            
+
             {% if professor.patents.count %}
               <dt class="col-sm-4">Patentes:</dt>
               <dd class="col-sm-8">

@@ -34,6 +34,7 @@ class HomeView(TemplateView):
         context['professors_admin'] = Professor._meta
         context['researcher_categories'] = Choices.RESEARCHER_CATEGORY
         context['patents_types'] = Choices.PATENT_TYPE
+        context['patent_admin'] = Patent._meta
 
         context['cards'] = [
             ('Grupos de investigación', ResearchGroup.objects.count()),
@@ -47,9 +48,9 @@ class HomeView(TemplateView):
 ########################################################################
 class NewsletterView(TemplateView):
     template_name = "newsletter.html"
-    
 
     # ----------------------------------------------------------------------
+
     def get_context_data(self, **kwargs):
         """"""
         context = super().get_context_data(**kwargs)

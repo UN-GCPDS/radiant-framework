@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False) == 'True'
 SQLITE = True
-PROTECT = True
+PROTECT = False
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -61,7 +61,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'tinymce',
-    
+
     'visualizations.apps.VisualizationsConfig',
 
     'researchers.apps.ResearchersConfig',
@@ -248,7 +248,7 @@ if PROTECT:
 
         'sha256-5FCr0iy0hQM4XcG9cQ1Vg/F9IyaUpP52lyn30NEVVGk=',
         'sha256-RvAvREUHojDuwHylTVWZp9DhleqLs6ml8G7LpjCF+EY=',
-        
+
         'sha256-7IRE3uD8GuJOoYGrkFqmwWDgCCRmzXCf56zI3C+Wnvs=',
 
     ]

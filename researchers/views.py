@@ -28,6 +28,7 @@ class Researchers(TemplateView):
     # ----------------------------------------------------------------------
     def get(self, request, pk=None, *args, **kwargs):
         """"""
+
         self.template_name = "researchers_view.html"
         context = self.get_context_data(**kwargs)
 

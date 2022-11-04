@@ -1,5 +1,13 @@
+{% load admin_urls %}
+
 <div class="container-lg">
     <div class="row">
+
+      {% if user.is_authenticated %}
+        <div class="dima-alert alert alert-danger" role="alert">
+          Los grupos de investigación se pueden editar desde <a href="{% url groups_admin|admin_urlname:'changelist' %}" target='_blank'>este link</a>.
+        </div>
+      {% endif %}
 
       <div class="col-12">
         <p>

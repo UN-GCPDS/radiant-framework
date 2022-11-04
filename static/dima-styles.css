@@ -49,6 +49,7 @@
 
 .dima-plot {
   margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 main.detalle {
@@ -318,4 +319,30 @@ h6 {
 
 .dima--table-btn-link {
 text-align: left;
+}
+
+.dima-alert {
+  margin: 30px;
+  padding: 15px;
+  font-size: 120%;
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+  background-image: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  text-shadow: none !important;
+
+    font-family: Ancizar Sans Light;
+line-height: 17px;
+    font-size: 17px;
+
+}
+
+.dima-alert a {
+
+font-weight: 600;
+    color: #842029;
+    text-decoration: underline;
+
 }

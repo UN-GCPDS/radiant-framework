@@ -101,7 +101,7 @@ def update_all_options(filters_to_use, id, req=None):
 
 
 # ----------------------------------------------------------------------
-@ bind('#dima-select--faculty__researchers', 'change')
+@bind('#dima-select--faculty__researchers', 'change')
 def update_faculty_filter_(evt):
     """"""
     global FILTERS_RESEARCHERS
@@ -124,7 +124,7 @@ def update_faculty_filter_(evt):
 
 
 # ----------------------------------------------------------------------
-@ bind('#dima-select--departament__researchers', 'change')
+@bind('#dima-select--departament__researchers', 'change')
 def update_departament_filter_(evt):
     """"""
     global FILTERS_RESEARCHERS
@@ -139,7 +139,7 @@ def update_departament_filter_(evt):
 
 
 # ----------------------------------------------------------------------
-@ bind('#dima-select--category__researchers', 'change')
+@bind('#dima-select--category__researchers', 'change')
 def update_researcher_category(evt):
     """"""
     global FILTERS_RESEARCHERS
@@ -154,7 +154,7 @@ def update_researcher_category(evt):
 
 
 # ----------------------------------------------------------------------
-@ bind('#dima-select--departament__patents', 'change')
+@bind('#dima-select--departament__patents', 'change')
 def update_patents_departament(evt):
     """"""
     global FILTERS_PATENTS
@@ -168,7 +168,7 @@ def update_patents_departament(evt):
 
 
 # ----------------------------------------------------------------------
-@ bind('#dima-select--patent_type__patents', 'change')
+@bind('#dima-select--patent_type__patents', 'change')
 def update_patents_types(evt):
     """"""
     global FILTERS_PATENTS
@@ -182,17 +182,66 @@ def update_patents_types(evt):
 
 
 # ----------------------------------------------------------------------
-@ bind('#investigadores-tab', 'click')
+@bind('#patentes-tab', 'click')
+def update_patentes__plot(evt):
+    """"""
+    update_all_plots(filters_to_use='FILTERS_RESEARCHERS')
+
+    if not window.location.href.endswith('#patentes'):
+        window.location.href += '#patentes'
+
+    document.select_one(
+        '.dima-breadcrumb').style = {'display': 'block', }
+    document.select_one('.dima-breadcrumb').clear()
+    document.select_one(
+        '.dima-breadcrumb') <= html.A('Patentes', href='#patentes')
+
+
+# ----------------------------------------------------------------------
+@bind('#investigadores-tab', 'click')
 def update_researchers_plot(evt):
     """"""
     update_all_plots(filters_to_use='FILTERS_RESEARCHERS')
 
+    if not window.location.href.endswith('#investigadores'):
+        window.location.href += '#investigadores'
+
+    document.select_one(
+        '.dima-breadcrumb').style = {'display': 'block', }
+    document.select_one('.dima-breadcrumb').clear()
+    document.select_one(
+        '.dima-breadcrumb') <= html.A('Investigadores', href='#investigadores')
+
 
 # ----------------------------------------------------------------------
-@ bind('#grupos-tab', 'click')
+@bind('#grupos-tab', 'click')
 def update_groups_plot(evt):
     """"""
     update_all_plots(filters_to_use='FILTERS_GROUPS')
+    document.select_one('.dima-breadcrumb').clear()
+
+
+# ----------------------------------------------------------------------
+@bind(window, 'load')
+def on_load(evt):
+    """"""
+    if window.location.href.endswith('#investigadores'):
+        document.select_one('.nav-link#investigadores-tab').click()
+        document.select_one(
+            '.dima-breadcrumb').style = {'display': 'block', }
+        document.select_one(
+            '.dima-breadcrumb') <= html.A('Investigadores', href='#investigadores')
+
+    elif window.location.href.endswith('#patentes'):
+        document.select_one('.nav-link#patentes-tab').click()
+        document.select_one(
+            '.dima-breadcrumb').style = {'display': 'block', }
+        document.select_one(
+            '.dima-breadcrumb') <= html.A('Patentes', href='#patentes')
+
+    else:
+
+        document.select_one('.dima-breadcrumb').style = {'display': 'none', }
 
 
 if __name__.startswith('__main__'):
