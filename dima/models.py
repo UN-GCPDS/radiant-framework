@@ -1,11 +1,13 @@
 import os
 import subprocess
+import random
 
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from tinymce.models import HTMLField
+from datetime import date
 
 
 upload_to_newsletter = os.path.join('uploads', 'newsletter')
@@ -71,14 +73,19 @@ class Broadcast(models.Model):
     image = models.FileField('broadcast', upload_to=upload_to_broadcast)
     expiration = models.DateField('expiration')
     link = models.URLField('link', blank=True, null=True)
-    title = models.CharField('title', max_length=2 **
-                             10, blank=True, null=True)
+    title = models.CharField('title', max_length=2
+                             ** 10, blank=True, null=True)
     description = models.TextField(
         'description', max_length=2**10, blank=True, null=True)
     upload = models.DateTimeField('upload', auto_now_add=True)
     dominant = models.CharField(
         'dominant', max_length=7, blank=True, null=True)
     active = models.BooleanField('active', default=True)
+
+    @property
+    # ----------------------------------------------------------------------
+    def expired(self):
+        return not (self.active and date.today() < self.expiration.date())
 
     # ----------------------------------------------------------------------
     def save(self):
@@ -89,8 +96,9 @@ class Broadcast(models.Model):
         self.dominant = dominant.decode()
         super().save()
 
-
 # ----------------------------------------------------------------------
+
+
 @receiver(post_save, sender=Newsletter)
 def on_post_save(sender, instance=False, **kwargs):
     """"""

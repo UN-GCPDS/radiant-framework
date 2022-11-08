@@ -1,0 +1,56 @@
+{% extends "base_unal.html" %}
+{% load admin_urls %}
+{% load dima_utils %}
+{% block 'head-title' %}Convocatorias internas - {% endblock %}
+
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        Está en: <a href="/">Inicio</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="{% url 'internal_call' %}">Convocatorias Internas</a>
+      </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+
+{% block 'main' %}
+<div class="container-lg">
+
+    <h1 class="display-3">Convocatorias internas
+      <small class="text-muted">
+        {% if user.is_authenticated %}
+          <a href='{% url internalcall_admin|admin_urlname:'add' %}'>Add call<i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+      </small>
+    </h1>
+
+    <div class="dima-content">
+        <div class="row">
+        {% for call in internalcall %}
+          {% if user.is_authenticated or call.expiered %}
+          
+            <div class="col-md-12 col-lg-6 dima-internal_call">
+              {% if call.image %}
+                  <img src="{{call.image.url}}" class="dima-image__internal_call"></img>
+              {% else %}
+                  <div class="dima-image__no_image" style='background-color: {{call.color}}'>
+                    {{ call.title }}
+                  </div>
+              {% endif %}
+              <a href='{{ call.link }}'>{{ call.title|lower|capfirst }}</a> <a href='{% url internalcall_admin|admin_urlname:'change' call.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+            </div>
+            
+          {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

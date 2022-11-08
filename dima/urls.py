@@ -28,11 +28,11 @@ urlpatterns = [
          template_name="static/contact.html"), name='contact'),
 
     # Convocatorias
-    path('convocatorias_internas', TemplateView.as_view(), name='calls_int'),
-    path('convocatorias_estudiantes_auxiliares',
-         TemplateView.as_view(), name='calls_aux'),
-    path('busqueda_de_convocatorias',
-         TemplateView.as_view(), name='calls_search'),
+    #path('convocatorias_internas', InternalCallView.as_view(), name='internal_call'),
+    #path('convocatorias_estudiantes_auxiliares',
+    #TemplateView.as_view(), name='calls_aux'),
+    #path('busqueda_de_convocatorias',
+    #TemplateView.as_view(), name='calls_search'),
 
 
 

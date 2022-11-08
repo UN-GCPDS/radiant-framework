@@ -9,7 +9,7 @@
 <div id="dima-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-indicators">
     {% for broadcast in broadcasts %}
-      {% if user.is_authenticated or broadcast.active %}
+      {% if user.is_authenticated or broadcast.expired %}
         <button type="button" data-bs-target="#dima-carousel" data-bs-slide-to="{{forloop.counter0}}" {% if not forloop.counter0 %}class="active" aria-current="true"{% endif %} aria-label="Slide {{forloop.counter0}}"></button>
         <style>
         .carousel-control--display{
@@ -21,7 +21,7 @@
   </div>
   <div class="carousel-inner">
     {% for broadcast in broadcasts %}
-      {% if user.is_authenticated or broadcast.active %}
+      {% if user.is_authenticated or broadcast.expired %}
 
         <style nonce="{{request.csp_nonce}}">
           .dima--carousel-item_{{forloop.counter}} {

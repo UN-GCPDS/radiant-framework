@@ -346,3 +346,27 @@ font-weight: 600;
     text-decoration: underline;
 
 }
+
+.dima-image__internal_call{
+  width: 100%;
+  max-height: 90vh;
+  padding-bottom: 15px;
+}
+
+.dima-image__no_image{
+text-transform: capitalize;
+    padding: 100px 30px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: white;
+    font-family: 'Ancizar sans light';
+  border-radius: 4px;
+    
+}
+
+.dima-internal_call {
+    margin-bottom: 60px;
+        padding: 0 15px;
+}
+
+

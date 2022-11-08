@@ -20,7 +20,7 @@ class NewsletterAdmin(admin.ModelAdmin):
 
 @admin.register(Broadcast)
 class BroadcastAdmin(admin.ModelAdmin):
-    list_display = ('upload', 'expiration', 'title', 'link')
+    list_display = ('upload', 'expiration', 'title', 'link', 'active')
     list_display_links = ['upload']
 
 

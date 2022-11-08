@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'bulk_data.apps.BulkDataConfig',
     'unal_plantilla_web.apps.UnalPlantillaWebConfig',
     'intellectual_property.apps.IntellectualPropertyConfig',
+    'calls.apps.CallsConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,7 +137,15 @@ DATABASES.update({
     }
 })
 
+DATABASES.update({
+    'calls_database': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        "NAME": os.path.join(BASE_DIR, 'db', "calls_database.sqlite3"),
+    }
+})
+
 DATABASE_ROUTERS = ['dima.db_router.DimaDBRouter',
+                    'calls.db_router.DimaDBRouter',
                     'dimawebapp.db_router.AdminInterfaceRouter']
 
 
@@ -313,4 +322,3 @@ if PROTECT:
     CSP_BASE_URI = ["'none'"]
     CSP_FRAME_ANCESTORS = ["'self'"]
     CSP_DEFAULT_SRC = ["'self'"]
-
