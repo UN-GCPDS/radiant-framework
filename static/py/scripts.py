@@ -94,7 +94,7 @@ def update_all_options(filters_to_use, id, req=None):
 # @bind(window, 'load')
 # def load_researchers_view(evt):
     # """"""
-    # ajax_render('investigadores-tab-pane', "/researchers/")
+    # ajax_render('investigadores-tab-pane', "/investigadores/")
 
     # # document.select_one('#dima-select--faculty__researchers').addEventListener(
         # # "change", update_faculty_filter_)
@@ -114,7 +114,7 @@ def update_faculty_filter_(evt):
         FILTERS_RESEARCHERS.pop('departament')
 
     ajax_render('dima-placeholder__researchers',
-                "/researchers/", FILTERS_RESEARCHERS)
+                "/investigadores/", FILTERS_RESEARCHERS)
 
     document.select_one(
         '#dima-select--departament__researchers').value = 'All'
@@ -134,7 +134,7 @@ def update_departament_filter_(evt):
         FILTERS_RESEARCHERS['departament'] = evt.target.value
 
     ajax_render('dima-placeholder__researchers',
-                "/researchers/", FILTERS_RESEARCHERS)
+                "investigadores/", FILTERS_RESEARCHERS)
     update_all_plots(filters_to_use='FILTERS_RESEARCHERS')
 
 
@@ -149,7 +149,7 @@ def update_researcher_category(evt):
         FILTERS_RESEARCHERS['category'] = evt.target.value
 
     ajax_render('dima-placeholder__researchers',
-                "/researchers/", FILTERS_RESEARCHERS)
+                "/investigadores/", FILTERS_RESEARCHERS)
     update_all_plots(filters_to_use='FILTERS_RESEARCHERS')
 
 
@@ -164,7 +164,7 @@ def update_patents_departament(evt):
         FILTERS_PATENTS['departament'] = evt.target.value
 
     ajax_render('dima-placeholder__patents',
-                "intellectual_property/patents/", FILTERS_PATENTS)
+                "propiedad_intelectual/patents/", FILTERS_PATENTS)
 
 
 # ----------------------------------------------------------------------
@@ -178,7 +178,7 @@ def update_patents_types(evt):
         FILTERS_PATENTS['patent_type'] = evt.target.value
 
     ajax_render('dima-placeholder__patents',
-                "intellectual_property/patents/", FILTERS_PATENTS)
+                "propiedad_intelectual/patents/", FILTERS_PATENTS)
 
 
 # ----------------------------------------------------------------------
