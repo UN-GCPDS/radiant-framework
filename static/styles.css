@@ -150,3 +150,10 @@ pre {
 .card-text:last-child {
     text-align: center;
 }
+
+.list-group {
+    border-radius: 4px;
+     -webkit-box-shadow: none !important;
+     box-shadow:  none !important;
+}
+

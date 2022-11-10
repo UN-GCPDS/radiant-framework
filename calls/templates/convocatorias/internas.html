@@ -12,7 +12,10 @@
         Está en: <a href="/">Inicio</a>
       </li>
       <li aria-current="page" class="breadcrumb-item active">
-        <a href="{% url 'internal_call' %}">Convocatorias Internas</a>
+        <a href="{% url 'calls' %}">Convocatorias</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="{% url 'internal_call' %}">Convocatorias internas</a>
       </li>
     </ol>
   </nav>
@@ -21,6 +24,16 @@
 
 
 {% block 'main' %}
+{% if user.is_authenticated %}
+  <div class='container'>
+    <div class="dima-alert alert alert-danger" role="alert">
+      Las convocatorias internas deben tener un título, un link de referencia
+      una fecha de expiración a partir de la cual no se mostrará como activa y
+      opcionalmente una imagen de referencia.
+    </div>
+  </div>
+{% endif %}
+
 <div class="container-lg">
 
     <h1 class="display-3">Convocatorias internas
@@ -33,9 +46,19 @@
 
     <div class="dima-content">
         <div class="row">
+
+        <div class="col-md-12 dima-margin-bottom__30">
+          Dentro de la Dirección de Investigación y Extensión de la Sede
+          Manizales, se dan a conocer las diferentes convocatorias internas que
+          se encuentran activas. Cualquier inquietud podrá ser resuelta en los
+          siguientes correos:
+          <a href="mailto:soportedima_man@unal.edu.co" target="_blank" rel="noopener">soportedima_man@unal.edu.co</a> y
+          <a href="mailto:dima_man@unal.edu.co" target="_blank" rel="noopener">dima_man@unal.edu.co</a>.
+        </div>
+
         {% for call in internalcall %}
-          {% if user.is_authenticated or call.expiered %}
-          
+          {% if user.is_authenticated or call.expired %}
+
             <div class="col-md-12 col-lg-6 dima-internal_call">
               {% if call.image %}
                   <img src="{{call.image.url}}" class="dima-image__internal_call"></img>
@@ -46,11 +69,12 @@
               {% endif %}
               <a href='{{ call.link }}'>{{ call.title|lower|capfirst }}</a> <a href='{% url internalcall_admin|admin_urlname:'change' call.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
             </div>
-            
+
           {% endif %}
         {% endfor %}
+
         </div>
     </div>
-    
+
 </div>
 {% endblock %}

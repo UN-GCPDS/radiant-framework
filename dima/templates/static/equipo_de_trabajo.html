@@ -44,7 +44,7 @@
           <dt class="col-md-3 col-lg-2">Email:</dt>
           <dd class="col-md-9 col-lg-10">
             {% for email in team.email_split %}
-              <p>{{email|lower}}</p>
+              <a href="mailto:{{email|lower}}" target="_blank" rel="noopener">{{email|lower}}</a>
             {% endfor %}
           </dd>
           <dt class="col-md-3 col-lg-2">Ext:</dt>

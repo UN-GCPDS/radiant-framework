@@ -361,12 +361,17 @@ text-transform: capitalize;
     color: white;
     font-family: 'Ancizar sans light';
   border-radius: 4px;
-    
+
 }
 
 .dima-internal_call {
     margin-bottom: 60px;
         padding: 0 15px;
+}
+
+
+.dima-margin-bottom__30{
+  margin-bottom: 30px;
 }
 
 

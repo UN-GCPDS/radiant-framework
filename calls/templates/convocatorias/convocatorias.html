@@ -1,0 +1,75 @@
+{% extends "base_unal.html" %}
+{% load admin_urls %}
+{% load dima_utils %}
+{% block 'head-title' %}Convocatorias - {% endblock %}
+
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        Está en: <a href="/">Inicio</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="{% url 'calls' %}">Convocatorias</a>
+      </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+
+{% block 'main' %}
+<div class="container-lg">
+
+    <h1 class="display-3">Convocatorias</h1>
+
+    <div class="dima-content">
+        <div class="row">
+
+          <div class="col-md-12 col-lg-6 dima-margin-bottom__30">
+            <div class="card">
+              <div class="card-body">
+                <h1 class="card-title">Convocatorias de estudiantes auxiliares</h1>
+                <p class="card-text"></p>
+                <a href="{% url 'students_call' %}" class="card-link">Ver convocatorias...</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 col-lg-6 dima-margin-bottom__30">
+            <div class="card">
+              <div class="card-body">
+                <h1 class="card-title">Convocatorias internas</h1>
+                <p class="card-text"></p>
+                <a href="{% url 'internal_call' %}" class="card-link">Ver convocatorias...</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 col-lg-6 dima-margin-bottom__30">
+            <div class="card">
+              <div class="card-body">
+                <h1 class="card-title">Convocatorias conjuntas</h1>
+                <p class="card-text"></p>
+                <a href="{% url 'joint_call' %}" class="card-link">Ver convocatorias...</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 col-lg-6 dima-margin-bottom__30">
+            <div class="card">
+              <div class="card-body">
+                <h1 class="card-title">Convocatorias Minciencias</h1>
+                <p class="card-text"></p>
+                <a href="{% url 'minciencias_call' %}" class="card-link">Ver convocatorias...</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

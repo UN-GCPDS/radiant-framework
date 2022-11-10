@@ -1,0 +1,78 @@
+{% extends "base_unal.html" %}
+{% load admin_urls %}
+{% load dima_utils %}
+{% block 'head-title' %}Convocatorias conjuntas - {% endblock %}
+
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        Está en: <a href="/">Inicio</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="{% url 'calls' %}">Convocatorias</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="{% url 'joint_call' %}">Conjuntas</a>
+      </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+
+{% block 'main' %}
+{% if user.is_authenticated %}
+  <div class='container'>
+    <div class="dima-alert alert alert-danger" role="alert">
+      Las convocatorias conjuntas deben tener un título, un link de referencia
+      una fecha de expiración a partir de la cual no se mostrará como activa y
+      opcionalmente una imagen de referencia.<br>
+      Adicionalmente puede incluir un párrafo de objetivos y un párrafo
+      describiendo a quién va dirigida.<br>
+      El cronograma, los términos de referencia y los anexos se pueden adjuntar
+      desde la <a href='{% url jointcall_admin|admin_urlname:'add' %}'>interfaz de creación de convocatoria</a>.
+    </div>
+  </div>
+{% endif %}
+
+
+<div class="container-lg">
+
+    <h1 class="display-3">Convocatorias conjuntas
+      <small class="text-muted">
+        {% if user.is_authenticated %}
+          <a href='{% url jointcall_admin|admin_urlname:'add' %}'>Add call<i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+      </small>
+    </h1>
+
+    <div class="dima-content">
+        <div class="row">
+
+        {% for call in jointcall %}
+          {% if user.is_authenticated or call.expiered %}
+            <div class="col-md-12 dima-margin-bottom__30">
+              <div class="card">
+                <div class="card-body">
+                  <h1 class="card-title">{{ call.title|lower|capfirst }}</h1>
+                  <p class="card-text">{{call.objective}}</p>
+                  <a href="{% url 'joint_call' call.pk %}" class="card-link">Ver convocatoria..</a>
+                </div>
+              </div>
+            </div>
+
+
+          {% endif %}
+        {% endfor %}
+
+
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
