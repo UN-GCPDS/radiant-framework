@@ -1,5 +1,5 @@
 from django.views.generic.base import TemplateView
-from .models import InternalCall, JointCall
+from .models import InternalCall, JointCall, MincienciasCall, StudentsCall
 
 
 ########################################################################
@@ -44,23 +44,23 @@ class JointCallView(TemplateView):
 class MincienciasCallView(TemplateView):
     template_name = "convocatorias/minciencias.html"
 
-    # # ----------------------------------------------------------------------
-    # def get_context_data(self, **kwargs):
-        # """"""
-        # context = super().get_context_data(**kwargs)
-        # context['jointcall'] = JointCall.objects.all()
-        # context['jointcall_admin'] = JointCall._meta
-        # return context
+    # ----------------------------------------------------------------------
+    def get_context_data(self, **kwargs):
+        """"""
+        context = super().get_context_data(**kwargs)
+        context['mincienciascall'] = MincienciasCall.objects.all()
+        context['mincienciascall_admin'] = MincienciasCall._meta
+        return context
 
 
 ########################################################################
 class StudentsCallView(TemplateView):
     template_name = "convocatorias/estudiantes.html"
 
-    # # ----------------------------------------------------------------------
-    # def get_context_data(self, **kwargs):
-        # """"""
-        # context = super().get_context_data(**kwargs)
-        # context['jointcall'] = JointCall.objects.all()
-        # context['jointcall_admin'] = JointCall._meta
-        # return context
+    # ----------------------------------------------------------------------
+    def get_context_data(self, **kwargs):
+        """"""
+        context = super().get_context_data(**kwargs)
+        context['studentscall'] = StudentsCall.objects.all()
+        context['studentscall_admin'] = StudentsCall._meta
+        return context

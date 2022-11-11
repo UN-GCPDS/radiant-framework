@@ -260,6 +260,10 @@ h6 {
   padding-inline-start: 40px;
 }
 
+.dima-content ol.list-group {
+  padding-inline-start: 15px;
+}
+
 .dima-content a {
   border-bottom: 1px dotted;
 }
@@ -374,4 +378,7 @@ text-transform: capitalize;
   margin-bottom: 30px;
 }
 
-
+.dima__disable{
+    background-color: #ededed;
+    opacity: 0.3;
+}

@@ -1,7 +1,7 @@
 {% extends "base_unal.html" %}
 {% load admin_urls %}
 {% load dima_utils %}
-{% block 'head-title' %}Convocatorias - {% endblock %}
+{% block 'head-title' %}Convocatorias Minciencias - {% endblock %}
 
 
 {% block 'breadcrumb' %}
@@ -15,7 +15,7 @@
         <a href="{% url 'calls' %}">Convocatorias</a>
       </li>
       <li aria-current="page" class="breadcrumb-item active">
-        <a href="{% url 'joint_call' %}">Convocatorias Minciencias</a>
+        <a href="{% url 'minciencias_call' %}">Convocatorias Minciencias</a>
       </li>
     </ol>
   </nav>
@@ -24,13 +24,65 @@
 
 
 {% block 'main' %}
+{% if user.is_authenticated %}
+  <div class='container'>
+    <div class="dima-alert alert alert-danger" role="alert">
+      Las convocatorias internas deben tener un título, un link de referencia
+      una fecha de expiración a partir de la cual no se mostrará como activa y
+      opcionalmente una imagen de referencia.
+    </div>
+  </div>
+{% endif %}
+
 <div class="container-lg">
 
-    <h1 class="display-3">Convocatorias Minciencias</h1>
+    <h1 class="display-3">Convocatorias Minciencias
+      <small class="text-muted">
+        {% if user.is_authenticated %}
+          <a href='{% url mincienciascall_admin|admin_urlname:'add' %}'>Add call<i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+      </small>
+    </h1>
 
     <div class="dima-content">
         <div class="row">
 
+        {% for call in mincienciascall %}
+          {% if user.is_authenticated or call.show %}
+
+            <div class="col-md-12 col-lg-6 dima-internal_call">
+              {% if call.image %}
+                  <img src="{{call.image.url}}" class="dima-image__internal_call"></img>
+                  {% if user.is_authenticated %}
+                    {% if not call.active %}<span class="badge rounded-pill text-bg-danger">Oculta</span>{% endif %}
+                    {% if call.expired %}<span class="badge rounded-pill text-bg-danger">Finalizada</span>{% endif %}
+                    {% if not call.expired %}<span class="badge rounded-pill text-bg-primary">Activa</span>{% endif %}
+                    <br>
+                  {% endif %}
+                  <a href='{{ call.link }}' target='_blank'>{{ call.title }}</a>
+                  {% if user.is_authenticated %}
+                    <a href='{% url mincienciascall_admin|admin_urlname:'change' call.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+                  {% endif %}
+              {% else %}
+                  <div class="dima-image__no_image" style='background-color: {{call.color}}'>
+                    {{ call.title }}
+                  </div>
+                  {% if user.is_authenticated %}
+                    {% if not call.active %}<span class="badge rounded-pill text-bg-danger">Oculta</span>{% endif %}
+                    {% if call.expired %}<span class="badge rounded-pill text-bg-danger">Finalizada</span>{% endif %}
+                    {% if not call.expired %}<span class="badge rounded-pill text-bg-primary">Activa</span>{% endif %}
+                    <br>
+                  {% endif %}
+                  <a href='{{ call.link }}' target='_blank'>Ver convocatoria...</a>
+                  {% if user.is_authenticated %}
+                    <a href='{% url mincienciascall_admin|admin_urlname:'change' call.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+                  {% endif %}
+
+              {% endif %}
+            </div>
+
+          {% endif %}
+        {% endfor %}
 
         </div>
     </div>

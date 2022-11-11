@@ -57,17 +57,36 @@
         </div>
 
         {% for call in internalcall %}
-          {% if user.is_authenticated or call.expired %}
+          {% if user.is_authenticated or call.show %}
 
             <div class="col-md-12 col-lg-6 dima-internal_call">
               {% if call.image %}
                   <img src="{{call.image.url}}" class="dima-image__internal_call"></img>
+                  {% if user.is_authenticated %}
+                    {% if not call.active %}<span class="badge rounded-pill text-bg-danger">Oculta</span>{% endif %}
+                    {% if call.expired %}<span class="badge rounded-pill text-bg-danger">Finalizada</span>{% endif %}
+                    {% if not call.expired %}<span class="badge rounded-pill text-bg-primary">Activa</span>{% endif %}
+                    <br>
+                  {% endif %}
+                  <a href='{{ call.link }}' target='_blank'>{{ call.title }}</a>
+                  {% if user.is_authenticated %}
+                    <a href='{% url internalcall_admin|admin_urlname:'change' call.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+                  {% endif %}
               {% else %}
                   <div class="dima-image__no_image" style='background-color: {{call.color}}'>
                     {{ call.title }}
                   </div>
+                  {% if user.is_authenticated %}
+                    {% if not call.active %}<span class="badge rounded-pill text-bg-danger">Oculta</span>{% endif %}
+                    {% if call.expired %}<span class="badge rounded-pill text-bg-danger">Finalizada</span>{% endif %}
+                    {% if not call.expired %}<span class="badge rounded-pill text-bg-primary">Activa</span>{% endif %}
+                    <br>
+                  {% endif %}
+                  <a href='{{ call.link }}' target='_blank'>Ver convocatoria...</a>
+                  {% if user.is_authenticated %}
+                    <a href='{% url internalcall_admin|admin_urlname:'change' call.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+                  {% endif %}
               {% endif %}
-              <a href='{{ call.link }}'>{{ call.title|lower|capfirst }}</a> <a href='{% url internalcall_admin|admin_urlname:'change' call.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
             </div>
 
           {% endif %}

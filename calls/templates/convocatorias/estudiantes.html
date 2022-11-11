@@ -26,7 +26,13 @@
 {% block 'main' %}
 <div class="container-lg">
 
-    <h1 class="display-3">Convocatorias de estudiantes auxiliares</h1>
+    <h1 class="display-3">Convocatorias de estudiantes auxiliares
+    <small class="text-muted">
+      {% if user.is_authenticated %}
+        <a href='{% url studentscall_admin|admin_urlname:'add' %}'>Add call<i class="bi bi-pencil-square"></i></a>
+      {% endif %}
+    </small>
+    </h1>
 
     <div class="dima-content">
         <div class="row">

@@ -31,21 +31,24 @@ class InternalCall(models.Model):
             '#153465',
         ])
 
-    @property
     # ----------------------------------------------------------------------
+    @property
     def expired(self):
-        return not (self.active and date.today() < self.expiration.date())
+        return date.today() > self.expiration
+
+    # ----------------------------------------------------------------------
+    @property
+    def show(self):
+        return self.active and not self.expired
 
 
 ########################################################################
-class JointCall(models.Model):
+class MincienciasCall(models.Model):
     """"""
     image = models.FileField('call', upload_to=upload_to_internal_call, blank=True, null=True)
     expiration = models.DateField('expiration')
     link = models.URLField('link')
     title = models.CharField('title', max_length=2 ** 10)
-    objective = models.TextField('objective', max_length=2 ** 12)
-    headed = models.TextField('headed', max_length=2 ** 12)
     active = models.BooleanField('active', default=True)
 
     @property
@@ -61,10 +64,64 @@ class JointCall(models.Model):
             '#153465',
         ])
 
-    @property
     # ----------------------------------------------------------------------
+    @property
     def expired(self):
-        return not (self.active and date.today() < self.expiration.date())
+        return date.today() > self.expiration
+
+    # ----------------------------------------------------------------------
+    @property
+    def show(self):
+        return self.active and not self.expired
+
+
+########################################################################
+class JointCall(models.Model):
+    """"""
+    image = models.FileField('call', upload_to=upload_to_internal_call, blank=True, null=True)
+    # expiration = models.DateField('expiration')
+    link = models.URLField('link')
+    title = models.CharField('title', max_length=2 ** 10)
+    objective = models.TextField('objective', max_length=2 ** 12)
+    headed = models.TextField('headed', max_length=2 ** 12)
+    active = models.BooleanField('active', default=True)
+
+    # ----------------------------------------------------------------------
+    @property
+    def expired(self):
+        expiration = max(filter(None, [date.today()] + [t.start_date for t in self.timeline.all()] + [t.end_date for t in self.timeline.all()]))
+        return date.today() >= expiration
+
+    # ----------------------------------------------------------------------
+    @property
+    def show(self):
+        return self.active and not self.expired
+
+
+########################################################################
+class StudentsCall(models.Model):
+    """"""
+    title = models.CharField('title', max_length=2 ** 10)
+    expiration = models.DateField('expiration')
+    funding = models.TextField('funding', max_length=2 ** 12)
+    supervise = models.CharField('supervise', max_length=2 ** 12)
+    students = models.IntegerField('students')
+    profile = models.TextField('profile', max_length=2 ** 12)
+    time = models.IntegerField('time', help_text='Horas a la semana')
+    economic_stimulus = models.CharField('economic_stimulus', max_length=2 ** 12)
+    period = models.IntegerField('period', help_text='Meses')
+    active = models.BooleanField('active', default=True)
+
+    # ----------------------------------------------------------------------
+    @property
+    def expired(self):
+        expiration = max(filter(None, [date.today()] + [t.start_date for t in self.timeline.all()] + [t.end_date for t in self.timeline.all()]))
+        return date.today() >= expiration
+
+    # ----------------------------------------------------------------------
+    @property
+    def show(self):
+        return self.active and not self.expired
 
 
 ########################################################################
@@ -77,7 +134,7 @@ class Timeline(models.Model):
     @property
     # ----------------------------------------------------------------------
     def expired(self):
-        return max(filter(None, [self.end_date, self.start_date])) < date.today()
+        return max(filter(None, [self.end_date, self.start_date])) <= date.today()
 
 
 ########################################################################
@@ -95,14 +152,44 @@ class Annex(models.Model):
 
 
 ########################################################################
-class Results(models.Model):
+class Result(models.Model):
     joint_call = models.ForeignKey('calls.JointCall', related_name='results', on_delete=models.CASCADE)
+    name = models.CharField('name', max_length=2 ** 10)
+    results = models.FileField('result', upload_to=upload_to_internal_call, blank=True, null=True)
+
+
+########################################################################
+class TermsOfReferenceS(models.Model):
+    joint_call = models.ForeignKey('calls.StudentsCall', related_name='terms_of_reference', on_delete=models.CASCADE)
+    name = models.CharField('name', max_length=2 ** 10)
+    terms_of_reference = models.FileField('terms_of_reference', upload_to=upload_to_internal_call, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "TermsOfReference"
+
+
+########################################################################
+class AnnexS(models.Model):
+    joint_call = models.ForeignKey('calls.StudentsCall', related_name='annex', on_delete=models.CASCADE)
+    name = models.CharField('name', max_length=2 ** 10)
+    annex = models.FileField('annex', upload_to=upload_to_internal_call, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Annex"
+
+
+########################################################################
+class ResultS(models.Model):
+    joint_call = models.ForeignKey('calls.StudentsCall', related_name='results', on_delete=models.CASCADE)
     name = models.CharField('name', max_length=2 ** 10)
     results = models.FileField('results', upload_to=upload_to_internal_call, blank=True, null=True)
 
+    class Meta:
+        verbose_name = "Result"
+
 
 # ----------------------------------------------------------------------
-@ receiver(post_delete, sender=InternalCall)
+@receiver(post_delete, sender=InternalCall)
 def on_post_delete_internalcall(sender, instance, **kwargs):
     """"""
     for object_ in ['image']:
@@ -112,7 +199,17 @@ def on_post_delete_internalcall(sender, instance, **kwargs):
 
 
 # ----------------------------------------------------------------------
-@ receiver(post_delete, sender=TermsOfReference)
+@receiver(post_delete, sender=MincienciasCall)
+def on_post_delete_MincienciasCall(sender, instance, **kwargs):
+    """"""
+    for object_ in ['image']:
+        if file := getattr(instance, object_, None):
+            if os.path.isfile(file.path):
+                os.remove(file.path)
+
+
+# ----------------------------------------------------------------------
+@receiver(post_delete, sender=TermsOfReference)
 def on_post_delete_TermsOfReference(sender, instance, **kwargs):
     """"""
     for object_ in ['terms_of_reference']:
@@ -122,7 +219,7 @@ def on_post_delete_TermsOfReference(sender, instance, **kwargs):
 
 
 # ----------------------------------------------------------------------
-@ receiver(post_delete, sender=Annex)
+@receiver(post_delete, sender=Annex)
 def on_post_delete_Annex(sender, instance, **kwargs):
     """"""
     for object_ in ['annex']:
@@ -132,8 +229,38 @@ def on_post_delete_Annex(sender, instance, **kwargs):
 
 
 # ----------------------------------------------------------------------
-@ receiver(post_delete, sender=Results)
-def on_post_delete_Results(sender, instance, **kwargs):
+@receiver(post_delete, sender=Result)
+def on_post_delete_Result(sender, instance, **kwargs):
+    """"""
+    for object_ in ['results']:
+        if file := getattr(instance, object_, None):
+            if os.path.isfile(file.path):
+                os.remove(file.path)
+
+
+# ----------------------------------------------------------------------
+@receiver(post_delete, sender=TermsOfReferenceS)
+def on_post_delete_TermsOfReferenceS(sender, instance, **kwargs):
+    """"""
+    for object_ in ['terms_of_reference']:
+        if file := getattr(instance, object_, None):
+            if os.path.isfile(file.path):
+                os.remove(file.path)
+
+
+# ----------------------------------------------------------------------
+@receiver(post_delete, sender=AnnexS)
+def on_post_delete_AnnexS(sender, instance, **kwargs):
+    """"""
+    for object_ in ['annex']:
+        if file := getattr(instance, object_, None):
+            if os.path.isfile(file.path):
+                os.remove(file.path)
+
+
+# ----------------------------------------------------------------------
+@receiver(post_delete, sender=ResultS)
+def on_post_delete_ResultS(sender, instance, **kwargs):
     """"""
     for object_ in ['results']:
         if file := getattr(instance, object_, None):
