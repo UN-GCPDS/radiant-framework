@@ -73,19 +73,14 @@ class Broadcast(models.Model):
     image = models.FileField('broadcast', upload_to=upload_to_broadcast)
     expiration = models.DateField('expiration')
     link = models.URLField('link', blank=True, null=True)
-    title = models.CharField('title', max_length=2
-                             ** 10, blank=True, null=True)
+    title = models.CharField('title', max_length=2 **
+                             10, blank=True, null=True)
     description = models.TextField(
         'description', max_length=2**10, blank=True, null=True)
     upload = models.DateTimeField('upload', auto_now_add=True)
     dominant = models.CharField(
         'dominant', max_length=7, blank=True, null=True)
     active = models.BooleanField('active', default=True)
-
-    @property
-    # ----------------------------------------------------------------------
-    def expired(self):
-        return not (self.active and date.today() < self.expiration.date())
 
     # ----------------------------------------------------------------------
     def save(self):
@@ -96,9 +91,18 @@ class Broadcast(models.Model):
         self.dominant = dominant.decode()
         super().save()
 
+    # ----------------------------------------------------------------------
+    @property
+    def expired(self):
+        return date.today() > self.expiration
+
+    # ----------------------------------------------------------------------
+    @property
+    def show(self):
+        return self.active and not self.expired
+
+
 # ----------------------------------------------------------------------
-
-
 @receiver(post_save, sender=Newsletter)
 def on_post_save(sender, instance=False, **kwargs):
     """"""
