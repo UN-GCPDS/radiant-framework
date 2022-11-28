@@ -12,7 +12,9 @@ urlpatterns = [
 
     path('minciencias', MincienciasCallView.as_view(), name='minciencias_call'),
     path('estudiantes_auxiliares', StudentsCallView.as_view(), name='students_call'),
+    path('estudiantes_auxiliares/<slug:pk>', StudentsCallView.as_view(), name='students_call'),
 
 ]
+
 
 

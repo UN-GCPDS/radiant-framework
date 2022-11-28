@@ -55,12 +55,19 @@ class MincienciasCallView(TemplateView):
 
 ########################################################################
 class StudentsCallView(TemplateView):
-    template_name = "convocatorias/estudiantes.html"
 
     # ----------------------------------------------------------------------
-    def get_context_data(self, **kwargs):
+    def get(self, request, pk=None, *args, **kwargs):
         """"""
-        context = super().get_context_data(**kwargs)
-        context['studentscall'] = StudentsCall.objects.all()
-        context['studentscall_admin'] = StudentsCall._meta
-        return context
+        context = self.get_context_data(**kwargs)
+
+        if pk:
+            self.template_name = "convocatorias/estudiantes_view.html"
+            context['studentscall'] = StudentsCall.objects.get(pk=pk)
+            context['studentscall_admin'] = StudentsCall._meta
+        else:
+            self.template_name = "convocatorias/estudiantes.html"
+            context['studentscall'] = StudentsCall.objects.all()
+            context['studentscall_admin'] = StudentsCall._meta
+
+        return self.render_to_response(context)

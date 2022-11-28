@@ -1,0 +1,93 @@
+{% extends "base_unal.html" %}
+{% load admin_urls %}
+{% load dima_utils %}
+{% block 'head-title' %}Convocatorias - {% endblock %}
+
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        Está en: <a href="/">Inicio</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="{% url 'calls' %}">Convocatorias</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="{% url 'students_call' %}">Convocatorias de estudiantes auxiliares</a>
+      </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+
+{% block 'main' %}
+<div class="container-lg">
+
+    <h1 class="display-3">{{ studentscall.title }}
+      <small class="text-muted">
+        {% if user.is_authenticated %}
+          <a href='{% url studentscall_admin|admin_urlname:'change' studentscall.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+      </small>
+    </h1>
+
+    <div class="dima-content">
+        <div class="row">
+        
+          <dl class="row">
+
+            <dt class="col-sm-3">Recursos Proyecto</dt>
+            <dd class="col-sm-9">{{studentscall.funding}}</dd>
+
+            <dt class="col-sm-3">Profesor responsable</dt>
+            <dd class="col-sm-9">{{studentscall.supervise}}</dd>
+            
+            <dt class="col-sm-3">Número de estudiantes a vincular</dt>
+            <dd class="col-sm-9">{{studentscall.students}}</dd>
+            
+            <dt class="col-sm-3">Perfil</dt>
+            <dd class="col-sm-9">{{studentscall.profile}}</dd>
+            
+            <dt class="col-sm-3">Tiempo</dt>
+            <dd class="col-sm-9">{{studentscall.time}} horas a la semana</dd>
+            
+            <dt class="col-sm-3">Estímulo económico</dt>
+            <dd class="col-sm-9">{{studentscall.economic_stimulus}}</dd>
+            
+            <dt class="col-sm-3">Periodo</dt>
+            <dd class="col-sm-9">{{studentscall.period}} días</dd>
+          
+          </dl>
+          
+          <h1>Terminos de referencia:</h1>         
+          <ol>
+            {% for doc in studentscall.terms_of_reference.all %}
+              <li><a href='{{doc.terms_of_reference.url}}' target='_blank'>{{doc.name}}</a></li>
+            {% endfor %}
+          </ol>
+          
+          <h1>Anexos:</h1>
+          <ol>
+            {% for annex in studentscall.annex.all %}
+              <li><a href='{{annex.annex.url}}' target='_blank'>{{annex.name}}</a></li>
+            {% endfor %}
+          </ol>
+            
+          {% if studentscall.results.count %}
+            <h1>Resultados:</h1>
+            <ol>
+              {% for result in studentscall.results.all %}
+                <li><a href='{{result.result.url}}' target='_blank'>{{result.name}}</a></li>
+              {% endfor %}
+            </ol>
+          {% endif %}
+            
+        </div>
+        
+    </div>
+
+</div>
+{% endblock %}

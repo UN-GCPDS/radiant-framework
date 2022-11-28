@@ -103,20 +103,19 @@ class StudentsCall(models.Model):
     """"""
     title = models.CharField('title', max_length=2 ** 10)
     expiration = models.DateField('expiration')
-    funding = models.TextField('funding', max_length=2 ** 12)
+    funding = models.CharField('funding', max_length=2 ** 12)
     supervise = models.CharField('supervise', max_length=2 ** 12)
     students = models.IntegerField('students')
     profile = models.TextField('profile', max_length=2 ** 12)
     time = models.IntegerField('time', help_text='Horas a la semana')
-    economic_stimulus = models.CharField('economic_stimulus', max_length=2 ** 12)
-    period = models.IntegerField('period', help_text='Meses')
+    economic_stimulus = models.CharField('economic stimulus', max_length=2 ** 12)
+    period = models.IntegerField('period', help_text='Días')
     active = models.BooleanField('active', default=True)
 
     # ----------------------------------------------------------------------
     @property
     def expired(self):
-        expiration = max(filter(None, [date.today()] + [t.start_date for t in self.timeline.all()] + [t.end_date for t in self.timeline.all()]))
-        return date.today() >= expiration
+        return date.today() > self.expiration
 
     # ----------------------------------------------------------------------
     @property

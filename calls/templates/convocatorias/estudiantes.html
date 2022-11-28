@@ -36,6 +36,33 @@
 
     <div class="dima-content">
         <div class="row">
+        
+          {% for call in studentscall %}
+            {% if user.is_authenticated or call.show %}
+              
+            <div class="col-md-12 col-lg-6 dima-margin-bottom__30">
+              <div class="card">
+                <div class="card-body">
+                  <h1 class="card-title">{{ call.title|lower|capfirst }}</h1>
+                  <p class="card-text">{{call.profile}}</p>
+                  <p class="card-text"><i>{{call.funding}}</i></p>
+                  <p class="card-text">{{call.economic_stimulus}}</p>
+
+                  {% if user.is_authenticated %}
+                    {% if not call.active %}<span class="badge rounded-pill text-bg-danger">Oculta</span>{% endif %}
+                    {% if call.expired %}<span class="badge rounded-pill text-bg-danger">Finalizada</span>{% endif %}
+                    {% if not call.expired %}<span class="badge rounded-pill text-bg-primary">Activa</span>{% endif %}
+                    <br>
+                  {% endif %}
+
+                  <a href="{% url 'students_call' call.pk %}" class="card-link">Ver convocatoria...</a>
+                </div>
+              </div>
+            </div>
+              
+            
+            {% endif %}
+          {% endfor %}
 
 
         </div>
