@@ -21,7 +21,7 @@
   </div>
   <div class="carousel-inner">
     {% for broadcast in broadcasts %}
-      {% if user.is_authenticated or broadcast.expired %}
+      {% if user.is_authenticated or broadcast.show %}
 
         <style nonce="{{request.csp_nonce}}">
           .dima--carousel-item_{{forloop.counter}} {
