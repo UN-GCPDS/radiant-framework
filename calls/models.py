@@ -18,6 +18,8 @@ class InternalCall(models.Model):
     title = models.CharField('title', max_length=2 ** 10)
     active = models.BooleanField('active', default=True)
 
+    # Dirigida a
+
     @property
     # ----------------------------------------------------------------------
     def color(self):
@@ -50,6 +52,9 @@ class MincienciasCall(models.Model):
     link = models.URLField('link')
     title = models.CharField('title', max_length=2 ** 10)
     active = models.BooleanField('active', default=True)
+    # Missing:
+    # - Objetivo
+    # - Dirigido a
 
     @property
     # ----------------------------------------------------------------------
@@ -109,8 +114,11 @@ class StudentsCall(models.Model):
     profile = models.TextField('profile', max_length=2 ** 12)
     time = models.IntegerField('time', help_text='Horas a la semana')
     economic_stimulus = models.CharField('economic stimulus', max_length=2 ** 12)
+    # period = models.CharField('period') # TODO
     period = models.IntegerField('period', help_text='Días')
     active = models.BooleanField('active', default=True)
+
+    # Anexo no recbir benificios
 
     # ----------------------------------------------------------------------
     @property
