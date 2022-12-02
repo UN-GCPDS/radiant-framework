@@ -5,9 +5,8 @@ from .models import Timeline_InternalCall, TermsOfReference_InternalCall, Annex_
 from .models import Timeline_JointCall, TermsOfReference_JointCall, Annex_JointCall, Result_JointCall
 from .models import TermsOfReference_StudentsCall, Annex_StudentsCall, Result_StudentsCall
 
-##
 
-
+# Internal calls
 class Timeline_InternalCallAdmin(admin.StackedInline):
     model = Timeline_InternalCall
     extra = 1
@@ -27,9 +26,7 @@ class Result_InternalCallAdmin(admin.StackedInline):
     model = Result_InternalCall
     extra = 1
 
-##
-
-
+# Joint calls
 class Timeline_JointCallAdmin(admin.StackedInline):
     model = Timeline_JointCall
     extra = 1
@@ -44,15 +41,11 @@ class Annex_JointCallAdmin(admin.StackedInline):
     model = Annex_JointCall
     extra = 1
 
-
 class Result_JointCallAdmin(admin.StackedInline):
     model = Result_JointCall
     extra = 1
 
-
-##
-
-
+# Students call
 class TermsOfReference_StudentsCallAdmin(admin.StackedInline):
     model = TermsOfReference_StudentsCall
     extra = 1

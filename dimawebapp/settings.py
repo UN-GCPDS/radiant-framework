@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-&-%3g&h#^q8%fnsxg27jwe*^u+az&&zcp$_!rh%w&1ekh#_2!n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False) == 'True'
 SQLITE = True
-PROTECT = False
+PROTECT = True
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     'groups.apps.GroupsConfig',
     'dima.apps.DimaConfig',
     'projects.apps.ProjectsConfig',
-    'bulk_data.apps.BulkDataConfig',
+    # 'bulk_data.apps.BulkDataConfig',
     'unal_plantilla_web.apps.UnalPlantillaWebConfig',
     'intellectual_property.apps.IntellectualPropertyConfig',
     'calls.apps.CallsConfig',

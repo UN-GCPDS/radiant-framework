@@ -13,9 +13,9 @@ if not settings.DEBUG:
 
 @admin.register(Newsletter)
 class NewsletterAdmin(admin.ModelAdmin):
-    list_display = ('file', 'upload')
+    list_display = ('upload', 'file')
     exclude = ('thumbnail',)
-    list_display_links = ['file']
+    list_display_links = ['upload']
 
 
 @admin.register(Broadcast)

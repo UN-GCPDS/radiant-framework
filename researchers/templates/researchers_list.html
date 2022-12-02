@@ -23,7 +23,7 @@
       <td class='dima-group--view' data-pk='{{professor.pk}}'>
         <a class="btn btn-link dima--table-btn-link" href="{% url 'researchers' professor.pk %}" role="button">{{professor.full_name}}</a>
         {% if user.is_authenticated %}
-          <a class='' href='{% url professors_admin|admin_urlname:'change' professor.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+          <a class='' href='{% url professors_admin|admin_urlname:'change' professor.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </td>
       <td>{{category|capfirst}}</td>

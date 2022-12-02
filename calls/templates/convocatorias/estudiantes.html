@@ -29,17 +29,17 @@
     <h1 class="display-3">Convocatorias de estudiantes auxiliares
     <small class="text-muted">
       {% if user.is_authenticated %}
-        <a href='{% url studentscall_admin|admin_urlname:'add' %}'>Add call<i class="bi bi-pencil-square"></i></a>
+        <a href='{% url studentscall_admin|admin_urlname:'add' %}'>Agregar convocatoria<i class="bi bi-pencil-square"></i></a>
       {% endif %}
     </small>
     </h1>
 
     <div class="dima-content">
         <div class="row">
-        
+
           {% for call in studentscall %}
             {% if user.is_authenticated or call.show %}
-              
+
             <div class="col-md-12 col-lg-6 dima-margin-bottom__30">
               <div class="card">
                 <div class="card-body">
@@ -59,8 +59,8 @@
                 </div>
               </div>
             </div>
-              
-            
+
+
             {% endif %}
           {% endfor %}
 

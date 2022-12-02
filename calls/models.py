@@ -1,6 +1,7 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_delete
+from tinymce.models import HTMLField
 from datetime import date
 import random
 import os
@@ -14,13 +15,18 @@ upload_to_student_call = os.path.join('uploads', 'calls_student')
 ########################################################################
 class InternalCall(models.Model):
     """"""
-    image = models.FileField('call', upload_to=upload_to_internal_call, blank=True, null=True)
-    expiration = models.DateField('expiration')
-    link = models.URLField('link')
-    title = models.CharField('title', max_length=2 ** 10)
-    objective = models.TextField('objective', max_length=2 ** 12)
-    headed = models.TextField('headed', max_length=2 ** 12)
-    active = models.BooleanField('active', default=True)
+    image = models.FileField('Imagen de convocatoria', upload_to=upload_to_internal_call, help_text='Opcional', blank=True, null=True)
+    expiration = models.DateField('Finalización', help_text='Hasta cuando está abierta la convocatoria')
+    link = models.URLField('Link de referencia')
+    title = models.CharField('Título', max_length=2 ** 10)
+    objective = HTMLField('Objetivo', max_length=2 ** 12)
+    headed = HTMLField('Dirigido a', max_length=2 ** 12)
+    active = models.BooleanField('Convocatoria activa', help_text='Oculta la convoctaria de la vista pública', default=True)
+
+    # ----------------------------------------------------------------------
+    class Meta:
+        verbose_name = "Convocatoria interna"
+        verbose_name_plural = "Convocatorias internas"
 
     @property
     # ----------------------------------------------------------------------
@@ -44,18 +50,29 @@ class InternalCall(models.Model):
     @property
     def show(self):
         return self.active and not self.expired
+
+
+    # ----------------------------------------------------------------------
+    def __str__(self):
+        return f'Convocatoria interna (ID:#{self.pk})'
 
 
 ########################################################################
 class MincienciasCall(models.Model):
     """"""
-    image = models.FileField('call', upload_to=upload_to_internal_call, blank=True, null=True)
-    expiration = models.DateField('expiration')
-    link = models.URLField('link')
-    title = models.CharField('title', max_length=2 ** 10)
-    objective = models.TextField('objective', max_length=2 ** 12)
-    headed = models.TextField('headed', max_length=2 ** 12)
-    active = models.BooleanField('active', default=True)
+    image = models.FileField('Imagen de convocatoria', upload_to=upload_to_internal_call, help_text='Opcional', blank=True, null=True)
+    expiration = models.DateField('Finalización', help_text='Hasta cuando está abierta la convocatoria')
+    link = models.URLField('Link de referencia')
+    title = models.CharField('Título', max_length=2 ** 10)
+    objective = HTMLField('Objetivo', max_length=2 ** 12)
+    headed = HTMLField('Dirigido a', max_length=2 ** 12)
+    active = models.BooleanField('Convocatoria activa', help_text='Oculta la convoctaria de la vista pública', default=True)
+
+    # ----------------------------------------------------------------------
+    class Meta:
+        verbose_name = "Convocatoria de Minciencias"
+        verbose_name_plural = "Convocatorias de Minciencias"
+
 
     @property
     # ----------------------------------------------------------------------
@@ -81,16 +98,27 @@ class MincienciasCall(models.Model):
         return self.active and not self.expired
 
 
+    # ----------------------------------------------------------------------
+    def __str__(self):
+        return f'Convocatoria de Minciencias (ID:#{self.pk})'
+
+
 ########################################################################
 class JointCall(models.Model):
     """"""
-    image = models.FileField('call', upload_to=upload_to_join_call, blank=True, null=True)
-    expiration = models.DateField('expiration')
-    link = models.URLField('link')
-    title = models.CharField('title', max_length=2 ** 10)
-    objective = models.TextField('objective', max_length=2 ** 12)
-    headed = models.TextField('headed', max_length=2 ** 12)
-    active = models.BooleanField('active', default=True)
+    image = models.FileField('Imagen de convocatoria', upload_to=upload_to_join_call, help_text='Opcional', blank=True, null=True)
+    expiration = models.DateField('Finalización', help_text='Hasta cuando está abierta la convocatoria')
+    link = models.URLField('Link de referencia')
+    title = models.CharField('Título', max_length=2 ** 10)
+    objective = HTMLField('Objetivo', max_length=2 ** 12)
+    headed = HTMLField('Dirigido a', max_length=2 ** 12)
+    active = models.BooleanField('Convocatoria activa', help_text='Oculta la convoctaria de la vista pública', default=True)
+
+
+    # ----------------------------------------------------------------------
+    class Meta:
+        verbose_name = "Convocatoria conjunta"
+        verbose_name_plural = "Convocatorias conjuntas"
 
     # ----------------------------------------------------------------------
     @property
@@ -101,23 +129,31 @@ class JointCall(models.Model):
     @property
     def show(self):
         return self.active and not self.expired
+
+    # ----------------------------------------------------------------------
+    def __str__(self):
+        return f'Convocatoria conjunta (ID:#{self.pk})'
 
 
 ########################################################################
 class StudentsCall(models.Model):
     """"""
-    title = models.CharField('title', max_length=2 ** 10)
-    expiration = models.DateField('expiration')
-    funding = models.CharField('funding', max_length=2 ** 12)
-    supervise = models.CharField('supervise', max_length=2 ** 12)
-    students = models.IntegerField('students')
-    profile = models.TextField('profile', max_length=2 ** 12)
-    time = models.IntegerField('time', help_text='Horas a la semana')
-    economic_stimulus = models.CharField('economic stimulus', max_length=2 ** 12)
-    period = models.CharField('period', max_length=2 ** 10, help_text='ej. 3 Meses y 5 días')
-    active = models.BooleanField('active', default=True)
+    title = models.CharField('Título', max_length=2 ** 10)
+    expiration = models.DateField('Finalización', help_text='Hasta cuando está abierta la convocatoria')
+    funding = models.CharField('Recursos del proyecto', max_length=2 ** 12)
+    supervise = models.CharField('Profesor responsable', max_length=2 ** 12)
+    students = models.IntegerField('Estudiantes', help_text='Cantidad de estudiantes en la convocatoria')
+    profile = HTMLField('Perfil', max_length=2 ** 12)
+    time = models.IntegerField('Tiempo', help_text='Horas a la semana')
+    economic_stimulus = models.CharField('Estímulo económico', help_text='ej. 3 pagos de $2.000.000 y uno de $350.000', max_length=2 ** 12)
+    period = models.CharField('Periodo', max_length=2 ** 10, help_text='ej. 3 Meses y 5 días')
+    active = models.BooleanField('Convocatoria activa', help_text='Oculta la convoctaria de la vista pública', default=True)
 
     # Anexo no recbir benificios
+    # ----------------------------------------------------------------------
+    class Meta:
+        verbose_name = "Convocatoria para estudiantes auxiliares"
+        verbose_name_plural = "Convocatorias para estudiantes auxiliares"
 
     # ----------------------------------------------------------------------
     @property
@@ -129,16 +165,21 @@ class StudentsCall(models.Model):
     def show(self):
         return self.active and not self.expired
 
+    # ----------------------------------------------------------------------
+    def __str__(self):
+        return f'Convocatoria para estudiante axiliar (ID:#{self.pk})'
+
 
 ########################################################################
 class Timeline_JointCall(models.Model):
     joint_call = models.ForeignKey('calls.JointCall', related_name='timeline', on_delete=models.CASCADE)
-    activity = models.CharField('activity', max_length=2 ** 10)
-    start_date = models.DateField('start date')
-    end_date = models.DateField('finalization date', blank=True, null=True)
+    activity = models.CharField('Actividad', max_length=2 ** 10)
+    start_date = models.DateField('Fecha de inicio')
+    end_date = models.DateField('Fecha de finalización', help_text='Opcional', blank=True, null=True)
 
     class Meta:
-        verbose_name = "Timeline"
+        verbose_name = "Cronograma"
+        verbose_name_plural = "Cronograma"
 
     @property
     # ----------------------------------------------------------------------
@@ -149,21 +190,22 @@ class Timeline_JointCall(models.Model):
 ########################################################################
 class TermsOfReference_JointCall(models.Model):
     joint_call = models.ForeignKey('calls.JointCall', related_name='terms_of_reference', on_delete=models.CASCADE)
-    name = models.CharField('name', max_length=2 ** 10)
-    terms_of_reference = models.FileField('terms of reference', upload_to=upload_to_join_call, blank=True, null=True)
+    name = models.CharField('Nombre del archivo', max_length=2 ** 10)
+    terms_of_reference = models.FileField('Archivo', upload_to=upload_to_student_call, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Terms of reference"
+        verbose_name = "Términos de referencia"
+        verbose_name_plural = "Términos de referencia"
 
 
 ########################################################################
 class Annex_JointCall(models.Model):
     joint_call = models.ForeignKey('calls.JointCall', related_name='annex', on_delete=models.CASCADE)
-    name = models.CharField('name', max_length=2 ** 10)
-    annex = models.FileField('annex', upload_to=upload_to_join_call, blank=True, null=True)
+    name = models.CharField('Nombre del archivo', max_length=2 ** 10)
+    annex = models.FileField('Anexo', upload_to=upload_to_student_call, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Annex"
+        verbose_name = "Anexo"
 
 
 ########################################################################
@@ -179,77 +221,81 @@ class Result_JointCall(models.Model):
 ########################################################################
 class TermsOfReference_StudentsCall(models.Model):
     joint_call = models.ForeignKey('calls.StudentsCall', related_name='terms_of_reference', on_delete=models.CASCADE)
-    name = models.CharField('name', max_length=2 ** 10)
-    terms_of_reference = models.FileField('terms of reference', upload_to=upload_to_student_call, blank=True, null=True)
+    name = models.CharField('Nombre del archivo', max_length=2 ** 10)
+    terms_of_reference = models.FileField('Archivo', upload_to=upload_to_student_call, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Terms of reference"
+        verbose_name = "Términos de referencia"
+        verbose_name_plural = "Términos de referencia"
 
 
 ########################################################################
 class Annex_StudentsCall(models.Model):
     joint_call = models.ForeignKey('calls.StudentsCall', related_name='annex', on_delete=models.CASCADE)
-    name = models.CharField('name', max_length=2 ** 10)
-    annex = models.FileField('annex', upload_to=upload_to_student_call, blank=True, null=True)
+    name = models.CharField('Nombre del archivo', max_length=2 ** 10)
+    annex = models.FileField('Anexo', upload_to=upload_to_student_call, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Annex"
+        verbose_name = "Anexo"
 
 
 ########################################################################
 class Result_StudentsCall(models.Model):
     joint_call = models.ForeignKey('calls.StudentsCall', related_name='results', on_delete=models.CASCADE)
-    name = models.CharField('name', max_length=2 ** 10)
-    results = models.FileField('results', upload_to=upload_to_student_call, blank=True, null=True)
+    name = models.CharField('Nombre del archivo', max_length=2 ** 10)
+    results = models.FileField('Archivo', upload_to=upload_to_student_call, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Result"
+        verbose_name = "Resultado"
 
 
 ########################################################################
 class Timeline_InternalCall(models.Model):
     joint_call = models.ForeignKey('calls.InternalCall', related_name='timeline', on_delete=models.CASCADE)
-    activity = models.CharField('activity', max_length=2 ** 10)
-    start_date = models.DateField('start date')
-    end_date = models.DateField('finalization date', blank=True, null=True)
+    activity = models.CharField('Actividad', max_length=2 ** 10)
+    start_date = models.DateField('Fecha de inicio')
+    end_date = models.DateField('Fecha de finalización', help_text='Opcional', blank=True, null=True)
 
     # ----------------------------------------------------------------------
     @property
     def expired(self):
         return max(filter(None, [self.end_date, self.start_date])) <= date.today()
 
+    # ----------------------------------------------------------------------
     class Meta:
-        verbose_name = "Timeline"
+        verbose_name = "Cronograma"
+        verbose_name_plural = "Cronograma"
 
 
 ########################################################################
 class TermsOfReference_InternalCall(models.Model):
     joint_call = models.ForeignKey('calls.InternalCall', related_name='terms_of_reference', on_delete=models.CASCADE)
-    name = models.CharField('name', max_length=2 ** 10)
-    terms_of_reference = models.FileField('terms of reference', upload_to=upload_to_internal_call, blank=True, null=True)
+    name = models.CharField('Nombre del archivo', max_length=2 ** 10)
+    terms_of_reference = models.FileField('Archivo', upload_to=upload_to_internal_call, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Terms of reference"
+        verbose_name = "Términos de referencia"
+        verbose_name_plural = "Términos de referencia"
 
 
 ########################################################################
 class Annex_InternalCall(models.Model):
     joint_call = models.ForeignKey('calls.InternalCall', related_name='annex', on_delete=models.CASCADE)
-    name = models.CharField('name', max_length=2 ** 10)
-    annex = models.FileField('annex', upload_to=upload_to_internal_call, blank=True, null=True)
+    name = models.CharField('Nombre del archivo', max_length=2 ** 10)
+    annex = models.FileField('Anexo', upload_to=upload_to_internal_call, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Annex"
+        verbose_name = "Anexo"
 
 
 ########################################################################
 class Result_InternalCall(models.Model):
     joint_call = models.ForeignKey('calls.InternalCall', related_name='results', on_delete=models.CASCADE)
-    name = models.CharField('name', max_length=2 ** 10)
-    results = models.FileField('result', upload_to=upload_to_internal_call, blank=True, null=True)
+    name = models.CharField('Nombre del archivo', max_length=2 ** 10)
+    results = models.FileField('Archivo', upload_to=upload_to_internal_call, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Result"
+        verbose_name = "Resultado"
 
 
 # ----------------------------------------------------------------------

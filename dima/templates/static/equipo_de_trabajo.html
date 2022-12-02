@@ -20,7 +20,7 @@
     <h1 class="display-3">Equipo de trabajo
       <small class="text-muted">
         {% if user.is_authenticated %}
-          <a href='{% url teams_admin|admin_urlname:'add' %}'> Add team <i class="bi bi-pencil-square"></i></a>
+          <a href='{% url teams_admin|admin_urlname:'add' %}'>Agregar al equipo<i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </small>
     </h1>
@@ -32,7 +32,7 @@
         <h1 class="display-9">{{team.area}}
         <!--<small class="text-muted">-->
           {% if user.is_authenticated %}
-            <a class='dima-edit' href='{% url teams_admin|admin_urlname:'change' team.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+            <a class='dima-edit' href='{% url teams_admin|admin_urlname:'change' team.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
           {% endif %}
         <!--</small>-->
         </h1>

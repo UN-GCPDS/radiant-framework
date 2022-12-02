@@ -5,19 +5,22 @@ import json
 ########################################################################
 class Patent(models.Model):
 
-    filed = models.CharField('Filed', primary_key=True, max_length=2**5)
+    filed = models.CharField('Radicado', primary_key=True, max_length=2**5)
     inventors = models.ManyToManyField('researchers.Professor', related_name='patents')
 
-    co_ownership = models.CharField('Co-ownership', max_length=2**10)
-    name = models.CharField('Name', max_length=2**10)
-    patent_type = models.CharField('Patent type', **Choices('PATENT_TYPE'))
+    co_ownership = models.CharField('Cotitularidad', help_text='Separados por coma (,)', max_length=2**10)
+    name = models.CharField('Nombre de la patente', max_length=2**10)
+    patent_type = models.CharField('Tipo de patente', **Choices('PATENT_TYPE'))
 
-    departament = models.CharField('Departament', **Choices('DEPARTAMENT'))
-    grant = models.DateField('Grant', default='django.utils.timezone.now')
-    filling = models.DateField('Filing', default='django.utils.timezone.now')
-    publication = models.DateField('Publication', default='django.utils.timezone.now')
+    departament = models.CharField('Departamento', **Choices('DEPARTAMENT'))
+    grant = models.DateField('Fecha de concesión', default='django.utils.timezone.now')
+    filling = models.DateField('Fecha de presentación', default='django.utils.timezone.now')
+    publication = models.DateField('Fecha de publicación', default='django.utils.timezone.now')
 
 
+    # ----------------------------------------------------------------------
+    class Meta:
+        verbose_name = "Patente"
 
     # ----------------------------------------------------------------------
     def __getattr__(self, attr):
@@ -32,3 +35,7 @@ class Patent(models.Model):
             return json.loads(getattr(self, field))
 
         return super().__getattr__(attr)
+
+    # ----------------------------------------------------------------------
+    def __str__(self):
+        return f'Patente (ID:#{self.pk})'

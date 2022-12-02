@@ -14,14 +14,14 @@
 
   <tbody>
   {% for patent in patents %}
-  
+
     {% replace patent.pk '/' '-' as url_ %}
-  
+
     <tr>
       <td><a class="btn btn-link dima--table-btn-link" href="{% url 'patents' url_ %}" role="button">{{patent.pk}}</a></td>
       <td>{{patent.name}}
       {% if user.is_authenticated %}
-        <a class='' href='{% url patents_admin|admin_urlname:'change' patent.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+        <a class='' href='{% url patents_admin|admin_urlname:'change' patent.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
       {% endif %}
       </td>
       <td>{{patent.patent_type_pretty}}</td>

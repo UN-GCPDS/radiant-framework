@@ -39,7 +39,7 @@
     <h1 class="display-3">Convocatorias Minciencias
       <small class="text-muted">
         {% if user.is_authenticated %}
-          <a href='{% url mincienciascall_admin|admin_urlname:'add' %}'>Add call<i class="bi bi-pencil-square"></i></a>
+          <a href='{% url mincienciascall_admin|admin_urlname:'add' %}'>Agregar convocatoria<i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </small>
     </h1>
@@ -61,7 +61,7 @@
                   {% endif %}
                   <a href='{{ call.link }}' target='_blank'>{{ call.title }}</a>
                   {% if user.is_authenticated %}
-                    <a href='{% url mincienciascall_admin|admin_urlname:'change' call.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+                    <a href='{% url mincienciascall_admin|admin_urlname:'change' call.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
                   {% endif %}
               {% else %}
                   <div class="dima-image__no_image" style='background-color: {{call.color}}'>
@@ -75,7 +75,7 @@
                   {% endif %}
                   <a href='{{ call.link }}' target='_blank'>Ver convocatoria...</a>
                   {% if user.is_authenticated %}
-                    <a href='{% url mincienciascall_admin|admin_urlname:'change' call.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+                    <a href='{% url mincienciascall_admin|admin_urlname:'change' call.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
                   {% endif %}
 
               {% endif %}

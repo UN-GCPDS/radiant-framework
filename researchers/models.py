@@ -56,30 +56,26 @@ class PersonBase():
 ########################################################################
 class Professor(PersonBase, models.Model):
     """"""
-    first_name = models.CharField(max_length=2**6)
-    last_name = models.CharField(max_length=2**6)
-
-    professor_id = models.BigIntegerField('Professor ID', primary_key=True)
-    category = models.CharField('Category', **Choices('RESEARCHER_CATEGORY'))
-
-    faculty = models.CharField('Faculty', **Choices('FACULTY'))
-    departament = models.CharField('Departament', **Choices('DEPARTAMENT'))
-    
+    first_name = models.CharField('Nombre(s)', max_length=2**6)
+    last_name = models.CharField('Apellido(s)', max_length=2**6)
+    professor_id = models.BigIntegerField('Documento de identificación', primary_key=True)
+    category = models.CharField('Categoría', **Choices('RESEARCHER_CATEGORY'))
+    faculty = models.CharField('Facultad', **Choices('FACULTY'))
+    departament = models.CharField('Departamento', **Choices('DEPARTAMENT'))
     cvlac = models.URLField('CvLAC', null=True, blank=True)
 
     class Meta:
-        verbose_name = "Professor"
+        verbose_name = "Docente"
 
 
 ########################################################################
 class Researcher(PersonBase, models.Model):
     """"""
-    first_name = models.CharField(max_length=2**6)
-    last_name = models.CharField(max_length=2**6)
-
-    researcher_id = models.BigIntegerField('Researcher ID', primary_key=True)
-    joined = models.DateField('Join', default='django.utils.timezone.now')
-    departed = models.DateField('Departed', null=True, blank=True)
+    first_name = models.CharField('Nombre(s)', max_length=2**6)
+    last_name = models.CharField('Apellido(s)', max_length=2**6)
+    researcher_id = models.BigIntegerField('Documento de identificación', primary_key=True)
+    joined = models.DateField('Fecha de integración', default='django.utils.timezone.now')
+    departed = models.DateField('Fecha de partida', null=True, blank=True)
 
     class Meta:
-        verbose_name = "Researcher"
+        verbose_name = "Investigador"

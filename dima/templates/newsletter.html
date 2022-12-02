@@ -20,13 +20,13 @@
     <h1 class="display-3">Boletines DIMA
       <small class="text-muted">
         {% if user.is_authenticated %}
-          <a href='{% url newsletters_admin|admin_urlname:'add' %}'> Add newsletter <i class="bi bi-pencil-square"></i></a>
+          <a href='{% url newsletters_admin|admin_urlname:'add' %}'>Agregar boletín<i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </small>
     </h1>
 
     <div class="d-flex justify-content-around flex-wrap">
-    
+
 
         <div class="row">
           {% for newsletter in newsletters %}
@@ -39,7 +39,7 @@
             </div>
           {% endfor %}
         </div>
-      
+
     </div>
   </div>
 </div>

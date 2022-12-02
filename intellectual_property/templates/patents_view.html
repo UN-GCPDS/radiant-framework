@@ -29,11 +29,11 @@
     <h1 class="display-3">{{patent.pk}}<br>
       <small class="text-muted"> {{patent.name}}
         {% if user.is_authenticated %}
-          <a href='{% url patent_admin|admin_urlname:'change' patent.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+          <a href='{% url patent_admin|admin_urlname:'change' patent.pk %}'> Editar <i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </small>
     </h1>
-  
+
     <div class="dima-content">
         <div class="row">
 
@@ -44,12 +44,12 @@
 
             <dt class="col-sm-4">Departamento:</dt>
             <dd class="col-sm-8">{{patent.departament_pretty}}</dd>
-            
+
             {% if patent.co_ownership %}
               <dt class="col-sm-4">Cotitularidad:</dt>
-              <dd class="col-sm-8">{{patent.co_ownership}}</dd>
+              <dd class="col-sm-8">{{patent.co_ownership_pretty}}</dd>
             {% endif %}
-            
+
             <dt class="col-sm-4">Inventores:</dt>
             <dd class="col-sm-8">
               <ul class="dima-list-noindent">
@@ -66,10 +66,10 @@
 
         <div class="col-md-12 col-lg-6">
           <dl class="row">
-          
+
           <dt class="col-sm-4">Presentada:</dt>
           <dd class="col-sm-8">{{patent.filling}} ({{patent.filling|timesince}})</dd>
-          
+
           <dt class="col-sm-4">Publicada:</dt>
           <dd class="col-sm-8">{{patent.publication}} ({{patent.publication|timesince}})</dd>
 

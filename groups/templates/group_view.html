@@ -32,7 +32,7 @@
     <h1 class="display-3">{{group.name}}
       <small class="text-muted">
         {% if user.is_authenticated %}
-          <a href='{% url group_admin|admin_urlname:'change' group.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+          <a href='{% url group_admin|admin_urlname:'change' group.pk %}'> Editar <i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </small>
     </h1>

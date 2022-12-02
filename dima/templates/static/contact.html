@@ -22,7 +22,7 @@
     <h1 class="display-3">Contáctenos
       <small class="text-muted">
         {% if user.is_authenticated %}
-          <a href='{% url contact_admin|admin_urlname:'change' contact.pk %}'> Edit <i class="bi bi-pencil-square"></i></a>
+          <a href='{% url contact_admin|admin_urlname:'change' contact.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </small>
     </h1>

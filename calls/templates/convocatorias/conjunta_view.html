@@ -32,7 +32,7 @@
     <h1 class="display-3">{{ jointcall.title }}
       <small class="text-muted">
         {% if user.is_authenticated %}
-          <a href='{% url jointcall_admin|admin_urlname:'change' jointcall.pk %}'>Edit<i class="bi bi-pencil-square"></i></a>
+          <a href='{% url jointcall_admin|admin_urlname:'change' jointcall.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
         {% endif %}
       </small>
     </h1>
