@@ -241,9 +241,9 @@ class Annex_StudentsCall(models.Model):
 
 ########################################################################
 class Result_StudentsCall(models.Model):
-    joint_call = models.ForeignKey('calls.StudentsCall', related_name='results', on_delete=models.CASCADE)
+    joint_call = models.ForeignKey('calls.StudentsCall', related_name='result', on_delete=models.CASCADE)
     name = models.CharField('Nombre del archivo', max_length=2 ** 10)
-    results = models.FileField('Archivo', upload_to=upload_to_student_call, blank=True, null=True)
+    result = models.FileField('Archivo', upload_to=upload_to_student_call, blank=True, null=True)
 
     class Meta:
         verbose_name = "Resultado"

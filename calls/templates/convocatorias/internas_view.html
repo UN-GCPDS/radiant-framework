@@ -2,7 +2,7 @@
 {% extends "base_unal.html" %}
 {% load admin_urls %}
 {% load dima_utils %}
-{% block 'head-title' %}Convocatorias conjuntas - {% endblock %}
+{% block 'head-title' %}Convocatorias internas - {% endblock %}
 
 
 {% block 'breadcrumb' %}
@@ -16,10 +16,10 @@
         <a href="{% url 'calls' %}">Convocatorias</a>
       </li>
       <li aria-current="page" class="breadcrumb-item active">
-        <a href="{% url 'joint_call' %}">Convocatorias conjuntas</a>
+        <a href="{% url 'internal_call' %}">Convocatorias internas</a>
       </li>
       <li aria-current="page" class="breadcrumb-item active">
-        <a href="{% url 'joint_call' jointcall.pk %}">{{ jointcall.title }}</a>
+        <a href="{% url 'internal_call' internalcall.pk %}">{{ internalcall.title }}</a>
       </li>
     </ol>
   </nav>
@@ -30,14 +30,14 @@
 {% block 'main' %}
 <div class="container-lg">
 
-    <h1 class="display-3">{{ jointcall.title }}
+    <h1 class="display-3">{{ internalcall.title }}
       <small class="text-muted">
         {% if user.is_authenticated %}
-          <a href='{% url jointcall_admin|admin_urlname:'change' jointcall.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
+          <a href='{% url internalcall_admin|admin_urlname:'change' internalcall.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
         {% endif %}
-        {% if jointcall.link %}
+        {% if internalcall.link %}
           <br>
-          <a href='{{jointcall.link}}'><i class="bi bi-link-45deg"></i>{{jointcall.link}}</a>
+          <a href='{{internalcall.link}}'><i class="bi bi-link-45deg"></i>{{internalcall.link}}</a>
         {% endif %}
       </small>
     </h1>
@@ -46,32 +46,32 @@
 
         <div class="row justify-content-md-center">
           <div class="col-md-4 col-sm-6 col-lg-3">
-          {% if jointcall.image %}
-            <img src="{{jointcall.image.url}}" class="card-img-top"></img>
+          {% if internalcall.image %}
+            <img src="{{internalcall.image.url}}" class="card-img-top"></img>
           {% endif %}
           </div>
         </div>
 
         <div class="row">
 
-        {% if jointcall.objective %}
+        {% if internalcall.objective %}
           <h1>Objetivos:</h1>
           <div class="dima-content">
-            {{jointcall.objective|safe}}
+            {{internalcall.objective|safe}}
           </div>
         {% endif %}
 
-        {% if jointcall.headed %}
+        {% if internalcall.headed %}
           <h1>Dirigida a:</h1>
           <div class="dima-content">
-            {{jointcall.headed|safe}}
+            {{internalcall.headed|safe}}
           </div>
         {% endif %}
 
         {% if jointcall.timeline.count %}
           <h1>Cronograma:</h1>
           <ol class="list-group list-group-numbered">
-          {% for activity in jointcall.timeline.all %}
+          {% for activity in internalcall.timeline.all %}
             <li class="list-group-item d-flex justify-content-between align-items-start">
               <div class="ms-2 me-auto">
                 <div class="fw-bold">{{ activity.activity }}</div>
@@ -96,22 +96,22 @@
 
         <h1>Términos de referencia:</h1>
         <ol>
-          {% for doc in jointcall.terms_of_reference.all %}
+          {% for doc in internalcall.terms_of_reference.all %}
             <li><a href='{{doc.terms_of_reference.url}}' target='_blank'>{{doc.name}}</a></li>
           {% endfor %}
         </ol>
 
         <h1>Anexos:</h1>
         <ol>
-          {% for annex in jointcall.annex.all %}
+          {% for annex in internalcall.annex.all %}
             <li><a href='{{annex.annex.url}}' target='_blank'>{{annex.name}}</a></li>
           {% endfor %}
         </ol>
 
-        {% if jointcall.results.count %}
+        {% if internalcall.results.count %}
           <h1>Resultados:</h1>
           <ol>
-            {% for result in jointcall.results.all %}
+            {% for result in internalcall.results.all %}
               <li><a href='{{result.result.url}}' target='_blank'>{{result.name}}</a></li>
             {% endfor %}
           </ol>

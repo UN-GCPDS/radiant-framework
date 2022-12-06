@@ -1,0 +1,75 @@
+
+{% extends "base_unal.html" %}
+{% load admin_urls %}
+{% load dima_utils %}
+{% block 'head-title' %}Convocatorias de Minciencias - {% endblock %}
+
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        Está en: <a href="/">Inicio</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="{% url 'calls' %}">Convocatorias</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="{% url 'minciencias_call' %}">Convocatorias de Minciencias</a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+        <a href="{% url 'minciencias_call' mincienciascall.pk %}">{{ mincienciascall.title }}</a>
+      </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+
+{% block 'main' %}
+<div class="container-lg">
+
+    <h1 class="display-3">{{ mincienciascall.title }}
+      <small class="text-muted">
+        {% if user.is_authenticated %}
+          <a href='{% url mincienciascall_admin|admin_urlname:'change' mincienciascall.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+        {% if mincienciascall.link %}
+          <br>
+          <a href='{{mincienciascall.link}}'><i class="bi bi-link-45deg"></i>{{mincienciascall.link}}</a>
+        {% endif %}
+      </small>
+    </h1>
+
+    <div class="dima-content">
+
+        <div class="row justify-content-md-center">
+          <div class="col-md-4 col-sm-6 col-lg-3">
+          {% if mincienciascall.image %}
+            <img src="{{mincienciascall.image.url}}" class="card-img-top"></img>
+          {% endif %}
+          </div>
+        </div>
+
+        <div class="row">
+
+        {% if mincienciascall.objective %}
+          <h1>Objetivos:</h1>
+          <div class="dima-content">
+            {{mincienciascall.objective|safe}}
+          </div>
+        {% endif %}
+
+        {% if mincienciascall.headed %}
+          <h1>Dirigida a:</h1>
+          <div class="dima-content">
+            {{mincienciascall.headed|safe}}
+          </div>
+        {% endif %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

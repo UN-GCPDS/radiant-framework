@@ -44,41 +44,46 @@
       </small>
     </h1>
 
+
     <div class="dima-content">
         <div class="row">
 
+        <div class="col-md-12 dima-margin-bottom__30">
+          Dentro de la Dirección de Investigación y Extensión de la Sede
+          Manizales, se dan a conocer las diferentes convocatorias internas que
+          se encuentran activas. Cualquier inquietud podrá ser resuelta en los
+          siguientes correos:
+          <a href="mailto:soportedima_man@unal.edu.co" target="_blank" rel="noopener">soportedima_man@unal.edu.co</a> y
+          <a href="mailto:dima_man@unal.edu.co" target="_blank" rel="noopener">dima_man@unal.edu.co</a>.
+        </div>
+
         {% for call in mincienciascall %}
           {% if user.is_authenticated or call.show %}
+            <div class="col-md-12 col-lg-6 dima-margin-bottom__30">
+              <div class="card">
 
-            <div class="col-md-12 col-lg-6 dima-internal_call">
-              {% if call.image %}
-                  <img src="{{call.image.url}}" class="dima-image__internal_call"></img>
+                {% if call.image %}
+                  <img src="{{call.image.url}}" class="card-img-top"></img>
+                {% endif %}
+
+                <div class="card-body">
+
+                  <h1 class="card-title">{{ call.title|lower|capfirst }}
+                  <small class="text-muted">Abierta hasta {{call.expiration}}{% if not call.expired %} ({{call.expiration|timeuntil}}){% endif %} </small>
+                  </h1>
+
                   {% if user.is_authenticated %}
-                    {% if not call.active %}<span class="badge rounded-pill text-bg-danger">Oculta</span>{% endif %}
-                    {% if call.expired %}<span class="badge rounded-pill text-bg-danger">Finalizada</span>{% endif %}
-                    {% if not call.expired %}<span class="badge rounded-pill text-bg-primary">Activa</span>{% endif %}
-                    <br>
-                  {% endif %}
-                  <a href='{{ call.link }}' target='_blank'>{{ call.title }}</a>
-                  {% if user.is_authenticated %}
-                    <a href='{% url mincienciascall_admin|admin_urlname:'change' call.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
-                  {% endif %}
-              {% else %}
-                  <div class="dima-image__no_image" style='background-color: {{call.color}}'>
-                    {{ call.title }}
-                  </div>
-                  {% if user.is_authenticated %}
-                    {% if not call.active %}<span class="badge rounded-pill text-bg-danger">Oculta</span>{% endif %}
-                    {% if call.expired %}<span class="badge rounded-pill text-bg-danger">Finalizada</span>{% endif %}
-                    {% if not call.expired %}<span class="badge rounded-pill text-bg-primary">Activa</span>{% endif %}
-                    <br>
-                  {% endif %}
-                  <a href='{{ call.link }}' target='_blank'>Ver convocatoria...</a>
-                  {% if user.is_authenticated %}
-                    <a href='{% url mincienciascall_admin|admin_urlname:'change' call.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
+                    <div class="dima__card-badge">
+                      {% if not call.active %}<span class="badge rounded-pill text-bg-danger">Oculta</span>{% endif %}
+                      {% if call.expired %}<span class="badge rounded-pill text-bg-danger">Finalizada</span>{% endif %}
+                      {% if not call.expired %}<span class="badge rounded-pill text-bg-primary">Activa</span>{% endif %}
+                    </div>
+                      <br>
                   {% endif %}
 
-              {% endif %}
+                  <a href="{% url 'minciencias_call' call.pk %}" class="card-link">Ver convocatoria...</a>
+                </div>
+              </div>
             </div>
 
           {% endif %}
@@ -86,6 +91,8 @@
 
         </div>
     </div>
+
+
 
 </div>
 {% endblock %}

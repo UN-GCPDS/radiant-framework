@@ -9,15 +9,23 @@ class CallsView(TemplateView):
 
 ########################################################################
 class InternalCallView(TemplateView):
-    template_name = "convocatorias/internas.html"
 
     # ----------------------------------------------------------------------
-    def get_context_data(self, **kwargs):
+    def get(self, request, pk=None, *args, **kwargs):
         """"""
-        context = super().get_context_data(**kwargs)
-        context['internalcall'] = InternalCall.objects.all()
-        context['internalcall_admin'] = InternalCall._meta
-        return context
+        context = self.get_context_data(**kwargs)
+
+        if pk:
+            self.template_name = "convocatorias/internas_view.html"
+            context['internalcall'] = InternalCall.objects.get(pk=pk)
+            context['internalcall_admin'] = InternalCall._meta
+        else:
+            self.template_name = "convocatorias/internas.html"
+            context['internalcall'] = InternalCall.objects.all()
+            context['internalcall_admin'] = InternalCall._meta
+
+        return self.render_to_response(context)
+
 
 
 ########################################################################
@@ -42,15 +50,23 @@ class JointCallView(TemplateView):
 
 ########################################################################
 class MincienciasCallView(TemplateView):
-    template_name = "convocatorias/minciencias.html"
 
     # ----------------------------------------------------------------------
-    def get_context_data(self, **kwargs):
+    def get(self, request, pk=None, *args, **kwargs):
         """"""
-        context = super().get_context_data(**kwargs)
-        context['mincienciascall'] = MincienciasCall.objects.all()
-        context['mincienciascall_admin'] = MincienciasCall._meta
-        return context
+        context = self.get_context_data(**kwargs)
+
+        if pk:
+            self.template_name = "convocatorias/minciencias_view.html"
+            context['mincienciascall'] = MincienciasCall.objects.get(pk=pk)
+            context['mincienciascall_admin'] = MincienciasCall._meta
+        else:
+            self.template_name = "convocatorias/minciencias.html"
+            context['mincienciascall'] = MincienciasCall.objects.all()
+            context['mincienciascall_admin'] = MincienciasCall._meta
+
+        return self.render_to_response(context)
+
 
 
 ########################################################################

@@ -166,7 +166,7 @@
                         <div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">{{user}}<span class="caret"></span></div>
                         <ul class="dropdown-menu dropdown-menu-right dima-dropdown-menu">
                            <li><a href="{% url 'admin:index' %}">Admin</a></li>
-                           <li><a href="{% url 'logout' %}">Logout</a></li>
+                           <li><a href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
                         </ul>
                      </div>
                   {% else %}

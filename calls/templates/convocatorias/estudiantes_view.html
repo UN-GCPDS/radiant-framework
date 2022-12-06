@@ -49,7 +49,11 @@
             <dd class="col-sm-9">{{studentscall.students}}</dd>
 
             <dt class="col-sm-3">Perfil</dt>
-            <dd class="col-sm-9">{{studentscall.profile}}</dd>
+            <dd class="col-sm-9">
+              <div class="dima-content">
+                {{studentscall.profile|safe}}
+              </div>
+            </dd>
 
             <dt class="col-sm-3">Tiempo</dt>
             <dd class="col-sm-9">{{studentscall.time}} horas a la semana</dd>
@@ -62,7 +66,9 @@
 
           </dl>
 
-          <h1>Terminos de referencia:</h1>
+
+
+          <h1 class='dima-attachment'>Términos de referencia:</h1>
           <ol>
             {% for doc in studentscall.terms_of_reference.all %}
               <li><a href='{{doc.terms_of_reference.url}}' target='_blank'>{{doc.name}}</a></li>
@@ -76,10 +82,10 @@
             {% endfor %}
           </ol>
 
-          {% if studentscall.results.count %}
+          {% if studentscall.result.count %}
             <h1>Resultados:</h1>
             <ol>
-              {% for result in studentscall.results.all %}
+              {% for result in studentscall.result.all %}
                 <li><a href='{{result.result.url}}' target='_blank'>{{result.name}}</a></li>
               {% endfor %}
             </ol>

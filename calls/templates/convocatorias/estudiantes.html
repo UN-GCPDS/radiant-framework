@@ -43,19 +43,31 @@
             <div class="col-md-12 col-lg-6 dima-margin-bottom__30">
               <div class="card">
                 <div class="card-body">
-                  <h1 class="card-title">{{ call.title|lower|capfirst }}</h1>
-                  <p class="card-text">{{call.profile}}</p>
-                  <p class="card-text"><i>{{call.funding}}</i></p>
-                  <p class="card-text">{{call.economic_stimulus}}</p>
+                  <h1 class="card-title">{{ call.title|lower|capfirst }}
+                  <small class="text-muted">Abierta hasta {{call.expiration}}{% if not call.expired %} ({{call.expiration|timeuntil}}){% endif %} </small>
+                  </h1>
+
+
+                  <dl class="row">
+                    <dt class="col-sm-4">Recursos</dt>
+                    <dd class="col-sm-8">{{call.funding}}</dd>
+
+                    <dt class="col-sm-4">Estímulo económico</dt>
+                    <dd class="col-sm-8">{{call.economic_stimulus}}</dd>
+                  </dl>
+
 
                   {% if user.is_authenticated %}
-                    {% if not call.active %}<span class="badge rounded-pill text-bg-danger">Oculta</span>{% endif %}
-                    {% if call.expired %}<span class="badge rounded-pill text-bg-danger">Finalizada</span>{% endif %}
-                    {% if not call.expired %}<span class="badge rounded-pill text-bg-primary">Activa</span>{% endif %}
+                    <div class="dima__card-badge">
+                      {% if not call.active %}<span class="badge rounded-pill text-bg-danger">Oculta</span>{% endif %}
+                      {% if call.expired %}<span class="badge rounded-pill text-bg-danger">Finalizada</span>{% endif %}
+                      {% if not call.expired %}<span class="badge rounded-pill text-bg-primary">Activa</span>{% endif %}
+                    </div>
                     <br>
                   {% endif %}
 
                   <a href="{% url 'students_call' call.pk %}" class="card-link">Ver convocatoria...</a>
+
                 </div>
               </div>
             </div>

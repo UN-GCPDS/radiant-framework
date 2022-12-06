@@ -382,3 +382,12 @@ text-transform: capitalize;
     background-color: #ededed;
     opacity: 0.3;
 }
+
+
+.dima__card-badge {
+  margin-top: 16px;
+}
+
+.dima-attachment {
+      margin-top: 30px;
+}
