@@ -27,8 +27,9 @@ def fix_filters(model, filters):
 
     for k in filters:
         k_plain = k.replace('~', '')
-        filters[k] = [c for c in model._meta.get_field(
-            k_plain).choices if filters[k] in c][0][0]
+
+        if flts := [c for c in model._meta.get_field(k_plain).choices if filters[k] in c]:
+            filters[k] = flts[0][0]
 
     return filters
 

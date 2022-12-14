@@ -32,7 +32,7 @@ PROTECT = True
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246']
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.23.177.246', 'investigacion.manizales.unal.edu.co']
 
 if DEBUG:
     def wing_debug_hook(*args, **kwargs):
