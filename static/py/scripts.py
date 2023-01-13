@@ -26,7 +26,7 @@ def load_group_view(evt):
     update_all_plots(filters_to_use='FILTERS_GROUPS')
     update_all_options(filters_to_use='FILTERS_GROUPS',
                        id='#dima-select--departament__groups')
-    ajax_render('dima-render--group', "/groups/", FILTERS_GROUPS)
+    ajax_render('dima-render--group', "/grupos/", FILTERS_GROUPS)
 
 
 # ----------------------------------------------------------------------
@@ -48,7 +48,7 @@ def update_faculty_filter(evt):
     update_all_plots(filters_to_use='FILTERS_GROUPS')
     update_all_options(filters_to_use='FILTERS_GROUPS',
                        id='#dima-select--departament__groups')
-    ajax_render('dima-render--group', "/groups/", FILTERS_GROUPS)
+    ajax_render('dima-render--group', "/grupos/", FILTERS_GROUPS)
 
 
 # ----------------------------------------------------------------------
@@ -62,7 +62,7 @@ def update_departament_filter(evt):
         FILTERS_GROUPS['departament'] = evt.target.value
     update_all_plots(filters_to_use='FILTERS_GROUPS')
     # update_all_options(filters_to_use='FILTERS_GROUPS')
-    ajax_render('dima-render--group', "/groups/", FILTERS_GROUPS)
+    ajax_render('dima-render--group', "/grupos/", FILTERS_GROUPS)
 
 
 # ----------------------------------------------------------------------
@@ -87,7 +87,7 @@ def update_all_options(filters_to_use, id, req=None):
         else:
             option.style = {'display': 'block'}
 
-    # ajax_render('dima-render--group', "/groups/", filters[filters_to_use])
+    # ajax_render('dima-render--group', "/grupos/", filters[filters_to_use])
 
 
 # # ----------------------------------------------------------------------
