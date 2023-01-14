@@ -246,7 +246,8 @@ def on_load(evt):
 
     else:
 
-        document.select_one('.dima-breadcrumb').style = {'display': 'none', }
+        if el := document.select_one('.dima-breadcrumb'):
+            el.style = {'display': 'none', }
 
 
 

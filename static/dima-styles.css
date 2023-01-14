@@ -423,7 +423,7 @@ text-transform: capitalize;
 }
 
 .dima-map {
-  height: 100vh;
+  height: 100vh !important;
   border: 10px solid #e8eaed;
 }
 
