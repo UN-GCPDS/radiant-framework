@@ -476,3 +476,8 @@ text-transform: capitalize;
     margin-top: 20vh;
   }
 }
+
+
+.nav-item {
+  cursor: pointer;
+}

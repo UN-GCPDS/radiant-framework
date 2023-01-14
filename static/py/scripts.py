@@ -264,6 +264,14 @@ def dropdown_collapse(evt):
     """"""
 
 
+# ----------------------------------------------------------------------
+@bind('.nav-item', 'click')
+def nav_item_click(evt):
+    """"""
+    window.location.href = evt.target.select_one('.nav-link').href
+
+
+
 # # ----------------------------------------------------------------------
 # @bind('.dima-nav-home li.nav-item', 'mouseover')
 # def nav_home_hover(evt):
