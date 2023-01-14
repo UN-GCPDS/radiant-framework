@@ -260,6 +260,13 @@ if PROTECT:
 
         'sha256-7IRE3uD8GuJOoYGrkFqmwWDgCCRmzXCf56zI3C+Wnvs=',
 
+        'sha256-3kYfFa35v99b81KaINpv2KQ05GTAS7T9U1qW9zhlNkU=',
+        'sha256-bkV+7ypydgbxtJ2pPV9NB94i06Fo9uSTyn/kY7rXbL0=',
+        'sha256-IUmUSIOHNOrqjyKfjMakEQ19oWMgeHg/bkn75Lgltng=',
+        # '',
+        # '',
+        # '',
+
     ]
 
     SCRIPT_HASHES = [
@@ -315,10 +322,11 @@ if PROTECT:
 
     CSP_INCLUDE_NONCE_IN = ['script-src', 'style-src']
     CSP_FORM_ACTION = ["'self'"]
-    CSP_IMG_SRC = ["'self'", "data:"]
+    CSP_IMG_SRC = ["'self'", "data:", "http:"]
     CSP_FONT_SRC = ["'self'"]
     CSP_CONNECT_SRC = ["'self'"]
     CSP_OBJECT_SRC = ["'none'"]
     CSP_BASE_URI = ["'none'"]
     CSP_FRAME_ANCESTORS = ["'self'"]
     CSP_DEFAULT_SRC = ["'self'"]
+    CSP_FRAME_SRC = ["*"]

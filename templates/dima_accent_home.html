@@ -1,32 +1,32 @@
 {% load static %}
 
-<div class="dima-nav__container">
-<div class='container-fluid'>
+<div class="dima-nav__container dima-nav__container-home">
+<!--<div class='container-fluid'>-->
 <div class="dima-main">
 
-  <ul class="nav">
-    <li class="nav-item">
+  <ul class="nav dima-nav-home">
+    <li class="nav-item dima-color_one">
       <img class="nav-item_icon" src="{% static '/unal/Icons/grafico-de-barras.png' %}"></img>
       <a class="nav-link" href="{% url 'data' %}">DIMA en datos</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item dima-color_two">
       <img class="nav-item_icon" src="{% static '/unal/Icons/periodico.png' %}"></img>
       <a class="nav-link" href="{% url 'newsletters' %}">Boletines DIMA</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item dima-color_three">
       <img class="nav-item_icon" src="{% static '/unal/Icons/megafono.png' %}"></img>
       <a class="nav-link" href="{% url 'calls' %}">Convocatorias</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item dima-color_four">
       <img class="nav-item_icon" src="{% static '/unal/Icons/informacion.png' %}"></img>
       <a class="nav-link" href="{% url 'contact' %}">Contáctenos</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item dima-color_five">
       <img class="nav-item_icon" src="{% static '/unal/Icons/equipo.png' %}"></img>
       <a class="nav-link" href="{% url 'equipo_de_trabajo' %}">Equipo de trabajo</a>
     </li>
   </ul>
 
 </div>
-</div>
+<!--</div>-->
 </div>

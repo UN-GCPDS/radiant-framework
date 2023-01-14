@@ -249,6 +249,34 @@ def on_load(evt):
         document.select_one('.dima-breadcrumb').style = {'display': 'none', }
 
 
+
+# ----------------------------------------------------------------------
+@bind('.navbar-toggler', 'click')
+def navbar_collapse(evt):
+    """"""
+    navbar = window.bootstrap.Collapse.new(document.select_one("#navbar_content"), {'toggle': False})
+    navbar.toggle()
+
+
+# ----------------------------------------------------------------------
+@bind('.btn.btn-default.dropdown-toggle', 'click')
+def dropdown_collapse(evt):
+    """"""
+
+
+# # ----------------------------------------------------------------------
+# @bind('.dima-nav-home li.nav-item', 'mouseover')
+# def nav_home_hover(evt):
+    # """"""
+    # print('XXXX')
+    # el = evt.target
+
+    # if color := el.attrs['data-color']:
+        # el.style = {
+            # 'background-color': color,
+        # }
+
+
 if __name__.startswith('__main__'):
     update_all_plots(filters_to_use='FILTERS_GROUPS')
 

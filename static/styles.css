@@ -110,6 +110,14 @@ main.accesibility-on {
   margin-right: 15px;
 }
 
+
+@media only screen and (max-device-width: 768px) {
+  #unalTop {
+    margin-right: 0px;
+  }
+}
+
+
 .btn-group.btn-plain:hover {
   background-color: unset !important;
   border-color: unset !important;
@@ -136,6 +144,14 @@ pre {
   margin-top: -50px;
   margin-bottom: 40px;
 }
+
+@media only screen and (max-device-width: 768px) {
+.dima-nav-tabs {
+  margin-top: 0px;
+}
+
+}
+
 
 .dima-nav-tabs button {
   color: #94b43b;

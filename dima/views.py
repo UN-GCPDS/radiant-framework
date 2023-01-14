@@ -12,6 +12,7 @@ from intellectual_property.models import Patent
 from datetime import date
 
 
+
 ########################################################################
 class HomeView(TemplateView):
     template_name = "home.html"
@@ -20,11 +21,25 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         """"""
         context = super().get_context_data(**kwargs)
+        context['broadcasts'] = Broadcast.objects.filter(expiration__gt=date.today())
+        context['broadcasts_admin'] = Broadcast._meta
+        return context
+
+
+
+########################################################################
+class DataView(TemplateView):
+    template_name = "data.html"
+
+    # ----------------------------------------------------------------------
+    def get_context_data(self, **kwargs):
+        """"""
+        context = super().get_context_data(**kwargs)
         context['groups'] = ResearchGroup.objects.all()
         context['groups_admin'] = ResearchGroup._meta
-        context['broadcasts'] = Broadcast.objects.filter(
-            expiration__gt=date.today())
-        context['broadcasts_admin'] = Broadcast._meta
+        # context['broadcasts'] = Broadcast.objects.filter(
+            # expiration__gt=date.today())
+        # context['broadcasts_admin'] = Broadcast._meta
         context['faculties'] = Choices.FACULTY
         context['departaments'] = Choices.DEPARTAMENT
         context['categories'] = Choices.GROUPS_CATEGORY
@@ -83,4 +98,9 @@ class ContentView(TemplateView):
         context = super().get_context_data(**kwargs)
         context[self.label] = Content.objects.get(label=self.label)
         context[f'{self.label}_admin'] = Content._meta
+
+        if self.label == 'home':
+            context['broadcasts'] = Broadcast.objects.filter(expiration__gt=date.today())
+            context['broadcasts_admin'] = Broadcast._meta
+
         return context

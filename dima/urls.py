@@ -1,25 +1,23 @@
 from django.urls import path
 from django.views.generic import TemplateView
-from .views import HomeView, NewsletterView, TeamView, ContentView
+from .views import DataView, NewsletterView, TeamView, ContentView
 from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
+    path('', ContentView.as_view(label='home', template_name="static/home.html"), name='home'),
 
-    # path('admin/default-login/', admin.site.login, name='default-admin-login'),
+    path('datos/', DataView.as_view(), name='data'),
 
     path('login/', auth_views.LoginView.as_view(template_name='admin/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-
 
     # Dynamic
     path('newsletters', NewsletterView.as_view(), name='newsletters'),
 
     # Static
     path('equipo_de_trabajo', TeamView.as_view(), name='equipo_de_trabajo'),
-    path('presentacion', ContentView.as_view(label='presentation',
-         template_name="static/presentacion.html"), name='presentation'),
+    path('presentacion', ContentView.as_view(label='presentation', template_name="static/presentacion.html"), name='presentation'),
     path('mision_y_vision', ContentView.as_view(label='mision',
          template_name="static/mision.html"), name='mision_y_vision'),
     path('avales', ContentView.as_view(label='avales',

@@ -1,0 +1,67 @@
+{% extends "base_unal.html" %}
+{% load static %}
+{% load admin_urls %}
+
+{% block 'top-page' %}
+  {% if broadcasts %}
+    {% include 'dima_carousel.html' %}
+  {% endif %}
+{% endblock %}
+
+{% block 'breadcrumb' %}
+<div class="breadcrumb-class">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">Está en:<a href="/">Inicio</a></li>
+    </ol>
+  </nav>
+</div>
+{% endblock %}
+
+{% block 'main' %}
+<div class="container-lg">
+  <div class="row">
+
+    <h1 class="display-3">
+      <small class="text-muted">
+        {% if user.is_authenticated %}
+          <a href='{% url home_admin|admin_urlname:'change' home.pk %}'> Editar <i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+      </small>
+    </h1>
+    <div class="dima-content">
+      {{home.content|safe}}
+    </div>
+
+    <hr>
+
+    <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+      <div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe dima-map" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Manziales Caldas, Universidad Nacional de Colombia&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div><style>.mapouter{position:relative;text-align:right;width:100%;height:400px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:400px;}.gmap_iframe {height:400px!important;}</style></div>
+      <!--<div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe dima-map" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Universidad Nacional de Colombia - Campus Palogrande&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://www.gachacute.com/">Gacha Cute</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:400px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:400px;}.gmap_iframe {height:400px!important;}</style></div>-->
+
+    </div>
+
+    <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+
+      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+        {% include 'dima_accent_home.html' %}
+      </div>
+
+      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 dima-home_address">
+        <h1>Contacto:</h1>
+        <b>Dirección:</b><br>
+        Carrera 27 #64-60 Bloque H Piso 3  - Oficina de Dirección -  Manizales - Colombia<br>
+        Carrera 27 #64-60 Bloque D Piso 4  - Oficina de Extensión y Soporte Hermes -  Manizales - Colombia<br>
+        <b>Teléfono:</b><br>
+        PBX (57+6) 8879300, ext 50239<br>
+        <b>Correo electrónico:</b><br>
+        <a href="mailto:dima_man@unal.edu.co" target="_blank" rel="noopener">dima_man@unal.edu.co</a><br>
+        <a href="mailto:soportedima_man@unal.edu.co" target="_blank" rel="noopener">soportedima_man@unal.edu.co</a><br>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+{% endblock %}

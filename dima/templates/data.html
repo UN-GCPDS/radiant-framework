@@ -1,19 +1,12 @@
 {% extends "base_unal.html" %}
 {% load static %}
 
-{% block 'top-page' %}
-  {% if broadcasts %}
-    {% include 'dima_carousel.html' %}
-    {% include 'dima_accent.html' %}
-  {% endif %}
-{% endblock %}
-
-
 {% block 'breadcrumb' %}
 <div class="breadcrumb-class breadcrumb-class__no-border">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">Está en:<a href="/">Inicio</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="#">Dima en datos</a></li>
       <li class="breadcrumb-item dima-breadcrumb"></li>
     </ol>
   </nav>

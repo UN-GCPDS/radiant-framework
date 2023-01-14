@@ -1,40 +1,48 @@
 {% load admin_urls %}
 {% load dima_utils %}
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Investigadores</th>
-      <th scope="col">Categoría de investigador</th>
-      <th scope="col">Facultad</th>
-      <th scope="col">Departamento</th>
-    </tr>
-  </thead>
+{% if not professors.count %}
+  <div class="dima-alert alert alert-info" role="alert">
+    No hay resultados para esta combinación de filtros.
+  </div>
+{% else %}
+  <table class="table table-hover">
 
-  <tbody>
-  {% for professor in professors %}
+    <thead>
+      <tr>
+        <th scope="col">Investigadores</th>
+        <th scope="col">Categoría de investigador</th>
+        <th scope="col">Facultad</th>
+        <th scope="col">Departamento</th>
+      </tr>
+    </thead>
 
-    {% replace professor.category_pretty 'Investigador' '' as category %}
-    {% replace professor.faculty_pretty 'Facultad de' '' as faculty %}
-    {% replace professor.departament_pretty 'Departamento de' '' as departament %}
+    <tbody>
+    {% for professor in professors %}
 
-    {% if professor.category_pretty != 'Sin información' %}
-    <tr>
-      <td class='dima-group--view' data-pk='{{professor.pk}}'>
-        <a class="btn btn-link dima--table-btn-link" href="{% url 'researchers' professor.pk %}" role="button">{{professor.full_name}}</a>
-        {% if user.is_authenticated %}
-          <a class='' href='{% url professors_admin|admin_urlname:'change' professor.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
-        {% endif %}
-      </td>
-      <td>{{category|capfirst}}</td>
-      <td>{{faculty|capfirst}}</td>
-      <td>{{departament|capfirst}}</td>
-    </tr>
-    {% endif %}
-  {% endfor %}
-  </tbody>
+      {% replace professor.category_pretty 'Investigador' '' as category %}
+      {% replace professor.faculty_pretty 'Facultad de' '' as faculty %}
+      {% replace professor.departament_pretty 'Departamento de' '' as departament %}
 
-</table>
+      {% if professor.category_pretty != 'Sin información' %}
+      <tr>
+        <td class='dima-group--view' data-pk='{{professor.pk}}'>
+          <a class="btn btn-link dima--table-btn-link" href="{% url 'researchers' professor.pk %}" role="button">{{professor.full_name}}</a>
+          {% if user.is_authenticated %}
+            <a class='' href='{% url professors_admin|admin_urlname:'change' professor.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
+          {% endif %}
+        </td>
+        <td>{{category|capfirst}}</td>
+        <td>{{faculty|capfirst}}</td>
+        <td>{{departament|capfirst}}</td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+    </tbody>
+
+  </table>
+{% endif %}
+
 
 
 

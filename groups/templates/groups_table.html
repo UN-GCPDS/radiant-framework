@@ -1,29 +1,38 @@
 {% load admin_urls %}
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Nombre</th>
-      <th scope="col">Categoría</th>
-      <th scope="col">Antigüedad</th>
-    </tr>
-  </thead>
-  <tbody>
 
-    {% for group in groups %}
-    <tr>
-      <td class='dima-group--view' data-pk='{{group.pk}}'>
-        <a class="btn btn-link dima--table-btn-link" href="{% url 'group' group.pk %}" role="button">{{group.name}}</a>
-        {% if user.is_authenticated %}
-          <a class='' href='{% url groups_admin|admin_urlname:'change' group.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
-        {% endif %}
-      </td>
+{% if not groups.count %}
+  <div class="dima-alert alert alert-info" role="alert">
+    No hay resultados para esta combinación de filtros.
+  </div>
+{% else %}
 
-      <td>{{group.category_pretty}}</td>
-      <td>{% if group.founded.year > 1970 %}{{group.founded|timesince}}{% else %}-{% endif %}</td>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Antigüedad</th>
+      </tr>
+    </thead>
+    <tbody>
 
-    </tr>
-    {% endfor %}
+      {% for group in groups %}
+      <tr>
+        <td class='dima-group--view' data-pk='{{group.pk}}'>
+          <a class="btn btn-link dima--table-btn-link" href="{% url 'group' group.pk %}" role="button">{{group.name}}</a>
+          {% if user.is_authenticated %}
+            <a class='' href='{% url groups_admin|admin_urlname:'change' group.pk %}'>Editar<i class="bi bi-pencil-square"></i></a>
+          {% endif %}
+        </td>
 
-  </tbody>
-</table>
+        <td>{{group.category_pretty}}</td>
+        <td>{% if group.founded.year > 1970 %}{{group.founded|timesince}}{% else %}-{% endif %}</td>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+{% endif %}

@@ -298,14 +298,14 @@ h6 {
   color: white;
   text-decoration: none;
   font-family: "Ancizar sans light";
-  line-height: 31px;
-  font-size: 80%;
+  line-height: 20px;
+  font-size: 70%;z
   text-transform: uppercase;
 }
 
 .dima-nav__container li img {
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
 }
 
 .dima-dropdown-menu {
@@ -329,26 +329,33 @@ text-align: left;
   margin: 30px;
   padding: 15px;
   font-size: 120%;
-  color: #842029;
-  background-color: #f8d7da;
-  border-color: #f5c2c7;
   background-image: none !important;
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
   text-shadow: none !important;
-
-    font-family: Ancizar Sans Light;
-line-height: 17px;
-    font-size: 17px;
-
+  font-family: Ancizar Sans Light;
+  line-height: 17px;
+  font-size: 17px;
+  width: -webkit-fill-available;
 }
 
 .dima-alert a {
+  font-weight: 600;
+  text-decoration: underline;
+}
 
-font-weight: 600;
-    color: #842029;
-    text-decoration: underline;
+.dima-alert.alert-danger a,
+.dima-alert.alert-danger {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+}
 
+.dima-alert.alert-info a,
+.dima-alert.alert-info {
+  color: #055160;
+  background-color: #cff4fc;
+  border-color: #b6effb;
 }
 
 .dima-image__internal_call{
@@ -390,4 +397,82 @@ text-transform: capitalize;
 
 .dima-attachment {
       margin-top: 30px;
+}
+
+
+
+
+@media only screen and (max-device-width: 768px) {
+  .dima-nav__container .nav-item{
+
+  width: 100%;
+
+  }
+
+}
+
+
+#unalTop .navigation .mainMenu {
+    margin-right: 70px !important;
+}
+
+
+.nav-item_icon {
+  opacity: 0.5;
+  filter: invert(1);
+}
+
+.dima-map {
+  height: 100vh;
+  border: 10px solid #e8eaed;
+}
+
+
+.dima-nav__container ul.dima-nav-home {
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
+.dima-nav__container-home {
+  background: unset;
+  border: none;
+}
+
+
+.dima-color_one:hover {
+  background-color: #fd0;
+  color: #212529;
+}
+.dima-color_two:hover {
+  background-color: #ffb600;
+  color: #212529;
+}
+.dima-color_three:hover {
+  background-color: #51b8be;
+  color: #212529;
+}
+.dima-color_four:hover {
+  background-color: #008c95;
+}
+.dima-color_five:hover {
+  background-color: #ff3d30;
+  color: #212529;
+}
+
+.dima-nav-home .nav-item a:hover {
+  color: #212529 !important;
+}
+
+.dima-nav-home .nav-item{
+  margin-left: 0px;
+}
+
+
+
+@media only screen and (min-width: 992px) {
+  .dima-home_address {
+    margin-top: 20vh;
+  }
 }

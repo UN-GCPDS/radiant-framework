@@ -199,10 +199,11 @@
                <!-- Items menú principal -->
                {% include 'dima_menu.html' %}
                <!-- Sedes -->
-               <div class="btn-group btn-group__right btn-group__right-last menu_sedes">
+
+               <div class="btn-group btn-group__right">
                   <div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">Sedes<span class="caret"></span></div>
-                  <ul class="dropdown-menu" id="sedes">
-                     <li>
+                  <ul class="dropdown-menu">
+                        <li>
                         <a class="dropdown-item" href="http://amazonia.unal.edu.co" target="_blank">Amazonia</a>
                         <span class="caret-right"></span>
                      </li>
@@ -240,6 +241,8 @@
                      </li>
                   </ul>
                </div>
+
+
                <div class="btn-group btn-group__right">
                   <div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">SIUN<span class="caret"></span></div>
                   <ul class="dropdown-menu">
@@ -253,6 +256,7 @@
                      <li><a class="dropdown-item" href="https://viceinvestigacion.unal.edu.co/" target="_blank">VRi UNAL</a><span class="caret-right"></span></li>
                   </ul>
                </div>
+
             </div>
             <!-- Servicios label -->
             <div class="btn-group d-none">
@@ -290,7 +294,9 @@
                <!-- <span class="navbar-toggler-icon"></span> -->
             </button>
             <!-- Collapsible content -->
+
             <div class="collapse navbar-collapse" id="navbar_content">
+
                <!-- subdominio -->
                <div class="site-url" id="container_subdominio_mobil"></div>
                <!-- buscador -->
@@ -298,23 +304,50 @@
                <!-- main -->
                <div id="container_mainmenu_mobil"></div>
                <!-- Sedes -->
-               <div class="btn-group d-block d-md-none hidden-print">
-                  <div class="btn btn-default dropdown-toggle" data-toggle="collapse" data-target="#container_sedes_mobil" aria-controls="container_sedes_mobil">Sedes<span class="caret"> </span>
-                  </div>
-               </div>
-               <div class="collapse" id="container_sedes_mobil"></div>
+               <!--<div class="btn-group d-block d-md-none hidden-print">-->
+                  <!--<div class="btn btn-default dropdown-toggle" data-toggle="collapse" data-target="#container_sedes_mobil" aria-controls="container_sedes_mobil">Sedes<span class="caret"> </span>-->
+                  <!--</div>-->
+               <!--</div>-->
+               <!--<div class="collapse" id="container_sedes_mobil"></div>-->
                <!-- Servicios -->
-               <div class="btn-group d-block d-md-none hidden-print">
-                  <div class="btn btn-default dropdown-toggle" data-toggle="collapse" data-target="#container_servicios_mobil" aria-controls="container_servicios_mobil">Servicios<span class="caret"> </span>
-                  </div>
-               </div>
-               <div class="collapse" id="container_servicios_mobil"></div>
+               <!--<div class="btn-group d-block d-md-none hidden-print">-->
+                  <!--<div class="btn btn-default dropdown-toggle" data-toggle="collapse" data-target="#container_servicios_mobil" aria-controls="container_servicios_mobil">Servicios<span class="caret"> </span>-->
+                  <!--</div>-->
+               <!--</div>-->
+               <!--<div class="collapse" id="container_servicios_mobil"></div>-->
                <!-- Perfiles -->
+               <!--<div class="btn-group d-block d-md-none hidden-print">-->
+                  <!--<div class="btn btn-default dropdown-toggle" data-toggle="collapse" data-target="#container_profiles_mobil" aria-controls="container_profiles_mobil">Perfiles<span class="caret"> </span>-->
+                  <!--</div>-->
+               <!--</div>-->
+               <!--<div class="collapse" id="container_profiles_mobil"></div>-->
+
                <div class="btn-group d-block d-md-none hidden-print">
-                  <div class="btn btn-default dropdown-toggle" data-toggle="collapse" data-target="#container_profiles_mobil" aria-controls="container_profiles_mobil">Perfiles<span class="caret"> </span>
-                  </div>
+               <div class="btn-group">
+                  <div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">Perfiles<span class="caret"></span></div>
+                  <ul class="dropdown-menu">
+                     <li><a class="dropdown-item" href="http://aspirantes.unal.edu.co" target="_blank">Aspirantes</a><span class="caret-right"></span></li>
+                     <li><a class="dropdown-item" href="http://estudiantes.unal.edu.co" target="_blank">Estudiantes</a><span class="caret-right"></span></li>
+                     <li><a class="dropdown-item" href="http://egresados.unal.edu.co" target="_blank">Egresados</a><span class="caret-right"></span></li>
+                     <li><a class="dropdown-item" href="http://docentes.unal.edu.co" target="_blank">Docentes</a><span class="caret-right"></span></li>
+                     <li><a class="dropdown-item" href="http://administrativos.unal.edu.co" target="_blank">Administrativos</a><span class="caret-right"></span></li>
+                  </ul>
                </div>
-               <div class="collapse" id="container_profiles_mobil"></div>
+               </div>
+
+               <div class="btn-group d-block d-md-none hidden-print">
+               <div class="btn-group">
+                  <div class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">Servicios<span class="caret"></span></div>
+                  <ul class="dropdown-menu">
+                     <li><a class="dropdown-item" href="http://correo.unal.edu.co" target="_blank">Correo Electrónico</a><span class="caret-right"></span></li>
+                     <li><a class="dropdown-item" href="http://dninfoa.unal.edu.co" target="_blank">DNINFOA - SIA</a><span class="caret-right"></span></li>
+                     <li><a class="dropdown-item" href="http://bibliotecas.unal.edu.co" target="_blank">Bibliotecas</a><span class="caret-right"></span></li>
+                     <li><a class="dropdown-item" href="http://personal.unal.edu.co" target="_blank">Convocatorias</a><span class="caret-right"></span></li>
+                     <li><a class="dropdown-item" href="http://identidad.unal.edu.co" target="_blank">Identidad UNAL</a><span class="caret-right"></span></li>
+                  </ul>
+               </div>
+               </div>
+
             </div>
             <!-- Collapsible content -->
          </nav>
@@ -417,7 +450,9 @@
       {% endcomment %}
       <!-- /content wrapper for padding -->
       <!--Carousel-->
-      {% block 'top-page' %}{% endblock %}
+      {% block 'top-page' %}{% include 'dima_accent.html' %}{% endblock %}
+
+
       <!-- Contenido -->
       <main class="detalle">
          <div class="dima-logo"><a href="{% url 'home' %}"><img src="{% static 'assets/dima_logo.svg' %}"></img></a></div>
@@ -469,13 +504,13 @@
                      PBX: (57+6) 8879300 Ext 50239.
                   </p>
                   <p class="col-lg-6 col-md-12 col-sm-12 col-6 derechos">
-                     <a href="https://unal.edu.co/fileadmin/user_upload/docs/legal.pdf" target="_blank">&copy; Copyright 2022</a><br/>
+                     <a href="https://unal.edu.co/fileadmin/user_upload/docs/legal.pdf" target="_blank">&copy; Copyright 2023</a><br/>
                      Algunos derechos reservados.<br/>
                      <a
                         title="Comuníquese con el administrador de este sitio web"
                         href="mailto:yencardonaal@unal.edu.co">yencardonaal@unal.edu.co</a><br/>
                      <!--<a href="index.html#">Acerca de este sitio web</a><br/>-->
-                     Actualización:29/09/22
+                     Actualización:14/01/2023
                   </p>
                </div>
             </div>
